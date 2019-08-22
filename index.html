@@ -84,32 +84,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Describe-a-Transmission-Line"><a href="#Describe-a-Transmission-Line" class="headerlink" title="Describe a Transmission Line"></a>Describe a Transmission Line</h2><h3 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h3><h3 id="Convertion"><a href="#Convertion" class="headerlink" title="Convertion"></a>Convertion</h3><p>RLCG to $\gamma$ Z<br>$$<br>\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta<br>$$</p>
-<p>$$<br>Z=\sqrt{\frac{R+j\omega L}{G+j\omega C}}<br>$$</p>
-<p>$\gamma$ Z to RLCG<br>$$<br>R={\rm Re}{\gamma Z}<br>$$</p>
-<p>$$<br>L={\rm Im}{\gamma Z}/\omega<br>$$</p>
-<p>$$<br>G={\rm Re}{\gamma/Z}<br>$$</p>
-<p>$$<br>C={\rm Im}{\gamma/Z}/\omega<br>$$</p>
-<h2 id="Simulation-Method-to-Obtain-Z-and-gamma"><a href="#Simulation-Method-to-Obtain-Z-and-gamma" class="headerlink" title="Simulation Method to Obtain Z and $\gamma$"></a>Simulation Method to Obtain Z and $\gamma$</h2><p><img src="/.io//1548660598122.png" alt="1548660598122"></p>
+        <h2 id="Describe-a-Transmission-Line"><a href="#Describe-a-Transmission-Line" class="headerlink" title="Describe a Transmission Line"></a>Describe a Transmission Line</h2><h3 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h3><h3 id="Convertion"><a href="#Convertion" class="headerlink" title="Convertion"></a>Convertion</h3><p>RLCG to $\gamma$ Z</p>
+<script type="math/tex; mode=display">
+\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><script type="math/tex; mode=display">
+Z=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>$\gamma$ Z to RLCG</p>
+<script type="math/tex; mode=display">
+R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
+L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
+G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
+C={\rm Im}\{\gamma/Z\}/\omega</script><h2 id="Simulation-Method-to-Obtain-Z-and-gamma"><a href="#Simulation-Method-to-Obtain-Z-and-gamma" class="headerlink" title="Simulation Method to Obtain Z and $\gamma$"></a>Simulation Method to Obtain Z and $\gamma$</h2><p><img src="/.io//1548660598122.png" alt="1548660598122"></p>
 <p>Real part of characteristic impedance is given by</p>
 <p><img src="/.io//1548660612503.png" alt="1548660612503"></p>
 <h2 id="Using-MATLAB-to-Obtain-RLGC-Z-and-gamma"><a href="#Using-MATLAB-to-Obtain-RLGC-Z-and-gamma" class="headerlink" title="Using MATLAB to Obtain RLGC, Z and $\gamma$"></a>Using MATLAB to Obtain RLGC, Z and $\gamma$</h2><h3 id="Calculation"><a href="#Calculation" class="headerlink" title="Calculation"></a>Calculation</h3><p>MATLAB code</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PolartoComplex = @(len, the) len*<span class="built_in">cos</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>) + <span class="number">1</span><span class="built_in">i</span>*len*<span class="built_in">sin</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">S11 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line">S12 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S21 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S22 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line"><span class="built_in">length</span> = <span class="number">400e-6</span>;	<span class="comment">% length of transmission line</span></span><br><span class="line">freq = <span class="number">28e9</span>;		<span class="comment">% frequency of simulation</span></span><br><span class="line">Z0 = <span class="number">50</span>;</span><br><span class="line">rlgc_params = s2rlgc([S11, S12; S21, S22], <span class="built_in">length</span>, freq, Z0)</span><br></pre></td></tr></table></figure>
-
 <p>Corresponding output is</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    R: <span class="number">5.1717e+03</span></span><br><span class="line">    L: <span class="number">3.6799e-07</span></span><br><span class="line">    G: <span class="number">0.4737</span></span><br><span class="line">    C: <span class="number">1.4002e-10</span></span><br><span class="line">alpha: <span class="number">62.5539</span></span><br><span class="line"> <span class="built_in">beta</span>: <span class="number">1.2634e+03</span></span><br><span class="line">   Zc: <span class="number">51.3183</span> - <span class="number">1.5526</span><span class="built_in">i</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="Validation"><a href="#Validation" class="headerlink" title="Validation"></a>Validation</h3><p>Using 8 RLGC segments</p>
-<p><img src="/.io//1548647653517.png" alt="1548647653517"></p>
-<img src="/.io//08/22/transmission-line/1548647653517.png" title="title">
-
+<p><img src="/.io//1548647653517.png" alt="1548647653517"><br><img src="/.io//08/22/transmission-line/1548647653517.png" title="title"></p>
 <p>Detailed schematic of each one</p>
 <p><img src="/.io//1548647675807.png" alt="1548647675807"></p>
 <p>Results</p>
 <p><img src="/.io//1548647604593.png" alt="1548647604593"></p>
 <ol>
 <li><p>How to convert $\alpha, \beta​$ parameters to $A, \epsilon​$ parameters?</p>
-<p>$\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}$</p>
+<p>$\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu<em>0\epsilon_0\epsilon</em>{eff}}$</p>
 <p>$1\ NP/m=20\log_{10}{e^{1}}=8.686\ dB/m$</p>
 <p>$A=20\alpha\log_{10}{e}$</p>
 <p>$\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2$</p>
@@ -119,7 +117,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://triblemany.github.io/2019/08/22/transmission-line/" data-id="cjzm5nsrr00014oudu3qy2ame" class="article-share-link">Share</a>
+      <a data-url="https://triblemany.github.io/2019/08/22/transmission-line/" data-id="cjzmawxnr00000wud4rwjp76x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -153,22 +151,18 @@
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://triblemany.github.io/2019/08/22/hello-world/" data-id="cjzm5nsre00004oud1m3zrjh6" class="article-share-link">Share</a>
+      <a data-url="https://triblemany.github.io/2019/08/22/hello-world/" data-id="cjzmawxob00010wudhwdqf37x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -255,5 +249,21 @@
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>
