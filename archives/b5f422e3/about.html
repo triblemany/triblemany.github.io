@@ -54,28 +54,32 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Triblemany&#39;s Blog">
-<meta property="og:url" content="https://triblemany.github.io/index.html">
+  <meta name="description" content="This page is intentionally left blank for future revision">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://triblemany.github.io/archives/b5f422e3/about.html">
 <meta property="og:site_name" content="Triblemany&#39;s Blog">
+<meta property="og:description" content="This page is intentionally left blank for future revision">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-24T07:01:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Triblemany&#39;s Blog">
-  <link rel="canonical" href="https://triblemany.github.io/">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="This page is intentionally left blank for future revision">
+  <link rel="canonical" href="https://triblemany.github.io/archives/b5f422e3/about">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Triblemany's Blog</title>
+  <title>about | Triblemany's Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -198,10 +202,11 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content page-home">
+          <div id="content" class="content page-post-detail">
             
-  <section id="posts" class="posts-expand">
-      
+
+  <div id="posts" class="posts-expand">
+    
 
   <article class="post" itemscope itemtype="http://schema.org/Article">
   
@@ -220,9 +225,8 @@
       <meta itemprop="name" content="Triblemany's Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/b5f422e3/about.html" class="post-title-link" itemprop="url">about</a>
+        <h1 class="post-title" itemprop="name headline">about
+
           
         </h1>
 
@@ -256,129 +260,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>This page is intentionally left blank for future revision</p>
+        <p>This page is intentionally left blank for future revision</p>
 
-        
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
         
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
       
 
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
+      <footer class="post-footer">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Triblemany">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
+        
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Triblemany's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/afb86e77/transmission-line.html" class="post-title-link" itemprop="url">How to Model RLCG Transmission Line</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
               
-                
+                <a href="/archives/afb86e77/transmission-line.html" rel="next" title="How to Model RLCG Transmission Line">
+                  <i class="fa fa-chevron-left"></i> How to Model RLCG Transmission Line
+                </a>
               
-
-              <time title="Created: 2019-08-22 11:25:51" itemprop="dateCreated datePublished" datetime="2019-08-22T11:25:51+08:00">2019-08-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-24 14:48:15" itemprop="dateModified" datetime="2019-08-24T14:48:15+08:00">2019-08-24</time>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h2><p>This part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters.</p>
-<p>RLCG to $\gamma$ Z</p>
-<script type="math/tex; mode=display">
-\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><script type="math/tex; mode=display">
-Z=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>$\gamma$ Z to RLCG</p>
-<script type="math/tex; mode=display">
-R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
-L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
-G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
-C={\rm Im}\{\gamma/Z\}/\omega</script>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/archives/afb86e77/transmission-line.html#more" rel="contents">
-                Read more &raquo;
-              </a>
             </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -397,6 +317,11 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -515,64 +440,6 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
   
 
   
-    
-      
-    
-      
-        
-      
-    
-  
-    
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
-  
 
   
 
@@ -580,5 +447,8 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
 
 
   
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
 </body>
 </html>

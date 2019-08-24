@@ -54,28 +54,38 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Triblemany&#39;s Blog">
-<meta property="og:url" content="https://triblemany.github.io/index.html">
+  <meta name="description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Model RLCG Transmission Line">
+<meta property="og:url" content="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
 <meta property="og:site_name" content="Triblemany&#39;s Blog">
+<meta property="og:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/real_of_Z.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/lumped_mimic_distributed.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/detailed_schematic.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_result.png">
+<meta property="og:updated_time" content="2019-08-24T06:48:15.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Triblemany&#39;s Blog">
-  <link rel="canonical" href="https://triblemany.github.io/">
+<meta name="twitter:title" content="How to Model RLCG Transmission Line">
+<meta name="twitter:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/afb86e77/transmission-line">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Triblemany's Blog</title>
+  <title>How to Model RLCG Transmission Line | Triblemany's Blog</title>
   <meta name="generator" content="Hexo 3.9.0">
   
 
@@ -198,85 +208,11 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content page-home">
-            
-  <section id="posts" class="posts-expand">
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/b5f422e3/about.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Triblemany">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Triblemany's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/b5f422e3/about.html" class="post-title-link" itemprop="url">about</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-08-24 14:53:57 / Modified: 15:01:07" itemprop="dateCreated datePublished" datetime="2019-08-24T14:53:57+08:00">2019-08-24</time>
-            </span>
-          
+          <div id="content" class="content page-post-detail">
             
 
-            
-          
-
-          
-
-        </div>
-      </header>
-
+  <div id="posts" class="posts-expand">
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>This page is intentionally left blank for future revision</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
 
   <article class="post" itemscope itemtype="http://schema.org/Article">
   
@@ -295,9 +231,8 @@
       <meta itemprop="name" content="Triblemany's Blog">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/afb86e77/transmission-line.html" class="post-title-link" itemprop="url">How to Model RLCG Transmission Line</a>
+        <h1 class="post-title" itemprop="name headline">How to Model RLCG Transmission Line
+
           
         </h1>
 
@@ -339,7 +274,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h2><p>This part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters.</p>
+        <h2 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h2><p>This part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters.</p>
 <p>RLCG to $\gamma$ Z</p>
 <script type="math/tex; mode=display">
 \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><script type="math/tex; mode=display">
@@ -348,37 +283,62 @@ Z=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>$\gamma$ Z to RLCG</p>
 R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
 L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
 G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
-C={\rm Im}\{\gamma/Z\}/\omega</script>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/archives/afb86e77/transmission-line.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
+C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
+<h2 id="Obtain-Z-and-gamma-from-simulation"><a href="#Obtain-Z-and-gamma-from-simulation" class="headerlink" title="Obtain Z and $\gamma$ from simulation"></a>Obtain Z and $\gamma$ from simulation</h2><img src="/archives/afb86e77/transmission-line/simulation_schematic.png" title="simulation_schematic">
+<p>Real part of characteristic impedance is given by</p>
+<img src="/archives/afb86e77/transmission-line/real_of_Z.png" title="real_part">
+<h2 id="Use-Matlab-to-obtain-RLGC-Z-and-gamma"><a href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma" class="headerlink" title="Use Matlab to obtain RLGC, Z and $\gamma$"></a>Use Matlab to obtain RLGC, Z and $\gamma$</h2><h3 id="Calculation"><a href="#Calculation" class="headerlink" title="Calculation"></a>Calculation</h3><p>MATLAB code</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PolartoComplex = @(len, the) len*<span class="built_in">cos</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>) + <span class="number">1</span><span class="built_in">i</span>*len*<span class="built_in">sin</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">S11 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line">S12 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S21 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S22 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line"><span class="built_in">length</span> = <span class="number">400e-6</span>;	<span class="comment">% length of transmission line</span></span><br><span class="line">freq = <span class="number">28e9</span>;		<span class="comment">% frequency of simulation</span></span><br><span class="line">Z0 = <span class="number">50</span>;</span><br><span class="line">rlgc_params = s2rlgc([S11, S12; S21, S22], <span class="built_in">length</span>, freq, Z0)</span><br></pre></td></tr></table></figure>
+<p>Corresponding output is</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    R: <span class="number">5.1717e+03</span></span><br><span class="line">    L: <span class="number">3.6799e-07</span></span><br><span class="line">    G: <span class="number">0.4737</span></span><br><span class="line">    C: <span class="number">1.4002e-10</span></span><br><span class="line">alpha: <span class="number">62.5539</span></span><br><span class="line"> <span class="built_in">beta</span>: <span class="number">1.2634e+03</span></span><br><span class="line">   Zc: <span class="number">51.3183</span> - <span class="number">1.5526</span><span class="built_in">i</span></span><br></pre></td></tr></table></figure>
+<h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><p>Using 8 RLGC segments</p>
+<img src="/archives/afb86e77/transmission-line/lumped_mimic_distributed.png" title="lumped_model">
+<p>Detailed schematic of each one</p>
+<img src="/archives/afb86e77/transmission-line/detailed_schematic.png" title="detailed_schematic">
+<p>Results</p>
+<img src="/archives/afb86e77/transmission-line/simulation_result.png" title="simulation_result">
+<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><ol>
+<li><p>How to convert $\alpha, \beta​$ parameters to $A, \epsilon​$ parameters?</p>
+<script type="math/tex; mode=display">\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}</script><script type="math/tex; mode=display">1\ NP/m=20\log_{10}{e^{1}}=8.686\ dB/m</script><script type="math/tex; mode=display">A=20\alpha\log_{10}{e}</script><script type="math/tex; mode=display">\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script></li>
+</ol>
+
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/archives/b5f422e3/about.html" rel="prev" title="about">
+                  about <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -397,6 +357,11 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
 
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc" data-target="post-toc-wrap">
@@ -409,6 +374,10 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line-Equations"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line Equations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obtain-Z-and-gamma-from-simulation"><span class="nav-number">2.</span> <span class="nav-text">Obtain Z and $\gamma$ from simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma"><span class="nav-number">3.</span> <span class="nav-text">Use Matlab to obtain RLGC, Z and $\gamma$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation"><span class="nav-number">3.1.</span> <span class="nav-text">Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification"><span class="nav-number">3.2.</span> <span class="nav-text">Verification</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">4.</span> <span class="nav-text">Questions</span></a></li></ol></div>
+          </div>
+        
       </div>
       <!--/noindex-->
 
@@ -517,14 +486,6 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
   
     
       
-    
-      
-        
-      
-    
-  
-    
-      
 <script type="text/x-mathjax-config">
 
   MathJax.Hub.Config({
@@ -580,5 +541,8 @@ C={\rm Im}\{\gamma/Z\}/\omega</script>
 
 
   
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
 </body>
 </html>
