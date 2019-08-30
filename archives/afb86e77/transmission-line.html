@@ -55,22 +55,23 @@
 </script>
 
   <meta name="description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
+<meta name="keywords" content="Transmission Line,RFIC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to Model RLCG Transmission Line">
 <meta property="og:url" content="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
 <meta property="og:site_name" content="Triblemany&#39;s Blog">
 <meta property="og:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/real_of_Z.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/lumped_mimic_distributed.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/detailed_schematic.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_result.png">
-<meta property="og:updated_time" content="2019-08-24T06:48:15.902Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/simulation_schematic.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/real_of_Z.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/lumped_mimic_distributed.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/detailed_schematic.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/simulation_result.png">
+<meta property="og:updated_time" content="2019-08-29T10:39:43.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to Model RLCG Transmission Line">
 <meta name="twitter:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/simulation_schematic.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/afb86e77/transmission-line">
 
 
@@ -258,7 +259,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-24 14:48:15" itemprop="dateModified" datetime="2019-08-24T14:48:15+08:00">2019-08-24</time>
+                <time title="Modified: 2019-08-29 18:39:43" itemprop="dateModified" datetime="2019-08-29T18:39:43+08:00">2019-08-29</time>
               </span>
             
           
@@ -284,19 +285,19 @@ R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
 L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
 G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
 C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
-<h2 id="Obtain-Z-and-gamma-from-simulation"><a href="#Obtain-Z-and-gamma-from-simulation" class="headerlink" title="Obtain Z and $\gamma$ from simulation"></a>Obtain Z and $\gamma$ from simulation</h2><img src="/archives/afb86e77/transmission-line/simulation_schematic.png" title="simulation_schematic">
+<h2 id="Obtain-Z-and-gamma-from-simulation"><a href="#Obtain-Z-and-gamma-from-simulation" class="headerlink" title="Obtain Z and $\gamma$ from simulation"></a>Obtain Z and $\gamma$ from simulation</h2><img src="/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/simulation_schematic.png" title="simulation_schematic">
 <p>Real part of characteristic impedance is given by</p>
-<img src="/archives/afb86e77/transmission-line/real_of_Z.png" title="real_part">
+<img src="/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/real_of_Z.png" title="real_part">
 <h2 id="Use-Matlab-to-obtain-RLGC-Z-and-gamma"><a href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma" class="headerlink" title="Use Matlab to obtain RLGC, Z and $\gamma$"></a>Use Matlab to obtain RLGC, Z and $\gamma$</h2><h3 id="Calculation"><a href="#Calculation" class="headerlink" title="Calculation"></a>Calculation</h3><p>MATLAB code</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PolartoComplex = @(len, the) len*<span class="built_in">cos</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>) + <span class="number">1</span><span class="built_in">i</span>*len*<span class="built_in">sin</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">S11 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line">S12 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S21 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S22 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line"><span class="built_in">length</span> = <span class="number">400e-6</span>;	<span class="comment">% length of transmission line</span></span><br><span class="line">freq = <span class="number">28e9</span>;		<span class="comment">% frequency of simulation</span></span><br><span class="line">Z0 = <span class="number">50</span>;</span><br><span class="line">rlgc_params = s2rlgc([S11, S12; S21, S22], <span class="built_in">length</span>, freq, Z0)</span><br></pre></td></tr></table></figure>
 <p>Corresponding output is</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    R: <span class="number">5.1717e+03</span></span><br><span class="line">    L: <span class="number">3.6799e-07</span></span><br><span class="line">    G: <span class="number">0.4737</span></span><br><span class="line">    C: <span class="number">1.4002e-10</span></span><br><span class="line">alpha: <span class="number">62.5539</span></span><br><span class="line"> <span class="built_in">beta</span>: <span class="number">1.2634e+03</span></span><br><span class="line">   Zc: <span class="number">51.3183</span> - <span class="number">1.5526</span><span class="built_in">i</span></span><br></pre></td></tr></table></figure>
 <h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><p>Using 8 RLGC segments</p>
-<img src="/archives/afb86e77/transmission-line/lumped_mimic_distributed.png" title="lumped_model">
+<img src="/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/lumped_mimic_distributed.png" title="lumped_model">
 <p>Detailed schematic of each one</p>
-<img src="/archives/afb86e77/transmission-line/detailed_schematic.png" title="detailed_schematic">
+<img src="/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/detailed_schematic.png" title="detailed_schematic">
 <p>Results</p>
-<img src="/archives/afb86e77/transmission-line/simulation_result.png" title="simulation_result">
+<img src="/archives/afb86e77/transmission-line.htm/afb86e77/transmission-line/simulation_result.png" title="simulation_result">
 <h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><ol>
 <li><p>How to convert $\alpha, \beta​$ parameters to $A, \epsilon​$ parameters?</p>
 <script type="math/tex; mode=display">\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}</script><script type="math/tex; mode=display">1\ NP/m=20\log_{10}{e^{1}}=8.686\ dB/m</script><script type="math/tex; mode=display">A=20\alpha\log_{10}{e}</script><script type="math/tex; mode=display">\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script></li>
@@ -311,6 +312,17 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
       
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Transmission-Line/" rel="tag"># Transmission Line</a>
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+          </div>
+        
 
         
 
@@ -394,6 +406,27 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
         
           <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
         </a>
       </div>
     
