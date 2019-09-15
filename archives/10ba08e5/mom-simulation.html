@@ -25,11 +25,11 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.3.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
+    copycode: {"enable":true,"show_result":true,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
     fancybox: false,
@@ -54,20 +54,20 @@
   };
 </script>
 
-  <meta name="description" content="前言电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
+  <meta name="description" content="电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
 <meta name="keywords" content="RFIC,Capacitor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="电容的电磁场仿真设置">
 <meta property="og:url" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation.html">
-<meta property="og:site_name" content="Triblemany&#39;s Blog">
-<meta property="og:description" content="前言电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/simulation-engine.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/mom-simulation-comparison.png">
-<meta property="og:updated_time" content="2019-09-13T08:21:32.460Z">
+<meta property="og:updated_time" content="2019-09-15T08:30:40.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="电容的电磁场仿真设置">
-<meta name="twitter:description" content="前言电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
+<meta name="twitter:description" content="电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
 <meta name="twitter:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/simulation-engine.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/10ba08e5/mom-simulation">
 
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>电容的电磁场仿真设置 | Triblemany's Blog</title>
+  <title>电容的电磁场仿真设置 | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -142,7 +142,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Triblemany's Blog</span>
+        <span class="site-title">Triblemany</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -213,8 +213,6 @@
     
   </ul>
 
-    
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -243,6 +241,8 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+            
+
           <div id="content" class="content page-post-detail">
             
 
@@ -263,7 +263,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Triblemany's Blog">
+      <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">电容的电磁场仿真设置
@@ -282,11 +282,19 @@
                 
               
 
-              <time title="Created: 2019-09-13 16:13:29 / Modified: 16:21:32" itemprop="dateCreated datePublished" datetime="2019-09-13T16:13:29+08:00">2019-09-13</time>
+              <time title="Created: 2019-09-13 16:13:29" itemprop="dateCreated datePublished" datetime="2019-09-13T16:13:29+08:00">2019-09-13</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-15 16:30:40" itemprop="dateModified" datetime="2019-09-15T16:30:40+08:00">2019-09-15</time>
+              </span>
             
           
 
@@ -312,7 +320,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。<br><a id="more"></a></p>
+        <p>电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。<br><a id="more"></a></p>
 <h2 id="仿真引擎的选择"><a href="#仿真引擎的选择" class="headerlink" title="仿真引擎的选择"></a>仿真引擎的选择</h2><p>常用的ADS Momentum引擎有两种模式：RF和Microwave。RF模式在射频频段内提供了精确的电磁场仿真结果，且仿真速度较快。在更高频段内，由于辐射效应，只用Microwave才能提供准角结果。ADS文档中推荐在以下电路中使用RF模式：</p>
 <ul>
 <li>电小的</li>
@@ -430,6 +438,25 @@
     
     
     
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
+      
+    </li>
+  
+  </ul>
+
         
       
         
@@ -534,7 +561,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仿真引擎的选择"><span class="nav-number">2.</span> <span class="nav-text">仿真引擎的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通孔的合并和模型选择"><span class="nav-number">3.</span> <span class="nav-text">通孔的合并和模型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#仿真引擎的选择"><span class="nav-number">1.</span> <span class="nav-text">仿真引擎的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通孔的合并和模型选择"><span class="nav-number">2.</span> <span class="nav-text">通孔的合并和模型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
           </div>
         
       </div>
@@ -609,7 +636,7 @@
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a></div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
 
         
 
@@ -641,7 +668,8 @@
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
-<script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
 <script src="/js/next-boot.js?v=7.3.0"></script>
 
 
