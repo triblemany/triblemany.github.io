@@ -65,7 +65,17 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/simulation-engine.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/mom-simulation-comparison.png">
-<meta property="og:updated_time" content="2019-09-15T08:30:40.975Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/original-layout.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/via-fill-layout.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/all-fill-layout.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/original.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/via-fill.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/all-fill.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/original-fill-i.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/via-fill-i.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/all-fill-i.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/10ba08e5/mom-simulation/fill-style-comparison.png">
+<meta property="og:updated_time" content="2019-09-18T12:38:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="电容的电磁场仿真设置">
 <meta name="twitter:description" content="电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。">
@@ -294,7 +304,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-15 16:30:40" itemprop="dateModified" datetime="2019-09-15T16:30:40+08:00">2019-09-15</time>
+                <time title="Modified: 2019-09-18 20:38:30" itemprop="dateModified" datetime="2019-09-18T20:38:30+08:00">2019-09-18</time>
               </span>
             
           
@@ -308,7 +318,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.1k</span>
+              <span>2.2k</span>
             </span>
           
 
@@ -432,6 +442,65 @@
 </table>
 </div>
 <p>仿真结果表明，同面积合并仿真速度最快，其他方法仿真速度相差无几。在合并之后，2D模型确实比3D模型更准确展现了Q值，但差距不大。前述的三种方法中， 出乎意料的是同面积合并无论是电容误差还是Q值误差都明显较大，可能是由于将通孔集中到中间与电流的趋肤效应背道而驰，人为加大了损耗。而覆盖合并方法简单有效，仅在Q值上产生一些明显误差。降低电导率后，Q值误差可以忽略不计，因此，采用2D通孔模型的覆盖合并方法最为有效。当对Q值精度要求高时，可将通孔电导率将为约1/5。</p>
+<h2 id="通孔合并的细节"><a href="#通孔合并的细节" class="headerlink" title="通孔合并的细节"></a>通孔合并的细节</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">原始版图</th>
+<th style="text-align:center">孔覆盖合并</th>
+<th style="text-align:center">全金属填充</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="mom-simulation/original-layout.png" alt="original-layout"></td>
+<td style="text-align:center"><img src="mom-simulation/via-fill-layout.png" alt="via-fill-layout"></td>
+<td style="text-align:center"><img src="mom-simulation/all-fill-layout.png" alt="all-fill-layout"></td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="mom-simulation/original.png" alt="original"></td>
+<td style="text-align:center"><img src="mom-simulation/via-fill.png" alt="original"></td>
+<td style="text-align:center"><img src="mom-simulation/all-fill.png" alt="original"></td>
+</tr>
+<tr>
+<td style="text-align:center"><img src="mom-simulation/original-fill-i.png" alt="original-fill-i"></td>
+<td style="text-align:center"><img src="mom-simulation/via-fill-i.png" alt="via-fill-i"></td>
+<td style="text-align:center"><img src="mom-simulation/all-fill-i.png" alt="all-fill-i"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>三种合并方式的仿真结果如下：</p>
+<p><img src="mom-simulation/fill-style-comparison.png" alt="fill-style-comparison"></p>
+<p>在14 GHz计算得到的仿真误差如下表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">电容误差</th>
+<th style="text-align:center">Q值误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">原始版图，3D（基准）</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>孔覆盖合并，3D</strong></td>
+<td style="text-align:center"><strong>0.19 %</strong></td>
+<td style="text-align:center"><strong>17.8 %</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">全金属填充，3D</td>
+<td style="text-align:center">0.59 %</td>
+<td style="text-align:center">144.21 %</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文比较了几种电容的仿真方法。为了快速、准确地仿真电容，最好采用带有Edge Mesh的RF模式，通过覆盖方法合并通孔，降低通孔电导率至约1/5，并选择2D模型抑制水平电流。</p>
 
     </div>
@@ -562,7 +631,7 @@
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#仿真引擎的选择"><span class="nav-number">1.</span> <span class="nav-text">仿真引擎的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通孔的合并和模型选择"><span class="nav-number">2.</span> <span class="nav-text">通孔的合并和模型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#仿真引擎的选择"><span class="nav-number">1.</span> <span class="nav-text">仿真引擎的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通孔的合并和模型选择"><span class="nav-number">2.</span> <span class="nav-text">通孔的合并和模型选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通孔合并的细节"><span class="nav-number">3.</span> <span class="nav-text">通孔合并的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
           </div>
         
       </div>

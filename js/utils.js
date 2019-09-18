@@ -37,7 +37,7 @@ NexT.utils = {
       var $image = $(element);
       var imageTitle = $image.attr('title') || $image.attr('alt');
       var $imageWrapLink = $image.parent('a');
-
+	  
       if ($imageWrapLink.length < 1) {
         var imageLink = $image.attr('data-src') || $image.attr('src');
         $imageWrapLink = $image.wrap(`<a class="fancybox fancybox.image" href="${imageLink}" itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>`).parent('a');
