@@ -55,25 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
-<meta name="keywords" content="Transmission Line,RFIC">
+  <meta name="description" content="本文介绍了二阶系统的基本概念。">
+<meta name="keywords" content="Circuit Theory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Model RLGC Transmission Line">
-<meta property="og:url" content="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
+<meta property="og:title" content="二阶系统">
+<meta property="og:url" content="https://triblemany.github.io/archives/5777cf8/frequency-response.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
+<meta property="og:description" content="本文介绍了二阶系统的基本概念。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/real_of_Z.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/lumped_mimic_distributed.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/detailed_schematic.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_result.png">
-<meta property="og:updated_time" content="2019-09-11T07:17:41.894Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/zeta-and-resonance">
+<meta property="og:updated_time" content="2019-10-11T12:26:27.569Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How to Model RLGC Transmission Line">
-<meta name="twitter:description" content="Transmission Line EquationsThis part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters. RLCG to $\gamma$ Z  \gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta Z=\sqrt">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_schematic.png">
-  <link rel="canonical" href="https://triblemany.github.io/archives/afb86e77/transmission-line">
+<meta name="twitter:title" content="二阶系统">
+<meta name="twitter:description" content="本文介绍了二阶系统的基本概念。">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/zeta-and-resonance">
+  <link rel="canonical" href="https://triblemany.github.io/archives/5777cf8/frequency-response">
 
 
 <script id="page-configurations">
@@ -87,7 +83,7 @@
   };
 </script>
 
-  <title>How to Model RLGC Transmission Line | Triblemany</title>
+  <title>二阶系统 | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -258,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/5777cf8/frequency-response.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Triblemany">
@@ -270,7 +266,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">How to Model RLGC Transmission Line
+        <h1 class="post-title" itemprop="name headline">二阶系统
 
           
         </h1>
@@ -286,19 +282,11 @@
                 
               
 
-              <time title="Created: 2019-08-22 11:25:51" itemprop="dateCreated datePublished" datetime="2019-08-22T11:25:51+08:00">2019-08-22</time>
+              <time title="Created: 2019-10-11 16:19:16 / Modified: 20:26:27" itemprop="dateCreated datePublished" datetime="2019-10-11T16:19:16+08:00">2019-10-11</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-11 15:17:41" itemprop="dateModified" datetime="2019-09-11T15:17:41+08:00">2019-09-11</time>
-              </span>
             
           
 
@@ -311,7 +299,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>1.4k</span>
+              <span>2.2k</span>
             </span>
           
 
@@ -324,32 +312,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Transmission-Line-Equations"><a href="#Transmission-Line-Equations" class="headerlink" title="Transmission Line Equations"></a>Transmission Line Equations</h2><p>This part deals with the conversion between RLGC parameters and the $\gamma$ Z parameters.</p>
-<p>RLCG to $\gamma$ Z</p>
+        <p>本文介绍了二阶系统的基本概念。</p>
+<a id="more"></a>
+<h2 id="二阶系统"><a href="#二阶系统" class="headerlink" title="二阶系统"></a>二阶系统</h2><p>二阶系统的传递函数为</p>
 <script type="math/tex; mode=display">
-\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><script type="math/tex; mode=display">
-Z=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>$\gamma$ Z to RLCG</p>
+G(s)=\frac{\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}</script><p>其中$\omega_n$为自然频率，也可写成</p>
 <script type="math/tex; mode=display">
-R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
-L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
-G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
-C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
-<h2 id="Obtain-Z-and-gamma-from-simulation"><a href="#Obtain-Z-and-gamma-from-simulation" class="headerlink" title="Obtain Z and $\gamma$ from simulation"></a>Obtain Z and $\gamma$ from simulation</h2><p><img src="transmission-line/simulation_schematic.png" alt="simulation_schematic"></p>
-<p>Real part of characteristic impedance is given by</p>
-<p><img src="transmission-line/real_of_Z.png" alt="real_of_Z"></p>
-<h2 id="Use-Matlab-to-obtain-RLGC-Z-and-gamma"><a href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma" class="headerlink" title="Use Matlab to obtain RLGC, Z and $\gamma$"></a>Use Matlab to obtain RLGC, Z and $\gamma$</h2><h3 id="Calculation"><a href="#Calculation" class="headerlink" title="Calculation"></a>Calculation</h3><p>MATLAB code</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PolartoComplex = @(len, the) len*<span class="built_in">cos</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>) + <span class="number">1</span><span class="built_in">i</span>*len*<span class="built_in">sin</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">S11 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line">S12 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S21 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S22 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line"><span class="built_in">length</span> = <span class="number">400e-6</span>;	<span class="comment">% length of transmission line</span></span><br><span class="line">freq = <span class="number">28e9</span>;		<span class="comment">% frequency of simulation</span></span><br><span class="line">Z0 = <span class="number">50</span>;</span><br><span class="line">rlgc_params = s2rlgc([S11, S12; S21, S22], <span class="built_in">length</span>, freq, Z0)</span><br></pre></td></tr></table></figure>
-<p>Corresponding output is</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    R: 5.1717e+03</span><br><span class="line">    L: 3.6799e-07</span><br><span class="line">    G: 0.4737</span><br><span class="line">    C: 1.4002e-10</span><br><span class="line">alpha: 62.5539</span><br><span class="line"> beta: 1.2634e+03</span><br><span class="line">   Zc: 51.3183 - 1.5526i</span><br></pre></td></tr></table></figure>
-<h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><p>Using 8 RLGC segments</p>
-<p><img src="transmission-line/lumped_mimic_distributed.png" alt="lumped_mimic_distributed"></p>
-<p>Detailed schematic of each one</p>
-<p><img src="transmission-line/detailed_schematic.png" alt="detailed_schematic"></p>
-<p>Results</p>
-<p><img src="transmission-line/simulation_result.png" alt="simulation_result"></p>
-<h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><ol>
-<li><p>How to convert $\alpha, \beta$ parameters to $A, \epsilon$ parameters?</p>
-<script type="math/tex; mode=display">\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}</script><script type="math/tex; mode=display">1\ NP/m=20\log_{10}{e^{1}}=8.686\ dB/m</script><script type="math/tex; mode=display">A=20\alpha\log_{10}{e}</script><script type="math/tex; mode=display">\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script></li>
+G(j\omega)=\frac{1}{1-(\frac{\omega}{\omega_n})^2+j2\zeta\frac{\omega}{\omega_n}}</script><h3 id="瞬态分析"><a href="#瞬态分析" class="headerlink" title="瞬态分析"></a>瞬态分析</h3><p>极点为</p>
+<script type="math/tex; mode=display">
+-\zeta\omega_n\pm\omega_n\sqrt{\zeta^2-1}</script><p>其实部定义为阻尼（damping）</p>
+<script type="math/tex; mode=display">
+\sigma=-\zeta\omega_n</script><p>虚部定义为衰减后振荡频率（damped natural frequency）</p>
+<script type="math/tex; mode=display">
+\omega_d=\omega_n\sqrt{1-\zeta^2}</script><p>因此</p>
+<ul>
+<li>$\zeta&lt;-1$，极点为右半平面一对不相等实数（无震荡发散）</li>
+<li>$\zeta=-1$，极点为右半平面一对相等实数（发散，无震荡临界情况）</li>
+<li>$-1&lt;\zeta&lt;0$，极点为右半平面一对复数（震荡发散）</li>
+<li>$\zeta=0$，极点为虚轴上一对大小相等符号相反的虚数（无衰减震荡）</li>
+<li>$0&lt;\zeta&lt;1$，极点为左半平面一对复数（欠阻尼衰减）</li>
+<li>$\zeta=1$，极点为左半平面一对相等实数（衰减，临界阻尼）</li>
+<li>$\zeta&gt;1$，极点为左半平面一对不相等实数（过阻尼衰减）</li>
+</ul>
+<p>当有输入信号为阶跃函数时，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Y(s) &=G(s) \cdot U(s) \\
+&=\frac{\omega_{n}^{2}}{s^{2}+2 \zeta \omega_{n} s+\omega_{n}^{2}} \cdot \frac{1}{s} \\
+&=\frac{\omega_{n}^{2}}{(s+\sigma)^{2}+\omega_{d}^{2}} \cdot \frac{1}{s} \\
+&=\frac{1}{s}-\frac{s+\sigma}{(s+\sigma)^{2}+\omega_{d}^{2}}-\frac{\sigma}{\omega_{d}} \frac{\omega_{d}}{(s+\sigma)^{2}+\omega_{d}^{2}}
+\end{aligned}</script><p>相应的时域表达式为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+y(t) &=1-e^{-\sigma t} \cos \omega_{d} t-\frac{\sigma}{\omega_{d}} e^{-\sigma t} \sin \omega_{d} t \\
+&=1-e^{-\sigma t}\left(\cos \omega_{d} t+\frac{\sigma}{\omega_{d}} \sin \omega_{d} t\right), t \geq 0
+\end{aligned}</script><h3 id="稳态分析"><a href="#稳态分析" class="headerlink" title="稳态分析"></a>稳态分析</h3><p>幅频响应为</p>
+<script type="math/tex; mode=display">
+A(\omega)=|G(j \omega)|=\frac{1}{\sqrt{\left[1-\left(\frac{\omega}{\omega_{n}}\right)^{2}\right]^{2}+\left(2 \zeta \frac{\omega}{\omega_{n}}\right)^{2}}}</script><p>相频响应为</p>
+<script type="math/tex; mode=display">
+\varphi(\omega)=-180^{\circ}+\arctan \frac{\left(\frac{\omega}{\omega_{n}}\right)^{2}-1}{2 \zeta \frac{\omega}{\omega_{n}}}</script><p>分析三种边界情况，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\omega=0 &\quad  A(0)=1, \varphi(0)=0^{\circ} \\
+\omega=\omega_{n} &\quad A(\omega)=\frac{1}{2 \zeta},\varphi\left(\omega_{n}\right)=-90^{\circ} \\
+\omega \rightarrow \infty &\quad A(\infty)=0, \varphi(\infty)=-180^{\circ}
+\end{aligned}</script><p>对幅频响应的分母求极值，得到谐振频率</p>
+<script type="math/tex; mode=display">
+\omega_r=\omega_n\sqrt{1-2\zeta^2}</script><p>以及谐振时的幅值和相位</p>
+<script type="math/tex; mode=display">
+A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mode=display">
+\varphi(\omega_r)=-\arctan\frac{\zeta}{\sqrt{1-2\zeta^2}}</script><p>因此，阻尼因子$\zeta $决定了</p>
+<ul>
+<li>当$\zeta&gt;1/\sqrt{2}$时，不存在谐振频率</li>
+<li>当$\zeta=1/\sqrt{2}$时，$\omega_r=0, A(\omega_r)=1, \varphi(\omega_r)=0$</li>
+<li>当$0&lt;\zeta&lt;1/\sqrt{2}$时，存在谐振频率</li>
+<li>当$\zeta=0$时，$\omega_r=\omega_n, A(\omega_r)\rightarrow\infty, \varphi(\omega_r)=-90^{\circ}$</li>
+</ul>
+<p>画出幅频响应和相频响应曲线则有</p>
+<p><img src="frequency-response\zeta-and-resonance" alt="zeta-and-resonance"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/48169298" target="_blank" rel="noopener">控制理论学习笔记（4）——一阶系统和二阶系统</a>.</li>
+<li>孙晓波, 李双全, 王海英. 自动控制原理. 科学出版社, 2006.</li>
 </ol>
 
     </div>
@@ -358,30 +381,6 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
     
     
       
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\33e60fbc\transformer-equation-derivation.html" rel="bookmark">变压器的跨阻推导</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\10ba08e5\mom-simulation.html" rel="bookmark">电容的电磁场仿真设置</a></div>
-      
-    </li>
-  
-  </ul>
 
         
       
@@ -393,7 +392,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/afb86e77/transmission-line.html" title="How to Model RLGC Transmission Line">https://triblemany.github.io/archives/afb86e77/transmission-line.html</a>
+    <a href="https://triblemany.github.io/archives/5777cf8/frequency-response.html" title="二阶系统">https://triblemany.github.io/archives/5777cf8/frequency-response.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -408,9 +407,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
           
           <div class="post-tags">
             
-              <a href="/tags/Transmission-Line/" rel="tag"># Transmission Line</a>
-            
-              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+              <a href="/tags/Circuit-Theory/" rel="tag"># Circuit Theory</a>
             
           </div>
         
@@ -420,15 +417,15 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
+                <a href="/archives/a9a43bb7/to-the-unlimited.html" rel="next" title="To the Unlimited">
+                  <i class="fa fa-chevron-left"></i> To the Unlimited
+                </a>
+              
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/archives/97db45b9/difficult-sentences.html" rel="prev" title="Diffucult Sentences in GRE Preparation">
-                  Diffucult Sentences in GRE Preparation <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -487,7 +484,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line-Equations"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line Equations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obtain-Z-and-gamma-from-simulation"><span class="nav-number">2.</span> <span class="nav-text">Obtain Z and $\gamma$ from simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma"><span class="nav-number">3.</span> <span class="nav-text">Use Matlab to obtain RLGC, Z and $\gamma$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation"><span class="nav-number">3.1.</span> <span class="nav-text">Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification"><span class="nav-number">3.2.</span> <span class="nav-text">Verification</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">4.</span> <span class="nav-text">Questions</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶系统"><span class="nav-number">1.</span> <span class="nav-text">二阶系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#瞬态分析"><span class="nav-number">1.1.</span> <span class="nav-text">瞬态分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稳态分析"><span class="nav-number">1.2.</span> <span class="nav-text">稳态分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
           </div>
         
       </div>
@@ -696,9 +693,9 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><a id="more"></a>
 
 <script>
   function disqus_config() {
-    this.page.url = "https://triblemany.github.io/archives/afb86e77/transmission-line.html";
-    this.page.identifier = "archives/afb86e77/transmission-line.html";
-    this.page.title = 'How to Model RLGC Transmission Line';};
+    this.page.url = "https://triblemany.github.io/archives/5777cf8/frequency-response.html";
+    this.page.identifier = "archives/5777cf8/frequency-response.html";
+    this.page.title = '二阶系统';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
