@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="电感是射频集成电路设计中的基础原件，也是变压器的构成部分。通常，电感越接近圆形其面积(磁通量，电感)/边长(串联损耗)比越高，因而Q值越高。但在CMOS工艺下，有时只允许使用直线和45°折线，因此设计时多数退而求其次绘制八边形电感。绘制八边形电感由于需要处理边角和格点，十分繁琐，因此可以通过编写程序省去这部分重复性工作。本文介绍了一种基于ADS AEL语言的电感Pcell设计方法。">
+<meta name="keywords" content="RFIC,Inductor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用ADS创建电感Pcell">
+<meta property="og:url" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="电感是射频集成电路设计中的基础原件，也是变压器的构成部分。通常，电感越接近圆形其面积(磁通量，电感)/边长(串联损耗)比越高，因而Q值越高。但在CMOS工艺下，有时只允许使用直线和45°折线，因此设计时多数退而求其次绘制八边形电感。绘制八边形电感由于需要处理边角和格点，十分繁琐，因此可以通过编写程序省去这部分重复性工作。本文介绍了一种基于ADS AEL语言的电感Pcell设计方法。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/crossing.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/coil.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/extension.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/ind.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/ind_square.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/transformer.png">
+<meta property="og:updated_time" content="2019-10-21T02:36:06.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用ADS创建电感Pcell">
+<meta name="twitter:description" content="电感是射频集成电路设计中的基础原件，也是变压器的构成部分。通常，电感越接近圆形其面积(磁通量，电感)/边长(串联损耗)比越高，因而Q值越高。但在CMOS工艺下，有时只允许使用直线和45°折线，因此设计时多数退而求其次绘制八边形电感。绘制八边形电感由于需要处理边角和格点，十分繁琐，因此可以通过编写程序省去这部分重复性工作。本文介绍了一种基于ADS AEL语言的电感Pcell设计方法。">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell/crossing.svg">
+  <link rel="canonical" href="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>使用ADS创建电感Pcell | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">使用ADS创建电感Pcell
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-20 16:44:50" itemprop="dateCreated datePublished" datetime="2019-10-20T16:44:50+08:00">2019-10-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-21 10:36:06" itemprop="dateModified" datetime="2019-10-21T10:36:06+08:00">2019-10-21</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>9.4k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>电感是射频集成电路设计中的基础原件，也是变压器的构成部分。通常，电感越接近圆形其面积(磁通量，电感)/边长(串联损耗)比越高，因而Q值越高。但在CMOS工艺下，有时只允许使用直线和45°折线，因此设计时多数退而求其次绘制八边形电感。绘制八边形电感由于需要处理边角和格点，十分繁琐，因此可以通过编写程序省去这部分重复性工作。本文介绍了一种基于ADS AEL语言的电感Pcell设计方法。</p>
+<a id="more"></a>
+<h2 id="预备"><a href="#预备" class="headerlink" title="预备"></a>预备</h2><p>AEL绘制多边形的语法为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">decl coors = list(</span><br><span class="line">	list(0, 0),</span><br><span class="line">	list(2, 0),</span><br><span class="line">	list(2, 2),</span><br><span class="line">	list(0, 2),</span><br><span class="line">	list(0, 0)</span><br><span class="line">);</span><br><span class="line">decl newPolygon = db_create_primitive_polygon(coors);</span><br><span class="line">db_create_polygon(context, layerM1, newPolygon);</span><br></pre></td></tr></table></figure>
+<p>上面的代码先定义了一个坐标的列表，列表中的每个元素代表多边形一个顶点。每个顶点又由一个2个元素的列表<code>list(x, y)</code>构成，分别代表为x、y的坐标。因此，上面的代码绘制了一个左下角在<code>(0, 0)</code>的边长为2的正方形。之后，先使用<code>db_create_primitive_polygon</code>将其创建成为原始多边形，再增加层信息后使用<code>db_create_polygon</code>将原始多边形加入设计数据库。</p>
+<p>由于AEL不支持类型，对坐标进行修改只能通过函数进行。值得注意的是，AEL中列表的赋值是引用传递，因此当使用<code>decl coors2 = coors;</code>后，<code>coors2</code>和<code>coors</code>指向同一个位置，对其中之一修改也会影响到另一个。我们设计了一个函数对多边形进行整体平移和翻转：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">defun adjust(l, xc, yc, x, y)</span><br><span class="line">&#123;</span><br><span class="line">	decl i = 0;</span><br><span class="line">	decl len = listlen( l );	//获得列表长度</span><br><span class="line">	for( i = 0; i &lt; len; i++ )	//遍历列表</span><br><span class="line">	&#123;</span><br><span class="line">		//生成平移和翻转后的坐标，由于采用了垃圾回收机制，新生成的列表t不是局部变量</span><br><span class="line">		decl t = list(l[i][0] * xc + x, l[i][1] * yc + y);</span><br><span class="line">		//替换原有元素</span><br><span class="line">		repla(l, t, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它接受5个参数，第1个是列表，第2、3个分别是x、y的缩放系数，第4、5个是x、y的平移系数。</p>
+<p>此外，为了防止设计的版图顶点不在格点上，我们附加了<code>grid_ceil2</code>和<code>grid_floor2</code>两个相对格点取整的函数，他们以微米为单位对0.01取整。</p>
+<h2 id="交错部分设计"><a href="#交错部分设计" class="headerlink" title="交错部分设计"></a>交错部分设计</h2><p>此部分由函数<code>create_crossing</code>实现。</p>
+<p>首先计算几个常用量，由</p>
+<script type="math/tex; mode=display">
+\tan(2\theta)=\frac{2\tan(\theta)}{1-\tan^2(\theta)}</script><p>可以算得</p>
+<script type="math/tex; mode=display">
+\tan(22.5^\circ)=\sqrt{2}-1</script><p>考虑版图</p>
+<p><img src="ads-inductor-pcell/crossing.svg" alt="crossing"></p>
+<p>可以计算出各点的位置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">位置</th>
+<th style="text-align:center">坐标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">（ -t, 0 ）</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">( -(w + s - e) / 2, 0 )</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">( (w + s + e) / 2, w + s )</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">( t, w + s )</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">( t, 2w + s )</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">( (w + s - e) / 2, 2w + s )</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">( -(w + s + e) / 2, w )</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">( -t, w )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中$e=(\sqrt{2}-1)w$，相反方向的可以通过<code>adjust</code>函数实现。</p>
+<h2 id="线圈边缘设计"><a href="#线圈边缘设计" class="headerlink" title="线圈边缘设计"></a>线圈边缘设计</h2><p>此部分由函数<code>create_coil</code>实现。</p>
+<p>线圈边缘如图</p>
+<p><img src="ads-inductor-pcell/coil.svg" alt="coil"></p>
+<p>对应坐标为</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">位置</th>
+<th style="text-align:center">坐标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">( t, Dh + Dd - w )</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">( Dw - e &lt; Dw + Dd - w ? Dw - e : Dw + Dd - w, Dh + Dd - w )</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">( Dw + Dd - w, Dh - e &lt; Dh + Dd - w ? Dh - e : Dh + Dd - w )</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">( Dw + Dd - w, -Dh + e &gt; -Dh - Dd + w ? -Dh + e : -Dh - Dd + w )</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">( Dw - e &lt; Dw + Dd - w ? Dw - e : Dw + Dd - w, - Dh - Dd + w )</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">( t, - Dh - Dd + w )</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">( t, - Dh - Dd )</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">( Dw, - Dh - Dd )</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">( Dw + Dd, - Dh )</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">( Dw + Dd, Dh )</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">( Dw, Dh + Dd )</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">( t, Dh + Dd )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>相反方向的可以通过<code>adjust</code>函数实现。</p>
+<h2 id="延展设计"><a href="#延展设计" class="headerlink" title="延展设计"></a>延展设计</h2><p>此部分由函数<code>create_tj</code>实现。</p>
+<p>延展部分和交错部分非常相似，其特殊之处在于两侧可宽度不同</p>
+<p><img src="ads-inductor-pcell/extension.svg" alt="coil"></p>
+<p>为了使图形尽可能平衡，令上、下的内侧长度均为$a_l$，中间线宽为两侧均值，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+a_l+a_r+(s_2-s_1)&=e\\
+w_1+\frac{a_r-a_l-(\sqrt{2}-1)w_1}{\sqrt{2}}&=\frac{w_1+w_2}{2}
+\end{aligned}</script><p>由此可解出各点坐标。</p>
+<h2 id="多圈绘制"><a href="#多圈绘制" class="headerlink" title="多圈绘制"></a>多圈绘制</h2><p>此部分由函数<code>create_diff_inductor</code>实现。</p>
+<p>其核心在于计算每圈的Dw, Dd, Dh，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">decl ew = grid_ceil2( W * (sqrt(2) - 1) );</span><br><span class="line">decl es = grid_ceil2( S * (sqrt(2) - 1) );</span><br><span class="line">decl newDw = grid_floor2( Dw - ew - es );</span><br><span class="line">decl newDh = grid_floor2( Dh - ew - es );</span><br><span class="line">decl newDd = grid_floor2( Dd - W - S + ew + es );</span><br><span class="line">// 支持矩形电感</span><br><span class="line">if(newDd &lt; 0)</span><br><span class="line">&#123;</span><br><span class="line">    newDw = newDw + newDd;</span><br><span class="line">    newDh = newDh + newDd;</span><br><span class="line">    newDd = 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>绘制出的电感如下图</p>
+<p><img src="ads-inductor-pcell/ind.png" alt="ind" style="zoom:50%;"></p>
+<p>可以看出，其具有电感的完整功能，且各部分可调。同时也可以支持矩形（RD=0）或者矩形/八边形混合电感（RD较小）。</p>
+<p><img src="ads-inductor-pcell/ind_square.png" alt="ind_square" style="zoom: 50%;"></p>
+<p>此外，将两个电感组合起来，也可以轻松实现变压器。</p>
+<p><img src="ads-inductor-pcell/transformer.png" alt="transformer" style="zoom: 50%;"></p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>完整代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line">load(&quot;vias.ael&quot;);</span><br><span class="line"></span><br><span class="line">defun grid_ceil2(input)</span><br><span class="line">&#123;</span><br><span class="line">	return ceil(100*input)/100.0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun grid_floor2(input)</span><br><span class="line">&#123;</span><br><span class="line">	return floor(100*input)/100.0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun adjust(l, xc, yc, x, y)</span><br><span class="line">&#123;</span><br><span class="line">	decl i = 0;</span><br><span class="line">	decl len = listlen( l );</span><br><span class="line">	for( i = 0; i &lt; len; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		decl t = list(l[i][0] * xc + x, l[i][1] * yc + y);</span><br><span class="line">		repla(l, t, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun create_crossing(context, layerM1, w, s, t, x, y, xc, yc)</span><br><span class="line">&#123;</span><br><span class="line">	w = grid_ceil2(w);</span><br><span class="line">	s = grid_ceil2(s);</span><br><span class="line">	e = grid_ceil2( w * (sqrt(2) - 1) );</span><br><span class="line">	decl x1 = (w + s - e) / 2.0;</span><br><span class="line">	decl x2 = (w + s + e) / 2.0;</span><br><span class="line">	decl coors = list(</span><br><span class="line">		list(- t, 0),</span><br><span class="line">		list(- x1 , 0),</span><br><span class="line">		list(x2, w + s),</span><br><span class="line">		list(t, w + s),</span><br><span class="line">		list(t, 2 * w + s),</span><br><span class="line">		list(x1, 2 * w + s),</span><br><span class="line">		list(- x2, w),</span><br><span class="line">		list(- t, w),</span><br><span class="line">		list(- t, 0)</span><br><span class="line">	);</span><br><span class="line">	adjust(coors, xc, yc, x, y);</span><br><span class="line">	decl newPolygon = db_create_primitive_polygon(coors);</span><br><span class="line">	db_create_polygon(context, layerM1, newPolygon);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun create_coil(context, layerM, Dw, Dh, Dd, w, t, x, y)</span><br><span class="line">&#123;</span><br><span class="line">	decl e = grid_ceil2( w * (sqrt(2) - 1) );</span><br><span class="line">	decl coors = list(</span><br><span class="line">		list(t, Dh + Dd - w),</span><br><span class="line">		list(Dw - e , Dh + Dd - w),</span><br><span class="line">		list(Dw + Dd - w, Dh - e),</span><br><span class="line">		list(Dw + Dd - w, - Dh + e),</span><br><span class="line">		list(Dw - e, - Dh - Dd + w),</span><br><span class="line">		list(t, - Dh - Dd + w),</span><br><span class="line">		list(t, - Dh - Dd),</span><br><span class="line">		list(Dw, - Dh - Dd),</span><br><span class="line">		list(Dw + Dd, - Dh),</span><br><span class="line">		list(Dw + Dd, Dh),</span><br><span class="line">		list(Dw, Dh + Dd),</span><br><span class="line">		list(t, Dh + Dd),</span><br><span class="line">		list(t, Dh + Dd - w)</span><br><span class="line">	);</span><br><span class="line">	adjust(coors, 1, 1, x, y);</span><br><span class="line">	decl newPolygon = db_create_primitive_polygon(coors);</span><br><span class="line">	db_create_polygon(context, layerM, newPolygon);</span><br><span class="line"></span><br><span class="line">	adjust(coors, -1, 1, 0, 0);</span><br><span class="line">	decl newPolygon2 = db_create_primitive_polygon(coors);</span><br><span class="line">	db_create_polygon(context, layerM, newPolygon2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun create_tj(context, layerM, w1, s1, t, w2, s2, e, x, y, dir)</span><br><span class="line">&#123;</span><br><span class="line">	decl d = s2 - s1;</span><br><span class="line">	decl ar = grid_floor2( 0.5 * ( sqrt(2)/2 * (w1 + w2) - w1 +e - s2 + s1 ) );</span><br><span class="line">	decl al = e - ar - s2 + s1;</span><br><span class="line">	decl coors = list(</span><br><span class="line">		list(-t, 0),</span><br><span class="line">		list(-s1, 0),</span><br><span class="line">		list(-s1, -w1 - ar),</span><br><span class="line">		list(-s2, -w1 - ar - (s2-s1)),</span><br><span class="line">		list(-s2, -w1 - e),</span><br><span class="line">		list(-s2 - w2, -w1 - e),</span><br><span class="line">		list(-s2 - w2, -w1 - al - (w2+s2-w1-s1)),</span><br><span class="line">		list(-s1 - w1, -w1 - al),</span><br><span class="line">		list(-s1 - w1, -w1),</span><br><span class="line">		list(-t, -w1),</span><br><span class="line">		list(-t, 0)</span><br><span class="line">	);</span><br><span class="line">	</span><br><span class="line">	adjust(coors, 1, pow(-1, dir+1), x, pow(-1, dir)*y);</span><br><span class="line">	decl newPolygon = db_create_primitive_polygon(coors);</span><br><span class="line">	db_create_polygon(context, layerM, newPolygon);</span><br><span class="line">	</span><br><span class="line">	adjust(coors, -1, 1, 0, 0);</span><br><span class="line">	decl newPolygon2 = db_create_primitive_polygon(coors);</span><br><span class="line">	db_create_polygon(context, layerM, newPolygon2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun create_diff_inductor(context, MT, MB, D, W, S, C, RH, RD, s1, w2, s2, e, x, y, dir, combine)</span><br><span class="line">&#123;</span><br><span class="line">	decl AP = db_get_layerid(context, &quot;AP&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M9 = db_get_layerid(context, &quot;M9&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M8 = db_get_layerid(context, &quot;M8&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M7 = db_get_layerid(context, &quot;M7&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M6 = db_get_layerid(context, &quot;M6&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M5 = db_get_layerid(context, &quot;M5&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M4 = db_get_layerid(context, &quot;M4&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M3 = db_get_layerid(context, &quot;M3&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M2 = db_get_layerid(context, &quot;M2&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl M1 = db_get_layerid(context, &quot;M1&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl Metals = list(M1, M1, M2, M3, M4, M5, M6, M7, M8, M9, AP);</span><br><span class="line">	decl via9 = db_get_layerid(context, &quot;via9&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via8 = db_get_layerid(context, &quot;via8&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via7 = db_get_layerid(context, &quot;via7&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via6 = db_get_layerid(context, &quot;via6&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via5 = db_get_layerid(context, &quot;via5&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via4 = db_get_layerid(context, &quot;via4&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via3 = db_get_layerid(context, &quot;via3&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via2 = db_get_layerid(context, &quot;via2&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl via1 = db_get_layerid(context, &quot;via1&quot;, &quot;drawing&quot;);</span><br><span class="line">	decl Vias = list(via1, via1, via2, M3, M4, M5, M6, M7, M8, M9, AP);</span><br><span class="line"></span><br><span class="line">	decl layerM1 = Metals[MT];</span><br><span class="line">	decl layerM2 = Metals[MB];</span><br><span class="line">	</span><br><span class="line">	decl i = 0;</span><br><span class="line">	decl Dw = grid_ceil2( D / 2 );</span><br><span class="line">	decl Dh = grid_ceil2( D / 2 * RH );</span><br><span class="line">	decl Dd = grid_ceil2( D * RD / sqrt(2) );</span><br><span class="line">	decl ew = grid_ceil2( W * (sqrt(2) - 1) );</span><br><span class="line">	decl es = grid_ceil2( S * (sqrt(2) - 1) );</span><br><span class="line"></span><br><span class="line">	decl iDW = Dw;</span><br><span class="line">	for(i = 0; i &lt; C - 1; i++)</span><br><span class="line">		iDW = grid_floor2( iDW - ew - es );</span><br><span class="line">	decl wv = grid_floor(iDW - (1 + (W + S + ew) / 2));</span><br><span class="line">	if(wv &gt; 2 * W)</span><br><span class="line">		wv = 2 * W;</span><br><span class="line">	decl t = grid_floor( wv + 1 + (W + S + ew) / 2 );</span><br><span class="line">	</span><br><span class="line">	create_tj(context, layerM1, W, s1, t, w2, s2, e, x, y+Dh+Dd-W, dir);</span><br><span class="line"></span><br><span class="line">	for(i = 0; i &lt; C; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		create_coil(context, layerM1, Dw, Dh, Dd, W, t, x, y);</span><br><span class="line">		decl newDw = grid_floor2( Dw - ew - es );</span><br><span class="line">		decl newDh = grid_floor2( Dh - ew - es );</span><br><span class="line">		decl newDd = grid_floor2( Dd - W - S + ew + es );</span><br><span class="line">		if(newDd &lt; 0)</span><br><span class="line">		&#123;</span><br><span class="line">			newDw = newDw + newDd;</span><br><span class="line">			newDh = newDh + newDd;</span><br><span class="line">			newDd = 0;</span><br><span class="line">		&#125;</span><br><span class="line">		decl cs = Dh + Dd - newDh - newDd - W;</span><br><span class="line">		if(i != C - 1)</span><br><span class="line">		&#123;</span><br><span class="line">			if(dir == 0)</span><br><span class="line">			&#123;</span><br><span class="line">				create_crossing(context, layerM1, W, cs, t, x, y-Dh-Dd, 1, 1);</span><br><span class="line">				create_crossing(context, layerM2, W, cs, t, x, y-Dh-Dd, -1, 1);</span><br><span class="line">				via_fill7to9(MB, MT, wv, W, 0.3, 0.3, 0.3, 0.3, x-t, y-(Dh+Dd)+W+cs, combine);</span><br><span class="line">				via_fill7to9(MB, MT, wv, W, 0.3, 0.3, 0.3, 0.3, x+t-wv, y-(Dh+Dd), combine);</span><br><span class="line">			&#125;</span><br><span class="line">			if(dir == 1)</span><br><span class="line">			&#123;</span><br><span class="line">				create_crossing(context, layerM1, W, cs, t, x, y+Dh+Dd, 1, -1);</span><br><span class="line">				create_crossing(context, layerM2, W, cs, t, x, y+Dh+Dd, -1, -1);</span><br><span class="line">				via_fill7to9(MB, MT, wv, W, 0.3, 0.3, 0.3, 0.3, x-t, y+Dh+Dd-2*W-cs, combine);</span><br><span class="line">				via_fill7to9(MB, MT, wv, W, 0.3, 0.3, 0.3, 0.3, x+t-wv, y+Dh+Dd-W, combine);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">			db_add_rectangle(context, layerM1, x-t, y+pow(-1, dir+1)*(Dh+Dd), x+t, y+pow(-1, dir+1)*(Dh+Dd-W));</span><br><span class="line">		Dw = newDw;</span><br><span class="line">		Dh = newDh;</span><br><span class="line">		Dd = newDd;</span><br><span class="line">		dir = 1 - dir;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">defun diff_inductor(MT, MB, D, W, S, C, RH, RD, s1, w2, s2, e, dir, combine)</span><br><span class="line">&#123;</span><br><span class="line">	decl designContext = de_get_current_design_context();</span><br><span class="line">	decl mks2uu = db_get_mks_to_uu_factor(designContext);</span><br><span class="line"></span><br><span class="line">	D = D * mks2uu;</span><br><span class="line">	W = W * mks2uu;</span><br><span class="line">	S = S * mks2uu;</span><br><span class="line">	C = floor(C);</span><br><span class="line">	s1 = s1 * mks2uu;</span><br><span class="line">	w2 = w2 * mks2uu;</span><br><span class="line">	s2 = s2 * mks2uu;</span><br><span class="line">	e = e * mks2uu;</span><br><span class="line">	dir = floor(dir);</span><br><span class="line">	combine = floor(combine);</span><br><span class="line">	</span><br><span class="line">	D = grid_ceil2( D * RH );</span><br><span class="line">	RH = 1 / RH;</span><br><span class="line">	RD = RD * RH;</span><br><span class="line">	</span><br><span class="line">	create_diff_inductor2(designContext, MT, MB, D, W, S, C, RH, RD, s1, w2, s2, e, 0, 0, dir, combine);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\33e60fbc\transformer-equation-derivation.html" rel="bookmark">变压器的跨阻推导</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\10ba08e5\mom-simulation.html" rel="bookmark">电容的电磁场仿真设置</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell.html" title="使用ADS创建电感Pcell">https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Inductor/" rel="tag"># Inductor</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/5777cf8/frequency-response.html" rel="next" title="二阶系统">
+                  <i class="fa fa-chevron-left"></i> 二阶系统
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备"><span class="nav-number">1.</span> <span class="nav-text">预备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交错部分设计"><span class="nav-number">2.</span> <span class="nav-text">交错部分设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线圈边缘设计"><span class="nav-number">3.</span> <span class="nav-text">线圈边缘设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延展设计"><span class="nav-number">4.</span> <span class="nav-text">延展设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多圈绘制"><span class="nav-number">5.</span> <span class="nav-text">多圈绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">6.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">45k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/1e678d19/ads-inductor-pcell.html";
+    this.page.identifier = "archives/1e678d19/ads-inductor-pcell.html";
+    this.page.title = '使用ADS创建电感Pcell';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
