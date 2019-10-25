@@ -55,20 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="This is a blog intended for sharing knowledge about RFIC design. If any part of the blog infringes your copyright, trademark or patent, please contact me at">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About">
-<meta property="og:url" content="https://triblemany.github.io/about/index.html">
+  <meta name="description" content="本文介绍了串联和并联电路的转换。">
+<meta name="keywords" content="Circuit Theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阻抗串并转换">
+<meta property="og:url" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This is a blog intended for sharing knowledge about RFIC design. If any part of the blog infringes your copyright, trademark or patent, please contact me at">
+<meta property="og:description" content="本文介绍了串联和并联电路的转换。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/about/index/nunito_regular.png">
-<meta property="og:updated_time" content="2019-09-16T08:11:48.115Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-parallel.svg">
+<meta property="og:updated_time" content="2019-10-25T08:41:09.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About">
-<meta name="twitter:description" content="This is a blog intended for sharing knowledge about RFIC design. If any part of the blog infringes your copyright, trademark or patent, please contact me at">
-<meta name="twitter:image" content="https://triblemany.github.io/about/index/nunito_regular.png">
-  <link rel="canonical" href="https://triblemany.github.io/about/">
+<meta name="twitter:title" content="阻抗串并转换">
+<meta name="twitter:description" content="本文介绍了串联和并联电路的转换。">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-parallel.svg">
+  <link rel="canonical" href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion">
 
 
 <script id="page-configurations">
@@ -76,13 +77,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
-    isPage: true,
+    isPost: true,
+    isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>About | Triblemany</title>
+  <title>阻抗串并转换 | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -242,70 +243,179 @@
         <div class="content-wrap">
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
           <div id="content" class="content page-post-detail">
             
 
   <div id="posts" class="posts-expand">
     
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">About
-
-</h1>
-
-<div class="post-meta">
+  <article class="post" itemscope itemtype="http://schema.org/Article">
   
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">阻抗串并转换
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-25 16:39:30 / Modified: 16:41:09" itemprop="dateCreated datePublished" datetime="2019-10-25T16:39:30+08:00">2019-10-25</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>430</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文介绍了串联和并联电路的转换。</p>
+<a id="more"></a>
+<p><img src="series-parallel-conversion/series-parallel.svg" alt="series-parallel"></p>
+<h2 id="串联-gt-并联"><a href="#串联-gt-并联" class="headerlink" title="串联-&gt;并联"></a>串联-&gt;并联</h2><script type="math/tex; mode=display">
+Q=\frac{X_s}{R_s}\\
+R_p=(1+Q^2)R_s\\
+X_p=X_s\left(1+\frac{1}{Q^2}\right)</script><h2 id="并联-gt-串联"><a href="#并联-gt-串联" class="headerlink" title="并联-&gt;串联"></a>并联-&gt;串联</h2><script type="math/tex; mode=display">
+Q=\frac{R_p}{X_p}\\
+R_s=\frac{R_p}{(1+Q^2)}\\
+X_s=\frac{X_p}{\left(1+\frac{1}{Q^2}\right)}</script><h2 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h2><p>并联-&gt;串联推导如下</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R_s+jX_s&=\frac{1}{\frac{1}{R_p}+\frac{1}{jX_p}}\\
+&=\frac{R_pX_p^2}{R_p^2+X_p^2}+j\frac{R_p^2X_p}{R_p^2+X_p^2}\\
+&=\frac{R_p}{(1+Q^2)}+j\frac{X_p}{\left(1+\frac{1}{Q^2}\right)}
+\end{aligned}</script><p>相应的，交换顺序可得串联-&gt;并联。</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\5777cf8\frequency-response.html" rel="bookmark">二阶系统</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html" title="阻抗串并转换">https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
 </div>
 
-</header>
+      
 
-      
-      
-      
-      <div class="post-body">
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Circuit-Theory/" rel="tag"># Circuit Theory</a>
+            
+          </div>
         
-          <p>This is a blog intended for sharing knowledge about RFIC design.</p>
-<p>If any part of the blog infringes your copyright, trademark or patent, please contact me at </p>
-<p><img src="./index/nunito_regular.png" width="183.5" height="18"></p>
 
         
-      </div>
-      
-      
-      
-    </div>
-    
 
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/1e678d19/ads-inductor-pcell.html" rel="next" title="使用ADS创建电感Pcell">
+                  <i class="fa fa-chevron-left"></i> 使用ADS创建电感Pcell
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
     
-    
-    
+  </div>
+  
+  
+  
+  </article>
+
   </div>
 
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
 
         </div>
           
@@ -337,6 +447,10 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串联-gt-并联"><span class="nav-number">1.</span> <span class="nav-text">串联-&gt;并联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并联-gt-串联"><span class="nav-number">2.</span> <span class="nav-text">并联-&gt;串联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推导"><span class="nav-number">3.</span> <span class="nav-text">推导</span></a></li></ol></div>
+          </div>
+        
       </div>
       <!--/noindex-->
 
@@ -483,17 +597,106 @@
   
 
   
+    
+      
+<script type="text/x-mathjax-config">
 
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
   
 
   
 
-
-  
-    <script src="/js/post-details.js?v=7.3.0"></script>
-
   
 
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html";
+    this.page.identifier = "archives/abd732af/series-parallel-conversion.html";
+    this.page.title = '阻抗串并转换';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
 
 </body>
 </html>

@@ -69,7 +69,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/lumped_mimic_distributed.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/detailed_schematic.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_result.png">
-<meta property="og:updated_time" content="2019-10-14T08:17:43.730Z">
+<meta property="og:updated_time" content="2019-10-21T07:27:01.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to Model RLGC Transmission Line">
 <meta name="twitter:description" content="This paper details the equations of transmission line, and introduces how to use Matlab to model RLGC transmission line.">
@@ -298,7 +298,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-14 16:17:43" itemprop="dateModified" datetime="2019-10-14T16:17:43+08:00">2019-10-14</time>
+                <time title="Modified: 2019-10-21 15:27:01" itemprop="dateModified" datetime="2019-10-21T15:27:01+08:00">2019-10-21</time>
               </span>
             
           
@@ -312,7 +312,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.2k</span>
+              <span>2.5k</span>
             </span>
           
 
@@ -380,6 +380,9 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><h2 id="Obtain-Z-and-gamma-from-simulation
 <h2 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h2><ol>
 <li><p>How to convert $\alpha, \beta$ parameters to $A, \epsilon$ parameters?</p>
 <script type="math/tex; mode=display">\beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}</script><script type="math/tex; mode=display">1\ NP/m=20\log_{10}{e^{1}}=8.686\ dB/m</script><script type="math/tex; mode=display">A=20\alpha\log_{10}{e}</script><script type="math/tex; mode=display">\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script></li>
+</ol>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>W. R. Eisenstadt and Y. Eo, “S-parameter-based IC interconnect transmission line characterization,” in <em>IEEE Transactions on Components, Hybrids, and Manufacturing Technology</em>, vol. 15, no. 4, pp. 483-490, Aug. 1992. DOI:  <a href="https://doi.org/10.1109/33.159877" target="_blank" rel="noopener">10.1109/33.159877</a></li>
 </ol>
 
     </div>
@@ -524,7 +527,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><h2 id="Obtain-Z-and-gamma-from-simulation
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transmission-Line-Solutions"><span class="nav-number">1.1.</span> <span class="nav-text">Transmission Line Solutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter-Conversion"><span class="nav-number">1.2.</span> <span class="nav-text">Parameter Conversion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obtain-Z-and-gamma-from-simulation"><span class="nav-number">2.</span> <span class="nav-text">Obtain Z and $\gamma$ from simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma"><span class="nav-number">3.</span> <span class="nav-text">Use Matlab to obtain RLGC, Z and $\gamma$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation"><span class="nav-number">3.1.</span> <span class="nav-text">Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification"><span class="nav-number">3.2.</span> <span class="nav-text">Verification</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">4.</span> <span class="nav-text">Questions</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transmission-Line-Solutions"><span class="nav-number">1.1.</span> <span class="nav-text">Transmission Line Solutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter-Conversion"><span class="nav-number">1.2.</span> <span class="nav-text">Parameter Conversion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Obtain-Z-and-gamma-from-simulation"><span class="nav-number">2.</span> <span class="nav-text">Obtain Z and $\gamma$ from simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Matlab-to-obtain-RLGC-Z-and-gamma"><span class="nav-number">3.</span> <span class="nav-text">Use Matlab to obtain RLGC, Z and $\gamma$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation"><span class="nav-number">3.1.</span> <span class="nav-text">Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification"><span class="nav-number">3.2.</span> <span class="nav-text">Verification</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Questions"><span class="nav-number">4.</span> <span class="nav-text">Questions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -541,7 +544,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><h2 id="Obtain-Z-and-gamma-from-simulation
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -603,7 +606,7 @@ C={\rm Im}\{\gamma/Z\}/\omega</script><h2 id="Obtain-Z-and-gamma-from-simulation
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">45k</span>
+    <span title="Symbols count total">46k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
