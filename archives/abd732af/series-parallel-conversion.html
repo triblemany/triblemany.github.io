@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-parallel.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/shunt-rlc-Q.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-rlc-Q.svg">
-<meta property="og:updated_time" content="2019-10-25T12:27:28.253Z">
+<meta property="og:updated_time" content="2019-10-27T08:03:23.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阻抗串并转换">
 <meta name="twitter:description" content="本文介绍了串联和并联电路的转换，以及Q值的计算。">
@@ -286,11 +286,19 @@
                 
               
 
-              <time title="Created: 2019-10-25 16:39:30 / Modified: 20:27:28" itemprop="dateCreated datePublished" datetime="2019-10-25T16:39:30+08:00">2019-10-25</time>
+              <time title="Created: 2019-10-25 16:39:30" itemprop="dateCreated datePublished" datetime="2019-10-25T16:39:30+08:00">2019-10-25</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-27 16:03:23" itemprop="dateModified" datetime="2019-10-27T16:03:23+08:00">2019-10-27</time>
+              </span>
             
           
 
@@ -303,7 +311,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>1.5k</span>
+              <span>1.8k</span>
             </span>
           
 
@@ -354,7 +362,10 @@ Q&=\omega C_pR_{s,p||p}\\
 &=\frac{1}{\frac{1}{Q_L}+\frac{1}{Q_C}}\\
 \end{aligned}</script><p>也即</p>
 <script type="math/tex; mode=display">
-\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><h3 id="实际串联LC网络的Q值"><a href="#实际串联LC网络的Q值" class="headerlink" title="实际串联LC网络的Q值"></a>实际串联LC网络的Q值</h3><p>另考虑一个具有Q值的电感和电容的串联谐振。</p>
+\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><p>值得注意的是，其中的$\omega$定义为</p>
+<script type="math/tex; mode=display">
+\omega=\frac{1}{\sqrt{L_{s,p}C_p}}=\frac{\sqrt{1-\frac{C_pR_s^2}{L_s}}}{\sqrt{L_{s}C_p}}\approx\frac{1}{\sqrt{L_{s}C_p}}</script><p>当串联电阻较小时可以简化为最后一项。</p>
+<h3 id="实际串联LC网络的Q值"><a href="#实际串联LC网络的Q值" class="headerlink" title="实际串联LC网络的Q值"></a>实际串联LC网络的Q值</h3><p>另考虑一个具有Q值的电感和电容的串联谐振。</p>
 <p><img src="series-parallel-conversion/series-rlc-Q.svg" alt="series-rlc-Q"></p>
 <p>计算这个网络的等效Q值时，首先将并联LC转换为等效串联的LC，有</p>
 <script type="math/tex; mode=display">
@@ -370,7 +381,10 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
 &=\frac{1}{\frac{1}{Q_L}+\frac{1}{Q_C}}\\
 \end{aligned}</script><p>也即</p>
 <script type="math/tex; mode=display">
-\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script>
+\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><p>此时，$\omega$定义为</p>
+<script type="math/tex; mode=display">
+\omega=\frac{1}{\sqrt{L_{s}C_{p,s}}}=\frac{\sqrt{1-\frac{L_s}{C_pR_p^2}}}{\sqrt{L_{s}C_p}}\approx\frac{1}{\sqrt{L_{s}C_p}}</script><p>当并联电阻较大时可以简化为最后一项。</p>
+
     </div>
 
     
