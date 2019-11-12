@@ -55,17 +55,17 @@
   };
 </script>
 
-  <meta name="description" content="变压器时毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
+  <meta name="description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
 <meta name="keywords" content="RFIC,Transformer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="变压器的设计和优化">
 <meta property="og:url" content="https://triblemany.github.io/archives/81501320/transformer-design.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="变压器时毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
+<meta property="og:description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/ideal-model.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/T-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Long%27s-model.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Longs-model.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/distributed-model.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/TLine-model.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/transformer-limitation.png">
@@ -77,10 +77,10 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Lp.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Ls.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/M.svg">
-<meta property="og:updated_time" content="2019-11-12T05:28:12.571Z">
+<meta property="og:updated_time" content="2019-11-12T05:32:52.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变压器的设计和优化">
-<meta name="twitter:description" content="变压器时毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
+<meta name="twitter:description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
 <meta name="twitter:image" content="https://triblemany.github.io/archives/81501320/transformer-design/ideal-model.svg">
   <link rel="canonical" href="https://triblemany.github.io/archives/81501320/transformer-design">
 
@@ -295,7 +295,7 @@
                 
               
 
-              <time title="Created: 2019-11-12 13:08:56 / Modified: 13:28:12" itemprop="dateCreated datePublished" datetime="2019-11-12T13:08:56+08:00">2019-11-12</time>
+              <time title="Created: 2019-11-12 13:08:56 / Modified: 13:32:52" itemprop="dateCreated datePublished" datetime="2019-11-12T13:08:56+08:00">2019-11-12</time>
             </span>
           
             
@@ -325,7 +325,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>变压器时毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。</p>
+        <p>变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。</p>
 <a id="more"></a>
 <h2 id="变压器的模型"><a href="#变压器的模型" class="headerlink" title="变压器的模型"></a>变压器的模型</h2><p>变压器的基本模型如下</p>
 <p><img src="transformer-design/ideal-model.svg" alt="ideal-model"></p>
@@ -336,7 +336,7 @@ k=\frac{M}{\sqrt{L_pL_s}}</script><p>变压器的基本模型可以等效转化�
 <p><img src="transformer-design/T-model.svg" alt="T-model"></p>
 <p>如果要进一步展现变压器的直流隔离作用，需要在一侧加一个理想变压器。由于这个模型没有跨接在两端的互感，可以在史密斯圆图上绘制出轨迹，方便匹配的设计。</p>
 <p>此外，另一种适用于理论分析的模型是John Long提出的模型[1]，如下</p>
-<p><img src="transformer-design/Long&#39;s-model.svg" alt="Long&#39;s-model"></p>
+<p><img src="transformer-design/Longs-model.svg" alt="Long&#39;s-model"></p>
 <p>这个模型涵盖了初级和次级的电阻损耗，并将变压器等效为理想变压器和漏电感。这可以用来分析阻抗，例如对于理想变压器（$k=1$，$L_p, L_s$同比趋于无穷大），其输入阻抗为</p>
 <script type="math/tex; mode=display">
 Z_{in}=n^2Z_L</script><p>上述的几种模型都是使用集总元件表征变压器的特征，因而只在窄带范围内有效。适用于宽带建模的变压器模型主要有分布式模型和传输线模型。例如，一个常见于八边形变压器的分布式模型如下</p>
@@ -439,14 +439,14 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
       
     </li>
   
