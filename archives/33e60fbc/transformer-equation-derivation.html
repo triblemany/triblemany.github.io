@@ -64,7 +64,7 @@
 <meta property="og:description" content="变压器是射频集成电路设计中极为重要的元件，它可以提供：  初级线圈和次级线圈的直流阻断 初级线圈的次级线圈的中心抽头是虚地，可用于连接直流偏置 阻抗匹配  在毫米波频段，其占用面积小，可实现的插入损耗、带宽相比于分立元件有较大优势。变压器的分析通常使用电感耦合的RLC谐振网络进行。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/33e60fbc/transformer-equation-derivation/mcr.svg">
-<meta property="og:updated_time" content="2019-10-11T12:33:21.610Z">
+<meta property="og:updated_time" content="2019-11-12T05:43:21.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变压器的跨阻推导">
 <meta name="twitter:description" content="变压器是射频集成电路设计中极为重要的元件，它可以提供：  初级线圈和次级线圈的直流阻断 初级线圈的次级线圈的中心抽头是虚地，可用于连接直流偏置 阻抗匹配  在毫米波频段，其占用面积小，可实现的插入损耗、带宽相比于分立元件有较大优势。变压器的分析通常使用电感耦合的RLC谐振网络进行。">
@@ -293,7 +293,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-11 20:33:21" itemprop="dateModified" datetime="2019-10-11T20:33:21+08:00">2019-10-11</time>
+                <time title="Modified: 2019-11-12 13:43:21" itemprop="dateModified" datetime="2019-11-12T13:43:21+08:00">2019-11-12</time>
               </span>
             
           
@@ -391,8 +391,8 @@ Q=\frac{R}{\omega L(1-k^2)}=\omega RC</script><p>可以得到整体Y参数为</p
 <script type="math/tex; mode=display">
 \left\{
 \begin{aligned}
-I_1=\frac{1}{R}\left[1+Q\left(\frac{s}{\omega}+\frac{\omega}{s}\right)\right]U_1-\frac{\omega kQ}{sR}U_2\\
-I_2=-\frac{\omega kQ}{sR}U_1+\frac{1}{R}\left[1+Q\left(\frac{s}{\omega}+\frac{\omega}{s}\right)\right]U_2\\
+I_1&=\frac{1}{R}\left[1+Q\left(\frac{s}{\omega}+\frac{\omega}{s}\right)\right]U_1-\frac{\omega kQ}{sR}U_2\\
+I_2&=-\frac{\omega kQ}{sR}U_1+\frac{1}{R}\left[1+Q\left(\frac{s}{\omega}+\frac{\omega}{s}\right)\right]U_2\\
 \end{aligned}
 \right.</script><p>此时，对Y参数矩阵求逆</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clear</span><br><span class="line">syms R Q w s k</span><br><span class="line">syms Y</span><br><span class="line">Y = [<span class="number">1</span> / R * (<span class="number">1</span> + Q * (s / w + w / s)), -k * w * Q / s / R;</span><br><span class="line">    -k * w * Q / s / R, <span class="number">1</span> / R * (<span class="number">1</span> + Q * (s / w + w / s))];</span><br><span class="line">x = <span class="built_in">eye</span>(<span class="number">2</span>)/Y;</span><br><span class="line">x(<span class="number">2</span>,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
@@ -438,14 +438,14 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\10ba08e5\mom-simulation.html" rel="bookmark">电容的电磁场仿真设置</a></div>
+      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
+      <div class="popular-posts-title"><a href="\archives\10ba08e5\mom-simulation.html" rel="bookmark">电容的电磁场仿真设置</a></div>
       
     </li>
   
@@ -576,7 +576,7 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -611,7 +611,9 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
