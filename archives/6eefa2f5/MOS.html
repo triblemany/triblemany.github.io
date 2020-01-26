@@ -55,34 +55,23 @@
   };
 </script>
 
-  <meta name="description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
-<meta name="keywords" content="RFIC,Transformer">
+  <meta name="description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+<meta name="keywords" content="RFIC,Transistor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="变压器的设计和优化">
-<meta property="og:url" content="https://triblemany.github.io/archives/81501320/transformer-design.html">
+<meta property="og:title" content="Basic Theory of MOSFETs">
+<meta property="og:url" content="https://triblemany.github.io/archives/6eefa2f5/MOS.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
+<meta property="og:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/ideal-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/T-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/longs-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/distributed-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/TLine-model.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/transformer-limitation.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/insertion-loss-kQ.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/wideband-matching.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/high-k.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/medium-k.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/low-k.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Lp.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/Ls.svg">
-<meta property="og:image" content="https://triblemany.github.io/archives/81501320/transformer-design/M.svg">
-<meta property="og:updated_time" content="2019-11-21T03:35:45.000Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-plot.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/Cgs.png">
+<meta property="og:updated_time" content="2020-01-26T09:40:07.328Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="变压器的设计和优化">
-<meta name="twitter:description" content="变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/81501320/transformer-design/ideal-model.svg">
-  <link rel="canonical" href="https://triblemany.github.io/archives/81501320/transformer-design">
+<meta name="twitter:title" content="Basic Theory of MOSFETs">
+<meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/6eefa2f5/MOS">
 
 
 <script id="page-configurations">
@@ -96,7 +85,7 @@
   };
 </script>
 
-  <title>变压器的设计和优化 | Triblemany</title>
+  <title>Basic Theory of MOSFETs | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -267,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/81501320/transformer-design.html">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/6eefa2f5/MOS.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Triblemany">
@@ -279,7 +268,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">变压器的设计和优化
+        <h1 class="post-title" itemprop="name headline">Basic Theory of MOSFETs
 
           
         </h1>
@@ -295,19 +284,11 @@
                 
               
 
-              <time title="Created: 2019-11-12 13:08:56" itemprop="dateCreated datePublished" datetime="2019-11-12T13:08:56+08:00">2019-11-12</time>
+              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:40:07" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-21 11:35:45" itemprop="dateModified" datetime="2019-11-21T11:35:45+08:00">2019-11-21</time>
-              </span>
             
           
 
@@ -333,101 +314,73 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>变压器是毫米波电路设计中常用的器件。本文介绍了变压器的基本模型、匹配限制、插入损耗估计、宽带匹配和微调等方面。</p>
-<a id="more"></a>
-<h2 id="变压器的模型"><a href="#变压器的模型" class="headerlink" title="变压器的模型"></a>变压器的模型</h2><p>变压器的基本模型如下</p>
-<p><img src="transformer-design/ideal-model.svg" alt="ideal-model"></p>
-<p>因此，一个变压器可以由初级自感$L_p$，次级自感$L_s$和互感$M$定义。此外，两个常用的量——圈数比$n$和耦合系数$k$——可以定义为</p>
+        <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
+<h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
+<li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
+<li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
 <script type="math/tex; mode=display">
-n=\sqrt{\frac{L_p}{Ls}}\\
-k=\frac{M}{\sqrt{L_pL_s}}</script><p>变压器的基本模型可以等效转化为T型模型</p>
-<p><img src="transformer-design/T-model.svg" alt="T-model"></p>
-<p>如果要进一步展现变压器的直流隔离作用，需要在一侧加一个理想变压器。由于这个模型没有跨接在两端的互感，可以在史密斯圆图上绘制出轨迹，方便匹配的设计。</p>
-<p>此外，另一种适用于理论分析的模型是John Long提出的模型[1]，如下</p>
-<p><img src="transformer-design/longs-model.svg" alt="Long&#39;s-model"></p>
-<p>这个模型涵盖了初级和次级的电阻损耗，并将变压器等效为理想变压器和漏电感。这可以用来分析阻抗，例如对于理想变压器（$k=1$，$L_p, L_s$同比趋于无穷大），其输入阻抗为</p>
+ I_d=\mu_nC_{ox}\frac{W}{L}\left[(V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V_{DS}^2\right]</script></li>
+<li><p>Saturation region/ Square law ($V_{GS}&gt;V_{TH}, V_{DS}&gt;V_{GS}-V_{TH}$)</p>
 <script type="math/tex; mode=display">
-Z_{in}=n^2Z_L</script><p>上述的几种模型都是使用集总元件表征变压器的特征，因而只在窄带范围内有效。适用于宽带建模的变压器模型主要有分布式模型和传输线模型。例如，一个常见于八边形变压器的分布式模型如下</p>
-<p><img src="transformer-design/distributed-model.svg" alt="distributed-model"></p>
-<p>这种模型对变压器的每一段线进行建模，并组成最终的整体模型。传输线模型如下</p>
-<p><img src="transformer-design/TLine-model.svg" alt="TLine-model"></p>
-<p>其组成元件数量较少，方便分析。</p>
-<h2 id="变压器匹配的限制"><a href="#变压器匹配的限制" class="headerlink" title="变压器匹配的限制"></a>变压器匹配的限制</h2><p>值得注意的是，变压器匹配并不是万能的，在$L_p&gt;0, L_s&gt;0, k&lt;1$的约束下，有一部分容性区域无法触及。例如，从500 Ohm // 30 fF出发，位于负载等Q圆以下的部分无法到达。这可以用Long的变压器模型解释：在负载阻抗经nk:1理想变压器变换后，Q值不变，此时并联电感、串联电感都只能使输入阻抗向上移动，因而负载阻抗等Q圆以下的部分不可达。但幸运的是，前级放大器的输出阻抗通常为容性，变压器只需匹配到其共轭的感性阻抗点，因此变压器可以实现绝大多数的放大器级间匹配。</p>
-<p><img src="transformer-design/transformer-limitation.png" alt="transformer-limitation"></p>
-<h2 id="变压器的插入损耗"><a href="#变压器的插入损耗" class="headerlink" title="变压器的插入损耗"></a>变压器的插入损耗</h2><p>理论插入损耗值为[2]</p>
+ I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
+</ol>
+<h3 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h3><p>In saturation region</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-\eta_{MAX}=\frac{P_{load}}{P_{IN}}&=\frac{1}{1+2\sqrt{\left(1+\frac{1}{Q_pQ_sk^2}\right)\cdot\frac{1}{Q_pQ_sk^2}+\frac{2}{Q_pQ_sk^2}}}\\
-&=\frac{\sqrt{1+(kQ)^2}-1}{\sqrt{1+(kQ)^2}+1}
-\end{aligned}</script><p>其中$Q=\sqrt{Q_pQ_s}$，其关系可以绘图为</p>
-<p><img src="transformer-design/insertion-loss-kQ.svg" alt="insertion-loss-kQ"></p>
-<p>可见，$kQ$乘积越高，变压器的最小插入损耗越小。</p>
-<h2 id="变压器的宽带匹配"><a href="#变压器的宽带匹配" class="headerlink" title="变压器的宽带匹配"></a>变压器的宽带匹配</h2><p>考虑变压器的宽带匹配需要加上前置放大器输出阻抗、后级放大器输入阻抗的影响，原理图如下：</p>
-<p><img src="transformer-design/wideband-matching.png" alt="wideband-matching" style="zoom:50%;"></p>
-<p>当满足</p>
+g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
+&=\sqrt{2\mu_nC_{ox}\frac{W}{L}I_D}\\
+&=\frac{2I_D}{V_{GS}-V_{TH}}
+\end{aligned}</script><h2 id="Second-Order-Effects"><a href="#Second-Order-Effects" class="headerlink" title="Second-Order Effects"></a>Second-Order Effects</h2><h3 id="Body-Effect"><a href="#Body-Effect" class="headerlink" title="Body Effect"></a>Body Effect</h3><script type="math/tex; mode=display">
+V_{TH}=V_{TH0}+\gamma\left(\sqrt{2\Phi_F+V_{SB}}-\sqrt{|2\Phi_F|}\right)</script><p>and</p>
 <script type="math/tex; mode=display">
-\omega_0=\frac{1}{\sqrt{L_pC_{out}}}=\frac{1}{\sqrt{L_sC_{in}}}\\
-Q=\omega R_{out}C_{out}=\omega C_{in}R_{in}</script><p>跨阻约为[3-4]</p>
+\gamma=\frac{\sqrt{2q\epsilon_{si}N_{sub}}}{C_{ox}}\\
+V_{TH0}=\Phi_{MS}+2\Phi_{F}+\frac{Q_dep}{C_ox}\\
+Q_{dep}=\sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}\\
+\Phi_F=\frac{kT}{q}\ln{\frac{N_{sub}}{n_i}}</script><p>Thus, body effect can be utilized to modify the threshold voltage.</p>
+<h3 id="Channel-Length-Modulation"><a href="#Channel-Length-Modulation" class="headerlink" title="Channel Length Modulation"></a>Channel Length Modulation</h3><script type="math/tex; mode=display">
+I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{DS})</script><p>and</p>
 <script type="math/tex; mode=display">
-Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_0^2s^2+2Q\omega_0^3s+Q^2\omega_0^4}</script><p>其极点为</p>
+\lambda\propto\frac{1}{L}</script><p>Thus, long-channel MOSFET exhibits less channel modulation effect.</p>
+<h3 id="Subthreshold-Conduction"><a href="#Subthreshold-Conduction" class="headerlink" title="Subthreshold Conduction"></a>Subthreshold Conduction</h3><p>Or called weak inversion region.</p>
 <script type="math/tex; mode=display">
-\omega_L=\frac{\omega_0}{\sqrt{1+k}}\\
-\omega_H=\frac{\omega_0}{\sqrt{1-k}}</script><p>通常的，变压器有三种使用方法：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">$Z_{21}$</th>
-<th style="text-align:center">特性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><img src="transformer-design/high-k.png" alt="high-k"></td>
-<td style="text-align:center"><strong>高耦合变压器</strong>只用了一个峰值，效率高</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="transformer-design/medium-k.png" alt="medium-k"></td>
-<td style="text-align:center"><strong>中等耦合变压器</strong>带宽较宽，但带内波动大</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="transformer-design/low-k.png" alt="low-k"></td>
-<td style="text-align:center"><strong>低耦合变压器</strong>有平坦、宽带的频率响应</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="低耦合变压器的微调"><a href="#低耦合变压器的微调" class="headerlink" title="低耦合变压器的微调"></a>低耦合变压器的微调</h2><p>有时，需要对低耦合变压器进行微调，以满足功率要求。进行微调时，$L_p$、$L_s$和$M$对变压器输入阻抗随频率变化路径的影响为</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">增大$L_p$</th>
-<th style="text-align:center">增大$L_s$</th>
-<th style="text-align:center">增大$M$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><img src="transformer-design/Lp.svg" alt="Lp"></td>
-<td style="text-align:center"><img src="transformer-design/Ls.svg" alt="Ls"></td>
-<td style="text-align:center"><img src="transformer-design/M.svg" alt="M"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>各参数对输入阻抗的影响可以总结为：</p>
+I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
+<script type="math/tex; mode=display">
+V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
+<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="mosfet/parasitic-capacitance-layout.png" alt="parasitic-capacitance-layout"></p>
+<script type="math/tex; mode=display">
+C_1=WLC_{ox}\\
+C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
+C_{5/6}=C_j+C_{jsw}
+C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="mosfet/parasitic-capacitance-plot.png" alt="parasitic-capacitance-plot"></p>
 <ol>
-<li>$L_p$主要影响输入阻抗的虚部</li>
-<li>$L_s$主要影响中心频率</li>
-<li>$M$主要影响两个极点的距离</li>
+<li><p>Off region</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=C_{3/4}=WC_{ov}\\
+C_{GB}=\frac{C_1C_2}{C_1+C_2}</script></li>
+<li><p>Triode region</p>
+<p>Gate-channel capacitance is evenly split between the source and the drain</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=\frac{C_{1}}{2}+C_{3/4}</script></li>
+<li><p>Saturation region</p>
+<script type="math/tex; mode=display">
+C_{GD}=C_{3/4}=WC_{ov}\\\\
+C_{GS}=\frac{2}{3}C_1+C_{3/4}</script></li>
 </ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li>J. R. Long, “Monolithic transformers for silicon RF IC design,” in <em>IEEE Journal of Solid-State Circuits</em>, vol. 35, no. 9, pp. 1368-1382, Sept. 2000. DOI: <a href="https://doi.org/10.1109/4.868049" target="_blank" rel="noopener">10.1109/4.868049</a> </li>
-<li>Aoki, S. D. Kee, D. B. Rutledge and A. Hajimiri, “Distributed active transformer-a new power-combining and impedance-transformation technique,” in <em>IEEE Transactions on Microwave Theory and Techniques</em>, vol. 50, no. 1, pp. 316-331, Jan. 2002. DOI: <a href="https://doi.org/10.1109/22.981284" target="_blank" rel="noopener">10.1109/22.981284</a></li>
-<li>H. Jia, C. C. Prawoto, B. Chi, Z. Wang and C. P. Yue, “A Full Ka-Band Power Amplifier With 32.9% PAE and 15.3-dBm Power in 65-nm CMOS,” in <em>IEEE Transactions on Circuits and Systems I: Regular Papers</em>, vol. 65, no. 9, pp. 2657-2668, Sept. 2018. DOI: <a href="https://doi.org/10.1109/TCSI.2018.2799983" target="_blank" rel="noopener">10.1109/TCSI.2018.2799983</a></li>
-<li>M. Vigilante, P. Reynaert, 5G and E-Band Communication Circuits in Deep-Scaled CMOS. Switzerland: Springer, 2018. DOI: <a href="https://doi.org/10.1007/978-3-319-72646-5" target="_blank" rel="noopener">10.1007/978-3-319-72646-5</a></li>
+<h3 id="Resistance"><a href="#Resistance" class="headerlink" title="Resistance"></a>Resistance</h3><p>In saturation region</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+r_o&=\frac{\partial V_{DS}}{\partial I_{D}}\\
+&=\frac{1}{\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\cdot\lambda}\\
+&\approx\frac{1}{\lambda I_D}
+\end{aligned}</script><p>In triode region</p>
+<script type="math/tex; mode=display">
+r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as-Capacitor"><a href="#MOSFET-as-Capacitor" class="headerlink" title="MOSFET as Capacitor"></a>MOSFET as Capacitor</h3><p>The source, drain and the bulk are connected together as a terminal, while the gate is treated as another terminal.</p>
+<ol>
+<li>Negative potential on gate -&gt; attract holes -&gt; accumulation region -&gt; high capacitance</li>
+<li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
+<li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
 </ol>
+<p><img src="mosfet/Cgs.png" alt="Cgs"></p>
 
     </div>
 
@@ -440,14 +393,7 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\33e60fbc\transformer-equation-derivation.html" rel="bookmark">变压器的跨阻推导</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\6eefa2f5\MOS.html" rel="bookmark">Basic Theory of MOSFETs</a></div>
+      <div class="popular-posts-title"><a href="\archives\6eefa2f5\mosfet.html" rel="bookmark">Basic Theory of MOSFETs</a></div>
       
     </li>
   
@@ -472,6 +418,13 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
       
     </li>
   
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      
+    </li>
+  
   </ul>
 
         
@@ -484,7 +437,7 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/81501320/transformer-design.html" title="变压器的设计和优化">https://triblemany.github.io/archives/81501320/transformer-design.html</a>
+    <a href="https://triblemany.github.io/archives/6eefa2f5/MOS.html" title="Basic Theory of MOSFETs">https://triblemany.github.io/archives/6eefa2f5/MOS.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -501,7 +454,7 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
             
               <a href="/tags/RFIC/" rel="tag"># RFIC</a>
             
-              <a href="/tags/Transformer/" rel="tag"># Transformer</a>
+              <a href="/tags/Transistor/" rel="tag"># Transistor</a>
             
           </div>
         
@@ -511,8 +464,8 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/archives/bda72102/collect-cdslib.html" rel="next" title="根据cds.lib进行设计资料库备份">
-                  <i class="fa fa-chevron-left"></i> 根据cds.lib进行设计资料库备份
+                <a href="/archives/6eefa2f5/mosfet.html" rel="next" title="Basic Theory of MOSFETs">
+                  <i class="fa fa-chevron-left"></i> Basic Theory of MOSFETs
                 </a>
               
             </div>
@@ -520,10 +473,6 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/archives/5544ed83/pa-backoff-efficiency-analysis.html" rel="prev" title="功率放大器的效率分析">
-                  功率放大器的效率分析 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -582,7 +531,7 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变压器的模型"><span class="nav-number">1.</span> <span class="nav-text">变压器的模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变压器匹配的限制"><span class="nav-number">2.</span> <span class="nav-text">变压器匹配的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变压器的插入损耗"><span class="nav-number">3.</span> <span class="nav-text">变压器的插入损耗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变压器的宽带匹配"><span class="nav-number">4.</span> <span class="nav-text">变压器的宽带匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#低耦合变压器的微调"><span class="nav-number">5.</span> <span class="nav-text">低耦合变压器的微调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-V-Characteristic"><span class="nav-number">1.</span> <span class="nav-text">I-V Characteristic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation-of-Gm"><span class="nav-number">1.1.</span> <span class="nav-text">Calculation of Gm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Effects"><span class="nav-number">2.</span> <span class="nav-text">Second-Order Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Effect"><span class="nav-number">2.1.</span> <span class="nav-text">Body Effect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Length-Modulation"><span class="nav-number">2.2.</span> <span class="nav-text">Channel Length Modulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subthreshold-Conduction"><span class="nav-number">2.3.</span> <span class="nav-text">Subthreshold Conduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parasitic"><span class="nav-number">3.</span> <span class="nav-text">Parasitic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitance"><span class="nav-number">3.1.</span> <span class="nav-text">Capacitance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resistance"><span class="nav-number">3.2.</span> <span class="nav-text">Resistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOSFET-as-Capacitor"><span class="nav-number">3.3.</span> <span class="nav-text">MOSFET as Capacitor</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
@@ -803,9 +752,9 @@ Z_{21}=\frac{\omega_0^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega_0 s+(1-k^2+2Q^2)\omega_
 
 <script>
   function disqus_config() {
-    this.page.url = "https://triblemany.github.io/archives/81501320/transformer-design.html";
-    this.page.identifier = "archives/81501320/transformer-design.html";
-    this.page.title = '变压器的设计和优化';};
+    this.page.url = "https://triblemany.github.io/archives/6eefa2f5/MOS.html";
+    this.page.identifier = "archives/6eefa2f5/MOS.html";
+    this.page.title = 'Basic Theory of MOSFETs';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({

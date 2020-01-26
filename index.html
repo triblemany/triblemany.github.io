@@ -246,6 +246,310 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/6eefa2f5/MOS.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/archives/6eefa2f5/MOS.html" class="post-title-link" itemprop="url">Basic Theory of MOSFETs</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:40:07" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>2.5k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
+<h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
+<li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
+<li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
+<script type="math/tex; mode=display">
+ I_d=\mu_nC_{ox}\frac{W}{L}\left[(V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V_{DS}^2\right]</script></li>
+<li><p>Saturation region/ Square law ($V_{GS}&gt;V_{TH}, V_{DS}&gt;V_{GS}-V_{TH}$)</p>
+<script type="math/tex; mode=display">
+ I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
+</ol>
+<h3 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h3><p>In saturation region</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
+&=\sqrt{2\mu_nC_{ox}\frac{W}{L}I_D}\\
+&=\frac{2I_D}{V_{GS}-V_{TH}}
+\end{aligned}</script><h2 id="Second-Order-Effects"><a href="#Second-Order-Effects" class="headerlink" title="Second-Order Effects"></a>Second-Order Effects</h2><h3 id="Body-Effect"><a href="#Body-Effect" class="headerlink" title="Body Effect"></a>Body Effect</h3><script type="math/tex; mode=display">
+V_{TH}=V_{TH0}+\gamma\left(\sqrt{2\Phi_F+V_{SB}}-\sqrt{|2\Phi_F|}\right)</script><p>and</p>
+<script type="math/tex; mode=display">
+\gamma=\frac{\sqrt{2q\epsilon_{si}N_{sub}}}{C_{ox}}\\
+V_{TH0}=\Phi_{MS}+2\Phi_{F}+\frac{Q_dep}{C_ox}\\
+Q_{dep}=\sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}\\
+\Phi_F=\frac{kT}{q}\ln{\frac{N_{sub}}{n_i}}</script><p>Thus, body effect can be utilized to modify the threshold voltage.</p>
+<h3 id="Channel-Length-Modulation"><a href="#Channel-Length-Modulation" class="headerlink" title="Channel Length Modulation"></a>Channel Length Modulation</h3><script type="math/tex; mode=display">
+I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{DS})</script><p>and</p>
+<script type="math/tex; mode=display">
+\lambda\propto\frac{1}{L}</script><p>Thus, long-channel MOSFET exhibits less channel modulation effect.</p>
+<h3 id="Subthreshold-Conduction"><a href="#Subthreshold-Conduction" class="headerlink" title="Subthreshold Conduction"></a>Subthreshold Conduction</h3><p>Or called weak inversion region.</p>
+<script type="math/tex; mode=display">
+I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
+<script type="math/tex; mode=display">
+V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
+<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="mosfet/parasitic-capacitance-layout.png" alt="parasitic-capacitance-layout"></p>
+<script type="math/tex; mode=display">
+C_1=WLC_{ox}\\
+C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
+C_{5/6}=C_j+C_{jsw}
+C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="mosfet/parasitic-capacitance-plot.png" alt="parasitic-capacitance-plot"></p>
+<ol>
+<li><p>Off region</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=C_{3/4}=WC_{ov}\\
+C_{GB}=\frac{C_1C_2}{C_1+C_2}</script></li>
+<li><p>Triode region</p>
+<p>Gate-channel capacitance is evenly split between the source and the drain</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=\frac{C_{1}}{2}+C_{3/4}</script></li>
+<li><p>Saturation region</p>
+<script type="math/tex; mode=display">
+C_{GD}=C_{3/4}=WC_{ov}\\\\
+C_{GS}=\frac{2}{3}C_1+C_{3/4}</script></li>
+</ol>
+<h3 id="Resistance"><a href="#Resistance" class="headerlink" title="Resistance"></a>Resistance</h3><p>In saturation region</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+r_o&=\frac{\partial V_{DS}}{\partial I_{D}}\\
+&=\frac{1}{\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\cdot\lambda}\\
+&\approx\frac{1}{\lambda I_D}
+\end{aligned}</script><p>In triode region</p>
+<script type="math/tex; mode=display">
+r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as-Capacitor"><a href="#MOSFET-as-Capacitor" class="headerlink" title="MOSFET as Capacitor"></a>MOSFET as Capacitor</h3><p>The source, drain and the bulk are connected together as a terminal, while the gate is treated as another terminal.</p>
+<ol>
+<li>Negative potential on gate -&gt; attract holes -&gt; accumulation region -&gt; high capacitance</li>
+<li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
+<li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
+</ol>
+<p><img src="mosfet/Cgs.png" alt="Cgs"></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/6eefa2f5/mosfet.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/archives/6eefa2f5/mosfet.html" class="post-title-link" itemprop="url">Basic Theory of MOSFETs</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:36:39" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>2.5k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
+<h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
+<li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
+<li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
+<script type="math/tex; mode=display">
+ I_d=\mu_nC_{ox}\frac{W}{L}\left[(V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V_{DS}^2\right]</script></li>
+<li><p>Saturation region/ Square law ($V_{GS}&gt;V_{TH}, V_{DS}&gt;V_{GS}-V_{TH}$)</p>
+<script type="math/tex; mode=display">
+ I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
+</ol>
+<h3 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h3><p>In saturation region</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
+&=\sqrt{2\mu_nC_{ox}\frac{W}{L}I_D}\\
+&=\frac{2I_D}{V_{GS}-V_{TH}}
+\end{aligned}</script><h2 id="Second-Order-Effects"><a href="#Second-Order-Effects" class="headerlink" title="Second-Order Effects"></a>Second-Order Effects</h2><h3 id="Body-Effect"><a href="#Body-Effect" class="headerlink" title="Body Effect"></a>Body Effect</h3><script type="math/tex; mode=display">
+V_{TH}=V_{TH0}+\gamma\left(\sqrt{2\Phi_F+V_{SB}}-\sqrt{|2\Phi_F|}\right)</script><p>and</p>
+<script type="math/tex; mode=display">
+\gamma=\frac{\sqrt{2q\epsilon_{si}N_{sub}}}{C_{ox}}\\
+V_{TH0}=\Phi_{MS}+2\Phi_{F}+\frac{Q_dep}{C_ox}\\
+Q_{dep}=\sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}\\
+\Phi_F=\frac{kT}{q}\ln{\frac{N_{sub}}{n_i}}</script><p>Thus, body effect can be utilized to modify the threshold voltage.</p>
+<h3 id="Channel-Length-Modulation"><a href="#Channel-Length-Modulation" class="headerlink" title="Channel Length Modulation"></a>Channel Length Modulation</h3><script type="math/tex; mode=display">
+I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{DS})</script><p>and</p>
+<script type="math/tex; mode=display">
+\lambda\propto\frac{1}{L}</script><p>Thus, long-channel MOSFET exhibits less channel modulation effect.</p>
+<h3 id="Subthreshold-Conduction"><a href="#Subthreshold-Conduction" class="headerlink" title="Subthreshold Conduction"></a>Subthreshold Conduction</h3><p>Or called weak inversion region.</p>
+<script type="math/tex; mode=display">
+I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
+<script type="math/tex; mode=display">
+V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
+<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="MOS/image-20200126165917682.png" alt="image-20200126165917682"></p>
+<script type="math/tex; mode=display">
+C_1=WLC_{ox}\\
+C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
+C_{5/6}=C_j+C_{jsw}
+C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="MOS/image-20200126170457772.png" alt="image-20200126170457772"></p>
+<ol>
+<li><p>Off region</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=C_{3/4}=WC_{ov}\\
+C_{GB}=\frac{C_1C_2}{C_1+C_2}</script></li>
+<li><p>Triode region</p>
+<p>Gate-channel capacitance is evenly split between the source and the drain</p>
+<script type="math/tex; mode=display">
+C_{GS}=C_{GD}=\frac{C_{1}}{2}+C_{3/4}</script></li>
+<li><p>Saturation region</p>
+<script type="math/tex; mode=display">
+C_{GD}=C_{3/4}=WC_{ov}\\\\
+C_{GS}=\frac{2}{3}C_1+C_{3/4}</script></li>
+</ol>
+<h3 id="Resistance"><a href="#Resistance" class="headerlink" title="Resistance"></a>Resistance</h3><p>In saturation region</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+r_o&=\frac{\partial V_{DS}}{\partial I_{D}}\\
+&=\frac{1}{\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\cdot\lambda}\\
+&\approx\frac{1}{\lambda I_D}
+\end{aligned}</script><p>In triode region</p>
+<script type="math/tex; mode=display">
+r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as-Capacitor"><a href="#MOSFET-as-Capacitor" class="headerlink" title="MOSFET as Capacitor"></a>MOSFET as Capacitor</h3><p>The source, drain and the bulk are connected together as a terminal, while the gate is treated as another terminal.</p>
+<ol>
+<li>Negative potential on gate -&gt; attract holes -&gt; accumulation region -&gt; high capacitance</li>
+<li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
+<li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
+</ol>
+<p><img src="MOS/image-20200126173027623.png" alt="image-20200126173027623"></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/bf359c5c/mathematica-tutorial.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -286,7 +590,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 19:26:03" itemprop="dateModified" datetime="2019-11-26T19:26:03+08:00">2019-11-26</time>
+                <time title="Modified: 2019-12-11 20:49:59" itemprop="dateModified" datetime="2019-12-11T20:49:59+08:00">2019-12-11</time>
               </span>
             
           
@@ -479,11 +783,19 @@
                 
               
 
-              <time title="Created: 2019-11-12 13:08:56 / Modified: 13:37:50" itemprop="dateCreated datePublished" datetime="2019-11-12T13:08:56+08:00">2019-11-12</time>
+              <time title="Created: 2019-11-12 13:08:56" itemprop="dateCreated datePublished" datetime="2019-11-12T13:08:56+08:00">2019-11-12</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-21 11:35:45" itemprop="dateModified" datetime="2019-11-21T11:35:45+08:00">2019-11-21</time>
+              </span>
             
           
 
@@ -1031,216 +1343,6 @@
   </article>
 
     
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/33e60fbc/transformer-equation-derivation.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Triblemany">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Triblemany">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/33e60fbc/transformer-equation-derivation.html" class="post-title-link" itemprop="url">变压器的跨阻推导</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-10-10 18:55:09" itemprop="dateCreated datePublished" datetime="2019-10-10T18:55:09+08:00">2019-10-10</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 13:43:21" itemprop="dateModified" datetime="2019-11-12T13:43:21+08:00">2019-11-12</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              
-              <span>4.6k</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>变压器是射频集成电路设计中极为重要的元件，它可以提供：</p>
-<ul>
-<li>初级线圈和次级线圈的直流阻断</li>
-<li>初级线圈的次级线圈的中心抽头是虚地，可用于连接直流偏置</li>
-<li>阻抗匹配</li>
-</ul>
-<p>在毫米波频段，其占用面积小，可实现的插入损耗、带宽相比于分立元件有较大优势。变压器的分析通常使用电感耦合的RLC谐振网络进行。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/archives/33e60fbc/transformer-equation-derivation.html" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/10ba08e5/mom-simulation.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Triblemany">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Triblemany">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/archives/10ba08e5/mom-simulation.html" class="post-title-link" itemprop="url">电容的电磁场仿真设置</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-09-13 16:13:29" itemprop="dateCreated datePublished" datetime="2019-09-13T16:13:29+08:00">2019-09-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-19 10:29:36" itemprop="dateModified" datetime="2019-09-19T10:29:36+08:00">2019-09-19</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              
-              <span>2.6k</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>电容是射频集成电路中的常用器件，其结构固定，设计较为简单。但由于精细结构较多，往往占用极大的仿真资源和时间。在隔直或者交流去耦应用中，电容的精确值并不是那么重要，只要足够大即可。即使在匹配电路中，些许偏差也不会对中心频率产生明显影响。因此，电容仿真不应无止尽追求精度，而是要在尽可能短的时间内获得误差不大的仿真结果。本文对比了电容仿真中不同的仿真引擎和通孔合并方法的优劣，并给出了推荐设置。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/archives/10ba08e5/mom-simulation.html" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </section>
 
   
@@ -1291,7 +1393,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1330,7 +1432,9 @@
         
           
         
-        <span class="site-state-item-count">12</span>
+          
+        
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -1352,7 +1456,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1361,7 +1465,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">122k</span>
+    <span title="Symbols count total">128k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
