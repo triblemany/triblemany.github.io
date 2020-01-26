@@ -55,22 +55,22 @@
   };
 </script>
 
-  <meta name="description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+  <meta name="description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
 <meta name="keywords" content="RFIC,Transistor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Basic Theory of MOSFETs">
 <meta property="og:url" content="https://triblemany.github.io/archives/6eefa2f5/mosfet.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+<meta property="og:description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/MOS/image-20200126165917682.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/MOS/image-20200126170457772.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/MOS/image-20200126173027623.png">
-<meta property="og:updated_time" content="2020-01-26T09:36:39.409Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-plot.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/Cgs.png">
+<meta property="og:updated_time" content="2020-01-26T09:46:08.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Basic Theory of MOSFETs">
-<meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/6eefa2f5/MOS/image-20200126165917682.png">
+<meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/6eefa2f5/mosfet">
 
 
@@ -284,7 +284,7 @@
                 
               
 
-              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:36:39" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:46:08" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
             </span>
           
             
@@ -315,6 +315,7 @@
 
       
         <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
+<a id="more"></a>
 <h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
 <li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
 <li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
@@ -346,12 +347,12 @@ I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{
 I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
 <script type="math/tex; mode=display">
 V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
-<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="MOS/image-20200126165917682.png" alt="image-20200126165917682"></p>
+<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="mosfet/parasitic-capacitance-layout.png" alt="parasitic-capacitance-layout"></p>
 <script type="math/tex; mode=display">
 C_1=WLC_{ox}\\
 C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
 C_{5/6}=C_j+C_{jsw}
-C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="MOS/image-20200126170457772.png" alt="image-20200126170457772"></p>
+C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="mosfet/parasitic-capacitance-plot.png" alt="parasitic-capacitance-plot"></p>
 <ol>
 <li><p>Off region</p>
 <script type="math/tex; mode=display">
@@ -380,7 +381,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
 <li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
 <li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
 </ol>
-<p><img src="MOS/image-20200126173027623.png" alt="image-20200126173027623"></p>
+<p><img src="mosfet/Cgs.png" alt="Cgs"></p>
 
     </div>
 
@@ -390,13 +391,6 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
       
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\6eefa2f5\MOS.html" rel="bookmark">Basic Theory of MOSFETs</a></div>
-      
-    </li>
-  
     <li class="popular-posts-item">
       
       
@@ -422,6 +416,13 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
       
       
       <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\81501320\transformer-design.html" rel="bookmark">变压器的设计和优化</a></div>
       
     </li>
   
@@ -473,10 +474,6 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/archives/6eefa2f5/MOS.html" rel="prev" title="Basic Theory of MOSFETs">
-                  Basic Theory of MOSFETs <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -552,7 +549,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -624,7 +621,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">128k</span>
+    <span title="Symbols count total">125k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
