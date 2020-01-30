@@ -55,23 +55,40 @@
   };
 </script>
 
-  <meta name="description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+  <meta name="description" content="This article details the structures of basic mos amplifiers.">
 <meta name="keywords" content="RFIC,Transistor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Basic Theory of MOSFETs">
-<meta property="og:url" content="https://triblemany.github.io/archives/6eefa2f5/MOS.html">
+<meta property="og:title" content="MOS Amplifier Structures">
+<meta property="og:url" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
+<meta property="og:description" content="This article details the structures of basic mos amplifiers.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-plot.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/Cgs.png">
-<meta property="og:updated_time" content="2020-01-26T09:40:07.328Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200126194424008.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200126202213384.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200126203017127.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200126231209175.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127194136167.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127195446658.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127200332588.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127201302537.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127202233541.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127205355566.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127210029545.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127211148004.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127211858893.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127215157365.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127215215285.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127221538415.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127221247153.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127222015493.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200128104210895.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200128110418704.png">
+<meta property="og:updated_time" content="2020-01-30T14:06:31.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Basic Theory of MOSFETs">
-<meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs. I-V Characteristic Turn-off region ($V_{GS}&amp;lt;V_{TH}$) Triode region/ Linear region ($V_{GS}&amp;gt;V_{TH}, V_{DS}&amp;lt;V_{GS}-V">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
-  <link rel="canonical" href="https://triblemany.github.io/archives/6eefa2f5/MOS">
+<meta name="twitter:title" content="MOS Amplifier Structures">
+<meta name="twitter:description" content="This article details the structures of basic mos amplifiers.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200126194424008.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier">
 
 
 <script id="page-configurations">
@@ -85,7 +102,7 @@
   };
 </script>
 
-  <title>Basic Theory of MOSFETs | Triblemany</title>
+  <title>MOS Amplifier Structures | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -256,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/6eefa2f5/MOS.html">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Triblemany">
@@ -268,7 +285,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Basic Theory of MOSFETs
+        <h1 class="post-title" itemprop="name headline">MOS Amplifier Structures
 
           
         </h1>
@@ -284,7 +301,7 @@
                 
               
 
-              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:40:07" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+              <time title="Created: 2020-01-30 21:27:06 / Modified: 22:06:31" itemprop="dateCreated datePublished" datetime="2020-01-30T21:27:06+08:00">2020-01-30</time>
             </span>
           
             
@@ -301,7 +318,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.5k</span>
+              <span>4.6k</span>
             </span>
           
 
@@ -314,73 +331,129 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
-<h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
-<li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
-<li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
-<script type="math/tex; mode=display">
- I_d=\mu_nC_{ox}\frac{W}{L}\left[(V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V_{DS}^2\right]</script></li>
-<li><p>Saturation region/ Square law ($V_{GS}&gt;V_{TH}, V_{DS}&gt;V_{GS}-V_{TH}$)</p>
-<script type="math/tex; mode=display">
- I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
-</ol>
-<h3 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h3><p>In saturation region</p>
+        <p>This article details the structures of basic mos amplifiers.<br><a id="more"></a></p>
+<h2 id="Common-Source"><a href="#Common-Source" class="headerlink" title="Common Source"></a>Common Source</h2><h3 id="CS-with-Resistor-Load"><a href="#CS-with-Resistor-Load" class="headerlink" title="CS with Resistor Load"></a>CS with Resistor Load</h3><p><img src="transistor-amplifier/image-20200126194424008.png" alt="Common Source Amplifier" style="zoom:50%;"></p>
+<p>In saturation mode, the voltage gain is</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
-&=\sqrt{2\mu_nC_{ox}\frac{W}{L}I_D}\\
-&=\frac{2I_D}{V_{GS}-V_{TH}}
-\end{aligned}</script><h2 id="Second-Order-Effects"><a href="#Second-Order-Effects" class="headerlink" title="Second-Order Effects"></a>Second-Order Effects</h2><h3 id="Body-Effect"><a href="#Body-Effect" class="headerlink" title="Body Effect"></a>Body Effect</h3><script type="math/tex; mode=display">
-V_{TH}=V_{TH0}+\gamma\left(\sqrt{2\Phi_F+V_{SB}}-\sqrt{|2\Phi_F|}\right)</script><p>and</p>
-<script type="math/tex; mode=display">
-\gamma=\frac{\sqrt{2q\epsilon_{si}N_{sub}}}{C_{ox}}\\
-V_{TH0}=\Phi_{MS}+2\Phi_{F}+\frac{Q_dep}{C_ox}\\
-Q_{dep}=\sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}\\
-\Phi_F=\frac{kT}{q}\ln{\frac{N_{sub}}{n_i}}</script><p>Thus, body effect can be utilized to modify the threshold voltage.</p>
-<h3 id="Channel-Length-Modulation"><a href="#Channel-Length-Modulation" class="headerlink" title="Channel Length Modulation"></a>Channel Length Modulation</h3><script type="math/tex; mode=display">
-I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{DS})</script><p>and</p>
-<script type="math/tex; mode=display">
-\lambda\propto\frac{1}{L}</script><p>Thus, long-channel MOSFET exhibits less channel modulation effect.</p>
-<h3 id="Subthreshold-Conduction"><a href="#Subthreshold-Conduction" class="headerlink" title="Subthreshold Conduction"></a>Subthreshold Conduction</h3><p>Or called weak inversion region.</p>
-<script type="math/tex; mode=display">
-I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
-<script type="math/tex; mode=display">
-V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
-<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="mosfet/parasitic-capacitance-layout.png" alt="parasitic-capacitance-layout"></p>
-<script type="math/tex; mode=display">
-C_1=WLC_{ox}\\
-C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
-C_{5/6}=C_j+C_{jsw}
-C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="mosfet/parasitic-capacitance-plot.png" alt="parasitic-capacitance-plot"></p>
-<ol>
-<li><p>Off region</p>
-<script type="math/tex; mode=display">
-C_{GS}=C_{GD}=C_{3/4}=WC_{ov}\\
-C_{GB}=\frac{C_1C_2}{C_1+C_2}</script></li>
-<li><p>Triode region</p>
-<p>Gate-channel capacitance is evenly split between the source and the drain</p>
-<script type="math/tex; mode=display">
-C_{GS}=C_{GD}=\frac{C_{1}}{2}+C_{3/4}</script></li>
-<li><p>Saturation region</p>
-<script type="math/tex; mode=display">
-C_{GD}=C_{3/4}=WC_{ov}\\\\
-C_{GS}=\frac{2}{3}C_1+C_{3/4}</script></li>
-</ol>
-<h3 id="Resistance"><a href="#Resistance" class="headerlink" title="Resistance"></a>Resistance</h3><p>In saturation region</p>
+A_v&=-R_D\mu_nC_{ox}\frac{W}{L}(V_{in}-V_{TH})\\
+&=-g_mR_D
+\end{aligned}</script><p>In triode mode, the voltage gain is </p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-r_o&=\frac{\partial V_{DS}}{\partial I_{D}}\\
-&=\frac{1}{\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\cdot\lambda}\\
-&\approx\frac{1}{\lambda I_D}
-\end{aligned}</script><p>In triode region</p>
+A_v&=\frac{-\mu_nC_{ox}(W/L)R_DV_{out}}{1+\mu_nC_{ox}(W/L)R_D(V_{in}-V_{TH}-V_{out})}
+\end{aligned}</script><p>which reaches maximal when $V_{out}=V_{in}-V_{TH}$.</p>
+<h3 id="CS-with-Diode-Load-Cascode"><a href="#CS-with-Diode-Load-Cascode" class="headerlink" title="CS with Diode Load (Cascode)"></a>CS with Diode Load (Cascode)</h3><p>A diode can be realized by connecting the gate and drain of a transistor</p>
+<p><img src="transistor-amplifier\image-20200126202213384.png" alt="MOS as Diode"></p>
+<p>In that case, the equivalent output resistance is</p>
 <script type="math/tex; mode=display">
-r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as-Capacitor"><a href="#MOSFET-as-Capacitor" class="headerlink" title="MOSFET as Capacitor"></a>MOSFET as Capacitor</h3><p>The source, drain and the bulk are connected together as a terminal, while the gate is treated as another terminal.</p>
+r_{eq}=\frac{1}{g_m+g_{mb}}||r_o</script><p>From a large-signal perspective, a diode act like a “square root” operator.</p>
+<p><img src="transistor-amplifier\image-20200126203017127.png" alt="CS with Diode Load"></p>
+<p>The voltage gain of a CS stage with diode load is</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+A_v&=-g_{m1}\left(\frac{1}{g_{m2}+g_{mb2}}||r_{o1}||r_{o2}\right)\\
+&\approx-\sqrt{\frac{(W/L)_1}{(W/L)_2}}\frac{1}{1+\eta}
+\end{aligned}</script><p>where $\eta=g_{mb2}/g_{m2}$</p>
+<p>The working state of this configuration is</p>
 <ol>
-<li>Negative potential on gate -&gt; attract holes -&gt; accumulation region -&gt; high capacitance</li>
-<li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
-<li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
+<li>$V_{in}&lt;V_{TH1}, V_{out}\approx V_{dd}-V_{TH2}$, M1 off, M2 near cut-off</li>
+<li>$V_{TH1}&lt;V_{in}&lt;V_{out}+V_{TH1}$, M1 saturation, M2 saturation, linear</li>
+<li>$V_{out}+V_{TH1}&lt;V_{in}$, M1 diode, M2 saturation</li>
 </ol>
-<p><img src="mosfet/Cgs.png" alt="Cgs"></p>
+<p>Strong input device and weak load device can lead to high gain, yet the voltage swing is severely limited.</p>
+<h3 id="CS-with-Current-Source-Load"><a href="#CS-with-Current-Source-Load" class="headerlink" title="CS with Current-Source Load"></a>CS with Current-Source Load</h3><p>Assume that M2 is operating in saturation region.</p>
+<p><img src="transistor-amplifier\image-20200126231209175.png" alt="CS with Current Source Load"></p>
+<p>The voltage gain is</p>
+<script type="math/tex; mode=display">
+A_v=-g_{m1}(r_{o1}||r_{o2})</script><h3 id="CS-with-Active-Load"><a href="#CS-with-Active-Load" class="headerlink" title="CS with Active Load"></a>CS with Active Load</h3><p><img src="transistor-amplifier\image-20200127194136167.png" alt="CS with Active Load"></p>
+<p>The voltage gain is</p>
+<script type="math/tex; mode=display">
+A_v=-(g_{m1}+g_{m2})(r_{o1}||r_{o2})</script><p>This topology is sensitive to PVT variation due to $V_{GS1}+V_{GS2}=V_{DD}$. Still, it would amplify supply noise, the gain is</p>
+<script type="math/tex; mode=display">
+\frac{V_{out}}{V_{DD}}=\left(g_{m2}+\frac{1}{r_{o2}}\right)(r_{o1}||r_{o2})</script><h3 id="CS-with-Triode-Load"><a href="#CS-with-Triode-Load" class="headerlink" title="CS with Triode Load"></a>CS with Triode Load</h3><p>Assume that M2 is operating in deep triode region and behaves as a resistor ($V_b$ is very close to $V_{DD}$).</p>
+<p><img src="transistor-amplifier\image-20200127195446658.png" alt="CS with Triode Load"></p>
+<p>The voltage gain is</p>
+<script type="math/tex; mode=display">
+A_v=-g_{m1}(r_{o1}||R_{on2})\\
+R_{on2}=\frac{1}{\mu_pC_{ox}\frac{W}{L}(V_{DD}-V_{b}-|V_{THP}|)}</script><p>This circuit is difficult to provide bias with consideration to PVT variation. However, as compared to diode counterpart, it has no output voltage headroom (i.e. $V_{out,max}=V_{DD}$)</p>
+<h3 id="CS-with-Source-Degeneration"><a href="#CS-with-Source-Degeneration" class="headerlink" title="CS with Source Degeneration"></a>CS with Source Degeneration</h3><p>Like diode load, source degeneration can be employed to enhance the linearity.</p>
+<p><img src="transistor-amplifier\image-20200127200332588.png" alt="CS with Source Degeneration"></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+A_{v}&=\frac{-g_mR_D}{1+g_mR_S}\\
+&=-\frac{R_D}{\frac{1}{g_m}+R_S}
+\end{aligned}</script><p>This can be explained as “the resistance seen at the drain” divided by “the total resistance in the source path”.</p>
+<p><img src="transistor-amplifier\image-20200127201302537.png" alt="CS with Source Degeneration, Small Signal"></p>
+<script type="math/tex; mode=display">
+G_m=\frac{g_mr_o}{R_S+[1+(g_m+g_{mb})R_S]r_o}</script><ul>
+<li>When $V_{in}$ is low, $1/g_m\gg R_s, G_m\approx g_m$</li>
+<li>For large $V_{in}$, $1/g_m\ll R_s, G_m\approx 1/R_s$</li>
+</ul>
+<p><img src="transistor-amplifier\image-20200127202233541.png" alt="CS with Source Degeneration, Large Signal"></p>
+<p>As depicted from the figure, the large signal gain is relatively smooth with source degeneration.</p>
+<p>The output impedance is</p>
+<script type="math/tex; mode=display">
+R_{out}=[1+(g_m+g_{mb})R_S]r_O+R_S</script><p><img src="transistor-amplifier\image-20200127205355566.png" alt="CS with Source Degeneration, Small Signal, Detailed"></p>
+<p>The gain can be written as </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+A_v&=\frac{-g_mr_OR_D}{R_D+R_S+r_O+(g_m+g_{mb})R_Sr_O}\\
+&=G_m\cdot(R_{out}||R_D)
+\end{aligned}</script><p><img src="transistor-amplifier\image-20200127210029545.png" alt="Lemma for Calculating Gm"></p>
+<h2 id="Source-Follower"><a href="#Source-Follower" class="headerlink" title="Source Follower"></a>Source Follower</h2><p><img src="transistor-amplifier\image-20200127211148004.png" alt="Source Follower"></p>
+<p>Source follower can act like a buffer. It offers high input resistance and low output resistance.</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+A_v&=\frac{g_mR_S}{1+(g_m+g_{mb})R_S}\\
+&=\frac{(\frac{1}{g_{mb}}||R_S)}{\frac{1}{g_m}+(\frac{1}{g_{mb}}||R_S)}\\
+&=\frac{R_{eq}}{\frac{1}{g_m}+R_{eq}}
+\end{aligned}</script><p>With a current source rather than a resistor as load, the linearity can be improved because $V_{GS}$ will be fixed for a fixed $I_d$.</p>
+<p><img src="transistor-amplifier\image-20200127211858893.png" alt="Source Follower with Current Source"></p>
+<script type="math/tex; mode=display">
+R_{out}=\frac{1}{g_m+g_{mb}}</script><h2 id="Common-Gate"><a href="#Common-Gate" class="headerlink" title="Common Gate"></a>Common Gate</h2><p><img src="transistor-amplifier\image-20200127215157365.png" alt="Common Gate"></p>
+<p><img src="transistor-amplifier\image-20200127215215285.png" alt="Common Gate, Large Signal"></p>
+<script type="math/tex; mode=display">
+A_v=(g_m+g_{mb})R_D\\
+R_{in}=\frac{1}{g_m+g_{mb}}</script><p>A more detailed calculation of Av reveals</p>
+<p><img src="transistor-amplifier\image-20200127221538415.png" alt="Common Gate, Small Signal"></p>
+<script type="math/tex; mode=display">
+A_v=\frac{(g_m+g_{mb})r_o+1}{r_o+(g_m+g_{mb})r_oR_S+R_S+R_D}R_D</script><p>For a more detailed calculation of Rin</p>
+<p><img src="transistor-amplifier\image-20200127221247153.png" alt="Common Gate, Input Impedance"></p>
+<script type="math/tex; mode=display">
+R_{in}=\frac{R_D+r_o}{1+(g_m+g_{mb})r_o}\\
+R_{out}=\{[1+(g_m+g_{mb})r_o]R_s+r_o\}||R_D</script><p>The MOS can transform impedance <em>up</em> from source to drain, or <em>down</em> from drain to source.</p>
+<p><img src="transistor-amplifier\image-20200127222015493.png" alt="Common Gate, Impedance Transformation"></p>
+<h2 id="Cascode"><a href="#Cascode" class="headerlink" title="Cascode"></a>Cascode</h2><p>For both MOS to be in saturation</p>
+<script type="math/tex; mode=display">
+V_{out} \ge (V_{GS1}-V_{TH1})+(V_{GS2}-V_{TH2})</script><p>The large signal operating mode is as follows:</p>
+<ul>
+<li>For $V_{in}&lt;V_{TH1}$, M1 off, M2 off, $V_{out}=V_{DD}$</li>
+<li>For $V_{in}&gt;V_{TH1}$, M1 saturation, M2 saturation</li>
+<li>For sufficiently large $V_{in}$, two occasions can occur<ul>
+<li>M1 enter triode region first</li>
+<li>M2 enter triode region first</li>
+</ul>
+</li>
+</ul>
+<p>Neglecting channel length modulation effect, Cascode amplifier has gain of </p>
+<script type="math/tex; mode=display">
+A_v=-G_{m}R_{out}\\
+R_{out}=[1+(g_{m2}+g_{mb2})r_{o2}]r_{o1}+r_{o2}</script><p>Cascode can reduce mismatch because</p>
+<p><img src="transistor-amplifier\image-20200128104210895.png" alt="Cascode, Sensitivity to VDD Noise"></p>
+<p>In the first case</p>
+<script type="math/tex; mode=display">
+\Delta I_D=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_b-V_{TH})^2(\lambda\Delta V)</script><p>Instead, in the second case</p>
+<script type="math/tex; mode=display">
+V_{PQ}=\Delta V\frac{r_{o1}||\frac{1}{g_{m3}+g_{mb3}}}{r_{o3}+(r_{o1}||\frac{1}{g_{m3}+g_{mb3}})}\\
+\Delta I_D=\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_b-V_{TH})^2\frac{\lambda\Delta V}{(g_{m3}+g_{mb3})r_{o3}}</script><p>Folded Cascode is as follows:</p>
+<p><img src="transistor-amplifier\image-20200128110418704.png" alt="Folded Cascode"></p>
+<ul>
+<li>Higher DC consumption for comparable performance</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li>Behzad Razavi. <em>Design of analog CMOS integrated circuits</em>.</li>
+</ol>
 
     </div>
 
@@ -437,7 +510,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/6eefa2f5/MOS.html" title="Basic Theory of MOSFETs">https://triblemany.github.io/archives/6eefa2f5/MOS.html</a>
+    <a href="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier.html" title="MOS Amplifier Structures">https://triblemany.github.io/archives/2e70db9d/transistor-amplifier.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -531,7 +604,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-V-Characteristic"><span class="nav-number">1.</span> <span class="nav-text">I-V Characteristic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation-of-Gm"><span class="nav-number">1.1.</span> <span class="nav-text">Calculation of Gm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Effects"><span class="nav-number">2.</span> <span class="nav-text">Second-Order Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Effect"><span class="nav-number">2.1.</span> <span class="nav-text">Body Effect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Length-Modulation"><span class="nav-number">2.2.</span> <span class="nav-text">Channel Length Modulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subthreshold-Conduction"><span class="nav-number">2.3.</span> <span class="nav-text">Subthreshold Conduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parasitic"><span class="nav-number">3.</span> <span class="nav-text">Parasitic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitance"><span class="nav-number">3.1.</span> <span class="nav-text">Capacitance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resistance"><span class="nav-number">3.2.</span> <span class="nav-text">Resistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOSFET-as-Capacitor"><span class="nav-number">3.3.</span> <span class="nav-text">MOSFET as Capacitor</span></a></li></ol></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Source"><span class="nav-number">1.</span> <span class="nav-text">Common Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Resistor-Load"><span class="nav-number">1.1.</span> <span class="nav-text">CS with Resistor Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Diode-Load-Cascode"><span class="nav-number">1.2.</span> <span class="nav-text">CS with Diode Load (Cascode)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Current-Source-Load"><span class="nav-number">1.3.</span> <span class="nav-text">CS with Current-Source Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Active-Load"><span class="nav-number">1.4.</span> <span class="nav-text">CS with Active Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Triode-Load"><span class="nav-number">1.5.</span> <span class="nav-text">CS with Triode Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Source-Degeneration"><span class="nav-number">1.6.</span> <span class="nav-text">CS with Source Degeneration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Follower"><span class="nav-number">2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Gate"><span class="nav-number">3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascode"><span class="nav-number">4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -620,7 +693,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">128k</span>
+    <span title="Symbols count total">130k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
@@ -752,9 +825,9 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
 
 <script>
   function disqus_config() {
-    this.page.url = "https://triblemany.github.io/archives/6eefa2f5/MOS.html";
-    this.page.identifier = "archives/6eefa2f5/MOS.html";
-    this.page.title = 'Basic Theory of MOSFETs';};
+    this.page.url = "https://triblemany.github.io/archives/2e70db9d/transistor-amplifier.html";
+    this.page.identifier = "archives/2e70db9d/transistor-amplifier.html";
+    this.page.title = 'MOS Amplifier Structures';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
