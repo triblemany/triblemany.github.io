@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="本文介绍了常用的Linux命令">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Linux命令">
+<meta property="og:url" content="https://triblemany.github.io/archives/c49a4fe0/Linux-command.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="本文介绍了常用的Linux命令">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-31T04:47:36.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用Linux命令">
+<meta name="twitter:description" content="本文介绍了常用的Linux命令">
+  <link rel="canonical" href="https://triblemany.github.io/archives/c49a4fe0/Linux-command">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>常用Linux命令 | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/c49a4fe0/Linux-command.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">常用Linux命令
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-31 12:45:53 / Modified: 12:47:36" itemprop="dateCreated datePublished" datetime="2020-01-31T12:45:53+08:00">2020-01-31</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>6.4k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文介绍了常用的Linux命令<br><a id="more"></a></p>
+<h2 id="查找帮助"><a href="#查找帮助" class="headerlink" title="查找帮助"></a>查找帮助</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看说明man（Manual）</span></span><br><span class="line">man ls</span><br><span class="line"><span class="comment"># 查看详解info（Information）</span></span><br><span class="line">info ls</span><br><span class="line"><span class="comment"># --help 选项，提供简短介绍</span></span><br><span class="line">ls --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<h2 id="文件和文件夹管理"><a href="#文件和文件夹管理" class="headerlink" title="文件和文件夹管理"></a>文件和文件夹管理</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwd（Print Working Directory）显示当前工作目录</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># cd（Change Directory）进入指定目录</span></span><br><span class="line"><span class="built_in">cd</span> newFolder</span><br><span class="line"></span><br><span class="line"><span class="comment"># mv（Move）</span></span><br><span class="line"><span class="comment"># -f 如果目标文件已经存在，不会询问而直接覆盖（force）</span></span><br><span class="line"><span class="comment"># -i 若目标文件已经存在时，会询问是否覆盖</span></span><br><span class="line"><span class="comment"># -u 若目标文件已经存在，源文件比较新，才会覆盖（update）</span></span><br><span class="line">mv -i sourceFile destFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># cp（Copy）</span></span><br><span class="line"><span class="comment"># -i 若目标档已经存在时，在覆盖时会先询问</span></span><br><span class="line"><span class="comment"># -r 递归持续复制，用于目录的复制</span></span><br><span class="line"><span class="comment"># -u 若目标文件已经存在，源文件比较新，才会覆盖（update）</span></span><br><span class="line">cp -i sourceFile destFile</span><br><span class="line">cp -ir sourceDir destDir</span><br><span class="line"></span><br><span class="line"><span class="comment"># rm（Remove）</span></span><br><span class="line"><span class="comment"># -i 操作前会先询问</span></span><br><span class="line"><span class="comment"># -r 递归持续删除</span></span><br><span class="line">rm tmpFile</span><br><span class="line">rm -r tmpDir</span><br><span class="line"></span><br><span class="line"><span class="comment"># mkdir（Make Directory）创建目录</span></span><br><span class="line"><span class="comment"># -p 递归创建目录</span></span><br><span class="line">mkdir newFolder</span><br><span class="line">mkdir -p newFolder/newFolder2</span><br><span class="line"></span><br><span class="line"><span class="comment"># rmdir（Remove Directory）删除目录</span></span><br><span class="line"><span class="comment"># 必须目录为空</span></span><br><span class="line"><span class="comment"># -p 递归删除目录</span></span><br><span class="line">rmdir newFolder</span><br><span class="line">rmdir -p newFolder/newFolder2</span><br><span class="line"></span><br><span class="line"><span class="comment"># ls（List）查看当前目录下的文件和目录</span></span><br><span class="line"><span class="comment"># -l 使用长列表模式，列出更多细节</span></span><br><span class="line"><span class="comment"># -a 查看所有文件，包括以.开头的隐藏文件</span></span><br><span class="line">ls -la</span><br><span class="line"></span><br><span class="line"><span class="comment"># echo（Echo）</span></span><br><span class="line"><span class="built_in">echo</span> hello world</span><br><span class="line"></span><br><span class="line"><span class="comment"># stat（Status）查看文件或者文件系统的状态</span></span><br><span class="line"><span class="built_in">stat</span> tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># touch（Touch）修改文件或目录的时间</span></span><br><span class="line"><span class="comment"># -a 仅更改读取时间</span></span><br><span class="line"><span class="comment"># -m 仅更改修改时间</span></span><br><span class="line"><span class="comment"># -d 使用指定的日期更改，而非当前时间</span></span><br><span class="line"><span class="comment"># 修改"所有时间属性"为当前系统时间</span></span><br><span class="line">touch tmpFile</span><br><span class="line"><span class="comment"># 修改"读取时间"为当前系统时间</span></span><br><span class="line">touch -a tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># ln（Link）创建连接</span></span><br><span class="line"><span class="comment"># 硬链接，多个文件名指向同一索引节点(Inode)，只能针对文件，可以防止误删（只要有一个索引，文件就不会被删除）</span></span><br><span class="line">ln destFile sourceFile</span><br><span class="line"><span class="comment"># 软链接，是普通文件，数据块中存放的内容是另一文件的路径名的指向</span></span><br><span class="line">ln -s destFile sourceFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># cat（concatenate）由第一行开始显示文件内容</span></span><br><span class="line"><span class="comment"># -n 列印出行号，连同空白行也会有行号</span></span><br><span class="line">cat tmpFile</span><br><span class="line">cat sourceFile1 sourceFile2 &gt; destFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># tac 从最后一行开始显示文件内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># head 取出文件前面几行</span></span><br><span class="line">head -n 5 tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># tail 取出文件后面几行</span></span><br><span class="line">tail -n 5 tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># find</span></span><br><span class="line"><span class="comment"># 将目前目录及其子目录下名称为tmpFile的文件列出来。</span></span><br><span class="line">find . -name tmpFile</span><br></pre></td></tr></table></figure>
+<h2 id="高级文本处理"><a href="#高级文本处理" class="headerlink" title="高级文本处理"></a>高级文本处理</h2><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>匹配字符串开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串结尾</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除了换行符的任意字符</td>
+</tr>
+<tr>
+<td>[…]</td>
+<td>匹配[]中的任意一个字符，例如[a-zA-Z]</td>
+</tr>
+<tr>
+<td><sup><a href="#fn_..." id="reffn_...">...</a></sup></td>
+<td>匹配不在[]中的任意一个字符，例如</td>
+</tr>
+<tr>
+<td>re*</td>
+<td>匹配0个或多个表达式</td>
+</tr>
+<tr>
+<td>re+</td>
+<td>匹配1个或多个表达式</td>
+</tr>
+<tr>
+<td>re?</td>
+<td>匹配0个或1个表达式</td>
+</tr>
+<tr>
+<td>re{n}</td>
+<td>精确匹配n个前面表达式</td>
+</tr>
+<tr>
+<td>re{n,}</td>
+<td>匹配前面表达式至少n个</td>
+</tr>
+<tr>
+<td>re{m, n}</td>
+<td>匹配m到n个前面表达式</td>
+</tr>
+<tr>
+<td>a\</td>
+<td>b</td>
+<td>匹配a或者b</td>
+</tr>
+<tr>
+<td>(re)</td>
+<td>分组</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>需要转义的字符有<code>$ ( ) * . [ ] ? { } ^ |</code> </p>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># grep (Globally search a Regular Expression and Print)</span></span><br><span class="line"><span class="comment"># 用于匹配、查找</span></span><br><span class="line"><span class="comment"># -E 开启扩展（Extend）的正则表达式,&#123;&#125;和？等不需要转义</span></span><br><span class="line"><span class="comment"># -n 显示行号</span></span><br><span class="line"><span class="comment"># -v 只打印没有匹配的，而匹配的反而不打印(invert)</span></span><br><span class="line"><span class="comment"># -o 只显示被模式匹配到的字符串</span></span><br><span class="line">grep <span class="string">"hello"</span> tmpFile</span><br><span class="line">ifconfig | grep -E <span class="string">"[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;"</span></span><br></pre></td></tr></table></figure>
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># awk (Aho Weiberger and Kernighan)</span></span><br><span class="line"><span class="comment"># 输出第1、4列</span></span><br><span class="line">awk <span class="string">'&#123;print $1,$4&#125;'</span> log.txt</span><br></pre></td></tr></table></figure>
+<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sed (Stream Editor)</span></span><br><span class="line"><span class="comment"># sed是行处理工具，一次处理一行并且不改变文本内容</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数</span></span><br><span class="line"><span class="comment"># -i 直接修改</span></span><br><span class="line"><span class="comment"># -n 仅显示处理后的结果</span></span><br><span class="line"><span class="comment"># -e 以选项中指定的script来处理输入的文本文件（可不写）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 命令</span></span><br><span class="line"><span class="comment"># d 删除行（delete）</span></span><br><span class="line"><span class="comment"># p 打印行（print）</span></span><br><span class="line"><span class="comment"># a 新增 （add），在后</span></span><br><span class="line"><span class="comment"># i 插入（insert），在前</span></span><br><span class="line"><span class="comment"># c 取代一行</span></span><br><span class="line"><span class="comment"># s 取代</span></span><br><span class="line"><span class="comment"># q 推出（quit）</span></span><br><span class="line"><span class="comment"># = 打印匹配行号</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二行后新增一行</span></span><br><span class="line">sed <span class="string">'2a\newLine'</span> tmpFile</span><br><span class="line">sed <span class="string">'2a newLine'</span> tmpFile</span><br><span class="line"><span class="comment"># 删除第二行</span></span><br><span class="line">sed <span class="string">'2d'</span> tmpFile</span><br><span class="line"><span class="comment"># 删除第二到最后行</span></span><br><span class="line">sed <span class="string">'2,$d'</span> tmpFile</span><br><span class="line"><span class="comment"># 定位第二行</span></span><br><span class="line">sed -n <span class="string">'2p'</span> tmpFile</span><br><span class="line"><span class="comment"># 定位第二到第五行</span></span><br><span class="line">sed -n <span class="string">'2,5p'</span> tmpFile</span><br><span class="line"><span class="comment"># 搜索一行</span></span><br><span class="line">sed -n <span class="string">'/SCL/p'</span> tmpFile</span><br><span class="line"><span class="comment"># 替换一行</span></span><br><span class="line">sed -n <span class="string">'/SCL/&#123;s/SCL/SCL2/;p;q&#125;'</span> tmpFile</span><br></pre></td></tr></table></figure>
+<h2 id="归档、压缩和加密"><a href="#归档、压缩和加密" class="headerlink" title="归档、压缩和加密"></a>归档、压缩和加密</h2><h3 id="查看文件占用空间du"><a href="#查看文件占用空间du" class="headerlink" title="查看文件占用空间du"></a>查看文件占用空间du</h3><p>-b 以Byte为单位显示</p>
+<p>-k 以kB单位显示（默认）</p>
+<p>-m 以MB单位显示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -b tmpFile</span><br></pre></td></tr></table></figure>
+<h3 id="计算MD5值md5sum"><a href="#计算MD5值md5sum" class="headerlink" title="计算MD5值md5sum"></a>计算MD5值md5sum</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 校验单个文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"123"</span> &gt; tmpFile</span><br><span class="line">md5sum tmpFile &gt; tmpFile.md5</span><br><span class="line">md5sum -c tmpFile.md5</span><br><span class="line"><span class="comment"># 检验多个文件</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1234"</span> &gt; tmpFile2</span><br><span class="line">md5sum tmpFile tmpFile2 &gt; multipleFile.md5</span><br><span class="line">md5sum -c multipleFile.md5</span><br></pre></td></tr></table></figure>
+<h3 id="打包和压缩tar"><a href="#打包和压缩tar" class="headerlink" title="打包和压缩tar"></a>打包和压缩tar</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -z 使用gzip算法压缩或者解压</span></span><br><span class="line"><span class="comment"># -j 使用bzip2算法压缩或者解压</span></span><br><span class="line"><span class="comment"># -c 创建包（Create）</span></span><br><span class="line"><span class="comment"># -t 查看（Tap）</span></span><br><span class="line"><span class="comment"># -x 解包（Extract）</span></span><br><span class="line"><span class="comment"># -v 显示详情（verbose）</span></span><br><span class="line"><span class="comment"># -f 指定文件（File）</span></span><br><span class="line"><span class="comment"># 以gzip格式压缩</span></span><br><span class="line">tar -czvf tmpFile.tar.gz tmpFile</span><br><span class="line"><span class="comment"># 查看gzip格式压缩文件内容</span></span><br><span class="line">tar -tzvf tmpFile.tar.gz</span><br><span class="line"><span class="comment"># 解压缩gzip格式压缩文件</span></span><br><span class="line">tar -xzvf tmpFile.tar.gz</span><br><span class="line"><span class="comment"># 批量解压缩</span></span><br><span class="line">ls *.tar.gz | xargs -n1 tar xzvf</span><br></pre></td></tr></table></figure>
+<h3 id="压缩zip"><a href="#压缩zip" class="headerlink" title="压缩zip"></a>压缩zip</h3><p>可能需要安装zip和unzip工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 压缩</span></span><br><span class="line">zip tmpFile.zip tmpFile</span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">unzip tmpFile.zip</span><br></pre></td></tr></table></figure>
+<h3 id="加密和密钥管理GPG"><a href="#加密和密钥管理GPG" class="headerlink" title="加密和密钥管理GPG"></a>加密和密钥管理GPG</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成密钥</span></span><br><span class="line">gpg --full-generate-key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看密钥</span></span><br><span class="line">gpg --list-keys</span><br><span class="line">gpg -k</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出密钥</span></span><br><span class="line"><span class="comment"># --armor或者-a 代表创建ASCII格式的文件</span></span><br><span class="line"><span class="comment"># --export-key，导出公钥</span></span><br><span class="line">--<span class="built_in">export</span>-secret-keys，导出私钥</span><br><span class="line"><span class="comment"># xxx代表uid或者密钥指纹</span></span><br><span class="line">gpg --armor --<span class="built_in">export</span> xxx &gt; xxx.key</span><br><span class="line">gpg --armor --<span class="built_in">export</span>-secret-key xxx &gt; xxx.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入密钥</span></span><br><span class="line">gpg --import xxx.key</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除密钥</span></span><br><span class="line">gpg　--delete-keys xxx</span><br><span class="line">gpg　--delete-secret-keys xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加密</span></span><br><span class="line"><span class="comment"># --recipient或者-r 指定接收者密钥</span></span><br><span class="line">gpg --recipient xxx --output tmpFile.gpg --encrypt tmpFile</span><br><span class="line">gpg -r xxx -o tmpFile.gpg -e tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解密</span></span><br><span class="line">gpg --output tmpFile --decrypt tmpFile.gpg</span><br><span class="line">gpg -o tmpFile -d tmpFile.gpg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 签名</span></span><br><span class="line"><span class="comment"># --sign 生成既含原文又含签名的二进制文件（取出时同解密）</span></span><br><span class="line">gpg --sign tmpFile</span><br><span class="line"><span class="comment"># --clear-sign 生成适合阅读的既含原文又含签名的文件</span></span><br><span class="line">gpg --clear-sign tmpFile</span><br><span class="line"><span class="comment"># --detach-sign 只生成签名文件</span></span><br><span class="line">gpg --armor --detach-sign tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line">gpg --verify tmpFile.asc tmpFile</span><br></pre></td></tr></table></figure>
+<h3 id="加密和密钥管理openSSL"><a href="#加密和密钥管理openSSL" class="headerlink" title="加密和密钥管理openSSL"></a>加密和密钥管理openSSL</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随机数</span></span><br><span class="line">openssl rand -base64 16</span><br><span class="line"><span class="comment"># 随机密码</span></span><br><span class="line">openssl rand -base64 32 | tr -d +/ | cut -c 1-16</span><br><span class="line"></span><br><span class="line"><span class="comment"># 摘要</span></span><br><span class="line"><span class="comment"># 可选方法有[-md5|-sha256...]</span></span><br><span class="line">openssl dgst -md5 tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对称加密</span></span><br><span class="line"><span class="comment"># -des DES算法</span></span><br><span class="line"><span class="comment"># -e 加密</span></span><br><span class="line"><span class="comment"># -a ASCII编码，否则为二进制编码</span></span><br><span class="line">openssl enc -des -e -<span class="keyword">in</span> tmpFile -out tmpFile.des</span><br><span class="line">openssl enc -des -e -a -<span class="keyword">in</span> tmpFile -out tmpFile.des</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对称解密</span></span><br><span class="line"><span class="comment"># -d 解密</span></span><br><span class="line">openssl enc -des -d -a -<span class="keyword">in</span> tmpFile.des -out tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 密钥生成</span></span><br><span class="line">openssl genrsa -out private.pem 1024</span><br><span class="line">openssl rsa -<span class="keyword">in</span> private.pem -pubout -out public.pem</span><br><span class="line"></span><br><span class="line"><span class="comment"># 公钥加密</span></span><br><span class="line">openssl rsautl -encrypt -<span class="keyword">in</span> tmpFile -inkey public.pem -pubin -out tmpFile.rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 私钥解密</span></span><br><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> tmpFile.rsa -inkey private.pem -out tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 私钥签名</span></span><br><span class="line">openssl dgst -sign private.pem -sha256 -<span class="keyword">in</span> tmpFile -out sign.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 公钥验证</span></span><br><span class="line">openssl dgst -verify public.pem -sha256 -signature sign.txt tmpFile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 私钥验证</span></span><br><span class="line">openssl dgst -prverify private.pem -sha256 -signature sign.txt tmpFile</span><br></pre></td></tr></table></figure>
+<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><h3 id="Top"><a href="#Top" class="headerlink" title="Top"></a>Top</h3><p>无需其他参数，通常输出为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">top - 21:11:38 up 7 min,  2 users,  load average: 0.15, 0.29, 0.20</span><br><span class="line">Tasks: 192 total,   2 running, 190 sleeping,   0 stopped,   0 zombie</span><br><span class="line">Cpu(s):  0.2%us,  0.2%sy,  0.0%ni, 99.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</span><br><span class="line">Mem:   6109668k total,   630520k used,  5479148k free,    33388k buffers</span><br><span class="line">Swap:        0k total,        0k used,        0k free,   200328k cached</span><br><span class="line"></span><br><span class="line">   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND           </span><br><span class="line">  2342 root      20   0  255m 8780 5152 S  0.3  0.1   0:01.11 vmtoolsd</span><br></pre></td></tr></table></figure>
+<p>抬头部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 第一行 任务队列信息</span><br><span class="line">当前时间、运行时间、当前用户、平均负载（三个数字分别是1分钟、5分钟和15分钟的平均负载）</span><br><span class="line"></span><br><span class="line"># 第二行 任务</span><br><span class="line">总进程数、运行进程数、休眠进程数、停止进程数、僵尸进程数</span><br><span class="line"></span><br><span class="line"># 第三行 cpu状态</span><br><span class="line">用户空间cpu占比us、内核空间cpu占比sy、改变过优先级的进程cpu占比ni、空闲cpu占比id、IO等待cpu占比wa、硬件中断cpu占比hi、软件中断cpu占比si</span><br><span class="line"></span><br><span class="line"># 第四行 物理内存</span><br><span class="line">物理内存总量、使用的内存、空闲的内存、缓存的内存</span><br><span class="line"></span><br><span class="line"># 第五行 交换分区</span><br><span class="line">交换区总量、使用的交换区、空闲的交换区、缓存的交换区</span><br></pre></td></tr></table></figure>
+<p>正文部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PID: 进程ID</span><br><span class="line">USER: 进程所有者</span><br><span class="line">PR: 进程的优先级，实时进程为RT，其他为(优先级-100)</span><br><span class="line">NI: NICE值，取-20至19的整数，越小优先级越高</span><br><span class="line">VIRT: 虚拟内存用量，单位kB，为SWAP+RES</span><br><span class="line">RES: 进程使用的（未被交换的）物理内存用量，单位kB</span><br><span class="line">SHR: 共享内存大小，单位kB</span><br><span class="line">S: 进程状态，D=不可中断的睡眠，R=运行，S=睡眠，T=跟踪，Z=僵尸</span><br><span class="line">%CPU: cpu时间占比</span><br><span class="line">%MEM: 物理内存占比</span><br><span class="line">TIME+: cpu时间总计</span><br><span class="line">COMMAND: 进程名称</span><br></pre></td></tr></table></figure>
+<h3 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># df 检查文件系统的磁盘空间占用</span></span><br><span class="line"><span class="comment"># -a 列出所有的文件系统</span></span><br><span class="line"><span class="comment"># -h 以较易阅读的 GBytes, MBytes, KBytes 等格式显示</span></span><br><span class="line"><span class="comment"># -k 以 KBytes 的容量显示各文件系统</span></span><br><span class="line"><span class="comment"># -m 以 MBytes 的容量显示各文件系统</span></span><br><span class="line">df -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># du 检查文件和目录磁盘使用的空间</span></span><br><span class="line"><span class="comment"># -a 列出所有的文件与目录容量</span></span><br><span class="line"><span class="comment"># -h 以较易阅读的 GBytes, MBytes, KBytes 等格式显示</span></span><br><span class="line"><span class="comment"># -k 以 KBytes 的容量显示各文件系统</span></span><br><span class="line"><span class="comment"># -m 以 MBytes 的容量显示各文件系统</span></span><br><span class="line">du -ah ~/Desktop</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>老马的春天. <a href="https://www.jianshu.com/p/268064e67719" target="_blank" rel="noopener">GPG入门指南（加密/签名）</a>. </li>
+<li>明翼. <a href="https://www.jianshu.com/p/fb2ae3dc7986" target="_blank" rel="noopener">OpenSSL 介绍和使用</a>. </li>
+<li>牛奔. <a href="https://www.cnblogs.com/niuben/p/12017242.html" target="_blank" rel="noopener">Linux top命令详解</a>. </li>
+<li>菜鸟教程. <a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener">Linux 命令大全</a>.</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/c49a4fe0/Linux-command.html" title="常用Linux命令">https://triblemany.github.io/archives/c49a4fe0/Linux-command.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/2e70db9d/transistor-amplifier.html" rel="next" title="MOS Amplifier Structures">
+                  <i class="fa fa-chevron-left"></i> MOS Amplifier Structures
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查找帮助"><span class="nav-number">1.</span> <span class="nav-text">查找帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和文件夹管理"><span class="nav-number">2.</span> <span class="nav-text">文件和文件夹管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级文本处理"><span class="nav-number">3.</span> <span class="nav-text">高级文本处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">3.1.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grep"><span class="nav-number">3.2.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">3.3.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-number">3.4.</span> <span class="nav-text">sed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归档、压缩和加密"><span class="nav-number">4.</span> <span class="nav-text">归档、压缩和加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看文件占用空间du"><span class="nav-number">4.1.</span> <span class="nav-text">查看文件占用空间du</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算MD5值md5sum"><span class="nav-number">4.2.</span> <span class="nav-text">计算MD5值md5sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包和压缩tar"><span class="nav-number">4.3.</span> <span class="nav-text">打包和压缩tar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩zip"><span class="nav-number">4.4.</span> <span class="nav-text">压缩zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密和密钥管理GPG"><span class="nav-number">4.5.</span> <span class="nav-text">加密和密钥管理GPG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密和密钥管理openSSL"><span class="nav-number">4.6.</span> <span class="nav-text">加密和密钥管理openSSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统管理"><span class="nav-number">5.</span> <span class="nav-text">系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Top"><span class="nav-number">5.1.</span> <span class="nav-text">Top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘管理"><span class="nav-number">5.2.</span> <span class="nav-text">磁盘管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">136k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/c49a4fe0/Linux-command.html";
+    this.page.identifier = "archives/c49a4fe0/Linux-command.html";
+    this.page.title = '常用Linux命令';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
