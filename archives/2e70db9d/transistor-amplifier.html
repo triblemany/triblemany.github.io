@@ -83,7 +83,16 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200127222015493.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200128104210895.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200128110418704.png">
-<meta property="og:updated_time" content="2020-01-30T14:06:25.093Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201103952034.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201151018992.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201154607068.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201155439190.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201162743936.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201163246921.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201165625279.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201171030851.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201172947070.png">
+<meta property="og:updated_time" content="2020-02-01T14:22:35.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MOS Amplifier Structures">
 <meta name="twitter:description" content="This article details the structures of basic mos amplifiers.">
@@ -301,11 +310,19 @@
                 
               
 
-              <time title="Created: 2020-01-30 21:27:06 / Modified: 22:06:25" itemprop="dateCreated datePublished" datetime="2020-01-30T21:27:06+08:00">2020-01-30</time>
+              <time title="Created: 2020-01-30 21:27:06" itemprop="dateCreated datePublished" datetime="2020-01-30T21:27:06+08:00">2020-01-30</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-01 22:22:35" itemprop="dateModified" datetime="2020-02-01T22:22:35+08:00">2020-02-01</time>
+              </span>
             
           
 
@@ -318,7 +335,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>4.6k</span>
+              <span>9.5k</span>
             </span>
           
 
@@ -451,6 +468,99 @@ V_{PQ}=\Delta V\frac{r_{o1}||\frac{1}{g_{m3}+g_{mb3}}}{r_{o3}+(r_{o1}||\frac{1}{
 <ul>
 <li>Higher DC consumption for comparable performance</li>
 </ul>
+<h2 id="Miller-Effect"><a href="#Miller-Effect" class="headerlink" title="Miller Effect"></a>Miller Effect</h2><p><img src="transistor-amplifier\image-20200201103952034.png" alt="Miller Effect Illustration"></p>
+<p>The current flowing from X to Y is</p>
+<script type="math/tex; mode=display">
+\frac{V_X-V_Y}{Z}=\frac{V_X}{Z_1}</script><p>Therefore</p>
+<script type="math/tex; mode=display">
+Z_1=\frac{Z}{1-\frac{V_Y}{V_x}}=\frac{Z}{1-A_v}</script><p>Similarly</p>
+<script type="math/tex; mode=display">
+Z_2=\frac{Z}{1-\frac{V_Y}{V_X}}=\frac{Z}{1-1/A_v}</script><p><strong>Attention:</strong></p>
+<ul>
+<li>Only actual $A_v$ at the frequency of interest may be used to accurately predict the input impedance, but low-frequency $A_v$ is useful for approximation (it may eliminate zeros and predict additional poles).</li>
+<li>Since the reverse gain is not necessarily $1/A_v$ (as in the case of CG), it cannot be used to calculate the output impedance directly. Instead, a voltage source should be connected at the output node to test the reverse gain, and  that result be used to calculate the impedance.</li>
+<li>Trans-impedance Z must present in the process of calculating $A_v$.</li>
+</ul>
+<h2 id="Frequency-Response"><a href="#Frequency-Response" class="headerlink" title="Frequency Response"></a>Frequency Response</h2><p>General Formula</p>
+<script type="math/tex; mode=display">
+A_v(s)=A_v(0)\frac{1}{(1+sR_1C_1)(1+sR_2C_2)...}</script><h3 id="Common-Source-1"><a href="#Common-Source-1" class="headerlink" title="Common Source"></a>Common Source</h3><p><img src="transistor-amplifier/image-20200201151018992.png" alt="Common Source, Frequency Response"></p>
+<p>Poles can be estimated as</p>
+<script type="math/tex; mode=display">
+\omega_{in}=\frac{1}{R_S[C_{GS}+(1+g_mR_D)C_{GD}]}\\
+\omega_{out}=\frac{1}{R_D(C_{DB}+C_{GD})}</script><p>and the gain is</p>
+<script type="math/tex; mode=display">
+A_v(s)=\frac{-g_mR_D}{\left(1+\frac{s}{\omega_{in}}\right)\left(1+\frac{s}{\omega_{out}}\right)}</script><p>A direct analysis shows</p>
+<script type="math/tex; mode=display">
+A_v(s)=\frac{R_D(sC_{GD}-g_m)}{\xi s^2+\varepsilon s+1}\\
+\xi=R_sR_D(C_{GS}C_{GD}+C_{GS}C_{DB}+C_{GD}C_{DB})\\
+\varepsilon=R_S(1+g_mR_D)C_{GD}+R_SC_{GS}+R_D(C_{GD}+C_{DB})</script><p>The denominator can be written as</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D&=\left(\frac{s}{\omega_{p1}}+1\right)\left(\frac{s}{\omega_{p2}}+1\right)\\
+&=\frac{s^2}{\omega_{p1}\omega_{p2}}+\left(\frac{1}{\omega_{p1}}+\frac{1}{\omega_{p2}}\right)s+1
+\end{aligned}</script><p>Further assume that $1/\omega_{p2}\ll1/\omega_{p1}$, we have</p>
+<script type="math/tex; mode=display">
+\omega_{p1}=\frac{1}{\varepsilon}\approx\omega_{in}\\
+\omega_{p2}=\frac{1}{\omega_{p1}\xi}</script><p>A zero exists as</p>
+<script type="math/tex; mode=display">
+\omega_z=\frac{g_m}{C_{GD}}>\frac{g_m}{C_{GS}}=f_T</script><p>Signal cancellation model is as follows:</p>
+<p><img src="transistor-amplifier\image-20200201154607068.png" alt="Signal Cancellation"></p>
+<h3 id="Source-Follower-1"><a href="#Source-Follower-1" class="headerlink" title="Source Follower"></a>Source Follower</h3><p><img src="transistor-amplifier/image-20200201155439190.png" alt="Source Follower, Frequency Response"></p>
+<p>Strong interaction through $C_{GS}$ makes it difficult to associate a pole with each node in the circuit. Calculation shows</p>
+<script type="math/tex; mode=display">
+A_v(s)=\frac{g_m+C_{GS}s}{\xi s^2+\varepsilon s+g_m}\\
+\xi=R_s(C_{GS}C_{L}+C_{GS}C_{GD}+C_{GD}C_{L})\\
+\varepsilon=g_mR_SC_{GD}+C_{L}+C_{GS}</script><p>Therefore</p>
+<script type="math/tex; mode=display">
+\omega_{p1}\approx\frac{g_m}{\varepsilon}</script><p>Note if $C_L=0$, the previous formula reduces to</p>
+<script type="math/tex; mode=display">
+A_v(s)=\frac{1}{1+R_SC_{GD}s}</script><p>In this case, only one pole at the input presents. We say $C_{GS}$ is bootstrapped by the source follower.</p>
+<p>Neglecting channel length modulation, the input impedance is</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z_{in}&=\frac{1}{C_{GS}s}+\frac{1}{C_{GD}s}+\left(1+\frac{g_m}{C_{GS}s}\right)\frac{1}{g_{mb}+C_Ls}\\
+&\approx\frac{1}{C_{GD}s}+\frac{1}{C_{GS}s}\left(1+\frac{g_m}{g_{mb}}\right)+\frac{1}{g_{mb}} &\text{low}\ f\\
+&\approx\frac{1}{C_{GD}s}+\frac{1}{C_{GS}s}+\frac{1}{C_{L}s}+\frac{g_m}{C_{GS}C_{L}s^2} &\text{high}\ f
+\end{aligned}</script><p>It presents negative real input impedance at high frequency, thus is possibly unstable.</p>
+<p>Output impedance is</p>
+<p><img src="transistor-amplifier\image-20200201162743936.png" alt="Source Follower, Frequency Response, Zout"></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z_{out}&=\frac{R_SC_{GS}s+1}{g_m+C_{GS}s}\\
+&\approx 1/g_m &\text{low}\ f\\
+&\approx R_s &\text{high}\ f\\
+\end{aligned}</script><p>Figure (c) is more common, as when operated as buffer, $Z_{out}&lt;Z_{in}$. It can be modelled as</p>
+<p><img src="transistor-amplifier/image-20200201163246921.png" alt="Source Follower, Output Impedance Model"></p>
+<script type="math/tex; mode=display">
+R_2=1/g_m\\
+R_1=R_S-1/g_m\\
+L=\frac{C_{GS}}{g_m}\left(R_S-\frac{1}{g_m}\right)</script><p>Thus, source follower can be used to realize inductors.</p>
+<h3 id="Common-Gate-1"><a href="#Common-Gate-1" class="headerlink" title="Common Gate"></a>Common Gate</h3><p><img src="transistor-amplifier/image-20200201165625279.png" alt="Common Gate, Frequency Response"></p>
+<p>We have</p>
+<script type="math/tex; mode=display">
+\omega_{in}=\frac{1}{(C_{GS}+C_{SB})(R_S||\frac{1}{g_m+g_{mb}})}\\
+\omega_{out}=\frac{1}{(C_{GD}+C_{DB})R_D}\\
+A_v(s)=\frac{(g_m+g_{mb})R_D}{1+(g_m+g_{mb})R_S}\cdot\frac{1}{\left(1+\frac{s}{\omega_{in}}\right)\left(1+\frac{s}{\omega_{out}}\right)}</script><p>It has no Miller multiplication of capacitances, thus have wider bandwidth.</p>
+<h3 id="Cascode-1"><a href="#Cascode-1" class="headerlink" title="Cascode"></a>Cascode</h3><p><img src="transistor-amplifier\image-20200201171030851.png" alt="Cascode, Frequency Response"></p>
+<p>The pole associated with node A is</p>
+<script type="math/tex; mode=display">
+\omega_{p,A}=\frac{1}{R_S\left[C_{GS1}+\left(1+\frac{g_{m1}}{g_{m2}+g_{mb2}}\right)C_{GD1}\right]}</script><p>The pole associated with node X is</p>
+<script type="math/tex; mode=display">
+\omega_{p,X}=\frac{g_{m2}+g_{mb2}}{\left(1+\frac{g_{m2}+g_{mb2}}{g_{m1}}\right)C_{GD1}+C_{DB1}+C_{SB2}+C_{GS2}}</script><p>The pole associated with node Y is</p>
+<script type="math/tex; mode=display">
+\omega_{p,Y}=\frac{1}{R_D(C_{DB2}+C_{L}+C_{GD2})}</script><h3 id="Extra-Element-Theorem"><a href="#Extra-Element-Theorem" class="headerlink" title="Extra Element Theorem"></a>Extra Element Theorem</h3><p><img src="transistor-amplifier\image-20200201172947070.png" alt="Extra Element Theorem"></p>
+<h3 id="Zero-Value-Time-Constant-Method"><a href="#Zero-Value-Time-Constant-Method" class="headerlink" title="Zero Value Time Constant Method"></a>Zero Value Time Constant Method</h3><p>The dominant pole of a circuit equals to the sum of all zero value time constants, each of which is obtained by setting input voltage and other capacitance to zero and computing the product of the capacitance of interest and its corresponding equivalent resistance. </p>
+<p><em>Proof</em></p>
+<ol>
+<li><p>The dominant pole is the coefficient of $s$ in the denominator.</p>
+<p>Denominator can be written as</p>
+<script type="math/tex; mode=display">
+D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...\left(1+\frac{s}{\omega_{pn}}\right)</script><p>Therefore, the coefficient of $s$ is $\omega_{p1}^{-1}+\omega_{p2}^{-1}+…+\omega_{pn}^{-1}$, which reduce to $\omega_{p1}^{-1}$ with dominant pole assumption.</p>
+</li>
+<li><p>The coefficient of $s$ in the denominator equals to the sum of all zero-value time constants.</p>
+<p>Since the coefficient of $s$ has a time dimension, we can write it as $B_s=R_1C_1+R_2C_2+…+R_nC_n$, where $C_1-C_n$ denote real capacitors, and $R_1-R_n$ are unknown. With $C_2-C_n$ set to 0, the order of the system reduces to 1, and therefore $R_1$ is the resistance seen by $C_1$.</p>
+</li>
+</ol>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>Behzad Razavi. <em>Design of analog CMOS integrated circuits</em>.</li>
 </ol>
@@ -473,14 +583,14 @@ V_{PQ}=\Delta V\frac{r_{o1}||\frac{1}{g_{m3}+g_{mb3}}}{r_{o3}+(r_{o1}||\frac{1}{
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
       
     </li>
   
@@ -608,7 +718,7 @@ V_{PQ}=\Delta V\frac{r_{o1}||\frac{1}{g_{m3}+g_{mb3}}}{r_{o3}+(r_{o1}||\frac{1}{
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Source"><span class="nav-number">1.</span> <span class="nav-text">Common Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Resistor-Load"><span class="nav-number">1.1.</span> <span class="nav-text">CS with Resistor Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Diode-Load-Cascode"><span class="nav-number">1.2.</span> <span class="nav-text">CS with Diode Load (Cascode)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Current-Source-Load"><span class="nav-number">1.3.</span> <span class="nav-text">CS with Current-Source Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Active-Load"><span class="nav-number">1.4.</span> <span class="nav-text">CS with Active Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Triode-Load"><span class="nav-number">1.5.</span> <span class="nav-text">CS with Triode Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Source-Degeneration"><span class="nav-number">1.6.</span> <span class="nav-text">CS with Source Degeneration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Follower"><span class="nav-number">2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Gate"><span class="nav-number">3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascode"><span class="nav-number">4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Source"><span class="nav-number">1.</span> <span class="nav-text">Common Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Resistor-Load"><span class="nav-number">1.1.</span> <span class="nav-text">CS with Resistor Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Diode-Load-Cascode"><span class="nav-number">1.2.</span> <span class="nav-text">CS with Diode Load (Cascode)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Current-Source-Load"><span class="nav-number">1.3.</span> <span class="nav-text">CS with Current-Source Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Active-Load"><span class="nav-number">1.4.</span> <span class="nav-text">CS with Active Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Triode-Load"><span class="nav-number">1.5.</span> <span class="nav-text">CS with Triode Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Source-Degeneration"><span class="nav-number">1.6.</span> <span class="nav-text">CS with Source Degeneration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Follower"><span class="nav-number">2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Gate"><span class="nav-number">3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascode"><span class="nav-number">4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miller-Effect"><span class="nav-number">5.</span> <span class="nav-text">Miller Effect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frequency-Response"><span class="nav-number">6.</span> <span class="nav-text">Frequency Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Source-1"><span class="nav-number">6.1.</span> <span class="nav-text">Common Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Follower-1"><span class="nav-number">6.2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Gate-1"><span class="nav-number">6.3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cascode-1"><span class="nav-number">6.4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extra-Element-Theorem"><span class="nav-number">6.5.</span> <span class="nav-text">Extra Element Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zero-Value-Time-Constant-Method"><span class="nav-number">6.6.</span> <span class="nav-text">Zero Value Time Constant Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -699,7 +809,7 @@ V_{PQ}=\Delta V\frac{r_{o1}||\frac{1}{g_{m3}+g_{mb3}}}{r_{o3}+(r_{o1}||\frac{1}{
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">136k</span>
+    <span title="Symbols count total">141k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
