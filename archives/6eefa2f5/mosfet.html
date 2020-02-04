@@ -66,7 +66,14 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-plot.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/Cgs.png">
-<meta property="og:updated_time" content="2020-01-26T09:53:54.373Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203223737905.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203224346282.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203224830841.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203225022517.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200204171429371.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/20190617153235935.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200204171347882.png">
+<meta property="og:updated_time" content="2020-02-04T09:16:47.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Basic Theory of MOSFETs">
 <meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
@@ -284,11 +291,19 @@
                 
               
 
-              <time title="Created: 2020-01-26 17:35:15 / Modified: 17:53:54" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+              <time title="Created: 2020-01-26 17:35:15" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-04 17:16:47" itemprop="dateModified" datetime="2020-02-04T17:16:47+08:00">2020-02-04</time>
+              </span>
             
           
 
@@ -301,7 +316,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.6k</span>
+              <span>4.9k</span>
             </span>
           
 
@@ -325,7 +340,7 @@
 <script type="math/tex; mode=display">
  I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
 </ol>
-<h3 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h3><p>In saturation region</p>
+<h2 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h2><p>In saturation region</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
@@ -382,6 +397,26 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
 <li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
 </ol>
 <p><img src="mosfet/Cgs.png" alt="Cgs"></p>
+<h2 id="Short-Channel-Device"><a href="#Short-Channel-Device" class="headerlink" title="Short-Channel Device"></a>Short-Channel Device</h2><h3 id="Velocity-Saturation-Lateral"><a href="#Velocity-Saturation-Lateral" class="headerlink" title="Velocity Saturation (Lateral)"></a>Velocity Saturation (Lateral)</h3><p>Previously, it is assumed that $v=\mu E$, but that is not true for short-channel devices, as shown in the figure<br><img src="mosfet/image-20200203223737905.png" alt="Velocity Saturation"></p>
+<p>Consider a extreme case that the velocity is fixed to a maximal value, we have</p>
+<script type="math/tex; mode=display">
+I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, irrelevant to the channel length and directly proportional to the overdrive voltage.</p>
+<p> Another consequence is the early saturation of Id</p>
+<p><img src="mosfet/image-20200203224346282.png" alt="Early Saturation of Id"></p>
+<p>Furthermore, $g_m$ would be less sensitive to $I_d$ or $V_{GS}$.</p>
+<h3 id="Mobility-Degradation-Vertical"><a href="#Mobility-Degradation-Vertical" class="headerlink" title="Mobility Degradation (Vertical)"></a>Mobility Degradation (Vertical)</h3><p>The mobility of the charge carriers in the channel also declines as the gate-source voltage and the vertical field increase.</p>
+<p><img src="mosfet/image-20200203224830841.png" alt="Mobility Degradation"></p>
+<p>For this reason, we may expect $g_m=\mu C_{ox}(W/L)(V_{GS}-V_{TH})$ would not strictly follow the linear relationship.</p>
+<p><img src="mosfet/image-20200203225022517.png" alt="Transconductance Saturation"></p>
+<h3 id="Hot-Carrier-Effects"><a href="#Hot-Carrier-Effects" class="headerlink" title="Hot Carrier Effects"></a>Hot Carrier Effects</h3><p>While the average velocity of carriers saturates at <strong>high fields</strong>, the <strong>instantaneous velocity</strong> and hence the kinetic energy of the carriers continue to increase, especially as they accelerate toward the drain. These are called “hot” carriers.</p>
+<p>In the vicinity of the drain region, hot carriers may <strong>“hit” the silicon atoms</strong> at high speeds, thereby<br>creating <strong>impact ionization</strong>. As a result, new electrons and holes are generated, with the electrons absorbed by the drain and the holes by the substrate. Thus, a finite <strong>drain-substrate current</strong> appears. Also, if the carriers acquire a very high energy, they may be injected into the gate oxide and even flow out the gate terminal, introducing a <strong>gate current</strong>. The substrate and gate currents are often measured to study hot carrier effects.</p>
+<h2 id="Layout-Considerations"><a href="#Layout-Considerations" class="headerlink" title="Layout Considerations"></a>Layout Considerations</h2><h3 id="Well-Proximity-Effect-WPE"><a href="#Well-Proximity-Effect-WPE" class="headerlink" title="Well Proximity Effect (WPE)"></a>Well Proximity Effect (WPE)</h3><p>Due to the reflection of the dope implants, the border areas of the n-well receive a different doping density from those in the middle of the n-well.</p>
+<p><img src="mosfet/image-20200204171429371.png" alt="WPE Illustration"></p>
+<p>This problem can be alleviated by drawing a large n-well beyond the devices.</p>
+<h3 id="Length-of-Diffusion-LOD"><a href="#Length-of-Diffusion-LOD" class="headerlink" title="Length of Diffusion (LOD)"></a>Length of Diffusion (LOD)</h3><p>Modern MOS devices are surrounded by a shallow “trench” so as to avoid the formation of a channel between adjacent transistors, called “Shallow Trench Isolation” (STI). STI material has different thermal coefficient to the surrounding silicon, generating stress and altering electrical properties.</p>
+<p><img src="mosfet/20190617153235935.png" alt="STI Illustration"></p>
+<p>To alleviate the problem, dummy fingers could be inserted on the sides of the main device to minimize the propagation of the stress.</p>
+<p><img src="mosfet/image-20200204171347882.png" alt="LOD Alleviation"></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>Behzad Razavi. <em>Design of analog CMOS integrated circuits</em>.</li>
 </ol>
@@ -539,7 +574,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-V-Characteristic"><span class="nav-number">1.</span> <span class="nav-text">I-V Characteristic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation-of-Gm"><span class="nav-number">1.1.</span> <span class="nav-text">Calculation of Gm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Effects"><span class="nav-number">2.</span> <span class="nav-text">Second-Order Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Effect"><span class="nav-number">2.1.</span> <span class="nav-text">Body Effect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Length-Modulation"><span class="nav-number">2.2.</span> <span class="nav-text">Channel Length Modulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subthreshold-Conduction"><span class="nav-number">2.3.</span> <span class="nav-text">Subthreshold Conduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parasitic"><span class="nav-number">3.</span> <span class="nav-text">Parasitic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitance"><span class="nav-number">3.1.</span> <span class="nav-text">Capacitance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resistance"><span class="nav-number">3.2.</span> <span class="nav-text">Resistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOSFET-as-Capacitor"><span class="nav-number">3.3.</span> <span class="nav-text">MOSFET as Capacitor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-V-Characteristic"><span class="nav-number">1.</span> <span class="nav-text">I-V Characteristic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculation-of-Gm"><span class="nav-number">2.</span> <span class="nav-text">Calculation of Gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Effects"><span class="nav-number">3.</span> <span class="nav-text">Second-Order Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Effect"><span class="nav-number">3.1.</span> <span class="nav-text">Body Effect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Length-Modulation"><span class="nav-number">3.2.</span> <span class="nav-text">Channel Length Modulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subthreshold-Conduction"><span class="nav-number">3.3.</span> <span class="nav-text">Subthreshold Conduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parasitic"><span class="nav-number">4.</span> <span class="nav-text">Parasitic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitance"><span class="nav-number">4.1.</span> <span class="nav-text">Capacitance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resistance"><span class="nav-number">4.2.</span> <span class="nav-text">Resistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOSFET-as-Capacitor"><span class="nav-number">4.3.</span> <span class="nav-text">MOSFET as Capacitor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Short-Channel-Device"><span class="nav-number">5.</span> <span class="nav-text">Short-Channel Device</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Velocity-Saturation-Lateral"><span class="nav-number">5.1.</span> <span class="nav-text">Velocity Saturation (Lateral)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobility-Degradation-Vertical"><span class="nav-number">5.2.</span> <span class="nav-text">Mobility Degradation (Vertical)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hot-Carrier-Effects"><span class="nav-number">5.3.</span> <span class="nav-text">Hot Carrier Effects</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout-Considerations"><span class="nav-number">6.</span> <span class="nav-text">Layout Considerations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Well-Proximity-Effect-WPE"><span class="nav-number">6.1.</span> <span class="nav-text">Well Proximity Effect (WPE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Length-of-Diffusion-LOD"><span class="nav-number">6.2.</span> <span class="nav-text">Length of Diffusion (LOD)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -556,7 +591,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -630,7 +665,7 @@ r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">141k</span>
+    <span title="Symbols count total">147k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>

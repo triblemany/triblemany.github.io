@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201165625279.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201171030851.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/2e70db9d/transistor-amplifier/image-20200201172947070.png">
-<meta property="og:updated_time" content="2020-02-01T14:22:35.366Z">
+<meta property="og:updated_time" content="2020-02-04T14:42:13.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MOS Amplifier Structures">
 <meta name="twitter:description" content="This article details the structures of basic mos amplifiers.">
@@ -321,7 +321,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-01 22:22:35" itemprop="dateModified" datetime="2020-02-01T22:22:35+08:00">2020-02-01</time>
+                <time title="Modified: 2020-02-04 22:42:13" itemprop="dateModified" datetime="2020-02-04T22:42:13+08:00">2020-02-04</time>
               </span>
             
           
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>9.5k</span>
+              <span>9.7k</span>
             </span>
           
 
@@ -481,7 +481,8 @@ Z_2=\frac{Z}{1-\frac{V_Y}{V_X}}=\frac{Z}{1-1/A_v}</script><p><strong>Attention:<
 <li>Since the reverse gain is not necessarily $1/A_v$ (as in the case of CG), it cannot be used to calculate the output impedance directly. Instead, a voltage source should be connected at the output node to test the reverse gain, and  that result be used to calculate the impedance.</li>
 <li>Trans-impedance Z must present in the process of calculating $A_v$.</li>
 </ul>
-<h2 id="Frequency-Response"><a href="#Frequency-Response" class="headerlink" title="Frequency Response"></a>Frequency Response</h2><p>General Formula</p>
+<h2 id="Frequency-Response"><a href="#Frequency-Response" class="headerlink" title="Frequency Response"></a>Frequency Response</h2><h3 id="Association-of-Poles-with-Nodes"><a href="#Association-of-Poles-with-Nodes" class="headerlink" title="Association of Poles with Nodes"></a>Association of Poles with Nodes</h3><p>We can associate each pole with one node of the circuit. It is not always true, but affords an intuitive approach to the estimation of the transfer function.</p>
+<p>General Formula</p>
 <script type="math/tex; mode=display">
 A_v(s)=A_v(0)\frac{1}{(1+sR_1C_1)(1+sR_2C_2)...}</script><h3 id="Common-Source-1"><a href="#Common-Source-1" class="headerlink" title="Common Source"></a>Common Source</h3><p><img src="transistor-amplifier/image-20200201151018992.png" alt="Common Source, Frequency Response"></p>
 <p>Poles can be estimated as</p>
@@ -718,7 +719,7 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Source"><span class="nav-number">1.</span> <span class="nav-text">Common Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Resistor-Load"><span class="nav-number">1.1.</span> <span class="nav-text">CS with Resistor Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Diode-Load-Cascode"><span class="nav-number">1.2.</span> <span class="nav-text">CS with Diode Load (Cascode)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Current-Source-Load"><span class="nav-number">1.3.</span> <span class="nav-text">CS with Current-Source Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Active-Load"><span class="nav-number">1.4.</span> <span class="nav-text">CS with Active Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Triode-Load"><span class="nav-number">1.5.</span> <span class="nav-text">CS with Triode Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Source-Degeneration"><span class="nav-number">1.6.</span> <span class="nav-text">CS with Source Degeneration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Follower"><span class="nav-number">2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Gate"><span class="nav-number">3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascode"><span class="nav-number">4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miller-Effect"><span class="nav-number">5.</span> <span class="nav-text">Miller Effect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frequency-Response"><span class="nav-number">6.</span> <span class="nav-text">Frequency Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Source-1"><span class="nav-number">6.1.</span> <span class="nav-text">Common Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Follower-1"><span class="nav-number">6.2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Gate-1"><span class="nav-number">6.3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cascode-1"><span class="nav-number">6.4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extra-Element-Theorem"><span class="nav-number">6.5.</span> <span class="nav-text">Extra Element Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zero-Value-Time-Constant-Method"><span class="nav-number">6.6.</span> <span class="nav-text">Zero Value Time Constant Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Source"><span class="nav-number">1.</span> <span class="nav-text">Common Source</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Resistor-Load"><span class="nav-number">1.1.</span> <span class="nav-text">CS with Resistor Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Diode-Load-Cascode"><span class="nav-number">1.2.</span> <span class="nav-text">CS with Diode Load (Cascode)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Current-Source-Load"><span class="nav-number">1.3.</span> <span class="nav-text">CS with Current-Source Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Active-Load"><span class="nav-number">1.4.</span> <span class="nav-text">CS with Active Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Triode-Load"><span class="nav-number">1.5.</span> <span class="nav-text">CS with Triode Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS-with-Source-Degeneration"><span class="nav-number">1.6.</span> <span class="nav-text">CS with Source Degeneration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Follower"><span class="nav-number">2.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Gate"><span class="nav-number">3.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascode"><span class="nav-number">4.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miller-Effect"><span class="nav-number">5.</span> <span class="nav-text">Miller Effect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frequency-Response"><span class="nav-number">6.</span> <span class="nav-text">Frequency Response</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Association-of-Poles-with-Nodes"><span class="nav-number">6.1.</span> <span class="nav-text">Association of Poles with Nodes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Source-1"><span class="nav-number">6.2.</span> <span class="nav-text">Common Source</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Follower-1"><span class="nav-number">6.3.</span> <span class="nav-text">Source Follower</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Common-Gate-1"><span class="nav-number">6.4.</span> <span class="nav-text">Common Gate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cascode-1"><span class="nav-number">6.5.</span> <span class="nav-text">Cascode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extra-Element-Theorem"><span class="nav-number">6.6.</span> <span class="nav-text">Extra Element Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zero-Value-Time-Constant-Method"><span class="nav-number">6.7.</span> <span class="nav-text">Zero Value Time Constant Method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -735,7 +736,7 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -809,7 +810,7 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">141k</span>
+    <span title="Symbols count total">147k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
