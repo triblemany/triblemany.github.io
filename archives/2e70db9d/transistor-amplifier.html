@@ -26,7 +26,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     version: '7.3.0',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -241,6 +241,8 @@
     
   </ul>
 
+    
+
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -269,8 +271,6 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-            
-
           <div id="content" class="content page-post-detail">
             
 
@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>9.7k</span>
+              <span>9.8k</span>
             </span>
           
 
@@ -364,7 +364,7 @@ A_v&=\frac{-\mu_nC_{ox}(W/L)R_DV_{out}}{1+\mu_nC_{ox}(W/L)R_D(V_{in}-V_{TH}-V_{o
 <p><img src="transistor-amplifier\image-20200126202213384.png" alt="MOS as Diode"></p>
 <p>In that case, the equivalent output resistance is</p>
 <script type="math/tex; mode=display">
-r_{eq}=\frac{1}{g_m+g_{mb}}||r_o</script><p>From a large-signal perspective, a diode act like a “square root” operator.</p>
+r_{eq}=\frac{1}{g_m+g_{mb}}||r_o</script><p>From a large-signal perspective, a diode act like a &quot;square root&quot; operator.</p>
 <p><img src="transistor-amplifier\image-20200126203017127.png" alt="CS with Diode Load"></p>
 <p>The voltage gain of a CS stage with diode load is</p>
 <script type="math/tex; mode=display">
@@ -400,7 +400,7 @@ R_{on2}=\frac{1}{\mu_pC_{ox}\frac{W}{L}(V_{DD}-V_{b}-|V_{THP}|)}</script><p>This
 \begin{aligned}
 A_{v}&=\frac{-g_mR_D}{1+g_mR_S}\\
 &=-\frac{R_D}{\frac{1}{g_m}+R_S}
-\end{aligned}</script><p>This can be explained as “the resistance seen at the drain” divided by “the total resistance in the source path”.</p>
+\end{aligned}</script><p>This can be explained as &quot;the resistance seen at the drain&quot; divided by &quot;the total resistance in the source path&quot;.</p>
 <p><img src="transistor-amplifier\image-20200127201302537.png" alt="CS with Source Degeneration, Small Signal"></p>
 <script type="math/tex; mode=display">
 G_m=\frac{g_mr_o}{R_S+[1+(g_m+g_{mb})R_S]r_o}</script><ul>
@@ -556,10 +556,10 @@ A_v(s)=\frac{(g_m+g_{mb})R_D}{1+(g_m+g_{mb})R_S}\cdot\frac{1}{\left(1+\frac{s}{\
 <li><p>The dominant pole is the coefficient of $s$ in the denominator.</p>
 <p>Denominator can be written as</p>
 <script type="math/tex; mode=display">
-D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...\left(1+\frac{s}{\omega_{pn}}\right)</script><p>Therefore, the coefficient of $s$ is $\omega_{p1}^{-1}+\omega_{p2}^{-1}+…+\omega_{pn}^{-1}$, which reduce to $\omega_{p1}^{-1}$ with dominant pole assumption.</p>
+D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...\left(1+\frac{s}{\omega_{pn}}\right)</script><p>Therefore, the coefficient of $s$ is $\omega_{p1}^{-1}+\omega_{p2}^{-1}+...+\omega_{pn}^{-1}$, which reduce to $\omega_{p1}^{-1}$ with dominant pole assumption.</p>
 </li>
 <li><p>The coefficient of $s$ in the denominator equals to the sum of all zero-value time constants.</p>
-<p>Since the coefficient of $s$ has a time dimension, we can write it as $B_s=R_1C_1+R_2C_2+…+R_nC_n$, where $C_1-C_n$ denote real capacitors, and $R_1-R_n$ are unknown. With $C_2-C_n$ set to 0, the order of the system reduces to 1, and therefore $R_1$ is the resistance seen by $C_1$.</p>
+<p>Since the coefficient of $s$ has a time dimension, we can write it as $B_s=R_1C_1+R_2C_2+...+R_nC_n$, where $C_1-C_n$ denote real capacitors, and $R_1-R_n$ are unknown. With $C_2-C_n$ set to 0, the order of the system reduces to 1, and therefore $R_1$ is the resistance seen by $C_1$.</p>
 </li>
 </ol>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
@@ -598,14 +598,14 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\10ba08e5\mom-simulation.html" rel="bookmark">电容的电磁场仿真设置</a></div>
+      <div class="popular-posts-title"><a href="\archives\b4b2824b\feedback-system-analysis.html" rel="bookmark">Feedback System Analysis</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      <div class="popular-posts-title"><a href="\archives\eff29f15\current-mirror-and-bandgap.html" rel="bookmark">Current Mirror and Bandgap</a></div>
       
     </li>
   
@@ -736,7 +736,7 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -779,7 +779,25 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
         
           
         
-        <span class="site-state-item-count">14</span>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -810,11 +828,11 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">147k</span>
+    <span title="Symbols count total">164k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
 
         
 
@@ -847,7 +865,7 @@ D(s)=\left(1+\frac{s}{\omega_{p1}}\right)\left(1+\frac{s}{\omega_{p2}}\right)...
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
-<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
 
 <script src="/js/next-boot.js?v=7.3.0"></script>
 

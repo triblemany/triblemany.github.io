@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This article intends to introduce the basic concepts of current mirrors and the bandgap reference.">
+<meta name="keywords" content="RFIC,Current Mirror,Bandgap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Current Mirror and Bandgap">
+<meta property="og:url" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="This article intends to introduce the basic concepts of current mirrors and the bandgap reference.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206172547720.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206174112332.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206174745873.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206205631025.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206210959043.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206212746379.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206221309473.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206221502249.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200207103827505.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200207105425058.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200207113011408.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200207113934386.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200207114827889.png">
+<meta property="og:updated_time" content="2020-02-08T08:15:03.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Current Mirror and Bandgap">
+<meta name="twitter:description" content="This article intends to introduce the basic concepts of current mirrors and the bandgap reference.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap/image-20200206172547720.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Current Mirror and Bandgap | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Current Mirror and Bandgap
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-02-06 17:17:01" itemprop="dateCreated datePublished" datetime="2020-02-06T17:17:01+08:00">2020-02-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-08 16:15:03" itemprop="dateModified" datetime="2020-02-08T16:15:03+08:00">2020-02-08</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>5.9k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This article intends to introduce the basic concepts of current mirrors and the bandgap reference.</p>
+<a id="more"></a>
+<h2 id="Basic-Current-Mirrors"><a href="#Basic-Current-Mirrors" class="headerlink" title="Basic Current Mirrors"></a>Basic Current Mirrors</h2><p>Shortcomings of voltage biasing:</p>
+<ul>
+<li>Sensitive to threshold voltage variation</li>
+<li>Temperature dependence</li>
+<li>Rely on the precision of $V_{DD}$</li>
+</ul>
+<p>Use of current for biasing may eliminate those problems. Use of identical MOS operating in saturation may suffice.</p>
+<p><img src="current-mirror-and-bandgap/image-20200206172547720.png" alt="Basic Current Source"></p>
+<p>Here we have</p>
+<script type="math/tex; mode=display">
+I_{REF}=\frac{1}{2}\mu_nC_{ox}\left(\frac{W}{L}\right)_1(V_{GS}-V_{TH})^2\\
+I_{out}=\frac{1}{2}\mu_nC_{ox}\left(\frac{W}{L}\right)_2(V_{GS}-V_{TH})^2</script><p>and thus</p>
+<script type="math/tex; mode=display">
+I_{out}=\frac{(W/L)_2}{(W/L)_1}I_{REF}</script><p>The transistor on the left generate $V_{GS}$ from $I_{REF}$ when and only when it is configured as a diode.</p>
+<p>Note that:</p>
+<ul>
+<li>Mirror transistor should have the <strong>same length</strong> as the operating transistor to minimize mismatch.</li>
+<li>Mirror transistor should have the <strong>same width</strong> as the operating transistor to reduce errors caused by the poorly defined gate sides (Number of fingers and devices may be changed).</li>
+</ul>
+<p>We can connect current mirrors in series as to modify the equivalent length of the transistor as follows:</p>
+<p><img src="current-mirror-and-bandgap/image-20200206174112332.png" alt="Current Mirror in Series"></p>
+<h2 id="Cascaded-Current-Mirror"><a href="#Cascaded-Current-Mirror" class="headerlink" title="Cascaded Current Mirror"></a>Cascaded Current Mirror</h2><p>If we consider channel-length modulation, the equations may be rewritten as</p>
+<script type="math/tex; mode=display">
+I_{REF}=\frac{1}{2}\mu_nC_{ox}\left(\frac{W}{L}\right)_1(V_{GS}-V_{TH})^2(1+\lambda V_{DS1})\\
+I_{out}=\frac{1}{2}\mu_nC_{ox}\left(\frac{W}{L}\right)_2(V_{GS}-V_{TH})^2(1+\lambda V_{DS2})</script><p>and thus</p>
+<script type="math/tex; mode=display">
+I_{out}=\frac{(W/L)_2}{(W/L)_1}\cdot \frac{1+\lambda V_{DS2}}{1+\lambda V_{DS1}}I_{REF}</script><p>while $V_{DS1}=V_{GS1}=V_{GS2}$, $V_{DS1}$ may not equal to $V_{DS2}$. We may introduce the Cascode structure to shield the variation at node Y from that at node P</p>
+<h3 id="Approach-1"><a href="#Approach-1" class="headerlink" title="Approach 1"></a>Approach 1</h3><p><img src="current-mirror-and-bandgap/image-20200206174745873.png" alt="Cascode Current Source"></p>
+<p>We need</p>
+<script type="math/tex; mode=display">
+V_{DS2}=V_{GS2}</script><p>and thus</p>
+<script type="math/tex; mode=display">
+V_b=V_{GS3}+V_{DS2}=V_{GS3}+V_{GS2}=V_{GS3}+V_{GS1}</script><p>We surmise that $V_b$ can be achieved by cascading two current sources, as in (c), as long as</p>
+<script type="math/tex; mode=display">
+V_{GS0}+V_{GS1}=V_{GS3}+V_{GS1}</script><p>or</p>
+<script type="math/tex; mode=display">
+V_{GS0}=V_{GS3}</script><p>Generally, we have</p>
+<ul>
+<li>$L_0=L_3$ to the lowest possible value to save area</li>
+<li>$W_3/W_0=W_2/W_1$ for $V_{GS0}=V_{GS3}$</li>
+<li>$L_1=L_2$ may be longer to reduce channel-length modulation and the flicker noise</li>
+</ul>
+<p>The minimal allowable voltage at Node P is two overdrive voltage plus one threshold voltage.</p>
+<h3 id="Approach-2"><a href="#Approach-2" class="headerlink" title="Approach 2"></a>Approach 2</h3><p><img src="current-mirror-and-bandgap/image-20200206205631025.png" alt="IR Drop"></p>
+<p>In order to save voltage headroom, we may set $V_b$ to a lower value of</p>
+<script type="math/tex; mode=display">
+V_b=V_{DS2}+V_{GS3}=V_{GS2}-V_{TH1}+V_{GS1}</script><p>And therefore, we need to reduce $V_{DS1}$ to the value of $V_{DS2}$. A resistor is added to cause such a voltage drop</p>
+<script type="math/tex; mode=display">
+V_{TH}=I_{REF}R_1</script><p>Definition of $V_b$ may be realized as in figure (c), where </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+V_{GS5}=V_{GS3}&\\
+V_{GS6}-R_6I_6&=V_{GS1}-V_{TH1}\\
+&=V_{GS1}-R_1I_{IREF}
+\end{aligned}</script><p>A further modification can be made to address the PVT problem</p>
+<p><img src="current-mirror-and-bandgap/image-20200206210959043.png" alt="Modification of Cascode Mirror"></p>
+<p>Here, $V_b$ can be chosen to place M1 at the edge of saturation. Note that if $V_{GS0}=V_{GS3}$, then $V_{DS2}$ is forced to be equal to $V_{DS1}$. The range of $V_b$ can be determined as</p>
+<script type="math/tex; mode=display">
+V_{GS1}-V_{TH1}\le V_b-V_{GS0}\\
+V_{b}-V_{TH0}\le V_{GS1}</script><p>Hence $V_{GS0}-V_{TH0}&lt;V_{TH1}$, and M0 should be large enough. Two methods can be used to generate $V_b$</p>
+<p><img src="current-mirror-and-bandgap/image-20200206212746379.png" alt="Generation of Vb"></p>
+<h2 id="Active-Current-Mirror"><a href="#Active-Current-Mirror" class="headerlink" title="Active Current Mirror"></a>Active Current Mirror</h2><p><img src="current-mirror-and-bandgap/image-20200206221309473.png" alt="Active Current Mirror"></p>
+<p><img src="current-mirror-and-bandgap/image-20200206221502249.png" alt="Active Current Mirror, Rout"></p>
+<p>We have</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+G_m&=-g_{m1}r_{o1}\frac{g_{m4}r_d+1}{r_d+2r_{o1}}\\
+&\approx g_m\\
+R_{out}&=\frac{(1+g_{m4}r_d)r_{o4}+2r_{o1}+r_d}{(2r_{o1}+r_d)r_{o4}}\\
+&\approx r_{o2}||r_{o4}\\\\
+r_d&=r_{o3}||(1/g_{m3})
+\end{aligned}</script><h2 id="Supply-Independent-Biasing"><a href="#Supply-Independent-Biasing" class="headerlink" title="Supply-Independent Biasing"></a>Supply-Independent Biasing</h2><p><img src="current-mirror-and-bandgap/image-20200207103827505.png" alt="Supply-Independent Biasing"></p>
+<p>For (a)</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\sqrt{\frac{2I_{out}}{\mu_nC_{ox}(W/L)_N}}+V_{TH1}\\=&\sqrt{\frac{2I_{out}}{\mu_nC_{ox}K(W/L)_N}}+V_{TH2}+I_{out}R_s
+\end{aligned}</script><p>and hence</p>
+<script type="math/tex; mode=display">
+I_{out}=\frac{2}{\mu_nC_{ox}(W/L)_N}\cdot\frac{1}{R_S^2}\left(1-\frac{1}{\sqrt{K}}\right)^2</script><p>Relatively long channels are used for all of the transistors in the circuit to avoid channel-length modulation. Another issue is the existence of &quot;degenerate&quot; bias point, where all transistors carry zero current.</p>
+<p><img src="current-mirror-and-bandgap/image-20200207105425058.png" alt="Solution of the Start-Up Problem"></p>
+<p>The “start-up” problem can be resolved by adding a mechanism that drives the circuit out of the degenerate bias point when the supply is turned on. Diode M3, M5, and M1 in series from VDD to GND could effectively prevent off states.</p>
+<h2 id="Temperature-Independent-References"><a href="#Temperature-Independent-References" class="headerlink" title="Temperature-Independent References"></a>Temperature-Independent References</h2><h3 id="Negative-TC-Voltage"><a href="#Negative-TC-Voltage" class="headerlink" title="Negative-TC Voltage"></a>Negative-TC Voltage</h3><p>For a bipolar device</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+I_C&=I_S\exp(\frac{V_{BE}}{V_T})\\
+V_{BE}&=V_T\ln\frac{I_C}{I_S}\\
+V_T&=\frac{kT}{q} &\text{Thermal Voltage}\\
+I_S&\propto\mu kTn_i^2 &\text{Saturation Current}\\
+\mu&\propto\mu_0T^m &\text{Minor Carrier Mobility}\\
+n_i^2&\propto T^3\exp(-\frac{E_g}{kT}) &\text{Intrinsic Carrier Concentration}\\
+E_g&\approx 1.12\text{eV} &\text{Bandgap Energy}
+\end{aligned}</script><p>We may derive (assume for now that $I_C$ is held constant)</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial V_{BE}}{\partial T}&=\frac{\partial V_T}{\partial T}\ln\frac{I_C}{I_S}-\frac{V_T}{I_S}\frac{\partial I_S}{\partial T}\\
+&=\frac{V_{BE}-(4+m)V_T-E_g/q}{T}
+\end{aligned}</script><p>Temperature coefficient of $V_{BE}$ itself depends on the temperature, creating error in constant reference generation if the positive-TC quantity exhibits a constant temperature coefficient.</p>
+<h3 id="Positive-TC-Voltage"><a href="#Positive-TC-Voltage" class="headerlink" title="Positive-TC Voltage"></a>Positive-TC Voltage</h3><p>If two bipolar transistors operate at unequal current densities, then the difference between their base-emitter voltages is directly proportional to the absolute temperature.</p>
+<p><img src="current-mirror-and-bandgap/image-20200207113011408.png" alt="PTAT"></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Delta V_{BE}&=V_{BE1}-V_{BE2}\\
+&=V_T\ln\frac{nI_0}{I_{S1}}-V_T\ln\frac{I_0}{I_{S2}}\\
+&=V_T\ln n\\
+\frac{\partial \Delta V_{BE}}{\partial T}&=\frac{k}{q}\ln n
+\end{aligned}</script><h3 id="Bandgap-Reference"><a href="#Bandgap-Reference" class="headerlink" title="Bandgap Reference"></a>Bandgap Reference</h3><p>Since at room temperature, $\partial V_{BE}/\partial T\approx−1.5\text{ mV/K}$ whereas $\partial V_{T}/\partial T\approx+0.087\text{ mV/K}$, hence $V_{REF}\approx V_{BE}+17.2V_T\approx1.25\text{ V}$.we can add the two as follows</p>
+<p><img src="current-mirror-and-bandgap/image-20200207113934386.png" alt="image-20200207113934386"></p>
+<p>If we guarantee that $V_{O1}=V_{O2}$, then $RI=V_{BE1}-V_{BE2}=V_T\ln n$, and then $V_{O2}=V_{BE2}+V_T\ln n$. Yet, since $V_{O2}=V_{O1}\approx800\text{ mV}&lt;1.25\text{ V}$, it cannot work as expected.</p>
+<p><img src="current-mirror-and-bandgap/image-20200207114827889.png" alt="Actual Bandgap"></p>
+<script type="math/tex; mode=display">
+V_{out}=V_{BE2}+\frac{V_T\ln n}{R_3}(R_3+R_2)</script><ol>
+<li>The op-amp ensures that $V_X=V_Y$</li>
+<li>$R_1=R_2$ and $V_X=V_Y$ ensures that $I_1=I_2$</li>
+<li>$V_Y$ is amplified before being added to $V_{BE2}$, hence voltage difference of $V_Y$ and $V_{O2}$ can be small</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\b4b2824b\feedback-system-analysis.html" rel="bookmark">Feedback System Analysis</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\6eefa2f5\mosfet.html" rel="bookmark">Basic Theory of MOSFETs</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap.html" title="Current Mirror and Bandgap">https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Current-Mirror/" rel="tag"># Current Mirror</a>
+            
+              <a href="/tags/Bandgap/" rel="tag"># Bandgap</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/4234db6/limited.html" rel="next" title="The Limited">
+                  <i class="fa fa-chevron-left"></i> The Limited
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/archives/ffa08d7c/useful-mathematical-formulas.html" rel="prev" title="Useful Mathematical Formulas">
+                  Useful Mathematical Formulas <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Current-Mirrors"><span class="nav-number">1.</span> <span class="nav-text">Basic Current Mirrors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cascaded-Current-Mirror"><span class="nav-number">2.</span> <span class="nav-text">Cascaded Current Mirror</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Approach-1"><span class="nav-number">2.1.</span> <span class="nav-text">Approach 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Approach-2"><span class="nav-number">2.2.</span> <span class="nav-text">Approach 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Active-Current-Mirror"><span class="nav-number">3.</span> <span class="nav-text">Active Current Mirror</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supply-Independent-Biasing"><span class="nav-number">4.</span> <span class="nav-text">Supply-Independent Biasing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Temperature-Independent-References"><span class="nav-number">5.</span> <span class="nav-text">Temperature-Independent References</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Negative-TC-Voltage"><span class="nav-number">5.1.</span> <span class="nav-text">Negative-TC Voltage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Positive-TC-Voltage"><span class="nav-number">5.2.</span> <span class="nav-text">Positive-TC Voltage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bandgap-Reference"><span class="nav-number">5.3.</span> <span class="nav-text">Bandgap Reference</span></a></li></ol></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">164k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/eff29f15/current-mirror-and-bandgap.html";
+    this.page.identifier = "archives/eff29f15/current-mirror-and-bandgap.html";
+    this.page.title = 'Current Mirror and Bandgap';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
