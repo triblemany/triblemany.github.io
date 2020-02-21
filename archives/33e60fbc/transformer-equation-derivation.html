@@ -29,7 +29,7 @@
     scheme: 'Mist',
     version: '7.3.0',
     exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
     copycode: {"enable":true,"show_result":true,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -64,7 +64,7 @@
 <meta property="og:description" content="变压器是射频集成电路设计中极为重要的元件，它可以提供：  初级线圈和次级线圈的直流阻断 初级线圈的次级线圈的中心抽头是虚地，可用于连接直流偏置 阻抗匹配  在毫米波频段，其占用面积小，可实现的插入损耗、带宽相比于分立元件有较大优势。变压器的分析通常使用电感耦合的RLC谐振网络进行。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/33e60fbc/transformer-equation-derivation/mcr.svg">
-<meta property="og:updated_time" content="2019-11-12T05:43:21.622Z">
+<meta property="og:updated_time" content="2020-02-13T04:26:36.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变压器的跨阻推导">
 <meta name="twitter:description" content="变压器是射频集成电路设计中极为重要的元件，它可以提供：  初级线圈和次级线圈的直流阻断 初级线圈的次级线圈的中心抽头是虚地，可用于连接直流偏置 阻抗匹配  在毫米波频段，其占用面积小，可实现的插入损耗、带宽相比于分立元件有较大优势。变压器的分析通常使用电感耦合的RLC谐振网络进行。">
@@ -259,7 +259,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Triblemany">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -293,7 +293,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 13:43:21" itemprop="dateModified" datetime="2019-11-12T13:43:21+08:00">2019-11-12</time>
+                <time title="Modified: 2020-02-13 12:26:36" itemprop="dateModified" datetime="2020-02-13T12:26:36+08:00">2020-02-13</time>
               </span>
             
           
@@ -307,7 +307,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>4.6k</span>
+              <span>6.4k</span>
             </span>
           
 
@@ -357,13 +357,21 @@ M=k\sqrt{L_1L_2}</script><p>于是，在Matlab中输入命令</p>
 <script type="math/tex; mode=display">
 Z_{21}=\frac{k\omega_1^2\omega_2^2\sqrt{\frac{R_1R_2}{Q_1Q_2\omega_1\omega_2}}s}{Q_1Q_2(1-k^2)s^4+(Q_1\omega_2+Q_2\omega_1)(1-k^2)s^3+\\ 
 [\omega_1\omega_2(1-k^2)+Q_1Q_2(\omega_1^2+\omega_2^2)]s^2+\omega_1\omega_2(Q_1\omega_1+Q_2\omega_2)s+\\
-Q_1Q_2\omega_1^2\omega_2^2}</script><p>得到了文章中的公式。此外，可以进一步简化，使初级、次级的$\omega, Q, R$对应相等，利用</p>
+Q_1Q_2\omega_1^2\omega_2^2}</script><p>进一步假设高Q值，$Q_1Q_2(\omega_1^2+\omega_2^2)\gg(1-k^2)\omega_1\omega_2$，可解得极点为</p>
+<script type="math/tex; mode=display">
+\omega_p^2=\frac{\omega_1^2+\omega_2^2\pm\sqrt{(\omega_1^2+\omega_2^2)^2-4(1-k^2)\omega_1^2\omega_2^2}}{2(1-k^2)}</script><p>得到了文章中的公式。此外，可以进一步简化，使初级、次级的$\omega, Q, R$对应相等，利用</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">syms Q w R</span><br><span class="line">x = subs(x, Q1, Q);</span><br><span class="line">x = subs(x, Q2, Q);</span><br><span class="line">x = subs(x, w1, w);</span><br><span class="line">x = subs(x, w2, w);</span><br><span class="line">x = subs(x, R1, R);</span><br><span class="line">x = subs(x, R2, R);</span><br><span class="line">x = simplify(x)</span><br></pre></td></tr></table></figure>
 <p>得到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x =</span><br><span class="line"> </span><br><span class="line">(Q^2*k*s*w^4*(R^2/(Q^2*w^2))^(1/2))/(- Q^2*k^2*s^4 + Q^2*s^4 + 2*Q^2*s^2*w^2 + Q^2*w^4 - 2*Q*k^2*s^3*w + 2*Q*s^3*w + 2*Q*s*w^3 - k^2*s^2*w^2 + s^2*w^2)</span><br></pre></td></tr></table></figure>
 <p>即</p>
 <script type="math/tex; mode=display">
-Z_{21}=\frac{\omega^3kQRs}{(1-k^2)Q^2s^2+2(1-k)Q\omega s+(1-k^2+2Q^2)\omega^2s^2+2Q\omega^3s+Q^2\omega^4}</script><h2 id="Marco-Vigilante的推导"><a href="#Marco-Vigilante的推导" class="headerlink" title="Marco Vigilante的推导"></a>Marco Vigilante的推导</h2><p>Marco巧妙地利用了Y参数，避免了很多的复杂计算。变压器方程为</p>
+Z_{21}=\frac{\omega^3kQRs}{(1-k^2)Q^2s^4+2(1-k)Q\omega s^3+(1-k^2+2Q^2)\omega^2s^2+2Q\omega^3s+Q^2\omega^4}</script><p>极点频率可以由</p>
+<script type="math/tex; mode=display">
+\mathrm{Re}[(1-k^2)Q^2s^4+2(1-k)Q\omega s^3+(1-k^2+2Q^2)\omega^2s^2+2Q\omega^3s+Q^2\omega^4]=0</script><p>得到，即</p>
+<script type="math/tex; mode=display">
+(1-k^2)Q^2s^4+(1-k^2+2Q^2)\omega^2s^2+Q^2\omega^4=0</script><p>进一步假设高Q值，$2Q^2\gg1-k^2$，可解得</p>
+<script type="math/tex; mode=display">
+\omega_p=\frac{\omega}{\sqrt{1\pm k}}</script><h2 id="Marco-Vigilante的推导"><a href="#Marco-Vigilante的推导" class="headerlink" title="Marco Vigilante的推导"></a>Marco Vigilante的推导</h2><p>Marco巧妙地利用了Y参数，避免了很多的复杂计算。变压器方程为</p>
 <script type="math/tex; mode=display">
 \left\{
 \begin{aligned}
@@ -401,6 +409,7 @@ I_2&=-\frac{\omega kQ}{sR}U_1+\frac{1}{R}\left[1+Q\left(\frac{s}{\omega}+\frac{\
 <p>手动整理可得</p>
 <script type="math/tex; mode=display">
 Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\omega^2)}</script><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用两种方法都能够推导出变压器$Z_{21}$的表达式，仔细观察两者简化后的表达式分母虽然一致，分子却有所区别，这是因为两者定义$Q, \omega$的方式不尽相同。尽管如此，这两种方法都可以进一步推导出两个极点的位置，用于指导变压器的宽带设计。</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="针对Haikun-Jia的Mathematica推导"><a href="#针对Haikun-Jia的Mathematica推导" class="headerlink" title="针对Haikun Jia的Mathematica推导"></a>针对Haikun Jia的Mathematica推导</h3><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Input 1 *)</span></span><br><span class="line">result = <span class="keyword">Solve</span>[s L1 Ip1 + s M Ip2 == U1 &amp;&amp;</span><br><span class="line">   			s M Ip1 + s L2 Ip2 == U2 &amp;&amp;</span><br><span class="line">   			I1 - s C1 U1 - U1/R1 == Ip1 &amp;&amp;</span><br><span class="line">   			-s C2 U2 - U2/R2 == Ip2, &#123;U1, U2, Ip1, Ip2&#125;];</span><br><span class="line">Zt = U2/I1 /. result[[<span class="number">1</span>]]</span><br><span class="line"><span class="comment">(* Output 1 *)</span></span><br><span class="line">-((M R1 R2 s)/(-R1 R2 - L2 R1 s - L1 R2 s - L1 L2 s^<span class="number">2</span> + M^<span class="number">2</span> s^<span class="number">2</span> - </span><br><span class="line">     C1 L1 R1 R2 s^<span class="number">2</span> - C2 L2 R1 R2 s^<span class="number">2</span> - C1 L1 L2 R1 s^<span class="number">3</span> + </span><br><span class="line">     C1 M^<span class="number">2</span> R1 s^<span class="number">3</span> - C2 L1 L2 R2 s^<span class="number">3</span> + C2 M^<span class="number">2</span> R2 s^<span class="number">3</span> - </span><br><span class="line">     C1 C2 L1 L2 R1 R2 s^<span class="number">4</span> + C1 C2 M^<span class="number">2</span> R1 R2 s^<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Input 2 *)</span></span><br><span class="line">Zt2 = <span class="keyword">Simplify</span>[Zt /. M -&gt; k <span class="keyword">Sqrt</span>[L1 L2] /. &#123;L1 -&gt; R1/w1/Q1, L2 -&gt; R2/w2/Q2, </span><br><span class="line">   C1 -&gt; Q1/w1/R1, C2 -&gt; Q2/w2/R2&#125;]</span><br><span class="line"><span class="comment">(* Output 2 *)</span></span><br><span class="line">(k R1 R2 s w1 w2)/(<span class="keyword">Sqrt</span>[(R1 R2)/(</span><br><span class="line">   Q1 Q2 w1 w2)] (s w1 (-(<span class="number">-1</span> + k^<span class="number">2</span>) s w2 + </span><br><span class="line">        Q2 (s^<span class="number">2</span> - k^<span class="number">2</span> s^<span class="number">2</span> + w2^<span class="number">2</span>)) + </span><br><span class="line">     Q1 (s (-(<span class="number">-1</span> + k^<span class="number">2</span>) s^<span class="number">2</span> + w1^<span class="number">2</span>) w2 + </span><br><span class="line">        Q2 (-(<span class="number">-1</span> + k^<span class="number">2</span>) s^<span class="number">4</span> + w1^<span class="number">2</span> w2^<span class="number">2</span> + s^<span class="number">2</span> (w1^<span class="number">2</span> + w2^<span class="number">2</span>)))))</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Input 3 *)</span></span><br><span class="line">Zt3 = <span class="keyword">Simplify</span>[Zt2 /. &#123;L1-&gt;L, L2-&gt;L, w1-&gt;w, w2-&gt;w, Q1-&gt;Q, Q2-&gt;Q, R1-&gt;R, R2-&gt;R&#125;,&#123;R&gt;<span class="number">0</span>,Q&gt;<span class="number">0</span>,w&gt;<span class="number">0</span>&#125;]</span><br><span class="line"><span class="comment">(* Output 3 *)</span></span><br><span class="line">(k R s w^<span class="number">2</span>)/(<span class="number">-2</span> (<span class="number">-1</span> + k^<span class="number">2</span>) s^<span class="number">3</span> - ((<span class="number">-1</span> + k^<span class="number">2</span>) Q s^<span class="number">4</span>)/w + ((<span class="number">1</span> - k^<span class="number">2</span> + </span><br><span class="line">    <span class="number">2</span> Q^<span class="number">2</span>) s^<span class="number">2</span> w)/Q + <span class="number">2</span> s w^<span class="number">2</span> + Q w^<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Solution of poles *)</span></span><br><span class="line"><span class="keyword">Collect</span>[<span class="keyword">Denominator</span>[Zt2]/<span class="keyword">Sqrt</span>[((R1 R2)/(Q1 Q2 w1 w2))], s]</span><br><span class="line"><span class="keyword">Solve</span>[(<span class="number">1</span> - k^<span class="number">2</span>) Q1 Q2 s^<span class="number">4</span> + s^<span class="number">2</span> (Q1 Q2 (w1^<span class="number">2</span> + w2^<span class="number">2</span>)) + Q1 Q2 w1^<span class="number">2</span> w2^<span class="number">2</span> == <span class="number">0</span>, s]</span><br></pre></td></tr></table></figure>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li>H. Jia, C. C. Prawoto, B. Chi, Z. Wang and C. P. Yue, &quot;A Full Ka-Band Power Amplifier With 32.9% PAE and 15.3-dBm Power in 65-nm CMOS,&quot; in <em>IEEE Transactions on Circuits and Systems I: Regular Papers</em>, vol. 65, no. 9, pp. 2657-2668, Sept. 2018. DOI: <a href="https://doi.org/10.1109/TCSI.2018.2799983" target="_blank" rel="noopener">10.1109/TCSI.2018.2799983</a></li>
 <li>M. Vigilante, P. Reynaert, 5G and E-Band Communication Circuits in Deep-Scaled CMOS. Switzerland: Springer, 2018. DOI: <a href="https://doi.org/10.1007/978-3-319-72646-5" target="_blank" rel="noopener">10.1007/978-3-319-72646-5</a></li>
@@ -431,6 +440,13 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
     <li class="popular-posts-item">
       
       
+      <div class="popular-posts-title"><a href="\archives\eff29f15\current-mirror-and-bandgap.html" rel="bookmark">Current Mirror and Bandgap</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
       <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
       
     </li>
@@ -439,13 +455,6 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
       
       
       <div class="popular-posts-title"><a href="\archives\b4b2824b\feedback-system-analysis.html" rel="bookmark">Feedback System Analysis</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\eff29f15\current-mirror-and-bandgap.html" rel="bookmark">Current Mirror and Bandgap</a></div>
       
     </li>
   
@@ -559,7 +568,7 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Haikun-Jia的推导"><span class="nav-number">1.</span> <span class="nav-text">Haikun Jia的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Marco-Vigilante的推导"><span class="nav-number">2.</span> <span class="nav-text">Marco Vigilante的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Haikun-Jia的推导"><span class="nav-number">1.</span> <span class="nav-text">Haikun Jia的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Marco-Vigilante的推导"><span class="nav-number">2.</span> <span class="nav-text">Marco Vigilante的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-number">4.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#针对Haikun-Jia的Mathematica推导"><span class="nav-number">4.1.</span> <span class="nav-text">针对Haikun Jia的Mathematica推导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
           </div>
         
       </div>
@@ -568,6 +577,9 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
   <p class="site-author-name" itemprop="name">Triblemany</p>
   <div class="site-description motion-element" itemprop="description"></div>
 </div>
@@ -668,7 +680,7 @@ Z_{21}=\frac{\omega^3kQRs}{(Qs^2+\omega s+Q(1+k)\omega^2)(Qs^2+\omega s+Q(1-k)\o
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">164k</span>
+    <span title="Symbols count total">170k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
