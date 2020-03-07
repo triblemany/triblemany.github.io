@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This article will cover   Calculation of Z and Y parameters of coupled transmission line. Different configuration of the coupled transmission line used as two-port network. Conversion between the stan">
+<meta name="keywords" content="RFIC,Transmission Line">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coupled Transmission Line and Its Applications">
+<meta property="og:url" content="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="This article will cover   Calculation of Z and Y parameters of coupled transmission line. Different configuration of the coupled transmission line used as two-port network. Conversion between the stan">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line/coupled-transmission-line.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line/two-port-configuration.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line/4-port-s-parameter.png">
+<meta property="og:updated_time" content="2020-03-07T14:26:47.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Coupled Transmission Line and Its Applications">
+<meta name="twitter:description" content="This article will cover   Calculation of Z and Y parameters of coupled transmission line. Different configuration of the coupled transmission line used as two-port network. Conversion between the stan">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line/coupled-transmission-line.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Coupled Transmission Line and Its Applications | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Coupled Transmission Line and Its Applications
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-02-23 20:08:36" itemprop="dateCreated datePublished" datetime="2020-02-23T20:08:36+08:00">2020-02-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 22:26:47" itemprop="dateModified" datetime="2020-03-07T22:26:47+08:00">2020-03-07</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>10k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This article will cover </p>
+<ul>
+<li>Calculation of Z and Y parameters of coupled transmission line.</li>
+<li>Different configuration of the coupled transmission line used as two-port network.</li>
+<li>Conversion between the standard S parameter and the mixed-mode S parameter.</li>
+</ul>
+<a id="more"></a>
+<h2 id="Coupled-Transmission-Line-Formulation"><a href="#Coupled-Transmission-Line-Formulation" class="headerlink" title="Coupled Transmission Line Formulation"></a>Coupled Transmission Line Formulation</h2><p>The Z parameter of a lossless transmission line is:</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=
+\left[
+\begin{matrix}
+-jZ_0\cot\theta & -jZ_0\csc\theta\\
+-jZ_0\csc\theta & -jZ_0\cot\theta \\
+\end{matrix}
+\right]</script><p>where $\theta=\beta l$ and $Z_0$ is the characteristic impedance.</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1"></a>Method 1</h3><p>The schematic used for analysis is</p>
+<p><img src="coupled-transmission-line/coupled-transmission-line.png" alt="Coupled Transmission Line"></p>
+<script type="math/tex; mode=display">
+v_a^1(0)=(-jZ_{0e}\cot\theta)i_1\\
+v_a^3(0)=(-jZ_{0e}\csc\theta)i_3\\
+v_a^2(0)=(-jZ_{0o}\cot\theta)i_2\\
+v_a^4(0)=(-jZ_{0o}\csc\theta)i_4\\
+V_1=v_a^1(0)+v_a^2(0)+v_a^3(0)+v_a^4(0)</script><p>where $v_a^1(0)$ represent the voltage induced by current $i_1$ at position 0 of conductor a. The current relation between the normal and the mixed-mode is:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+i_1 &= \frac{1}{2} (I_1 + I_2) \\
+i_2 &= \frac{1}{2} (I_1 - I_2) \\
+i_3 &= \frac{1}{2} (I_3 + I_4) \\
+i_4 &= \frac{1}{2} (I_4 - I_3)
+\end{align}</script><p>Combine two equations, we have</p>
+<script type="math/tex; mode=display">
+\begin{align}
+V_1 &= \frac{-j}{2}(Z_{0e}I_1+Z_{0e}I_2+Z_{0o}I_1-Z_{0o}I_2)\cot\theta\\
+&= \frac{-j}{2}(Z_{0e}I_3+Z_{0e}I_4+Z_{0o}I_3-Z_{0o}I_4)\csc\theta
+\end{align}</script><p>Symmetry can be used to derive other parameters.</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method 2"></a>Method 2</h3><p>The mixed-mode S parameter of the coupled transmission line can be written as:</p>
+<script type="math/tex; mode=display">
+\mathbf{Z^{mm}}=
+\left[
+\begin{matrix}
+-j2Z_{0o}\cot\theta & -j2Z_{0o}\csc\theta & {0} & {0} \\
+-j2Z_{0o}\csc\theta & -j2Z_{0o}\cot\theta & {0} & {0} \\
+{0} & {0} & \frac{-jZ_{0e}\cot\theta}{2} & \frac{-jZ_{0e}\csc\theta}{2} \\
+{0} & {0} & \frac{-jZ_{0e}\cot\theta}{2} & \frac{-jZ_{0e}\csc\theta}{2}
+\end{matrix}
+\right]</script><p>Because the line is TEM, the propagation constant and phase velocity are the same for both of these modes $v_p=\omega/\beta=1/\sqrt{L_eC_e}=1/\sqrt{L_oC_o}$.</p>
+<p>With the conversion formula listed in Appendix, we may write the standard S parameter as:</p>
+<script type="math/tex; mode=display">
+\mathbf{Z^{std}}=-j\left[
+\begin{matrix}
+Z_p\cot\theta & Z_m\cot\theta & Z_m\csc\theta & Z_p\csc\theta \\
+
+Z_m\cot\theta & Z_p\cot\theta & Z_p\csc\theta & Z_m\csc\theta \\
+
+Z_m\csc\theta & Z_p\csc\theta & Z_p\cot\theta & Z_m\cot\theta \\
+
+Z_p\csc\theta & Z_m\csc\theta & Z_m\cot\theta & Z_p\cot\theta
+\end{matrix}
+\right]</script><p>where $Z_p=(Z_{0e}+Z_{0o})/2,Z_m=(Z_{0e}-Z_{0o})/2$. Note that the port definition of port 3 and port 4 are opposite in Appendix and the aforementioned analysis. To make the conclusion compatible, the transformation is modified as</p>
+<script type="math/tex; mode=display">
+\mathbf{Z^{std}}=\mathbf{T}\mathbf{M}^{H}\mathbf{Z^{mm}}\mathbf{M}\mathbf{T}\\
+\mathbf{T}=\left[
+\begin{matrix}
+{1} & {0} & {0} & {0} \\
+{0} & {1} & {0} & {0} \\
+{0} & {0} & {0} & {1} \\
+{0} & {0} & {1} & {0}
+\end{matrix}
+\right]</script><p>The additional matrix $\mathbf{T}$ is used to swap port sequence.</p>
+<p>The Y parameter can be expressed as</p>
+<script type="math/tex; mode=display">
+\mathbf{Y}=-j\left[
+\begin{matrix}
+{Y_p\cot\theta} & {-Y_m\cot\theta} & {Y_m\csc\theta} & {-Y_p\csc\theta} \\
+{-Y_m\cot\theta} & {Y_p\cot\theta} & {-Y_p\csc\theta} & {Y_m\csc\theta} \\
+{Y_m\csc\theta} & {-Y_p\csc\theta} & {Y_p\cot\theta} & {-Y_m\cot\theta} \\
+{-Y_p\csc\theta} & {Y_m\csc\theta} & {-Y_m\cot\theta} & {Y_p\cot\theta}
+\end{matrix}
+\right]</script><p>where $Y_p=(Y_{0o}+Y_{0e})/2,Y_m=(Y_{0o}-Y_{0e})/2$.</p>
+<h2 id="Two-Port-Configuration"><a href="#Two-Port-Configuration" class="headerlink" title="Two-Port Configuration"></a>Two-Port Configuration</h2><p><img src="coupled-transmission-line/two-port-configuration.png" alt="Two-Port Configuration"></p>
+<h3 id="Type-3"><a href="#Type-3" class="headerlink" title="Type 3"></a>Type 3</h3><p>Port 2 open</p>
+<p>Port 4 open</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=
+\left[
+\begin{matrix}
+-\frac{j}{2}(Z_{0e}+Z_{0o})\cot\theta & -\frac{j}{2}(Z_{0e}-Z_{0o})\csc\theta\\
+-\frac{j}{2}(Z_{0e}-Z_{0o})\csc\theta & -\frac{j}{2}(Z_{0e}+Z_{0o})\cot\theta \\
+\end{matrix}
+\right]</script><h3 id="Type-5"><a href="#Type-5" class="headerlink" title="Type 5"></a>Type 5</h3><p>Port 2 open</p>
+<p>Port 3 open</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=\frac{Z_{0e}+Z_{0o}}{2}
+\left[
+\begin{matrix}
+-j\cot\theta & -j\csc\theta\\
+-j\csc\theta & -j\cot\theta \\
+\end{matrix}
+\right]</script><h3 id="Type-6"><a href="#Type-6" class="headerlink" title="Type 6"></a>Type 6</h3><p>Port 2 short</p>
+<p>Port 3 short</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=\frac{2Z_{0e}Z_{0o}}{Z_{0e}+Z_{0o}}
+\left[
+\begin{matrix}
+-j\cot\theta & -j\csc\theta\\
+-j\csc\theta & -j\cot\theta \\
+\end{matrix}
+\right]</script><h3 id="Type-7"><a href="#Type-7" class="headerlink" title="Type 7"></a>Type 7</h3><p>Port 2-3 connected</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=-\frac{j}{2}\csc\theta \sec\theta\left[
+\begin{matrix}
+Z_p\cos 2\theta +Z_m & Z_m\cos 2\theta +Z_p \\
+Z_m\cos 2\theta +Z_p & Z_p\cos 2\theta +Z_m \\
+\end{matrix}
+\right]</script><h3 id="Type-8"><a href="#Type-8" class="headerlink" title="Type 8"></a>Type 8</h3><p>Port 2 short</p>
+<p>Port 4 open</p>
+<script type="math/tex; mode=display">
+\mathbf{Z}=
+\left[
+\begin{matrix}
+-2j\frac{Z_{0e}Z_{0o}\cot\theta}{Z_{0e}+Z_{0o}} & 0\\
+0 & \frac{j}{2}(Z_{0e}+Z_{0o})\tan\theta \\
+\end{matrix}
+\right]</script><p>It is an all-stop filter. An intuitive understanding is that when applied at the input, the signal is divided to the through and coupled ports, got reflected at these ports with open/short terminations, and out-of-phase combined at the isolation port, resulting in zero transmissions at all frequencies.</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="Conversion-Between-the-Standard-S-Parameter-and-Mixed-Mode-S-Parameter"><a href="#Conversion-Between-the-Standard-S-Parameter-and-Mixed-Mode-S-Parameter" class="headerlink" title="Conversion Between the Standard S Parameter and Mixed-Mode S Parameter"></a>Conversion Between the Standard S Parameter and Mixed-Mode S Parameter</h3><p>Numbering of the ports is as follows:</p>
+<p><img src="coupled-transmission-line/4-port-s-parameter.png" alt="4 port S parameter"></p>
+<p>The standard S parameter ($\mathbf{S^{std}}$) is</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+{b_{1}} \\ {b_{2}} \\ {b_{3}} \\ {b_{4}}
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{S_{11}} & {S_{12}} & {S_{13}} & {S_{14}} \\
+{S_{21}} & {S_{22}} & {S_{23}} & {S_{24}} \\
+{S_{31}} & {S_{32}} & {S_{33}} & {S_{34}} \\
+{S_{41}} & {S_{42}} & {S_{43}} & {S_{44}}
+\end{matrix}
+\right]
+
+\left[
+\begin{matrix}
+{a_{1}} \\ {a_{2}} \\ {a_{3}} \\ {a_{4}}
+\end{matrix}
+\right]</script><p>The mixed-mode S parameter ($\mathbf{S^{mm}}$) is:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\left[
+\begin{matrix}
+{b_{d1}} \\ {b_{d2}} \\ {b_{c1}} \\ {b_{c2}}
+\end{matrix}
+\right]
+&=
+\left[
+\begin{matrix}
+\mathbf{S_{dd}} & \mathbf{S_{dc}} \\
+\mathbf{S_{cd}} & \mathbf{S_{cc}}
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+{a_{d1}} \\ {a_{d2}} \\ {a_{c1}} \\ {a_{c2}}
+\end{matrix}
+\right]\\
+&=
+\left[
+\begin{matrix}
+{S_{dd11}} & {S_{dd12}} & {S_{dc11}} & {S_{dc12}} \\
+{S_{dd21}} & {S_{dd22}} & {S_{dc21}} & {S_{dc22}} \\
+{S_{cd11}} & {S_{cd12}} & {S_{cc11}} & {S_{cc12}} \\
+{S_{cd21}} & {S_{cd22}} & {S_{cc21}} & {S_{cc22}}
+\end{matrix}
+\right]
+
+\left[
+\begin{matrix}
+{a_{d1}} \\ {a_{d2}} \\ {a_{c1}} \\ {a_{c2}}
+\end{matrix}
+\right]
+\end{aligned}</script><p>The relationship between the two is:</p>
+<script type="math/tex; mode=display">
+\mathbf{S^{mm}}=\mathbf{M}\mathbf{S^{std}}\mathbf{M}^{H}\\
+\mathbf{M}=\frac{1}{\sqrt{2}}
+\left[
+\begin{matrix}
+{1} & {-1} & {0} & {0} \\
+{0} & {0} & {1} & {-1} \\
+{1} & {1} & {0} & {0} \\
+{0} & {0} & {1} & {1}
+\end{matrix}
+\right]\\
+\mathbf{M}\mathbf{M}^{H}=\mathbf{I}</script><h3 id="Conversion-Between-the-Standard-Z-Parameter-and-Mixed-Mode-Z-Parameter"><a href="#Conversion-Between-the-Standard-Z-Parameter-and-Mixed-Mode-Z-Parameter" class="headerlink" title="Conversion Between the Standard Z Parameter and Mixed-Mode Z Parameter"></a>Conversion Between the Standard Z Parameter and Mixed-Mode Z Parameter</h3><p>For the full circuit, we may write</p>
+<script type="math/tex; mode=display">
+v_d=v_1-v_2\\
+i_d=\frac{1}{2}(i_1-i_2)\\
+v_c=\frac{1}{2}(v_1+v_2)\\
+i_c=i_1+i_2</script><p>This is different from the half circuit analysis. The above equations can be put into matrix form.</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+{I_{d1}} \\ {I_{d2}} \\ {I_{c1}} \\ {I_{c2}}
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{1/2} & {-1/2} & {0} & {0} \\
+{0} & {0} & {1/2} & {-1/2}\\
+{1} & {1} & {0} & {0} \\
+{0} & {0} & {1} & {1} 
+\end{matrix}
+\right]
+
+\left[
+\begin{matrix}
+{I_{1}} \\ {I_{2}} \\ {I_{3}} \\ {I_{4}}
+\end{matrix}
+\right]
+
+\\
+
+\left[
+\begin{matrix}
+{U_{d1}} \\ {U_{d2}} \\ {U_{c1}} \\ {U_{c2}}
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{1} & {-1} & {0} & {0} \\
+{0} & {0} & {1} & {-1}\\
+{1/2} & {1/2} & {0} & {0} \\
+{0} & {0} & {1/2} & {1/2} 
+\end{matrix}
+\right]
+
+\left[
+\begin{matrix}
+{U_{1}} \\ {U_{2}} \\ {U_{3}} \\ {U_{4}}
+\end{matrix}
+\right]</script><p>which leads to</p>
+<script type="math/tex; mode=display">
+\mathbf{Z^{std}}=\mathbf{M}^{H}\mathbf{Z^{mm}}\mathbf{M}\\
+\mathbf{M}=\left[
+\begin{matrix}
+{1/2} & {-1/2} & {0} & {0} \\
+{0} & {0} & {1/2} & {-1/2}\\
+{1} & {1} & {0} & {0} \\
+{0} & {0} & {1} & {1} 
+\end{matrix}
+\right]</script><p>Instead if half circuit is used, we have</p>
+<script type="math/tex; mode=display">
+v_o=\frac{1}{2}(v_1-v_2)\\
+i_o=\frac{1}{2}(i_1-i_2)\\
+v_e=\frac{1}{2}(v_1+v_2)\\
+i_e=\frac{1}{2}(i_1+i_2)</script><p>The result is modified to be the same as the S parameter.</p>
+<h3 id="Mathematica-Derivation"><a href="#Mathematica-Derivation" class="headerlink" title="Mathematica Derivation"></a>Mathematica Derivation</h3><p>Calculation of standard S parameter</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Zmm = ( &#123;</span><br><span class="line">    &#123;<span class="number">-2</span> I Zo <span class="keyword">Cot</span>[t], <span class="number">-2</span> I Zo <span class="keyword">Csc</span>[t], <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">-2</span> I Zo <span class="keyword">Csc</span>[t], <span class="number">-2</span> I Zo <span class="keyword">Cot</span>[t], <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, -I/<span class="number">2</span> Ze <span class="keyword">Cot</span>[t], -I/<span class="number">2</span> Ze <span class="keyword">Csc</span>[t]&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, -I/<span class="number">2</span> Ze <span class="keyword">Csc</span>[t], -I/<span class="number">2</span> Ze <span class="keyword">Cot</span>[t]&#125;</span><br><span class="line">   &#125; );</span><br><span class="line">M = (&#123;</span><br><span class="line">    &#123;<span class="number">1</span>/<span class="number">2</span>, <span class="number">-1</span>/<span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>/<span class="number">2</span>, <span class="number">-1</span>/<span class="number">2</span>&#125;,</span><br><span class="line">    &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>&#125;</span><br><span class="line">   &#125;);</span><br><span class="line">T = ( &#123;</span><br><span class="line">    &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;</span><br><span class="line">   &#125; );</span><br><span class="line">Zstd = T.<span class="keyword">Transpose</span>[M].Zmm.M.T // <span class="keyword">MatrixForm</span></span><br></pre></td></tr></table></figure>
+<p>Derivation of type 6</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">St = ( &#123;</span><br><span class="line">   &#123;a, d, b, c&#125;,</span><br><span class="line">   &#123;d, a, c, b&#125;,</span><br><span class="line">   &#123;b, c, a, d&#125;,</span><br><span class="line">   &#123;c, b, d, a&#125;</span><br><span class="line">  &#125; ); y = ( &#123;</span><br><span class="line">   &#123;V1&#125;,</span><br><span class="line">   &#123;V2&#125;,</span><br><span class="line">   &#123;V3&#125;,</span><br><span class="line">   &#123;V4&#125;</span><br><span class="line">  &#125; ); x = ( &#123;</span><br><span class="line">   &#123;I1&#125;,</span><br><span class="line">   &#123;I2&#125;,</span><br><span class="line">   &#123;I3&#125;,</span><br><span class="line">   &#123;I4&#125;</span><br><span class="line">  &#125; );</span><br><span class="line">result = <span class="keyword">Solve</span>[(y /. &#123;V2 -&gt; <span class="number">0</span>, V3 -&gt; <span class="number">0</span>&#125;) == St.x, &#123;V1, I2, I3, V4&#125;][[<span class="number">1</span>]];</span><br><span class="line">Y = <span class="keyword">Simplify</span>[( &#123;</span><br><span class="line">      &#123;<span class="keyword">Coefficient</span>[V1 /. result, I1], <span class="keyword">Coefficient</span>[V1 /. result, I4]&#125;,</span><br><span class="line">      &#123;<span class="keyword">Coefficient</span>[V4 /. result, I1], <span class="keyword">Coefficient</span>[V4 /. result, I4]&#125;</span><br><span class="line">     &#125; ) /. &#123;a -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Cot</span>[t] - <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Cot</span>[t], </span><br><span class="line">     b -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Csc</span>[t] + <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Csc</span>[t], </span><br><span class="line">     c -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Csc</span>[t] - <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Csc</span>[t], </span><br><span class="line">     d -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Cot</span>[t] + <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Cot</span>[t]&#125;];</span><br></pre></td></tr></table></figure>
+<p>Derivation of type 7</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">St = ( &#123;</span><br><span class="line">   &#123;a, d, b, c&#125;,</span><br><span class="line">   &#123;d, a, c, b&#125;,</span><br><span class="line">   &#123;b, c, a, d&#125;,</span><br><span class="line">   &#123;c, b, d, a&#125;</span><br><span class="line">  &#125; ); y = ( &#123;</span><br><span class="line">   &#123;V1&#125;,</span><br><span class="line">   &#123;V2&#125;,</span><br><span class="line">   &#123;V3&#125;,</span><br><span class="line">   &#123;V4&#125;</span><br><span class="line">  &#125; ); x = ( &#123;</span><br><span class="line">   &#123;I1&#125;,</span><br><span class="line">   &#123;I2&#125;,</span><br><span class="line">   &#123;I3&#125;,</span><br><span class="line">   &#123;I4&#125;</span><br><span class="line">  &#125; );</span><br><span class="line">result = <span class="keyword">Solve</span>[(y /. &#123;V4 -&gt; V3&#125;) == (St.x /. I4 -&gt; -I3), &#123;V1, V2, I3, </span><br><span class="line">   V3&#125;];</span><br><span class="line">Y = <span class="keyword">Simplify</span>[( &#123;</span><br><span class="line">      &#123;<span class="keyword">Coefficient</span>[(V1 /. result)[[<span class="number">1</span>]], I1], </span><br><span class="line">       <span class="keyword">Coefficient</span>[(V1 /. result)[[<span class="number">1</span>]], I2]&#125;,</span><br><span class="line">      &#123;<span class="keyword">Coefficient</span>[(V2 /. result)[[<span class="number">1</span>]], I1], </span><br><span class="line">       <span class="keyword">Coefficient</span>[(V2 /. result)[[<span class="number">1</span>]], I2]&#125;</span><br><span class="line">     &#125; ) /. &#123;a -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Cot</span>[t] - <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Cot</span>[t], </span><br><span class="line">     b -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Csc</span>[t] + <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Csc</span>[t], </span><br><span class="line">     c -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Csc</span>[t] - <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Csc</span>[t], </span><br><span class="line">     d -&gt; -(<span class="number">1</span>/<span class="number">2</span>) I Ze <span class="keyword">Cot</span>[t] + <span class="number">1</span>/<span class="number">2</span> I Zo <span class="keyword">Cot</span>[t]&#125;] ;</span><br><span class="line">Y // <span class="keyword">MatrixForm</span></span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>For the derivation of coupled transmission line, Wilkinson power divider, quadrature hybrid, refer to</p>
+<ul>
+<li>D. M. Pozar, <em>Microwave Engineering</em>. NJ, Hoboken: Wiley, 1998.</li>
+</ul>
+<p>For the conversion between the standard S parameter and mixed-mode S parameter, refer to</p>
+<ul>
+<li>W. R. Eisenstadt, B. Stengel and B. M. Thompson, <em>Microwave Differential Circuit Design Using Mixed-Mode S-Parameters</em>. Norwood: Artech House, 2006</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\c3975ee1\even-odd-mode-analysis.html" rel="bookmark">Even and Odd Mode Analysis</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\eff29f15\current-mirror-and-bandgap.html" rel="bookmark">Current Mirror and Bandgap</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/865ebedb/coupled-transmission-line.html" title="Coupled Transmission Line and Its Applications">https://triblemany.github.io/archives/865ebedb/coupled-transmission-line.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Transmission-Line/" rel="tag"># Transmission Line</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/706864ae/math-typesetting-in-latex.html" rel="next" title="Math Typesetting in Latex">
+                  <i class="fa fa-chevron-left"></i> Math Typesetting in Latex
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/archives/587faa75/network-parameter.html" rel="prev" title="Network Parameters in Circuit Analysis">
+                  Network Parameters in Circuit Analysis <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-Transmission-Line-Formulation"><span class="nav-number">1.</span> <span class="nav-text">Coupled Transmission Line Formulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-1"><span class="nav-number">1.1.</span> <span class="nav-text">Method 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Method-2"><span class="nav-number">1.2.</span> <span class="nav-text">Method 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-Port-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Two-Port Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-3"><span class="nav-number">2.1.</span> <span class="nav-text">Type 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-5"><span class="nav-number">2.2.</span> <span class="nav-text">Type 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-6"><span class="nav-number">2.3.</span> <span class="nav-text">Type 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-7"><span class="nav-number">2.4.</span> <span class="nav-text">Type 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-8"><span class="nav-number">2.5.</span> <span class="nav-text">Type 8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">3.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conversion-Between-the-Standard-S-Parameter-and-Mixed-Mode-S-Parameter"><span class="nav-number">3.1.</span> <span class="nav-text">Conversion Between the Standard S Parameter and Mixed-Mode S Parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conversion-Between-the-Standard-Z-Parameter-and-Mixed-Mode-Z-Parameter"><span class="nav-number">3.2.</span> <span class="nav-text">Conversion Between the Standard Z Parameter and Mixed-Mode Z Parameter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematica-Derivation"><span class="nav-number">3.3.</span> <span class="nav-text">Mathematica Derivation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">209k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/865ebedb/coupled-transmission-line.html";
+    this.page.identifier = "archives/865ebedb/coupled-transmission-line.html";
+    this.page.title = 'Coupled Transmission Line and Its Applications';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="Analysis in this section will derive S parameters directly.">
+<meta name="keywords" content="RFIC,Transmission Line">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Even and Odd Mode Analysis">
+<meta property="og:url" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="Analysis in this section will derive S parameters directly.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/wilkinson-power-divider.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/normalized-wilkinson-power-divider.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-odd-mode-analysis-of-wpd.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/quadrature-hybrid.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/normalized-schematic-of-the-quadrature-hybrid.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-odd-mode-analysis-of-the-hybrid.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/coupled-line-coupler.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-odd-mode-analysis-of-the-coupler.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/general-balun.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/s-parameter-of-the-general-balun.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/balun-analysis-with-virtual-port-4.gif">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/parameter-definition.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-mode-circuit.gif">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/odd-mode-circuit.gif">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/proof-of-marchand-balun.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/calculation-of-the-marchand-balun-y-parameter.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/impedance-inverting-balun.png">
+<meta property="og:updated_time" content="2020-03-07T14:26:47.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Even and Odd Mode Analysis">
+<meta name="twitter:description" content="Analysis in this section will derive S parameters directly.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/wilkinson-power-divider.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Even and Odd Mode Analysis | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Even and Odd Mode Analysis
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-03-06 12:18:10" itemprop="dateCreated datePublished" datetime="2020-03-06T12:18:10+08:00">2020-03-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-07 22:26:47" itemprop="dateModified" datetime="2020-03-07T22:26:47+08:00">2020-03-07</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>12k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Analysis in this section will derive S parameters directly.</p>
+<a id="more"></a>
+<h2 id="Wilkinson-Power-Divider"><a href="#Wilkinson-Power-Divider" class="headerlink" title="Wilkinson Power Divider"></a>Wilkinson Power Divider</h2><p><img src="even-odd-mode-analysis/wilkinson-power-divider.png" alt="Wilkinson power divider"></p>
+<p>It can be normalized as</p>
+<p><img src="even-odd-mode-analysis/normalized-wilkinson-power-divider.png" alt="Normalized Wilkinson power divider"></p>
+<p>It is assumed that for even mode $V_{g2}=V_{g3}=2V_0$, and for odd mode $V_{g2}=-V_{g3}=2V_0$.</p>
+<p>Apply even and odd mode analysis, where $Z=\sqrt{2},r=2$</p>
+<p><img src="even-odd-mode-analysis/even-odd-mode-analysis-of-wpd.png" alt="Even-odd mode analysis of WPD"></p>
+<p>For the <strong>even</strong> mode, the node 2 is matched, so $V_{2}^e=V_0$. By establishing transmission line equation, we have</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+V_1^e&=V(-\lambda/4)=jV^+(1-\Gamma)=V_0\\
+V_2^e&=V(0)=V^+(1+\Gamma)=jV_0\frac{\Gamma+1}{\Gamma-1}\\
+\Gamma&=\frac{2-\sqrt{2}}{2+\sqrt{2}}\\
+V_1^e&=-jV_0\sqrt{2}
+\end{aligned}</script><p>For the <strong>odd</strong> mode, the impedance seen to the left of the port 2 is 1, and the power is dissipated at the resistor. We have $V_1^o=0,V_2^o=V_0$.</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S_{11}&=0 &&Z_{in}=1\\
+S_{22}&=S_{33}=0 &&\text{ports 2-3 matched}\\
+S_{12}&=S_{21}=\frac{V_1^e+V_1^o}{V_2^e+V_2^o}=-j/\sqrt{2} &&\text{symmetry due to reciprocity}\\
+S_{13}&=S_{13}=-j/\sqrt{2} &&\text{symmetry of port 2-3}\\
+S_{23}&=S_{32}=0 &&\text{short or open at bisection}\\
+\end{aligned}</script><h2 id="Quadrature-90◦-Hybrid"><a href="#Quadrature-90◦-Hybrid" class="headerlink" title="Quadrature (90◦) Hybrid"></a>Quadrature (90◦) Hybrid</h2><p><img src="even-odd-mode-analysis/quadrature-hybrid.png" alt="Quadrature hybrid"></p>
+<p>S parameter is</p>
+<script type="math/tex; mode=display">
+\mathbf{S}=\frac{-1}{\sqrt{2}}\left[
+\begin{matrix}
+{0} & {j} & {1} & {0} \\
+{j} & {0} & {0} & {1} \\
+{1} & {0} & {0} & {j} \\
+{0} & {1} & {j} & {0}
+\end{matrix}
+\right]</script><p>Calculation is detailed as follows. It can be normalized as</p>
+<p><img src="even-odd-mode-analysis/normalized-schematic-of-the-quadrature-hybrid.png" alt="Normalized schematic of the quadrature hybrid"></p>
+<p>Apply even and odd mode analysis</p>
+<p><img src="even-odd-mode-analysis/even-odd-mode-analysis-of-the-hybrid.png" alt="Even-odd mode analysis of the hybrid"></p>
+<p>For the <strong>even</strong> mode, we have</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+A & B \\
+C & D
+\end{matrix}
+\right]_e=
+\left[
+\begin{matrix}
+1 & 0 \\
+j & 1
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+0 & j/\sqrt{2} \\
+j\sqrt{2} & 0
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+1 & 0 \\
+j & 1
+\end{matrix}
+\right]=
+\frac{1}{\sqrt{2}}
+\left[
+\begin{matrix}
+-1 & j \\
+j & -1
+\end{matrix}
+\right]</script><p>and thus</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Gamma_e&=\frac{A+B-C-D}{A+B+C+D}=0\\
+T_e&=\frac{2}{A+B+C+D}=\frac{1}{\sqrt{2}}(-1-j)
+\end{aligned}</script><p>For the <strong>odd</strong> mode, we have</p>
+<script type="math/tex; mode=display">
+\left[\begin{matrix}A & B \\C & D\end{matrix}\right]_o=\left[\begin{matrix}1 & 0 \\-j & 1\end{matrix}\right]\left[\begin{matrix}0 & j/\sqrt{2} \\j\sqrt{2} & 0\end{matrix}\right]\left[\begin{matrix}1 & 0 \\-j & 1\end{matrix}\right]=\frac{1}{\sqrt{2}}\left[\begin{matrix}1 & j \\j & 1\end{matrix}\right]</script><p>and thus</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Gamma_o&=\frac{A+B-C-D}{A+B+C+D}=0\\
+T_o&=\frac{2}{A+B+C+D}=\frac{1}{\sqrt{2}}(1-j)
+\end{aligned}</script><p>Suppose a unit wave of $A_1=1$ presents at port 1, it can be decomposed as $A_o=1/2, A_e=1/2$, and thus</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+B_1&=\frac{1}{2}\Gamma_e+\frac{1}{2}\Gamma_o=0\\
+B_2&=\frac{1}{2}T_e+\frac{1}{2}T_o=-\frac{j}{\sqrt{2}}\\
+B_3&=\frac{1}{2}T_e-\frac{1}{2}T_o=-\frac{1}{\sqrt{2}}\\
+B_4&=\frac{1}{2}\Gamma_e-\frac{1}{2}\Gamma_o=0
+\end{aligned}</script><p>Other ports can be calculated similarly.</p>
+<h2 id="Coupled-Line-Coupler"><a href="#Coupled-Line-Coupler" class="headerlink" title="Coupled Line Coupler"></a>Coupled Line Coupler</h2><p><img src="even-odd-mode-analysis/coupled-line-coupler.png" alt="Coupled line coupler"></p>
+<p>Its equivalent even-odd mode circuit is</p>
+<p><img src="even-odd-mode-analysis/even-odd-mode-analysis-of-the-coupler.png" alt="Even-odd mode analysis of the coupler"></p>
+<p>It can be observed that</p>
+<script type="math/tex; mode=display">
+\begin{aligned}V_1^o &= V_0\frac{Z_{in}^o}{Z_{in}^o+Z_0}\\V_1^e &= V_0\frac{Z_{in}^e}{Z_{in}^e+Z_0}\\I_1^o &= \frac{V_0}{Z_{in}^o+Z_0}\\I_1^e &= \frac{V_0}{Z_{in}^e+Z_0}\\Z_{in} &= \frac{V_1^o+V_1^e}{I_1^o+I_1^e}\\    &= Z_0+\frac{2(Z_{in}^oZ_{in}^e-Z_0^2)}{Z_{in}^o+Z_{in}^e+2Z_0}\end{aligned}</script><p>If we further assume that $Z_0=\sqrt{Z_{0o}Z_{0e}}$, the input impedance is</p>
+<script type="math/tex; mode=display">
+\begin{aligned}Z_{in}^o &= Z_{0o}\frac{Z_0+jZ_{0o}\tan\theta}{Z_{0o}+jZ_0\tan\theta}\\    &=Z_{0o}\frac{\sqrt{Z_{0e}}+j\sqrt{Z_{0o}}\tan\theta}{\sqrt{Z_{0o}}+j\sqrt{Z_{0e}}\tan\theta}\\Z_{in}^e &= Z_{0e}\frac{Z_0+jZ_{0e}\tan\theta}{Z_{0e}+jZ_0\tan\theta}\\    &=Z_{0e}\frac{\sqrt{Z_{0o}}+j\sqrt{Z_{0e}}\tan\theta}{\sqrt{Z_{0e}}+j\sqrt{Z_{0o}}\tan\theta}\\\end{aligned}</script><p>It follows that $Z_{in}^eZ_{in}^o=Z_{0e}Z_{0o}=Z_0^2$, and $Z_{in}=Z_0$. Hence, all ports will be matched. Voltage at the ports can be written as</p>
+<script type="math/tex; mode=display">
+\begin{aligned}V_3 &=V_1^e-V_1^o\\&= V_0\frac{j(Z_{0e}-Z_{0o})\tan{\theta}}{2Z_0+j(Z_{0e}+Z_{0o})\tan{\theta}}\\\end{aligned}</script><p>Assume that</p>
+<script type="math/tex; mode=display">
+C=\frac{Z_{0e}-Z_{0o}}{Z_{0e}+Z_{0o}}</script><p>Several inferences are</p>
+<script type="math/tex; mode=display">
+\sqrt{1-C^2}=2Z_0/(Z_{0e}+Z_{0o})\\
+Z_{0e}=Z_0\sqrt{\frac{1+C}{1-C}}\\
+Z_{0o}=Z_0\sqrt{\frac{1-C}{1+C}}</script><p>With these annotation, we may rewrite $V_3$ as</p>
+<script type="math/tex; mode=display">
+V_3=V_0\frac{jC\tan\theta}{\sqrt{1-C^2}+j\tan\theta}</script><p>$V_2, V_4$ are derived as follow.</p>
+<script type="math/tex; mode=display">
+\Gamma_e=\frac{Z_0-Z_{0e}}{Z_0+Z_{0e}}\\
+\Gamma_o=\frac{Z_0-Z_{0o}}{Z_0+Z_{0o}}\\
+V_2^e=V_1^e\frac{1+\Gamma_e}{e^{j\theta}+\Gamma_e e^{-j\theta}}\\
+V_2^o=V_1^e\frac{1+\Gamma_o}{e^{j\theta}+\Gamma_o e^{-j\theta}}</script><p>Those equations lead to</p>
+<script type="math/tex; mode=display">
+V_2=V_2^e+V_2^o=V_0\frac{\sqrt{1-C^2}}{\sqrt{1-C^2}\cos\theta+j\sin\theta}\\
+V_4=V_2^e-V_2^o=0</script><p>These results can be used to derive the S parameter.</p>
+<h2 id="Marchand-Balun"><a href="#Marchand-Balun" class="headerlink" title="Marchand Balun"></a>Marchand Balun</h2><h3 id="General-Balun"><a href="#General-Balun" class="headerlink" title="General Balun"></a>General Balun</h3><p><img src="even-odd-mode-analysis/general-balun.png" alt="General Balun"></p>
+<p>It is assumed that the general balun has the following properties:</p>
+<ul>
+<li>Single-ended port is matched ($S_{11}=0$).</li>
+<li>Differential ports are matched ($S_{22}=S_{23}=S_{32}=S_{33}$).</li>
+<li>The power present at the common port is evenly divided between the two differential ports with opposite polarity ($S_{21}=(1/\sqrt{2})e^{-j\theta},S_{31}=-(1/\sqrt{2})e^{-j\theta}$).</li>
+</ul>
+<p>To illustrate the second point, the following schematic is adopted.</p>
+<p><img src="even-odd-mode-analysis/s-parameter-of-the-general-balun.png" alt="S parameter of the general Balun"></p>
+<p>For differential excitation at the left side, we have $a_2=-a_3, b_2=b_3=0$. It follows that</p>
+<script type="math/tex; mode=display">
+0=b_2=S_{21}a_1+S_{22}a_2+S_{23}a_3=(S_{22}-S_{23})a_2</script><p>The relation between the source and the load reflection coefficients are</p>
+<script type="math/tex; mode=display">
+\Gamma_S=\frac{b_2}{a_2}=\frac{S_{12}a_1}{b_1/2S_{12}}=\Gamma_Le^{-2j\theta}</script><p>If $\theta=0/\pi$, we have $Z_S=(Z_{S0}/Z_{L0})Z_L$, which features an impedance scaling balun; if $\theta=\pm\pi/2$, we have $Z_S=(Z_{L0}/Z_{S0})(1/Z_L)$, which demonstrates an impedance inverting balun.</p>
+<h3 id="Requirement-of-Balun"><a href="#Requirement-of-Balun" class="headerlink" title="Requirement of Balun"></a>Requirement of Balun</h3><p>A variety of three-port balun, when adding an “invisible port 4,” are inherently symmetrical structures. The following structure is considered for analysis.</p>
+<p><img src="even-odd-mode-analysis/balun-analysis-with-virtual-port-4.gif" alt="Balun analysis with virtual port 4"></p>
+<p>When the differential and common excitation is applied.</p>
+<p><img src="even-odd-mode-analysis/parameter-definition.png" alt="Parameter definition"></p>
+<p>The mixed-mode S parameter can be obtained as</p>
+<script type="math/tex; mode=display">
+\mathbf{S^{mm}}=
+\left[
+\begin{matrix}
+{\Gamma_{o1}} & {T_{o2}} & {0} & {0} \\
+{T_{o1}} & {\Gamma_{o2}} & {0} & {0} \\
+{0} & {0} & {\Gamma_{e1}} & {T_{e2}} \\
+{0} & {0} & {T_{e1}} & {\Gamma_{e2}}
+\end{matrix}
+\right]</script><p>It can be converted to the standard S parameter as</p>
+<script type="math/tex; mode=display">
+\mathbf{S^{std}}=\frac{1}{2}
+\left[
+\begin{matrix}
+{\Gamma_{e1}+\Gamma_{o1}} & {\Gamma_{e1}-\Gamma_{o1}} & {T_{e2}+T_{o2}} & {T_{e2}-T_{o2}} \\
+{\Gamma_{e1}-\Gamma_{o1}} & {\Gamma_{e1}+\Gamma_{o1}} & {T_{e2}-T_{o2}} & {T_{e2}+T_{o2}} \\
+{T_{e2}+T_{o2}} & {T_{e2}-T_{o2}} & {\Gamma_{e2}+\Gamma_{o2}} & {\Gamma_{e2}-\Gamma_{o2}} \\
+{T_{e2}-T_{o2}} & {T_{e2}+T_{o2}} & {\Gamma_{e2}-\Gamma_{o2}} & {\Gamma_{e2}+\Gamma_{o2}}
+\end{matrix}
+\right]</script><p>Using Mason&#39;s formula, the 3-port S parameter with port 2 terminated with $\Gamma$ is</p>
+<script type="math/tex; mode=display">
+S_{21,new}=S_{31}+\frac{S_{32} S_{21} \Gamma}{1-S_{22}\Gamma}\\
+S_{31,new}=S_{41}+\frac{S_{42} S_{21} \Gamma}{1-S_{22}\Gamma}</script><p>It must satisfy</p>
+<script type="math/tex; mode=display">
+S_{21, new}=-S_{31, new}\\
+S_{11,new}=0</script><p>which lead us to</p>
+<script type="math/tex; mode=display">
+\frac{T_{e1}(1-\Gamma_{o1}\Gamma)}{2-\Gamma(\Gamma_{e1}+\Gamma_{o1})}=0\\
+\frac{\Gamma_{e1}+\Gamma_{o1}-2\Gamma_{e1}\Gamma_{o1}\Gamma}{2-\Gamma(\Gamma_{e1}+\Gamma_{o1})} = 0</script><p>Using the following even and odd mode definition, we have</p>
+<p><img src="even-odd-mode-analysis/even-mode-circuit.gif" alt="Even mode circuit"></p>
+<p><img src="even-odd-mode-analysis/odd-mode-circuit.gif" alt="Odd mode circuit"></p>
+<p>The reflection coefficient is</p>
+<script type="math/tex; mode=display">
+\Gamma_{e1}=\frac{Z_e-Z_{in}}{Z_e+Z_{in}}=\frac{Y_{in}-Y_e}{Y_{in}+Y_e}\\
+\Gamma_{o1}=\frac{Z_o-Z_{in}}{Z_o+Z_{in}}=\frac{Y_{in}-Y_o}{Y_{in}+Y_o}</script><p>It can be used to solve for the requirement of balun, as</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+T_{e1}=0&\\
+Y_e+Y_o=2Y_{in}&,\ \Gamma=-1\quad(\mathrm{short})\\
+\frac{1}{Y_e}+\frac{1}{Y_o}=\frac{2}{Y_{in}}&,\ \Gamma=1\quad(\mathrm{open})
+\end{aligned}</script><h3 id="Marchand-Balun-Formulation"><a href="#Marchand-Balun-Formulation" class="headerlink" title="Marchand Balun Formulation"></a>Marchand Balun Formulation</h3><p>To prove that Marchand balun is indeed a balun</p>
+<p><img src="even-odd-mode-analysis/proof-of-marchand-balun.png" alt="Proof of Marchand balun"></p>
+<p>we need to add a virtual port to facilitate decomposing into even-mode and odd-mode circuits. Note that for the even-mode circuit, the coupled line with short and open termination features an all-stop filter, so that the requirement $T_e=0$ is indeed satisfied. </p>
+<p><img src="even-odd-mode-analysis/calculation-of-the-marchand-balun-y-parameter.png" alt="Calculation of the Marchand balun Y parameter"></p>
+<p>which leads to</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+I_{pa}\\
+I_a\\
+I_b
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{-jY_p\cot(\theta)} & {jY_m\csc(\theta)/2} & {-jY_m\csc(\theta)/2} \\
+{jY_m\csc(\theta)} & {-jY_p\cot(2\theta)} & {jY_p\csc(2\theta)} \\
+{-jY_m\csc(\theta)} & {jY_p\csc(2\theta)} & {-jY_p\cot(2\theta)} 
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+V_{pa}\\
+V_a\\
+V_b
+\end{matrix}
+\right]</script><p>where  $Y_p=(Y_{0o}+Y_{0e})/2,Y_m=(Y_{0o}-Y_{0e})/2, Y_{0e}=1/Z_{0e}, Y_{0o}=1/Z_{0o}$.</p>
+<p>Since $V_b=0$, the third row and the third column can be eliminated. It follows that</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+I_{pa}\\
+I_L\\
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{-jY_p\cot(\theta)} & {jY_m\csc(\theta)/2}  \\
+{jY_m\csc(\theta)} & {-jY_p\cot(2\theta)} 
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+V_{pa}\\
+V_L\\
+\end{matrix}
+\right]</script><h3 id="Impedance-Inverting-Balun"><a href="#Impedance-Inverting-Balun" class="headerlink" title="Impedance Inverting Balun"></a>Impedance Inverting Balun</h3><p><img src="even-odd-mode-analysis/impedance-inverting-balun.png" alt="Impedance inverting balun"></p>
+<p>A capacitor is therefore required to resonate out the parasitic inductance. At the PA side, a capacitor is required as</p>
+<script type="math/tex; mode=display">
+Y_C=jY_p\cos(\theta)</script><p>which can absorb the parasitic capacitance of the PA output. As for the reactance at the load side</p>
+<script type="math/tex; mode=display">
+Y_{C_{Shunt}/L_{Shunt}}=jY_p\cos(2\theta)</script><p>In that case, the input impedance is</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+I_{pa}\\
+I_L\\
+\end{matrix}
+\right]
+=
+\left[
+\begin{matrix}
+{0} & {jY_m\csc(\theta)/2}  \\
+{jY_m\csc(\theta)} & {0} 
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+V_{pa}\\
+V_L\\
+\end{matrix}
+\right]</script><p>and the input impedance is</p>
+<script type="math/tex; mode=display">
+Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>Mathematica derivation of Y parameter of the Marchand balun</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* This is the Y parameter of the coupled transmission line *)</span></span><br><span class="line">Y = &#123;&#123;-I Yp <span class="keyword">Cot</span>[t], I Ym <span class="keyword">Cot</span>[t], -I Ym <span class="keyword">Csc</span>[t], </span><br><span class="line">    I Yp <span class="keyword">Csc</span>[t]&#125;, &#123;I Ym <span class="keyword">Cot</span>[t], -I Yp <span class="keyword">Cot</span>[t], </span><br><span class="line">    I Yp <span class="keyword">Csc</span>[t], -I Ym <span class="keyword">Csc</span>[t]&#125;, &#123;-I Ym <span class="keyword">Csc</span>[t], </span><br><span class="line">    I Yp <span class="keyword">Csc</span>[t], -I Yp <span class="keyword">Cot</span>[t], </span><br><span class="line">    I Ym <span class="keyword">Cot</span>[t]&#125;, &#123;I Yp <span class="keyword">Csc</span>[t], -I Ym <span class="keyword">Csc</span>[t], </span><br><span class="line">    I Ym <span class="keyword">Cot</span>[t], -I Yp <span class="keyword">Cot</span>[t]&#125;&#125;;</span><br><span class="line"><span class="comment">(* Set boundary conditions *)</span></span><br><span class="line">y1 = &#123;&#123;-Ipa&#125;, &#123;Ix&#125;, &#123;Ia&#125;, &#123;Ix1&#125;&#125;;</span><br><span class="line">x1 = &#123;&#123;-Vpa&#125;, &#123;Vx&#125;, &#123;Va&#125;, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line">y2 = &#123;&#123;Ipa&#125;, &#123;-Ix&#125;, &#123;Ib&#125;, &#123;Ix2&#125;&#125;;</span><br><span class="line">x2 = &#123;&#123;Vpa&#125;, &#123;Vx&#125;, &#123;Vb&#125;, &#123;<span class="number">0</span>&#125;&#125;;</span><br><span class="line"><span class="comment">(* Eliminate unnecessary variables *)</span></span><br><span class="line">R = <span class="keyword">Eliminate</span>[&#123;y1 == Y.x1, y2 == Y.x2&#125;, &#123;Vx, Ix, Ix1, Ix2&#125;];</span><br><span class="line"><span class="keyword">Solve</span>[R, &#123;Ipa, Ia, Ib&#125;]</span><br></pre></td></tr></table></figure>
+<p>Proof of the requirement of the balun</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Conversion to the standard S parameter *)</span></span><br><span class="line">M = <span class="number">1</span>/<span class="keyword">Sqrt</span>[<span class="number">2</span>] (&#123;</span><br><span class="line">     &#123;<span class="number">1</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">     &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">-1</span>&#125;,</span><br><span class="line">     &#123;<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">     &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">Smm = (&#123;</span><br><span class="line">    &#123;Go1, To2, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;To1, Go2, <span class="number">0</span>, <span class="number">0</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, Ge1, Te2&#125;,</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">0</span>, Te1, Ge2&#125;</span><br><span class="line">   &#125;);</span><br><span class="line">Snew = <span class="keyword">Simplify</span>[<span class="keyword">Inverse</span>[M].Smm.M];</span><br><span class="line"><span class="comment">(* Apply boundary conditions, and use Mason's formula to simplify it as 3-port S parameter *)</span></span><br><span class="line">S11 = Snew[[<span class="number">1</span>, <span class="number">1</span>]] + Snew[[<span class="number">1</span>, <span class="number">2</span>]] Snew[[<span class="number">2</span>, <span class="number">1</span>]] G/(<span class="number">1</span> - G Snew[[<span class="number">2</span>, <span class="number">2</span>]]);</span><br><span class="line">S21 = Snew[[<span class="number">3</span>, <span class="number">1</span>]] + Snew[[<span class="number">3</span>, <span class="number">2</span>]] Snew[[<span class="number">2</span>, <span class="number">1</span>]] G/(<span class="number">1</span> - G Snew[[<span class="number">2</span>, <span class="number">2</span>]]);</span><br><span class="line">S31 = Snew[[<span class="number">4</span>, <span class="number">1</span>]] + Snew[[<span class="number">4</span>, <span class="number">2</span>]] Snew[[<span class="number">2</span>, <span class="number">1</span>]] G/(<span class="number">1</span> - G Snew[[<span class="number">2</span>, <span class="number">2</span>]]);</span><br><span class="line"><span class="comment">(* Solve for the equivalent requirement of the balun *)</span></span><br><span class="line">R1 = <span class="keyword">Together</span>[S21 + S31];</span><br><span class="line">R2 = <span class="keyword">Together</span>[S11];</span><br><span class="line">rule = &#123;Ge1 -&gt; (Yin - Ye)/(Yin + Ye), Go1 -&gt; (Yin - Yo)/(Yin + Yo)&#125;;</span><br><span class="line"><span class="keyword">Reduce</span>[(R1 /. rule) == <span class="number">0</span> &amp;&amp; (R2 /. rule) == <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>For the derivation of coupled transmission line, Wilkinson power divider, quadrature hybrid, and coupled line coupled, refer to</p>
+<ul>
+<li>D. M. Pozar, <em>Microwave Engineering</em>. NJ, Hoboken: Wiley, 1998.</li>
+</ul>
+<p>For the theoretical analysis of balun, refer to</p>
+<ul>
+<li>K. S. Ang, Y. C. Leong and C. H. Lee, &quot;Analysis and design of miniaturized lumped-distributed impedance-transforming baluns,&quot; <em>IEEE Trans. Microw. Theory Techn.</em>, vol. 51, no. 3, pp. 1009-1017, March 2003, doi: <a href="https://doi.org/10.1109/TMTT.2003.808677" target="_blank" rel="noopener">10.1109/TMTT.2003.808677</a>.</li>
+<li>Y. C. Leong, K. S. Ang and C. H. Lee, &quot;A derivation of a class of 3-port baluns from symmetrical 4-port networks,&quot; <em>2002 IEEE MTT-S Int. Microw. Symp. Digest</em>, Seattle, WA, USA, 2002, pp. 1165-1168 vol.2, doi: <a href="https://doi.org/10.1109/MWSYM.2002.1011855" target="_blank" rel="noopener">10.1109/MWSYM.2002.1011855</a>.</li>
+</ul>
+<p>For the insightful analysis of coupled line balun, refer to</p>
+<ul>
+<li>H. T. Nguyen and H. Wang, &quot;A coupler-based differential mm-wave Doherty power amplifier with impedance inverting and scaling baluns,&quot; <em>IEEE J. Solid-State Circuits</em>, doi: <a href="https://doi.org/10.1109/JSSC.2020.2970708" target="_blank" rel="noopener">10.1109/JSSC.2020.2970708</a>.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\865ebedb\coupled-transmission-line.html" rel="bookmark">Coupled Transmission Line and Its Applications</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\eff29f15\current-mirror-and-bandgap.html" rel="bookmark">Current Mirror and Bandgap</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis.html" title="Even and Odd Mode Analysis">https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Transmission-Line/" rel="tag"># Transmission Line</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/587faa75/network-parameter.html" rel="next" title="Network Parameters in Circuit Analysis">
+                  <i class="fa fa-chevron-left"></i> Network Parameters in Circuit Analysis
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wilkinson-Power-Divider"><span class="nav-number">1.</span> <span class="nav-text">Wilkinson Power Divider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quadrature-90◦-Hybrid"><span class="nav-number">2.</span> <span class="nav-text">Quadrature (90◦) Hybrid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-Line-Coupler"><span class="nav-number">3.</span> <span class="nav-text">Coupled Line Coupler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Marchand-Balun"><span class="nav-number">4.</span> <span class="nav-text">Marchand Balun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Balun"><span class="nav-number">4.1.</span> <span class="nav-text">General Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirement-of-Balun"><span class="nav-number">4.2.</span> <span class="nav-text">Requirement of Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Marchand-Balun-Formulation"><span class="nav-number">4.3.</span> <span class="nav-text">Marchand Balun Formulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impedance-Inverting-Balun"><span class="nav-number">4.4.</span> <span class="nav-text">Impedance Inverting Balun</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">5.</span> <span class="nav-text">Appendix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">209k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis.html";
+    this.page.identifier = "archives/c3975ee1/even-odd-mode-analysis.html";
+    this.page.title = 'Even and Odd Mode Analysis';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
