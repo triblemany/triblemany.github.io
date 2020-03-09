@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This paper explains how to implemented distributed components (e.g., transmission line, balun, coupler) with lumped elements.">
+<meta name="keywords" content="RFIC,Circuit Theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lumped-Element Circuit">
+<meta property="og:url" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="This paper explains how to implemented distributed components (e.g., transmission line, balun, coupler) with lumped elements.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/ladder-network.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/pi-representation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/t-representation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/coupled-transmission-line.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/lumped-element-coupler.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/img.gif">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/lumped-wilkinson-power-divider.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/differential-inductor.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/differential-wilkinson-power-divider.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/pi-circuit-attenuator.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/t-circuit-attenuator.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/bridge-t-attenuator.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/direct-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/direct-differential-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/simplified-direct-differential-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/loose-layout-of-the-direct-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/coil-rotation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/compact-layout-of-the-direct-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/rotated-compact-layout-of-the-direct-quadrature-generation.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/transformer-based-hybrid.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/hybrid.png">
+<meta property="og:updated_time" content="2020-03-09T13:13:45.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lumped-Element Circuit">
+<meta name="twitter:description" content="This paper explains how to implemented distributed components (e.g., transmission line, balun, coupler) with lumped elements.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/ladder-network.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Lumped-Element Circuit | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Lumped-Element Circuit
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-03-08 10:48:09" itemprop="dateCreated datePublished" datetime="2020-03-08T10:48:09+08:00">2020-03-08</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-09 21:13:45" itemprop="dateModified" datetime="2020-03-09T21:13:45+08:00">2020-03-09</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>9.5k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This paper explains how to implemented distributed components (e.g., transmission line, balun, coupler) with lumped elements.</p>
+<a id="more"></a>
+<h2 id="Transmission-Line"><a href="#Transmission-Line" class="headerlink" title="Transmission Line"></a>Transmission Line</h2><h3 id="Cutoff-Frequency"><a href="#Cutoff-Frequency" class="headerlink" title="Cutoff Frequency"></a>Cutoff Frequency</h3><p><img src="lumped-element-circuit/ladder-network.png" alt="Ladder network"></p>
+<p>For an infinite ladder network shown above, the input impedance to the right of each nodes is the same (e.g., <strong><em>A, B, C</em></strong>). Therefore, we may write</p>
+<script type="math/tex; mode=display">
+Z_{in}=Z+[(1/Y)||Z_{in}]</script><p>Solution to the above equation is</p>
+<script type="math/tex; mode=display">
+Z_{in}=\frac{Z}{2}\left(1\pm\sqrt{1+\frac{4}{ZY}}\right)</script><p>Assuming a sufficiently small $|ZY|$, the above is simply</p>
+<script type="math/tex; mode=display">
+Z_{in}\approx\sqrt{Z/Y}</script><p>If $Z=sL,Y=sC$, we may note that the input impedance is purely real and act like a resistor. However, the transmission line of infinite length is made of purely reactive elements and does not dissipate power. The solution is that the energy keeps travelling along the line forever.</p>
+<p>Suppose that $Y=j\omega C,Z=j\omega L$, the exact input impedance is</p>
+<script type="math/tex; mode=display">
+Z_{in}=\frac{j\omega L}{2}\left(1\pm\sqrt{1-\frac{4}{\omega^2LC}}\right)</script><p>It is apparent that the term under the radical becomes positive above a frequency of</p>
+<script type="math/tex; mode=display">
+\omega_h=2/\sqrt{LC}</script><p>which makes the input impedance purely imaginary, and sets an upper bound of the artificial transmission line.</p>
+<h3 id="Equivalent-π-Representation"><a href="#Equivalent-π-Representation" class="headerlink" title="Equivalent-π Representation"></a>Equivalent-π Representation</h3><p><img src="lumped-element-circuit/pi-representation.png" alt="Pi representation"></p>
+<p>we have</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z&=Z_0{\sinh\gamma l}\\
+&=jZ_0\sin\theta\\
+Y&=\frac{1}{Z_0}\tanh(\gamma l/2)\\
+&=\frac{j}{Z_0}\tan(\theta/2)
+\end{aligned}</script><p>To synthesize a $\lambda/4$ transmission line, we need a inductor of $L=Z_0/\omega_0$ and capacitors of $C=1/(\omega_0Z_0)$. Alternatively, we may synthesize $3\lambda/4$ transmission line, the inductor and the capacitor may swap position.</p>
+<h3 id="Equivalent-T-Representation"><a href="#Equivalent-T-Representation" class="headerlink" title="Equivalent-T Representation"></a>Equivalent-T Representation</h3><p><img src="lumped-element-circuit/t-representation.png" alt="T representation"></p>
+<p>we have</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z&=Z_0{\tanh(\gamma l/2)}\\
+&=jZ_0\tan(\theta/2)\\
+Y&=\frac{1}{Z_0}\sinh(\gamma l)\\
+&=\frac{j}{Z_0}\sin(\theta)
+\end{aligned}</script><p>To synthesize a $\lambda/4$ transmission line, we need inductors of $Z_0/\omega_0$ and a capacitor of $1/(\omega_0Z_0)$.</p>
+<h2 id="Coupled-Transmission-Line"><a href="#Coupled-Transmission-Line" class="headerlink" title="Coupled Transmission Line"></a>Coupled Transmission Line</h2><h3 id="Transformer-based"><a href="#Transformer-based" class="headerlink" title="Transformer-based"></a>Transformer-based</h3><p><img src="lumped-element-circuit/coupled-transmission-line.png" alt="Coupled transmission line"></p>
+<p>Equating their respective parameters, we have</p>
+<script type="math/tex; mode=display">
+L=\frac{(Z_{0e}+Z_{0o})\sin\theta}{2\omega_0}\\
+M=\frac{(Z_{0e}-Z_{0o})\sin\theta}{2\omega_0}\\
+C_g=\frac{\tan(\theta/2)}{\omega_0Z_{0e}}\\
+C_c=\left(\frac{1}{Z_{0o}}-\frac{1}{Z_{0e}}\right)\frac{\tan(\theta/2)}{2\omega_0}</script><p>Define two coupling coefficient as</p>
+<script type="math/tex; mode=display">
+k_L=\frac{M}{L}=\frac{Z_{0e}-Z_{0o}}{Z_{0e}+Z_{0o}}\\
+k_C=\frac{C_c}{C_c+C_g}=\frac{C_c}{C}</script><p>Then, the even and odd mode characteristic and velocity can be written as</p>
+<script type="math/tex; mode=display">
+Z_{0e}=\sqrt{\frac{L(1+k_L)}{C(1-k_C)}}\\
+v_e=\frac{1}{\sqrt{L(1+k_L)C(1-k_C)}}\\
+Z_{0o}=\sqrt{\frac{L(1-k_L)}{C(1+k_C)}}\\
+v_o=\frac{1}{\sqrt{L(1-k_L)C(1+k_C)}}</script><p>For the desired transverse electromagnetic mode (TEM) propagation, the even-mode and odd-mode propagation velocities should equal to avoid dispersions. Therefore, we have $k_L=k_C$.</p>
+<p>If we want 3-dB power division, then $|k|=|-j\sqrt{1-k^2}|$, and thus $k\approx0.707$.</p>
+<p>A example of the lumped-element coupler is as follows:</p>
+<p><img src="lumped-element-circuit/lumped-element-coupler.png" alt="Lumped-element coupler"></p>
+<h2 id="Balun"><a href="#Balun" class="headerlink" title="Balun"></a>Balun</h2><h3 id="Lattice-type-LC-balun"><a href="#Lattice-type-LC-balun" class="headerlink" title="Lattice-type LC balun"></a>Lattice-type LC balun</h3><p>Schematic of the lattice-type LC balun is</p>
+<p><img src="lumped-element-circuit/img.gif" alt="Lattice-type LC balun"></p>
+<p>This circuit transforms the balanced input into an unbalanced output by shifting the phase of one input port by +90° and the second input port by −90° and vice versa. To act like a balun, it must have $T_e=0$, which translates to</p>
+<script type="math/tex; mode=display">
+\omega_0=\frac{1}{\sqrt{LC}}</script><p>In that case, we have $Y_e=0$. It is required, therefore, $Y_{odd}=2Y_{in}=2Y_1$. To calculate $Y_o$, we resort to the a differential load, with impedance of $Y_{out}=2R_L$. It can be proved that the input impedance $Z_{odd}$ is</p>
+<script type="math/tex; mode=display">
+Z_{odd}=\frac{1}{2R_L}\frac{L}{C}=\frac{R_1}{2}</script><p>Both equations lead to</p>
+<script type="math/tex; mode=display">
+L=\frac{\sqrt{R_1R_L}}{\omega_0}\\
+C=\frac{1}{\omega_0\sqrt{R_1R_L}}</script><h2 id="Wilkinson-Power-Divider"><a href="#Wilkinson-Power-Divider" class="headerlink" title="Wilkinson Power Divider"></a>Wilkinson Power Divider</h2><h3 id="Single-ended"><a href="#Single-ended" class="headerlink" title="Single-ended"></a>Single-ended</h3><p>Wilkinson power divider is comprised of two $\lambda/4$ transmission lines with $Z_C=\sqrt{2}R$, and a resistor of $2R$ connecting the split terminals. Two transmission lines can be realized using equivalent-π representation, where the two capacitors at one side can be combined.</p>
+<p><img src="lumped-element-circuit/lumped-wilkinson-power-divider.png" alt="Lumped Wilkinson power divider"></p>
+<p>where we have</p>
+<script type="math/tex; mode=display">
+L=\frac{\sqrt{2}R}{\omega_0}\\
+C=\frac{1}{\sqrt{2}\omega_0R}</script><p>The same method can be applied to design multi-section Wilkinson power divider to further extend the bandwidth.</p>
+<h3 id="Differential"><a href="#Differential" class="headerlink" title="Differential"></a>Differential</h3><p>The schematic and the layout of a differential inductor is as follows</p>
+<p><img src="lumped-element-circuit/differential-inductor.png" alt="Differential inductor"></p>
+<p>Note that in this design, the mutual inductance is negative if the positive terminals are assumed to locate at the left side. Therefore, if driven differentially, the mutual inductance add to the self-inductance, creating an equivalent inductance $L(1+k)$ for both sides. For the common excitation, however, the equivalent inductance is mitigated to be $L(1-k)$.</p>
+<p>The knowledge of mutual inductance can be used to guide the design of the differential Wilkinson power divider. The schematic is show below.</p>
+<p><img src="lumped-element-circuit/differential-wilkinson-power-divider.png" alt="Differential Wilkinson power divider"></p>
+<p>The differential inductor is adopted to provide higher inductance while ensuring compact layout. If the source and load impedance are both $R$, half circuit seen an impedance of $R/2$. Thus, the resistance needed to implement isolation is twice that of the half-circuit characteristic impedance, and is $R$ again. $\lambda/4$ transmission line is realized with differential inductor and the capacitors, with a characteristic impedance of $R/\sqrt{2}$.</p>
+<h2 id="Attenuator"><a href="#Attenuator" class="headerlink" title="Attenuator"></a>Attenuator</h2><h3 id="π-Circuit"><a href="#π-Circuit" class="headerlink" title="π Circuit"></a>π Circuit</h3><p><img src="lumped-element-circuit/pi-circuit-attenuator.png" alt="Pi circuit attenuator"></p>
+<p>Design equations are</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R_3 &= \frac{1}{2} (10^{L/10}-1)\sqrt{\frac{Z_{in}Z_{out}}{10^{L/10}}} \\
+R_2 &= \frac{1}{\frac{10^{L/10}+1}{Z_{out}(10^{L/10}-1)} - \frac{1}{R_3}} \\
+R_1 &= \frac{1}{\frac{10^{L/10}+1}{Z_{in}(10^{L/10}-1)} - \frac{1}{R_3}}
+\end{aligned}</script><p>where the minimal loss that can be achieved is</p>
+<script type="math/tex; mode=display">
+L_{min}=20\log\left(\sqrt{\frac{Z_{in}}{Z_{out}}}+\sqrt{\frac{Z_{in}}{Z_{out}}-1}\right)</script><h3 id="T-Circuit"><a href="#T-Circuit" class="headerlink" title="T Circuit"></a>T Circuit</h3><p><img src="lumped-element-circuit/t-circuit-attenuator.png" alt="T-circuit attenuator"></p>
+<p>Design equations are</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R_3 &= \frac{2\sqrt{Z_{in}Z_{out}10^{L/10}}}{10^{L/10}-1} \\
+R_2 &= \frac{10^{L/10}+1}{10^{L/10}-1}Z_{out} - R_3 \\
+R_1 &= \frac{10^{L/10}+1}{10^{L/10}-1}Z_{in} - R_3
+\end{aligned}</script><p>where the minimal loss that can be achieved is</p>
+<script type="math/tex; mode=display">
+L_{min}=20\log\left(\sqrt{\frac{Z_{in}}{Z_{out}}}+\sqrt{\frac{Z_{in}}{Z_{out}}-1}\right)</script><h3 id="Bridge-T-Circuit"><a href="#Bridge-T-Circuit" class="headerlink" title="Bridge T Circuit"></a>Bridge T Circuit</h3><p><img src="lumped-element-circuit/bridge-t-attenuator.png" alt="Bridge-T attenuator"></p>
+<p>Design equations are</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R_1 &= Z_0(10^{L/20}-1) \\
+R_4 &= \frac{Z_0}{10^{L/20}-1}
+\end{aligned}</script><h2 id="Quadrature-Generation"><a href="#Quadrature-Generation" class="headerlink" title="Quadrature Generation"></a>Quadrature Generation</h2><h3 id="Direct"><a href="#Direct" class="headerlink" title="Direct"></a>Direct</h3><p><img src="lumped-element-circuit/direct-quadrature-generation.png" alt="Direct quadrature generation"></p>
+<p>It should satisfy</p>
+<script type="math/tex; mode=display">
+Z_2=(j\omega L)||(\frac{1}{j\omega C_1})||(50\ \Omega)\\
+Z_3=(\frac{1}{j\omega C_2})||(50\ \Omega)\\</script><p>Since $Z_2+Z_3=50 \Omega$, and we need a 90° phase difference</p>
+<script type="math/tex; mode=display">
+\frac{Z_2}{Z_3}=\frac{25+j25}{25-j25}</script><p>A high coupling transformer can be used to isolate port 2 from port 3. </p>
+<p>For a differential implementation</p>
+<p><img src="lumped-element-circuit/direct-differential-quadrature-generation.png" alt="Direct differential quadrature generation"></p>
+<p>Capacitors can be combined, as</p>
+<p><img src="lumped-element-circuit/simplified-direct-differential-quadrature-generation.png" alt="Simplified direct differential quadrature generation"></p>
+<p>Layout of the above circuit is</p>
+<p><img src="lumped-element-circuit/loose-layout-of-the-direct-quadrature-generation.png" alt="Loose layout of the direct quadrature generation"></p>
+<p>When the right half is rotated</p>
+<p><img src="lumped-element-circuit/coil-rotation.png" alt="Coil rotation"></p>
+<p>It can be combined with the left coil for area reduction</p>
+<p><img src="lumped-element-circuit/compact-layout-of-the-direct-quadrature-generation.png" alt="Compact layout of the direct quadrature generation"></p>
+<p>This layout can be further rotated to facilitate port connection</p>
+<p><img src="lumped-element-circuit/rotated-compact-layout-of-the-direct-quadrature-generation.png" alt="Rotated compact layout of the direct quadrature generation"></p>
+<h3 id="Hybrid"><a href="#Hybrid" class="headerlink" title="Hybrid"></a>Hybrid</h3><p>The schematic is given below</p>
+<p><img src="lumped-element-circuit/transformer-based-hybrid.png" alt="Transformer-based hybrid"></p>
+<p>Layout is as follows</p>
+<p><img src="lumped-element-circuit/hybrid.png" alt="Hybrid"></p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="Derivation-of-π-circuit-attenuator"><a href="#Derivation-of-π-circuit-attenuator" class="headerlink" title="Derivation of π-circuit attenuator"></a>Derivation of π-circuit attenuator</h3><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Parallel[x_, y_] := x y/(x + y);</span><br><span class="line"><span class="comment">(* Both ports are matched *)</span></span><br><span class="line">result = <span class="keyword">Solve</span>[&#123;Zin == <span class="keyword">Simplify</span>[Parallel[R1, Parallel[Zout, R2] + R3]],</span><br><span class="line">   Zout == Parallel[R2, Parallel[Zin, R1] + R3]&#125;, &#123;R1, R2&#125;]</span><br><span class="line"><span class="comment">(* Specify the insertion loss *)</span></span><br><span class="line">T = Parallel[Zout, R2];</span><br><span class="line">Ul = Uin/<span class="number">2</span> T/(T + R3);</span><br><span class="line">result2 = <span class="keyword">Solve</span>[A == <span class="number">4</span> Zin/Zout (Ul/Uin)^<span class="number">2</span> /. result[[<span class="number">2</span>]], &#123;R3&#125;]</span><br><span class="line"><span class="comment">(* Obtaining R3 *)</span></span><br><span class="line"><span class="keyword">Simplify</span>[R3 /. result2[[<span class="number">1</span>]] /. A -&gt; <span class="number">10</span>^(L/<span class="number">10</span>)]</span><br><span class="line"><span class="comment">(* Obtaining R2 *)</span></span><br><span class="line"><span class="keyword">Simplify</span>[<span class="number">1</span>/(R2) /. result[[<span class="number">2</span>]], &#123;Zin &gt; <span class="number">0</span>, Zout &gt; <span class="number">0</span>, R3 &gt; <span class="number">0</span>&#125;]</span><br></pre></td></tr></table></figure>
+<p>Here we have</p>
+<script type="math/tex; mode=display">
+\frac{1}{R_2}=\frac{R_{3}^2+Z_{in} Z_{out}-Z_{out}^2}{R_{3} Z_{out}^2+R_{3} Z_{out} \sqrt{R_{3}^2+Z_{in} Z_{out}}}</script><p>If we define $A=10^{L/10}$, it is apparent that</p>
+<script type="math/tex; mode=display">
+R_3^2+Z_{in}Z_{out}=R_3^2\frac{(A+1)^2}{(A-1)^2}</script><p>Substitute the equation into the expression, we have</p>
+<script type="math/tex; mode=display">
+\frac{1}{R_2}=\frac{1}{R_3Z_{out}}\frac{(R_3\frac{A+1}{A-1}+Z_{out})(R_3\frac{A+1}{A-1}-Z_{out})}{R_3\frac{A+1}{A-1}+Z_{out}}\\
+=\frac{A+1}{Z_{out}(A-1)} - \frac{1}{R_3}</script><p>which is equivalent to the expression in the article. The same could be done for the $R_3$.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>For a inspiring discussion of various lumped-element circuit, refer to</p>
+<ul>
+<li>T. H. Lee, <em>Planar Microwave Engineering</em>.</li>
+<li>P. Vizmuller, <em>RF Design Guide - Systems, Circuits, and Equations</em>.</li>
+</ul>
+<p>For the transformation of <strong>coupled transmission line</strong>, refer to</p>
+<ul>
+<li><p>J. Hogerheiden, M. Ciminera and G. Jue, &quot;Improved planar spiral transformer theory applied to a miniature lumped element quadrature hybrid,&quot; <em>IEEE Trans. Microw. Theory Techn.</em>, vol. 45, no. 4, pp. 543-545, April 1997, doi: <a href="https://doi.org/10.1109/22.566635" target="_blank" rel="noopener">10.1109/22.566635</a>.</p>
+</li>
+<li><p>R. Garg and A. S. Natarajan, &quot;A 28-GHz low-power phased-array receiver front-end with 360° RTPS phase shift range,&quot; <em>IEEE Trans. Microw. Theory Techn.</em>, vol. 65, no. 11, pp. 4703-4714, Nov. 2017, doi: <a href="https://doi.org/10.1109/TMTT.2017.2707414" target="_blank" rel="noopener">10.1109/TMTT.2017.2707414</a>.</p>
+</li>
+</ul>
+<p>For the design of the <strong>lattice balun</strong>, refer to</p>
+<ul>
+<li>W. Bakalski, W. Simburger, H. Knapp, H. -D. Wohlmuth and A. L. Scholtz, &quot;Lumped and distributed lattice-type LC-baluns,&quot; <em>2002 IEEE MTT-S Int. Microw. Symp. Digest</em>, Seattle, WA, USA, 2002, pp. 209-212 vol.1, doi: <a href="https://doi.org/10.1109/MWSYM.2002.1011595" target="_blank" rel="noopener">10.1109/MWSYM.2002.1011595</a>.</li>
+</ul>
+<p>For more details about single-ended and differential <strong>Wilkinson power divider</strong>, refer to</p>
+<ul>
+<li>M. Balducci and H. Schumacher, &quot;Ka band passive differential 4:1 power divider/combiner based on Wilkinson topology,&quot; <em>2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME)</em>, Giardini Naxos, 2017, pp. 189-192.</li>
+</ul>
+<p>For more information about <strong>quadrature signal generation</strong>, refer to</p>
+<ul>
+<li>J. S. Park, S. Kousai and H. Wang, &quot;A fully differential ultra-compact broadband transformer based quadrature generation scheme,&quot; <em>Proc. Custom Integr. Circuits Conf.</em>, San Jose, CA, 2013, pp. 1-4, doi: <a href="https://doi.org/10.1109/CICC.2013.6658546" target="_blank" rel="noopener">10.1109/CICC.2013.6658546</a>.</li>
+<li>J. S. Park and H. Wang, &quot;A transformer-based poly-phase network for ultra-broadband quadrature signal generation,&quot; <em>IEEE Trans. Microw. Theory and Techn.</em>, vol. 63, no. 12, pp. 4444-4457, Dec. 2015, doi: <a href="https://doi.org/10.1109/TMTT.2015.2496187" target="_blank" rel="noopener">10.1109/TMTT.2015.2496187</a>.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\865ebedb\coupled-transmission-line.html" rel="bookmark">Coupled Transmission Line and Its Applications</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\c3975ee1\even-odd-mode-analysis.html" rel="bookmark">Even and Odd Mode Analysis</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit.html" title="Lumped-Element Circuit">https://triblemany.github.io/archives/df4c5938/lumped-element-circuit.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Circuit-Theory/" rel="tag"># Circuit Theory</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/c3975ee1/even-odd-mode-analysis.html" rel="next" title="Even and Odd Mode Analysis">
+                  <i class="fa fa-chevron-left"></i> Even and Odd Mode Analysis
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cutoff-Frequency"><span class="nav-number">1.1.</span> <span class="nav-text">Cutoff Frequency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Equivalent-π-Representation"><span class="nav-number">1.2.</span> <span class="nav-text">Equivalent-π Representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Equivalent-T-Representation"><span class="nav-number">1.3.</span> <span class="nav-text">Equivalent-T Representation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-Transmission-Line"><span class="nav-number">2.</span> <span class="nav-text">Coupled Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-based"><span class="nav-number">2.1.</span> <span class="nav-text">Transformer-based</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Balun"><span class="nav-number">3.</span> <span class="nav-text">Balun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lattice-type-LC-balun"><span class="nav-number">3.1.</span> <span class="nav-text">Lattice-type LC balun</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wilkinson-Power-Divider"><span class="nav-number">4.</span> <span class="nav-text">Wilkinson Power Divider</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-ended"><span class="nav-number">4.1.</span> <span class="nav-text">Single-ended</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Differential"><span class="nav-number">4.2.</span> <span class="nav-text">Differential</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attenuator"><span class="nav-number">5.</span> <span class="nav-text">Attenuator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#π-Circuit"><span class="nav-number">5.1.</span> <span class="nav-text">π Circuit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-Circuit"><span class="nav-number">5.2.</span> <span class="nav-text">T Circuit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bridge-T-Circuit"><span class="nav-number">5.3.</span> <span class="nav-text">Bridge T Circuit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quadrature-Generation"><span class="nav-number">6.</span> <span class="nav-text">Quadrature Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct"><span class="nav-number">6.1.</span> <span class="nav-text">Direct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid"><span class="nav-number">6.2.</span> <span class="nav-text">Hybrid</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">7.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivation-of-π-circuit-attenuator"><span class="nav-number">7.1.</span> <span class="nav-text">Derivation of π-circuit attenuator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">221k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/df4c5938/lumped-element-circuit.html";
+    this.page.identifier = "archives/df4c5938/lumped-element-circuit.html";
+    this.page.title = 'Lumped-Element Circuit';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>

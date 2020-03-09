@@ -58,19 +58,22 @@
   <meta name="description" content="本文介绍了串联和并联电路的转换，以及Q值的计算。">
 <meta name="keywords" content="Circuit Theory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="阻抗串并转换">
+<meta property="og:title" content="串并转换和阻抗变换">
 <meta property="og:url" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html">
 <meta property="og:site_name" content="Triblemany">
 <meta property="og:description" content="本文介绍了串联和并联电路的转换，以及Q值的计算。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-to-parallel.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/parallel-to-series.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/image-20200308200135152.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/image-20200308200431500.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/image-20200308200849775.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-parallel.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/shunt-rlc-Q.svg">
 <meta property="og:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-rlc-Q.svg">
-<meta property="og:updated_time" content="2019-10-27T08:03:23.072Z">
+<meta property="og:updated_time" content="2020-03-08T16:01:40.291Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="阻抗串并转换">
+<meta name="twitter:title" content="串并转换和阻抗变换">
 <meta name="twitter:description" content="本文介绍了串联和并联电路的转换，以及Q值的计算。">
 <meta name="twitter:image" content="https://triblemany.github.io/archives/abd732af/series-parallel-conversion/series-to-parallel.svg">
   <link rel="canonical" href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion">
@@ -87,7 +90,7 @@
   };
 </script>
 
-  <title>阻抗串并转换 | Triblemany</title>
+  <title>串并转换和阻抗变换 | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -270,7 +273,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">阻抗串并转换
+        <h1 class="post-title" itemprop="name headline">串并转换和阻抗变换
 
           
         </h1>
@@ -297,7 +300,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-27 16:03:23" itemprop="dateModified" datetime="2019-10-27T16:03:23+08:00">2019-10-27</time>
+                <time title="Modified: 2020-03-09 00:01:40" itemprop="dateModified" datetime="2020-03-09T00:01:40+08:00">2020-03-09</time>
               </span>
             
           
@@ -311,7 +314,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>1.8k</span>
+              <span>2.5k</span>
             </span>
           
 
@@ -334,9 +337,33 @@ X_p=X_s\left(1+\frac{1}{Q^2}\right)</script><h3 id="并联-gt-串联"><a href="#
 <script type="math/tex; mode=display">
 Q=\frac{R_p}{X_p}\\
 R_s=\frac{R_p}{(1+Q^2)}\\
-X_s=\frac{X_p}{\left(1+\frac{1}{Q^2}\right)}</script><h2 id="带有Q值的L和带有Q值的C谐振"><a href="#带有Q值的L和带有Q值的C谐振" class="headerlink" title="带有Q值的L和带有Q值的C谐振"></a>带有Q值的L和带有Q值的C谐振</h2><p>谐振网络的Q值为</p>
+X_s=\frac{X_p}{\left(1+\frac{1}{Q^2}\right)}</script><h2 id="谐振网络Q值的计算"><a href="#谐振网络Q值的计算" class="headerlink" title="谐振网络Q值的计算"></a>谐振网络Q值的计算</h2><p>串联或者并联谐振网络的Q值为</p>
 <script type="math/tex; mode=display">
-\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><h2 id="理论推导"><a href="#理论推导" class="headerlink" title="理论推导"></a>理论推导</h2><p>这里包含上面三个结论的理论推导。</p>
+\frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><p>对于并联谐振网络且有多个电容的，为</p>
+<script type="math/tex; mode=display">
+\frac{1}{Q}=\frac{1}{Q_L}+\sum_{n}\frac{C_n}{C_{tot}}\frac{1}{Q_{C_n}}</script><p>其中$C_{tot}=\sum_nC_n$</p>
+<h2 id="阻抗匹配"><a href="#阻抗匹配" class="headerlink" title="阻抗匹配"></a>阻抗匹配</h2><h3 id="L型"><a href="#L型" class="headerlink" title="L型"></a>L型</h3><h4 id="Rs-gt-Rl"><a href="#Rs-gt-Rl" class="headerlink" title="Rs&gt;Rl"></a>Rs&gt;Rl</h4><p><img src="series-parallel-conversion/image-20200308200135152.png" alt="Rs greater than Rl"></p>
+<p>可得</p>
+<script type="math/tex; mode=display">
+Q=\sqrt{\frac{R_S}{R_L}-1}\\
+X_S=QR_L\\
+X_P=\frac{R_S}{Q}</script><h4 id="Rs-lt-Rl"><a href="#Rs-lt-Rl" class="headerlink" title="Rs&lt;Rl"></a>Rs&lt;Rl</h4><p><img src="series-parallel-conversion/image-20200308200431500.png" alt="Rs smaller than Rl"></p>
+<p>可得</p>
+<script type="math/tex; mode=display">
+Q=\sqrt{\frac{R_L}{R_S}-1}\\
+X_P=\frac{R_L}{Q}\\
+X_S=QR_S</script><h3 id="电容部分接入"><a href="#电容部分接入" class="headerlink" title="电容部分接入"></a>电容部分接入</h3><p><img src="series-parallel-conversion/image-20200308200849775.png" alt="Capacitive impedance matching"></p>
+<p>当$Q\gg1$时，可将并联网络转换为串联网络，再将其转回并联网络。在第一次转换后，$C_1&#39;\approx C_1,R_S=[(\omega C_1)^2R_L]^{-1}$；在第二次转换后，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C_{eq} &= \frac{C_1C_2}{C_1+C_2}\\
+R_{tot} &= \frac{1}{(\omega C_{eq})^2R_S}\\
+        &= \left(1+\frac{C_1}{C_2}\right)^2R_L
+\end{aligned}</script><p>对于低Q电路而言，有</p>
+<script type="math/tex; mode=display">
+Y_{in}=\frac{j\omega C_2(1+j\omega R_LC_1)}{1+j\omega R_L(C_1+C_2)}</script><p>其等效并联电阻为</p>
+<script type="math/tex; mode=display">
+R_{tot}=\frac{1}{\omega^2C_2^2R_L}+R_L\left(1+\frac{C_1}{C_2}\right)^2</script><h2 id="理论推导"><a href="#理论推导" class="headerlink" title="理论推导"></a>理论推导</h2><p>这里包含上面三个结论的理论推导。</p>
 <h3 id="并联-gt-串联-1"><a href="#并联-gt-串联-1" class="headerlink" title="并联-&gt;串联"></a>并联-&gt;串联</h3><p><img src="series-parallel-conversion/series-parallel.svg" alt="series-parallel"></p>
 <p>推导如下</p>
 <script type="math/tex; mode=display">
@@ -384,6 +411,11 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
 \frac{1}{Q}=\frac{1}{Q_L}+\frac{1}{Q_C}</script><p>此时，$\omega$定义为</p>
 <script type="math/tex; mode=display">
 \omega=\frac{1}{\sqrt{L_{s}C_{p,s}}}=\frac{\sqrt{1-\frac{L_s}{C_pR_p^2}}}{\sqrt{L_{s}C_p}}\approx\frac{1}{\sqrt{L_{s}C_p}}</script><p>当并联电阻较大时可以简化为最后一项。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>相关内容可以参考</p>
+<ul>
+<li>B. Razavi, <em>RF Microelectronics</em>.</li>
+<li>李志群, 王志功, <em>射频集成电路与系统</em>.</li>
+</ul>
 
     </div>
 
@@ -417,14 +449,14 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
+      <div class="popular-posts-title"><a href="\archives\df4c5938\lumped-element-circuit.html" rel="bookmark">Lumped-Element Circuit</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
       
     </li>
   
@@ -440,7 +472,7 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html" title="阻抗串并转换">https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html</a>
+    <a href="https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html" title="串并转换和阻抗变换">https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -536,7 +568,7 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串并联转换"><span class="nav-number">1.</span> <span class="nav-text">串并联转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#串联-gt-并联"><span class="nav-number">1.1.</span> <span class="nav-text">串联-&gt;并联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并联-gt-串联"><span class="nav-number">1.2.</span> <span class="nav-text">并联-&gt;串联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#带有Q值的L和带有Q值的C谐振"><span class="nav-number">2.</span> <span class="nav-text">带有Q值的L和带有Q值的C谐振</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论推导"><span class="nav-number">3.</span> <span class="nav-text">理论推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并联-gt-串联-1"><span class="nav-number">3.1.</span> <span class="nav-text">并联-&gt;串联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际并联LC网络的Q值"><span class="nav-number">3.2.</span> <span class="nav-text">实际并联LC网络的Q值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际串联LC网络的Q值"><span class="nav-number">3.3.</span> <span class="nav-text">实际串联LC网络的Q值</span></a></li></ol></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#串并联转换"><span class="nav-number">1.</span> <span class="nav-text">串并联转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#串联-gt-并联"><span class="nav-number">1.1.</span> <span class="nav-text">串联-&gt;并联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并联-gt-串联"><span class="nav-number">1.2.</span> <span class="nav-text">并联-&gt;串联</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谐振网络Q值的计算"><span class="nav-number">2.</span> <span class="nav-text">谐振网络Q值的计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻抗匹配"><span class="nav-number">3.</span> <span class="nav-text">阻抗匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#L型"><span class="nav-number">3.1.</span> <span class="nav-text">L型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rs-gt-Rl"><span class="nav-number">3.1.1.</span> <span class="nav-text">Rs&gt;Rl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rs-lt-Rl"><span class="nav-number">3.1.2.</span> <span class="nav-text">Rs&lt;Rl</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电容部分接入"><span class="nav-number">3.2.</span> <span class="nav-text">电容部分接入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论推导"><span class="nav-number">4.</span> <span class="nav-text">理论推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并联-gt-串联-1"><span class="nav-number">4.1.</span> <span class="nav-text">并联-&gt;串联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际并联LC网络的Q值"><span class="nav-number">4.2.</span> <span class="nav-text">实际并联LC网络的Q值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际串联LC网络的Q值"><span class="nav-number">4.3.</span> <span class="nav-text">实际串联LC网络的Q值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
           </div>
         
       </div>
@@ -556,7 +588,7 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -650,7 +682,7 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">209k</span>
+    <span title="Symbols count total">221k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
@@ -784,7 +816,7 @@ Q&=\frac{\omega L_s}{R_s+R_{p,s}}\\
   function disqus_config() {
     this.page.url = "https://triblemany.github.io/archives/abd732af/series-parallel-conversion.html";
     this.page.identifier = "archives/abd732af/series-parallel-conversion.html";
-    this.page.title = '阻抗串并转换';};
+    this.page.title = '串并转换和阻抗变换';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({

@@ -75,7 +75,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/587faa75/network-parameter/pi-network.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/587faa75/network-parameter/two-port-parameter-conversion.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/587faa75/network-parameter/two-port-parameter-conversion-2.png">
-<meta property="og:updated_time" content="2020-03-07T14:30:38.455Z">
+<meta property="og:updated_time" content="2020-03-09T13:08:44.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Parameters in Circuit Analysis">
 <meta name="twitter:description" content="This article presents S, Z, Y, ABCD parameters and their transformation.">
@@ -304,7 +304,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 22:30:38" itemprop="dateModified" datetime="2020-03-07T22:30:38+08:00">2020-03-07</time>
+                <time title="Modified: 2020-03-09 21:08:44" itemprop="dateModified" datetime="2020-03-09T21:08:44+08:00">2020-03-09</time>
               </span>
             
           
@@ -318,7 +318,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>8.1k</span>
+              <span>9.3k</span>
             </span>
           
 
@@ -450,20 +450,41 @@ P_L=\frac{1}{2}\mathrm{Re}[VI^*]=\frac{1}{2Z_0}(a^2-b^2)</script><p>Reflection c
 \Gamma_{IN}=S_{11}+\frac{S_{12}S_{21}\Gamma_L}{1-S_{22}\Gamma_L}\\
 \Gamma_{OUT}=S_{22}+\frac{S_{12}S_{21}\Gamma_S}{1-S_{11}\Gamma_S}</script><p>Mason&#39;s rule</p>
 <script type="math/tex; mode=display">
-T=\frac{P_1[1-\sum L(1)^{(1)}+\sum L(2)^{(1)}\ldots]+\\P_2[1-\sum L(1)^{(2)}+\sum L(2)^{(2)}\ldots]\ldots}{1-\sum L(1)+\sum L(2)-\sum L(3)+\ldots}</script><p>where</p>
+G=\frac{y_{out}}{y_{in}}=\frac{\sum_{k=1}^NG_k\Delta_k}{\Delta}\\
+\Delta=1-\sum L_i+\sum L_iL_j-\sum L_iL_jL_k+...</script><p>where</p>
 <ul>
-<li>$P_n$ is a path that connects the beginning and the ending. And node can be in the path only once.</li>
-<li>$L(1)$ is the first-order loop. It is a closed loop made of branches in the same direction.</li>
-<li>$L(n)$ is the product of $n$ separate $L(1)$.</li>
-<li>$L(n)^{(m)}$ is the n th order loop that is not in contact with path $P_m$.</li>
+<li>$\Delta$ is the determinant of the graph.</li>
+<li>$y_{in}$ is the input-node variable.</li>
+<li>$y_{out}$ is the output-node variable.</li>
+<li>$G$ is the complete gain.</li>
+<li>$N$ is the total number of forward paths between $y_{in}$ and $y_{out}$.</li>
+<li>$G_k$ is the path gain of the k th forward path between $y_{in}$ and $y_{out}$.</li>
+<li>$L_i$ is the loop gain of a closed loop in the system.</li>
+<li>$L_iL_j$ is the product of the loop gains of two non-touching closed loops.</li>
+<li>$\Delta_k$ is the cofactor value of $\Delta$ for the <em>k</em> th forward path, with the loops touching the <em>k</em> th forward path removed.</li>
+</ul>
+<p>It is defined that</p>
+<ul>
+<li>Path: a continuous set of branches traversed in the direction that they indicate.</li>
+<li>Forward path: A path from an input node to an output node in which <strong>no node is touched more than once</strong>.</li>
+<li>Loop: A path that originates and ends on the same node in which no node is touched more than once.</li>
+<li>Path gain: the product of the gains of all the branches in the path.</li>
+<li>Loop gain: the product of the gains of all the branches in the loop.</li>
 </ul>
 <p>To calculate the input reflection coefficient, the following signal graph is used</p>
 <p><img src="network-parameter/input-reflection-coefficient-signal-graph.png" alt="Input reflection coefficient signal graph"></p>
 <p>we have</p>
 <ul>
-<li>$P_1=S_{11},P_2=S_{21}\Gamma_LS_{12}$</li>
-<li>$L(1)=S_{22}\Gamma_L$</li>
-<li>$L(1)^{(1)}=S_{22}\Gamma_L$</li>
+<li>$G_1=S_{11}$<ul>
+<li>$\Delta_1=1-S_{22}\Gamma_L$</li>
+</ul>
+</li>
+<li>$G_2=S_{21}\Gamma_L S_{12}$<ul>
+<li>$\Delta_2=1$, because the only loop in the graph touches $\Gamma_L$</li>
+</ul>
+</li>
+<li>$\Delta=1-S_{22}\Gamma_L$</li>
+<li>$S_{11}=\frac{G_1\Delta_1+G_2\Delta_2}{\Delta}$</li>
 </ul>
 <h3 id="Transfer-Scattering-Parameter"><a href="#Transfer-Scattering-Parameter" class="headerlink" title="Transfer Scattering Parameter"></a>Transfer Scattering Parameter</h3><script type="math/tex; mode=display">
 \left[
@@ -523,7 +544,7 @@ Z_{i2}=\sqrt{\frac{BD}{AC}}=\sqrt{\frac{Z_{22}}{Z_{11}}\mathrm{Det[\mathbf{Z}]}}
 \left[
 \begin{matrix}
 Z_1+Z_2 & Z_2 \\
-Z_2 & Z_1+Z_2
+Z_2 & Z_2+Z_3
 \end{matrix}
 \right]</script><p>For Pi</p>
 <p><img src="network-parameter/pi-network.png" alt="Pi Network"></p>
@@ -532,7 +553,7 @@ Z_2 & Z_1+Z_2
 \left[
 \begin{matrix}
 Y_1+Y_2 & -Y_2 \\
--Y_2 & Y_1+Y_2
+-Y_2 & Y_2+Y_3
 \end{matrix}
 \right]</script><h2 id="Conversion"><a href="#Conversion" class="headerlink" title="Conversion"></a>Conversion</h2><h3 id="General"><a href="#General" class="headerlink" title="General"></a>General</h3><script type="math/tex; mode=display">
 \mathbf{Z}=\mathbf{Y}^{-1}\\
@@ -592,6 +613,15 @@ A_n=\sqrt{\frac{Z_n}{Z_{n,before}}}\cdot\frac{1}{Z_n+Z_{n,before}}</script><p>wh
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* Conversion between Z and Y parameters *)</span></span><br><span class="line">Z2Y[Y_] := <span class="keyword">Inverse</span>[Y];</span><br><span class="line">Y2Z[Z_] := <span class="keyword">Inverse</span>[Z];</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Conversion between Y and S parameters *)</span></span><br><span class="line">Y2S[Y_, Zref_] := <span class="keyword">Module</span>[&#123;E0, G0, Z0&#125;,</span><br><span class="line">  E0 = <span class="keyword">IdentityMatrix</span>[<span class="keyword">Length</span>[Y]];</span><br><span class="line">  G0 = <span class="keyword">DiagonalMatrix</span>[(<span class="number">1</span>/<span class="keyword">Sqrt</span>[<span class="keyword">Re</span>[#<span class="number">1</span>]]) &amp; /@ Zref];</span><br><span class="line">  Z0=<span class="keyword">DiagonalMatrix</span>[Zref];</span><br><span class="line">  G0.(E0 - Z0.Y).<span class="keyword">Inverse</span>[(E0 + Z0.Y)].<span class="keyword">Inverse</span>[G0]</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">S2Y[S_, Zref_] := <span class="keyword">Module</span>[&#123;E0, G0, Z0&#125;,</span><br><span class="line">  E0 = <span class="keyword">IdentityMatrix</span>[<span class="keyword">Length</span>[S]];</span><br><span class="line">  G0 = <span class="keyword">DiagonalMatrix</span>[(<span class="number">1</span>/<span class="keyword">Sqrt</span>[<span class="keyword">Re</span>[#<span class="number">1</span>]]) &amp; /@ Zref];</span><br><span class="line">  Z0=<span class="keyword">DiagonalMatrix</span>[Zref];</span><br><span class="line">  <span class="keyword">Inverse</span>[G0].<span class="keyword">Inverse</span>[S.Z0 + Z0].(E0 - S).G0</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Conversion between Z and S parameters *)</span></span><br><span class="line">Z2S[Z_, Zref_] := <span class="keyword">Module</span>[&#123;E0, G0, Z0&#125;,</span><br><span class="line">  E0 = <span class="keyword">IdentityMatrix</span>[<span class="keyword">Length</span>[Z]];</span><br><span class="line">  G0 = <span class="keyword">DiagonalMatrix</span>[(<span class="number">1</span>/<span class="keyword">Sqrt</span>[<span class="keyword">Re</span>[#<span class="number">1</span>]]) &amp; /@ Zref];</span><br><span class="line">  Z0=<span class="keyword">DiagonalMatrix</span>[Zref];</span><br><span class="line">  G0.(Z - Z0).<span class="keyword">Inverse</span>[(Z + Z0)].<span class="keyword">Inverse</span>[G0]</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">S2Z[S_, Zref_] := <span class="keyword">Module</span>[&#123;E0, G0, Z0&#125;,</span><br><span class="line">  E0 = <span class="keyword">IdentityMatrix</span>[<span class="keyword">Length</span>[S]];</span><br><span class="line">  G0 = <span class="keyword">DiagonalMatrix</span>[(<span class="number">1</span>/<span class="keyword">Sqrt</span>[<span class="keyword">Re</span>[#<span class="number">1</span>]]) &amp; /@ Zref];</span><br><span class="line">  Z0=<span class="keyword">DiagonalMatrix</span>[Zref];</span><br><span class="line">  <span class="keyword">Inverse</span>[G0].<span class="keyword">Inverse</span>[E0 - S].(S.Z0 + Z0).G0</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line"><span class="comment">(* Renormalization of S parameters *)</span></span><br><span class="line">S2S[S_, Zn_, Znb_] := <span class="keyword">Module</span>[&#123;R, A, E&#125;,</span><br><span class="line">	R = <span class="keyword">DiagonalMatrix</span>[(Zn-Znb)/(Zn+Znb)];</span><br><span class="line">	A = <span class="keyword">DiagonalMatrix</span>[<span class="keyword">Sqrt</span>[Zn/Znb]/(Zn+Znb)];</span><br><span class="line">	E = <span class="keyword">IdentityMatrix</span>[<span class="keyword">Length</span>[S]];</span><br><span class="line">	<span class="keyword">Inverse</span>[A].(S-R).<span class="keyword">Inverse</span>[E-R.S].A</span><br><span class="line">	];</span><br></pre></td></tr></table></figure>
 <p>Examples</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Y2S[(&#123;</span><br><span class="line">    &#123;<span class="number">0.2</span>, <span class="number">0.8</span>&#125;,</span><br><span class="line">    &#123;<span class="number">0.8</span>, <span class="number">0.2</span>&#125;</span><br><span class="line">   &#125;), &#123;<span class="number">50</span>, <span class="number">50</span>&#125;] // N</span><br></pre></td></tr></table></figure>
+<p>Another way of stating the Mason&#39;s rule</p>
+<script type="math/tex; mode=display">
+T=\frac{P_1[1-\sum L(1)^{(1)}+\sum L(2)^{(1)}\ldots]+\\P_2[1-\sum L(1)^{(2)}+\sum L(2)^{(2)}\ldots]\ldots}{1-\sum L(1)+\sum L(2)-\sum L(3)+\ldots}</script><p>where</p>
+<ul>
+<li>$P_n$ is a path that connects the beginning and the ending. And node can be in the path only once.</li>
+<li>$L(1)$ is the first-order loop. It is a closed loop made of branches in the same direction.</li>
+<li>$L(n)$ is the product of $n$ separate $L(1)$.</li>
+<li>$L(n)^{(m)}$ is the n th order loop that is not in contact with path $P_m$.</li>
+</ul>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>For the basic concepts of Z, Y, S, ABCD parameters, refer to</p>
 <ul>
 <li>D. M. Pozar, <em>Microwave Engineering</em>. NJ, Hoboken: Wiley, 1998.</li>
@@ -626,6 +656,13 @@ A_n=\sqrt{\frac{Z_n}{Z_{n,before}}}\cdot\frac{1}{Z_n+Z_{n,before}}</script><p>wh
     <li class="popular-posts-item">
       
       
+      <div class="popular-posts-title"><a href="\archives\df4c5938\lumped-element-circuit.html" rel="bookmark">Lumped-Element Circuit</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
       <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
       
     </li>
@@ -634,13 +671,6 @@ A_n=\sqrt{\frac{Z_n}{Z_{n,before}}}\cdot\frac{1}{Z_n+Z_{n,before}}</script><p>wh
       
       
       <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
       
     </li>
   
@@ -774,7 +804,7 @@ A_n=\sqrt{\frac{Z_n}{Z_{n,before}}}\cdot\frac{1}{Z_n+Z_{n,before}}</script><p>wh
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -868,7 +898,7 @@ A_n=\sqrt{\frac{Z_n}{Z_{n,before}}}\cdot\frac{1}{Z_n+Z_{n,before}}</script><p>wh
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">209k</span>
+    <span title="Symbols count total">221k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>

@@ -71,6 +71,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-odd-mode-analysis-of-the-hybrid.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/coupled-line-coupler.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/even-odd-mode-analysis-of-the-coupler.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/RTPS.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/general-balun.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/s-parameter-of-the-general-balun.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/balun-analysis-with-virtual-port-4.gif">
@@ -80,7 +81,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/proof-of-marchand-balun.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/calculation-of-the-marchand-balun-y-parameter.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/c3975ee1/even-odd-mode-analysis/impedance-inverting-balun.png">
-<meta property="og:updated_time" content="2020-03-07T14:30:54.761Z">
+<meta property="og:updated_time" content="2020-03-09T12:49:01.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Even and Odd Mode Analysis">
 <meta name="twitter:description" content="Analysis in this section will derive S parameters directly.">
@@ -309,7 +310,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-07 22:30:54" itemprop="dateModified" datetime="2020-03-07T22:30:54+08:00">2020-03-07</time>
+                <time title="Modified: 2020-03-09 20:49:01" itemprop="dateModified" datetime="2020-03-09T20:49:01+08:00">2020-03-09</time>
               </span>
             
           
@@ -323,7 +324,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>12k</span>
+              <span>13k</span>
             </span>
           
 
@@ -426,7 +427,15 @@ B_3&=\frac{1}{2}T_e-\frac{1}{2}T_o=-\frac{1}{\sqrt{2}}\\
 B_4&=\frac{1}{2}\Gamma_e-\frac{1}{2}\Gamma_o=0
 \end{aligned}</script><p>Other ports can be calculated similarly.</p>
 <h2 id="Coupled-Line-Coupler"><a href="#Coupled-Line-Coupler" class="headerlink" title="Coupled Line Coupler"></a>Coupled Line Coupler</h2><p><img src="even-odd-mode-analysis/coupled-line-coupler.png" alt="Coupled line coupler"></p>
-<p>Its equivalent even-odd mode circuit is</p>
+<script type="math/tex; mode=display">
+\mathbf{S}=\left[
+\begin{matrix}
+{0} & {-j\sqrt{1-C^2}} & {C} & {0} \\
+{-j\sqrt{1-C^2}} & {0} & {0} & {C} \\
+{C} & {0} & {0} & {-j\sqrt{1-C^2}} \\
+{0} & {C} & {-j\sqrt{1-C^2}} & {0}
+\end{matrix}
+\right]</script><p>Its equivalent even-odd mode circuit is</p>
 <p><img src="even-odd-mode-analysis/even-odd-mode-analysis-of-the-coupler.png" alt="Even-odd mode analysis of the coupler"></p>
 <p>It can be observed that</p>
 <script type="math/tex; mode=display">
@@ -450,8 +459,18 @@ V_2^e=V_1^e\frac{1+\Gamma_e}{e^{j\theta}+\Gamma_e e^{-j\theta}}\\
 V_2^o=V_1^e\frac{1+\Gamma_o}{e^{j\theta}+\Gamma_o e^{-j\theta}}</script><p>Those equations lead to</p>
 <script type="math/tex; mode=display">
 V_2=V_2^e+V_2^o=V_0\frac{\sqrt{1-C^2}}{\sqrt{1-C^2}\cos\theta+j\sin\theta}\\
-V_4=V_2^e-V_2^o=0</script><p>These results can be used to derive the S parameter.</p>
-<h2 id="Marchand-Balun"><a href="#Marchand-Balun" class="headerlink" title="Marchand Balun"></a>Marchand Balun</h2><h3 id="General-Balun"><a href="#General-Balun" class="headerlink" title="General Balun"></a>General Balun</h3><p><img src="even-odd-mode-analysis/general-balun.png" alt="General Balun"></p>
+V_4=V_2^e-V_2^o=0</script><p>These results can be used to derive the S parameter. If the electrical length is $\pi/4$, we may write the S parameter as in the beginning.</p>
+<h3 id="Termination"><a href="#Termination" class="headerlink" title="Termination"></a>Termination</h3><p><img src="even-odd-mode-analysis/RTPS.png" alt="Signal graph of the coupler"></p>
+<p>Thus, we may write</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S_{11,new} &= S_{21}S_{12}\Gamma_2+S_{31}S_{13}\Gamma_3\\
+    &=C^2\Gamma_3-(1-C^2)\Gamma_2\\
+S_{41,new} &= S_{42}S_{21}\Gamma_2+S_{43}S_{31}\Gamma_3\\
+    &=-jC\sqrt{1-C^2}(\Gamma_2+\Gamma_3)
+\end{aligned}</script><p>In the case that $C=\sqrt{2}/2, \Gamma_3=-\Gamma_2=1$, we have $S_{11,new}=1,S_{41,new}=0$. Thus, it constitute an all-stop filter, as having been derived using the network parameters. In the case that $C=\sqrt{2}/2,\Gamma_3=\Gamma_2=\Gamma$, we have $S_{11,new}=0,S_{41,new}=-j\Gamma$. This is the result that leads to the design of reflective-type attenuator and reflective-type phase shifter. Note that $\Gamma$ is defined as</p>
+<script type="math/tex; mode=display">
+\Gamma=\frac{Z_L-Z_0}{Z_L+Z_0}</script><h2 id="Marchand-Balun"><a href="#Marchand-Balun" class="headerlink" title="Marchand Balun"></a>Marchand Balun</h2><h3 id="General-Balun"><a href="#General-Balun" class="headerlink" title="General Balun"></a>General Balun</h3><p><img src="even-odd-mode-analysis/general-balun.png" alt="General Balun"></p>
 <p>It is assumed that the general balun has the following properties:</p>
 <ul>
 <li>Single-ended port is matched ($S_{11}=0$).</li>
@@ -507,9 +526,9 @@ S_{11,new}=0</script><p>which lead us to</p>
 \Gamma_{o1}=\frac{Z_o-Z_{in}}{Z_o+Z_{in}}=\frac{Y_{in}-Y_o}{Y_{in}+Y_o}</script><p>It can be used to solve for the requirement of balun, as</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-T_{e1}=0&\\
-Y_e+Y_o=2Y_{in}&,\ \Gamma=-1\quad(\mathrm{short})\\
-\frac{1}{Y_e}+\frac{1}{Y_o}=\frac{2}{Y_{in}}&,\ \Gamma=1\quad(\mathrm{open})
+T_{even}=0&\\
+Y_{even}+Y_{odd}=2Y_{in}&,\ \Gamma=-1\quad(\mathrm{short})\\
+\frac{1}{Y_{even}}+\frac{1}{Y_{odd}}=\frac{2}{Y_{in}}&,\ \Gamma=1\quad(\mathrm{open})
 \end{aligned}</script><h3 id="Marchand-Balun-Formulation"><a href="#Marchand-Balun-Formulation" class="headerlink" title="Marchand Balun Formulation"></a>Marchand Balun Formulation</h3><p>To prove that Marchand balun is indeed a balun</p>
 <p><img src="even-odd-mode-analysis/proof-of-marchand-balun.png" alt="Proof of Marchand balun"></p>
 <p>we need to add a virtual port to facilitate decomposing into even-mode and odd-mode circuits. Note that for the even-mode circuit, the coupled line with short and open termination features an all-stop filter, so that the requirement $T_e=0$ is indeed satisfied. </p>
@@ -621,6 +640,13 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
     <li class="popular-posts-item">
       
       
+      <div class="popular-posts-title"><a href="\archives\df4c5938\lumped-element-circuit.html" rel="bookmark">Lumped-Element Circuit</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
       <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
       
     </li>
@@ -636,13 +662,6 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
       
       
       <div class="popular-posts-title"><a href="\archives\afb86e77\transmission-line.html" rel="bookmark">How to Model RLGC Transmission Line</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
       
     </li>
   
@@ -696,6 +715,10 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/archives/df4c5938/lumped-element-circuit.html" rel="prev" title="Lumped-Element Circuit">
+                  Lumped-Element Circuit <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -754,7 +777,7 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wilkinson-Power-Divider"><span class="nav-number">1.</span> <span class="nav-text">Wilkinson Power Divider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quadrature-90◦-Hybrid"><span class="nav-number">2.</span> <span class="nav-text">Quadrature (90◦) Hybrid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-Line-Coupler"><span class="nav-number">3.</span> <span class="nav-text">Coupled Line Coupler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Marchand-Balun"><span class="nav-number">4.</span> <span class="nav-text">Marchand Balun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Balun"><span class="nav-number">4.1.</span> <span class="nav-text">General Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirement-of-Balun"><span class="nav-number">4.2.</span> <span class="nav-text">Requirement of Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Marchand-Balun-Formulation"><span class="nav-number">4.3.</span> <span class="nav-text">Marchand Balun Formulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impedance-Inverting-Balun"><span class="nav-number">4.4.</span> <span class="nav-text">Impedance Inverting Balun</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">5.</span> <span class="nav-text">Appendix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wilkinson-Power-Divider"><span class="nav-number">1.</span> <span class="nav-text">Wilkinson Power Divider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quadrature-90◦-Hybrid"><span class="nav-number">2.</span> <span class="nav-text">Quadrature (90◦) Hybrid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-Line-Coupler"><span class="nav-number">3.</span> <span class="nav-text">Coupled Line Coupler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Termination"><span class="nav-number">3.1.</span> <span class="nav-text">Termination</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Marchand-Balun"><span class="nav-number">4.</span> <span class="nav-text">Marchand Balun</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Balun"><span class="nav-number">4.1.</span> <span class="nav-text">General Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirement-of-Balun"><span class="nav-number">4.2.</span> <span class="nav-text">Requirement of Balun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Marchand-Balun-Formulation"><span class="nav-number">4.3.</span> <span class="nav-text">Marchand Balun Formulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Impedance-Inverting-Balun"><span class="nav-number">4.4.</span> <span class="nav-text">Impedance Inverting Balun</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">5.</span> <span class="nav-text">Appendix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -774,7 +797,7 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -868,7 +891,7 @@ Z_{pa}=\frac{1}{Z_L}\left(\frac{\sqrt{2}}{Y_m\csc(\theta)}\right)^2</script><h2 
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">209k</span>
+    <span title="Symbols count total">221k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
