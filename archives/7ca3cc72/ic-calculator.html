@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="This article features calculators of:  Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
+  <meta name="description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
 <meta name="keywords" content="RFIC,Circuit Theory,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IC Calculator">
 <meta property="og:url" content="https://triblemany.github.io/archives/7ca3cc72/ic-calculator.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This article features calculators of:  Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
+<meta property="og:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-20T03:59:32.180Z">
+<meta property="og:updated_time" content="2020-03-20T07:16:07.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IC Calculator">
-<meta name="twitter:description" content="This article features calculators of:  Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
+<meta name="twitter:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
   <link rel="canonical" href="https://triblemany.github.io/archives/7ca3cc72/ic-calculator">
 
 
@@ -291,7 +291,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-20 11:59:32" itemprop="dateModified" datetime="2020-03-20T11:59:32+08:00">2020-03-20</time>
+                <time title="Modified: 2020-03-20 15:16:07" itemprop="dateModified" datetime="2020-03-20T15:16:07+08:00">2020-03-20</time>
               </span>
             
           
@@ -305,7 +305,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>12k</span>
+              <span>13k</span>
             </span>
           
 
@@ -320,11 +320,25 @@
       
         <p>This article features calculators of:</p>
 <ul>
+<li>Simple calculator</li>
 <li>Resonating frequency.</li>
 <li>Impedance conversion.</li>
 <li>Transmission line RLGC parameters from S parameters.</li>
 </ul>
 <a id="more"></a>
+<h1 id="Simple-Calculator"><a href="#Simple-Calculator" class="headerlink" title="Simple Calculator"></a>Simple Calculator</h1><p>Usages includes:</p>
+<ul>
+<li>Direct calculation: <code>(1+2) 3/4</code> (where space denotes multiplication)</li>
+<li>Variable definition: <code>x=2</code></li>
+<li>Function definition: <code>db(x)=20 log10(x)</code></li>
+<li>Matrix calculation: <code>det([1, 2;3, 4])</code></li>
+<li>Symbolic calaulation:<ul>
+<li><code>a=simplify(&#39;x+x&#39;)</code></li>
+<li><code>a.evaluate({x:2})</code></li>
+<li><code>derivative(&#39;log(x)&#39;,&#39;x&#39;)</code></li>
+</ul>
+</li>
+</ul>
 <html>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.1/math.min.js"></script>
@@ -675,14 +689,20 @@ function calcSimp(){
         $("#simp-res").html("");
         return;
     }
-    content = ">>> " + input + "<br/>";
+    content = ">>> " + input + "\n";
     try{
-        content += parser.evaluate(input).toString() + "<br/>";
+        tmp = parser.evaluate(input).toString();
+        if(tmp == "function e(t,r){\"use strict\";if(arguments.length===_&&p(t)&&v(r)){return j.apply(null,arguments)}if(arguments.length===I&&m(t)&&b(r)){return E.apply(null,arguments)}if(arguments.length===q&&h(t)&&x(r)){return S.apply(null,arguments)}if(arguments.length===B&&d(t)&&w(r)){return A.apply(null,arguments)}if(arguments.length===k&&y(t)&&N(r)){return C.apply(null,arguments)}if(arguments.length===z&&g(t)&&O(r)){return T.apply(null,arguments)}return P.apply(null,arguments)}"){
+            tmp = "Function defined";
+        }
+        content += tmp + "\n";
     }
     catch(err){
-        content += "Error: " + err.message + "<br/>";
+        content += "Error: " + err.message + "\n";
     }
     $("#simp-res").append(content);
+    height = $("#simp-res")[0].scrollHeight;
+    $("#simp-res").scrollTop(height)
 }
 
 function cleanSimp(){
@@ -692,26 +712,29 @@ function cleanSimp(){
 </script>
 <style type="text/css">
     input {
-    text-align:center;
-    vertical-align:middle
+        text-align:center;
+        vertical-align:middle
     }
     #simp-res {
         font-family:"Courier New";
         font-weight:bold;
-    }
-    #simp-res-div {
         background-color: #F1F1F1;
         line-height: normal;
+        border:none;
+        width:100%;
+    }
+    #simp-input {
+        font-family:"Courier New";
+        font-weight:bold;
     }
 </style>
-<h2>Simple Calculator</h2>
+
     <div id="simp-res-div">
-        <p id="simp-res"></p>
+        <textarea id="simp-res" readonly="readonly" rows="16"></textarea>
     </div>
     <input type="text" id="simp-input" value size="30" style="text-align:left">
     <button type="button" onclick="calcSimp()">Calculate</button>
     <button type="button" onclick="cleanSimp()">Clear</button>
-<h2>Resonance</h2>
 <h2>Resonance</h2>
 <table>
     <tr>
@@ -736,6 +759,9 @@ function cleanSimp(){
     <tr>
         <td>Frequency [GHz]</td>
         <td><input type="text" id="freqi" value="28" size="10" onclick="this.select()"></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr>
         <td>Impedance</td>
@@ -781,6 +807,7 @@ function cleanSimp(){
         <td><input type="text" id="Nr" value="50" size="10" onclick="this.select()"></td>
         <td>+j*</td>
         <td><input type="text" id="Ni" value="0" size="10" onclick="this.select()"></td>
+        <td></td>
     </tr>
     <tr>
         <td>Reflection</td>
@@ -792,10 +819,16 @@ function cleanSimp(){
     <tr>
         <td>VSWR</td>
         <td id="vswr"></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr>
         <td>Q</td>
         <td id="q"></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 </table>
 
@@ -994,7 +1027,7 @@ function cleanSimp(){
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Simple Calculator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">Impedance Conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">S to RLGC</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Simple-Calculator"><span class="nav-number">1.</span> <span class="nav-text">Simple Calculator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">Impedance Conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">S to RLGC</span></a></li></ol></li></ol></div>
           </div>
         
       </div>
@@ -1110,7 +1143,7 @@ function cleanSimp(){
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">235k</span>
+    <span title="Symbols count total">236k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
