@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Triblemany">
 <meta property="og:description" content="This article features calculators of:  Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-18T12:55:15.633Z">
+<meta property="og:updated_time" content="2020-03-20T03:57:05.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IC Calculator">
 <meta name="twitter:description" content="This article features calculators of:  Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
@@ -280,11 +280,19 @@
                 
               
 
-              <time title="Created: 2020-03-18 20:40:20 / Modified: 20:55:15" itemprop="dateCreated datePublished" datetime="2020-03-18T20:40:20+08:00">2020-03-18</time>
+              <time title="Created: 2020-03-18 20:40:20" itemprop="dateCreated datePublished" datetime="2020-03-18T20:40:20+08:00">2020-03-18</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-20 11:57:05" itemprop="dateModified" datetime="2020-03-20T11:57:05+08:00">2020-03-20</time>
+              </span>
             
           
 
@@ -322,6 +330,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.1/math.min.js"></script>
 <script type="text/javascript">
 const { complex, add, subtract, multiply, divide, sqrt, pow, abs, pi, e, log, log10, format } = math;
+const parser = math.parser()
 
 function s2rlgc(s11, s12, s21, s22, linelength, freq, z0){
     precision = 5;
@@ -634,8 +643,10 @@ $(document).ready(function(){
     $("#PC").change(calcP);
 
     $("#calcR").click(calcR);
-    $("#Rr").click(calcR);
-    $("#Ri").click(calcR);
+    $("#Rr").change(calcR);
+    $("#Ri").change(calcR);
+
+    $("#simp-input").change(calcSimp);
 });
 
 function calcResFreq(){
@@ -649,144 +660,185 @@ function calcResInd(){
 function calcResCap(){
     $("#res-cap").val(format(1/4/pi/pi/pow(parseFloat($("#res-freq").val()), 2)/parseFloat($("#res-ind").val())*1e9, 5));
 }
+function calcSimp(){
+    input = $("#simp-input").val();
+    $("#simp-input").val("");
+    if(input == ""){
+        return;
+    }
+    else if(input == "clean"){
+        $("#simp-res").html("");
+        return;
+    }
+    else if(input == "clear"){
+        parser.clear();
+        $("#simp-res").html("");
+        return;
+    }
+    content = ">>> " + input + "<br/>";
+    try{
+        content += parser.evaluate(input).toString() + "<br/>";
+    }
+    catch(err){
+        content += "Error: " + err.message + "<br/>";
+    }
+    $("#simp-res").append(content);
+}
 
+function cleanSimp(){
+    $("#simp-res").html("");
+    parser.clear();
+}
 </script>
 <style type="text/css">
-input {
-text-align:center;
-vertical-align:middle
-}
+    input {
+    text-align:center;
+    vertical-align:middle
+    }
+    #simp-res {
+        font-family:"Courier New";
+        font-weight:bold;
+    }
+    #simp-res-div {
+        background-color: #F1F1F1;
+    }
 </style>
+<h2>Simple Calculator</h2>
+    <div id="simp-res-div">
+        <p id="simp-res"></p>
+    </div>
+    <input type="text" id="simp-input" value size="30" style="text-align:left">
+    <button type="button" onclick="calcSimp()">Calculate</button>
+    <button type="button" onclick="cleanSimp()">Clear</button>
 <h2>Resonance</h2>
-    <table>
-        <tr>
-            <td>Frequency [GHz]</td>
-            <td><input type="text" id="res-freq" value="28" size="10" onclick="this.select()"></td>
-            <td><button type="button" onclick="calcResFreq()">Calculate This</button></td>
-        </tr>
-        <tr>
-            <td>Inductance [pH]</td>
-            <td><input type="text" id="res-ind" value="200" size="10" onclick="this.select()"></td>
-            <td><button type="button" onclick="calcResInd()">Calculate This</button></td>
-        </tr>
-        <tr>
-            <td>Capacitance [fF]</td>
-            <td><input type="text" id="res-cap" value="160" size="10" onclick="this.select()"></td>
-            <td><button type="button" onclick="calcResCap()">Calculate This</button></td>
-        </tr>
-    </table>
+<h2>Resonance</h2>
+<table>
+    <tr>
+        <td>Frequency [GHz]</td>
+        <td><input type="text" id="res-freq" value="28" size="10" onclick="this.select()"></td>
+        <td><button type="button" onclick="calcResFreq()">Calculate This</button></td>
+    </tr>
+    <tr>
+        <td>Inductance [pH]</td>
+        <td><input type="text" id="res-ind" value="200" size="10" onclick="this.select()"></td>
+        <td><button type="button" onclick="calcResInd()">Calculate This</button></td>
+    </tr>
+    <tr>
+        <td>Capacitance [fF]</td>
+        <td><input type="text" id="res-cap" value="160" size="10" onclick="this.select()"></td>
+        <td><button type="button" onclick="calcResCap()">Calculate This</button></td>
+    </tr>
+</table>
 
-    <h2>Impedance Conversion</h2>
-    <table>
-        <tr>
-            <td>Frequency [GHz]</td>
-            <td><input type="text" id="freqi" value="28" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>Impedance</td>
-            <td><input type="text" id="Ireal" value="50" size="10" onclick="this.select()"></td>
-            <td>+j*</td>
-            <td><input type="text" id="Iimag" value="0" size="10" onclick="this.select()"></td>
-            <td><button type="button" id="calcImp">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>Admittance</td>
-            <td><input type="text" id="Areal" value="0.02" size="10" onclick="this.select()"></td>
-            <td>+j*</td>
-            <td><input type="text" id="Aimag" value="0" size="10" onclick="this.select()"></td>
-            <td><button type="button" id="calcAdm">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>Series</td>
-            <td><input type="text" id="SR" value="50" size="10" onclick="this.select()"></td>
-            <td>+</td>
-            <td>
-                <input type="text" id="SC" value="0" size="10" onclick="this.select()">
-                <select id="ST">
-                    <option value="Scap">fF</option>
-                    <option value="Sind">pH</option>
-                </select>
-            </td>
-            <td><button type="button" id="calcS">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>Shunt</td>
-            <td><input type="text" id="PR" value="50" size="10" onclick="this.select()"></td>
-            <td>||</td>
-            <td>
-                <input type="text" id="PC" value="0" size="10" onclick="this.select()">
-                <select id="PT">
-                    <option value="Pcap">fF</option>
-                    <option value="Pind">pH</option>
-                </select></td>
-            <td><button type="button" id="calcP">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>Z0</td>
-            <td><input type="text" id="Nr" value="50" size="10" onclick="this.select()"></td>
-            <td>+j*</td>
-            <td><input type="text" id="Ni" value="0" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>Reflection</td>
-            <td><input type="text" id="Rr" value="0" size="10" onclick="this.select()"></td>
-            <td>+j*</td>
-            <td><input type="text" id="Ri" value="0" size="10" onclick="this.select()"></td>
-            <td><button type="button" id="calcR">Calculate</button></td>
-        </tr>
-        <tr>
-            <td>VSWR</td>
-            <td id="vswr"></td>
-        </tr>
-        <tr>
-            <td>Q</td>
-            <td id="q"></td>
-        </tr>
-    </table>
+<h2>Impedance Conversion</h2>
+<table>
+    <tr>
+        <td>Frequency [GHz]</td>
+        <td><input type="text" id="freqi" value="28" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>Impedance</td>
+        <td><input type="text" id="Ireal" value="50" size="10" onclick="this.select()"></td>
+        <td>+j*</td>
+        <td><input type="text" id="Iimag" value="0" size="10" onclick="this.select()"></td>
+        <td><button type="button" id="calcImp">Calculate</button></td>
+    </tr>
+    <tr>
+        <td>Admittance</td>
+        <td><input type="text" id="Areal" value="0.02" size="10" onclick="this.select()"></td>
+        <td>+j*</td>
+        <td><input type="text" id="Aimag" value="0" size="10" onclick="this.select()"></td>
+        <td><button type="button" id="calcAdm">Calculate</button></td>
+    </tr>
+    <tr>
+        <td>Series</td>
+        <td><input type="text" id="SR" value="50" size="10" onclick="this.select()"></td>
+        <td>+</td>
+        <td>
+            <input type="text" id="SC" value="0" size="10" onclick="this.select()">
+            <select id="ST">
+                <option value="Scap">fF</option>
+                <option value="Sind">pH</option>
+            </select>
+        </td>
+        <td><button type="button" id="calcS">Calculate</button></td>
+    </tr>
+    <tr>
+        <td>Shunt</td>
+        <td><input type="text" id="PR" value="50" size="10" onclick="this.select()"></td>
+        <td>||</td>
+        <td>
+            <input type="text" id="PC" value="0" size="10" onclick="this.select()">
+            <select id="PT">
+                <option value="Pcap">fF</option>
+                <option value="Pind">pH</option>
+            </select></td>
+        <td><button type="button" id="calcP">Calculate</button></td>
+    </tr>
+    <tr>
+        <td>Z0</td>
+        <td><input type="text" id="Nr" value="50" size="10" onclick="this.select()"></td>
+        <td>+j*</td>
+        <td><input type="text" id="Ni" value="0" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>Reflection</td>
+        <td><input type="text" id="Rr" value="0" size="10" onclick="this.select()"></td>
+        <td>+j*</td>
+        <td><input type="text" id="Ri" value="0" size="10" onclick="this.select()"></td>
+        <td><button type="button" id="calcR">Calculate</button></td>
+    </tr>
+    <tr>
+        <td>VSWR</td>
+        <td id="vswr"></td>
+    </tr>
+    <tr>
+        <td>Q</td>
+        <td id="q"></td>
+    </tr>
+</table>
 
-
-​    
-    <h2>S to RLGC</h2>
-    <table>
-        <tr>
-            <td>Z0 [Ohm]</td>
-            <td><input type="text" id="Z0" value="50" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>Length [um]</td>
-            <td><input type="text" id="l" value="200" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>Frequency [GHz]</td>
-            <td><input type="text" id="freq" value="28" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>S11,mag</td>
-            <td><input type="text" id="S11r" value="0.012" size="10" onclick="this.select()">
-            </td><td>S11,pha</td>
-            <td><input type="text" id="S11i" value="-115.7" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>S21,mag</td>
-            <td><input type="text" id="S21r" value="0.985" size="10" onclick="this.select()">
-            </td><td>S21,pha</td>
-            <td><input type="text" id="S21i" value="-14.3" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>S12,mag</td>
-            <td><input type="text" id="S12r" size="10" onclick="this.select()">
-            </td><td>S12,pha</td>
-            <td><input type="text" id="S12i" size="10" onclick="this.select()"></td>
-        </tr>
-        <tr>
-            <td>S22,mag</td>
-            <td><input type="text" id="S22r" size="10" onclick="this.select()">
-            </td><td>S22,pha</td>
-            <td><input type="text" id="S22i" size="10" onclick="this.select()"></td>
-        </tr>
-    </table>
-    <button type="button" id="calcRLGC">Calculate</button>
-    <p id="resRLGC"></p>
+<h2>S to RLGC</h2>
+<table>
+    <tr>
+        <td>Z0 [Ohm]</td>
+        <td><input type="text" id="Z0" value="50" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>Length [um]</td>
+        <td><input type="text" id="l" value="200" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>Frequency [GHz]</td>
+        <td><input type="text" id="freq" value="28" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>S11,mag</td>
+        <td><input type="text" id="S11r" value="0.012" size="10" onclick="this.select()">
+        </td><td>S11,pha</td>
+        <td><input type="text" id="S11i" value="-115.7" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>S21,mag</td>
+        <td><input type="text" id="S21r" value="0.985" size="10" onclick="this.select()">
+        </td><td>S21,pha</td>
+        <td><input type="text" id="S21i" value="-14.3" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>S12,mag</td>
+        <td><input type="text" id="S12r" size="10" onclick="this.select()">
+        </td><td>S12,pha</td>
+        <td><input type="text" id="S12i" size="10" onclick="this.select()"></td>
+    </tr>
+    <tr>
+        <td>S22,mag</td>
+        <td><input type="text" id="S22r" size="10" onclick="this.select()">
+        </td><td>S22,pha</td>
+        <td><input type="text" id="S22i" size="10" onclick="this.select()"></td>
+    </tr>
+</table>
+<button type="button" id="calcRLGC">Calculate</button>
+<p id="resRLGC"></p>
 </html>
 
 
@@ -822,14 +874,14 @@ vertical-align:middle
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
+      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\5544ed83\pa-backoff-efficiency-analysis.html" rel="bookmark">功率放大器的效率分析</a></div>
+      <div class="popular-posts-title"><a href="\archives\587faa75\network-parameter.html" rel="bookmark">Network Parameters in Circuit Analysis</a></div>
       
     </li>
   
@@ -941,7 +993,7 @@ vertical-align:middle
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Impedance Conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">S to RLGC</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Simple Calculator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">Resonance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">Impedance Conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">S to RLGC</span></a></li></ol></div>
           </div>
         
       </div>
@@ -1057,7 +1109,7 @@ vertical-align:middle
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">234k</span>
+    <span title="Symbols count total">235k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
