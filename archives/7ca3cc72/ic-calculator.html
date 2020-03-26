@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Triblemany">
 <meta property="og:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-20T07:16:07.473Z">
+<meta property="og:updated_time" content="2020-03-26T10:11:25.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IC Calculator">
 <meta name="twitter:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
@@ -291,7 +291,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-20 15:16:07" itemprop="dateModified" datetime="2020-03-20T15:16:07+08:00">2020-03-20</time>
+                <time title="Modified: 2020-03-26 18:11:25" itemprop="dateModified" datetime="2020-03-26T18:11:25+08:00">2020-03-26</time>
               </span>
             
           
@@ -305,7 +305,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>13k</span>
+              <span>15k</span>
             </span>
           
 
@@ -660,7 +660,7 @@ $(document).ready(function(){
     $("#Rr").change(calcR);
     $("#Ri").change(calcR);
 
-    $("#simp-input").change(calcSimp);
+    //$("#simp-input").change(calcSimp);
 });
 
 function calcResFreq(){
@@ -674,8 +674,11 @@ function calcResInd(){
 function calcResCap(){
     $("#res-cap").val(format(1/4/pi/pi/pow(parseFloat($("#res-freq").val()), 2)/parseFloat($("#res-ind").val())*1e9, 5));
 }
+
 function calcSimp(){
     input = $("#simp-input").val();
+    inputHistory.push( input );
+    currentItem = inputHistory.length;
     $("#simp-input").val("");
     if(input == ""){
         return;
@@ -685,13 +688,12 @@ function calcSimp(){
         return;
     }
     else if(input == "clear"){
-        parser.clear();
-        $("#simp-res").html("");
+        cleanSimp();
         return;
     }
     content = ">>> " + input + "\n";
     try{
-        tmp = parser.evaluate(input).toString();
+        var tmp = parser.evaluate(input).toString();
         if(tmp == "function e(t,r){\"use strict\";if(arguments.length===_&&p(t)&&v(r)){return j.apply(null,arguments)}if(arguments.length===I&&m(t)&&b(r)){return E.apply(null,arguments)}if(arguments.length===q&&h(t)&&x(r)){return S.apply(null,arguments)}if(arguments.length===B&&d(t)&&w(r)){return A.apply(null,arguments)}if(arguments.length===k&&y(t)&&N(r)){return C.apply(null,arguments)}if(arguments.length===z&&g(t)&&O(r)){return T.apply(null,arguments)}return P.apply(null,arguments)}"){
             tmp = "Function defined";
         }
@@ -701,14 +703,59 @@ function calcSimp(){
         content += "Error: " + err.message + "\n";
     }
     $("#simp-res").append(content);
-    height = $("#simp-res")[0].scrollHeight;
-    $("#simp-res").scrollTop(height)
+    var height = $("#simp-res")[0].scrollHeight;
+    $("#simp-res").scrollTop(height);
 }
 
 function cleanSimp(){
     $("#simp-res").html("");
     parser.clear();
+    $("#simp-input").val("");
+    inputHistory = new Array();
+    currentItem = 0;
 }
+
+var keyEnter = 13;
+var keyUp = 38;
+var keyDown = 40;
+var inputHistory = new Array();
+var tmpInput = '';
+var currentItem = 0;
+$(document).keydown(function(event){
+    var isFocus=$("#simp-input").is(":focus");
+    if(isFocus){
+        //alert(event.keyCode);
+        if(event.keyCode == keyEnter){
+            calcSimp();
+            return false;
+        }
+        if(event.keyCode == keyUp){
+            if(currentItem != 0){
+                if(currentItem == inputHistory.length){
+                    tmpInput = $("#simp-input").val();
+                }
+                currentItem -= 1;
+                $("#simp-input").val(inputHistory[currentItem]);
+                var l = inputHistory[currentItem].length;
+                document.getElementById('simp-input').setSelectionRange(l, l);
+            }
+            return false;
+        }
+        if(event.keyCode == keyDown){
+            if(currentItem < inputHistory.length - 1){
+                currentItem += 1;
+                $("#simp-input").val(inputHistory[currentItem]);
+                var l = inputHistory[currentItem].length;
+                document.getElementById('simp-input').setSelectionRange(l, l);
+            }
+            else if(currentItem == inputHistory.length - 1){
+                currentItem += 1;
+                $("#simp-input").val(tmpInput);
+            }
+            return false;
+        }
+    }
+})
 </script>
 <style type="text/css">
     input {
@@ -1143,7 +1190,7 @@ function cleanSimp(){
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">236k</span>
+    <span title="Symbols count total">237k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
