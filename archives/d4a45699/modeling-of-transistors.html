@@ -55,30 +55,27 @@
   };
 </script>
 
-  <meta name="description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
+  <meta name="description" content="This article is about the modeling of MOSFET in small-signal condition.">
 <meta name="keywords" content="RFIC,Transistor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Basic Theory of MOSFETs">
-<meta property="og:url" content="https://triblemany.github.io/archives/6eefa2f5/mosfet.html">
+<meta property="og:title" content="Modeling of Transistors in Small-Signal Condition">
+<meta property="og:url" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
+<meta property="og:description" content="This article is about the modeling of MOSFET in small-signal condition.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-plot.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/Cgs.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203223737905.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203224346282.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203224830841.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200203225022517.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200204171429371.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/20190617153235935.png">
-<meta property="og:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/image-20200204171347882.png">
-<meta property="og:updated_time" content="2020-02-04T09:16:47.645Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/schematic-of-the-small-signal-mosfet-model.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/schematic-for-extrinsic-parameter-extraction.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/simulated-result-for-extrinsic-parameter-extraction.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/schematic-for-intrinsic-parameter-extraction.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/simulated-result-for-intrinsic-parameter-extraction.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/extracted-parameters.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/comparison-of-the-results.png">
+<meta property="og:updated_time" content="2020-05-28T08:09:16.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Basic Theory of MOSFETs">
-<meta name="twitter:description" content="This article presents the formulas and theories regarding the basic MOSFETs.">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/6eefa2f5/mosfet/parasitic-capacitance-layout.png">
-  <link rel="canonical" href="https://triblemany.github.io/archives/6eefa2f5/mosfet">
+<meta name="twitter:title" content="Modeling of Transistors in Small-Signal Condition">
+<meta name="twitter:description" content="This article is about the modeling of MOSFET in small-signal condition.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors/schematic-of-the-small-signal-mosfet-model.png">
+  <link rel="canonical" href="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors">
 
 
 <script id="page-configurations">
@@ -92,7 +89,7 @@
   };
 </script>
 
-  <title>Basic Theory of MOSFETs | Triblemany</title>
+  <title>Modeling of Transistors in Small-Signal Condition | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -263,7 +260,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/6eefa2f5/mosfet.html">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Triblemany">
@@ -275,7 +272,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Basic Theory of MOSFETs
+        <h1 class="post-title" itemprop="name headline">Modeling of Transistors in Small-Signal Condition
 
           
         </h1>
@@ -291,7 +288,7 @@
                 
               
 
-              <time title="Created: 2020-01-26 17:35:15" itemprop="dateCreated datePublished" datetime="2020-01-26T17:35:15+08:00">2020-01-26</time>
+              <time title="Created: 2020-05-26 18:55:27" itemprop="dateCreated datePublished" datetime="2020-05-26T18:55:27+08:00">2020-05-26</time>
             </span>
           
             
@@ -302,7 +299,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-04 17:16:47" itemprop="dateModified" datetime="2020-02-04T17:16:47+08:00">2020-02-04</time>
+                <time title="Modified: 2020-05-28 16:09:16" itemprop="dateModified" datetime="2020-05-28T16:09:16+08:00">2020-05-28</time>
               </span>
             
           
@@ -316,7 +313,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>4.9k</span>
+              <span>6.3k</span>
             </span>
           
 
@@ -329,96 +326,125 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>This article presents the formulas and theories regarding the basic MOSFETs.</p>
+        <p>This article is about the modeling of MOSFET in small-signal condition.</p>
 <a id="more"></a>
-<h2 id="I-V-Characteristic"><a href="#I-V-Characteristic" class="headerlink" title="I-V Characteristic"></a>I-V Characteristic</h2><ol>
-<li>Turn-off region ($V_{GS}&lt;V_{TH}$)</li>
-<li><p>Triode region/ Linear region ($V_{GS}&gt;V_{TH}, V_{DS}&lt;V_{GS}-V_{TH}$)</p>
-<script type="math/tex; mode=display">
- I_d=\mu_nC_{ox}\frac{W}{L}\left[(V_{GS}-V_{TH})V_{DS}-\frac{1}{2}V_{DS}^2\right]</script></li>
-<li><p>Saturation region/ Square law ($V_{GS}&gt;V_{TH}, V_{DS}&gt;V_{GS}-V_{TH}$)</p>
-<script type="math/tex; mode=display">
- I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2</script></li>
-</ol>
-<h2 id="Calculation-of-Gm"><a href="#Calculation-of-Gm" class="headerlink" title="Calculation of Gm"></a>Calculation of Gm</h2><p>In saturation region</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-g_m&=\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})\\
-&=\sqrt{2\mu_nC_{ox}\frac{W}{L}I_D}\\
-&=\frac{2I_D}{V_{GS}-V_{TH}}
-\end{aligned}</script><h2 id="Second-Order-Effects"><a href="#Second-Order-Effects" class="headerlink" title="Second-Order Effects"></a>Second-Order Effects</h2><h3 id="Body-Effect"><a href="#Body-Effect" class="headerlink" title="Body Effect"></a>Body Effect</h3><script type="math/tex; mode=display">
-V_{TH}=V_{TH0}+\gamma\left(\sqrt{2\Phi_F+V_{SB}}-\sqrt{|2\Phi_F|}\right)</script><p>and</p>
-<script type="math/tex; mode=display">
-\gamma=\frac{\sqrt{2q\epsilon_{si}N_{sub}}}{C_{ox}}\\
-V_{TH0}=\Phi_{MS}+2\Phi_{F}+\frac{Q_dep}{C_ox}\\
-Q_{dep}=\sqrt{4q\epsilon_{si}|\Phi_F|N_{sub}}\\
-\Phi_F=\frac{kT}{q}\ln{\frac{N_{sub}}{n_i}}</script><p>Thus, body effect can be utilized to modify the threshold voltage.</p>
-<h3 id="Channel-Length-Modulation"><a href="#Channel-Length-Modulation" class="headerlink" title="Channel Length Modulation"></a>Channel Length Modulation</h3><script type="math/tex; mode=display">
-I_d=\frac{1}{2}\mu_nC_{ox}\frac{W}{L'}\left(V_{GS}-V_{TH}\right)^2(1+\lambda V_{DS})</script><p>and</p>
-<script type="math/tex; mode=display">
-\lambda\propto\frac{1}{L}</script><p>Thus, long-channel MOSFET exhibits less channel modulation effect.</p>
-<h3 id="Subthreshold-Conduction"><a href="#Subthreshold-Conduction" class="headerlink" title="Subthreshold Conduction"></a>Subthreshold Conduction</h3><p>Or called weak inversion region.</p>
-<script type="math/tex; mode=display">
-I_D=I_0\exp\frac{V_{GS}}{\xi V_{T}}</script><p>and</p>
-<script type="math/tex; mode=display">
-V_{T}=\frac{kT}{q}</script><p>MOSFETS operating in subthreshold region have higher gain, but generally, MOSFETs are inferior to bipolar transistors in terms of gm.</p>
-<h2 id="Parasitic"><a href="#Parasitic" class="headerlink" title="Parasitic"></a>Parasitic</h2><h3 id="Capacitance"><a href="#Capacitance" class="headerlink" title="Capacitance"></a>Capacitance</h3><p><img src="mosfet/parasitic-capacitance-layout.png" alt="parasitic-capacitance-layout"></p>
-<script type="math/tex; mode=display">
-C_1=WLC_{ox}\\
-C_2=WL\sqrt{q\epsilon_{si}N_{sub}/(4\Phi_F)}\\
-C_{5/6}=C_j+C_{jsw}
-C_j=C_{j0}/[1+V_R/\Phi_B]^m</script><p><img src="mosfet/parasitic-capacitance-plot.png" alt="parasitic-capacitance-plot"></p>
-<ol>
-<li><p>Off region</p>
-<script type="math/tex; mode=display">
-C_{GS}=C_{GD}=C_{3/4}=WC_{ov}\\
-C_{GB}=\frac{C_1C_2}{C_1+C_2}</script></li>
-<li><p>Triode region</p>
-<p>Gate-channel capacitance is evenly split between the source and the drain</p>
-<script type="math/tex; mode=display">
-C_{GS}=C_{GD}=\frac{C_{1}}{2}+C_{3/4}</script></li>
-<li><p>Saturation region</p>
-<script type="math/tex; mode=display">
-C_{GD}=C_{3/4}=WC_{ov}\\\\
-C_{GS}=\frac{2}{3}C_1+C_{3/4}</script></li>
-</ol>
-<h3 id="Resistance"><a href="#Resistance" class="headerlink" title="Resistance"></a>Resistance</h3><p>In saturation region</p>
+<h2 id="Direct-Extraction-Conditions"><a href="#Direct-Extraction-Conditions" class="headerlink" title="Direct Extraction Conditions"></a>Direct Extraction Conditions</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Bias State</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zero bias</td>
+<td>$V_{gs}=0,V_{ds}=0$</td>
+</tr>
+<tr>
+<td>Strong inversion</td>
+<td>$V_{gs}&gt;V_{th},V_{ds}=0$</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>$V_{ds}&gt;V_{gs}-V_{th}&gt;0$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Small-Signal-Parameter-Extraction"><a href="#Small-Signal-Parameter-Extraction" class="headerlink" title="Small-Signal Parameter Extraction"></a>Small-Signal Parameter Extraction</h2><h3 id="Model-Description"><a href="#Model-Description" class="headerlink" title="Model Description"></a>Model Description</h3><p>Schematic of the small-signal MOSFET model. It is comprised of an intrinsic transistor and extrinsic parasitic resistors and inductors (not drawn). In the model, the non-quasi-static (NQS) effect is represented by a delay $\tau_g$ in the voltage-controlled current source (VCCS).</p>
+<p><img src="modeling-of-transistors/schematic-of-the-small-signal-mosfet-model.png" alt="Schematic of the small signal MOSFET model"></p>
+<p>The Y parameter of the intrinsic transistor $Y&#39;$ is</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-r_o&=\frac{\partial V_{DS}}{\partial I_{D}}\\
-&=\frac{1}{\frac{1}{2}\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})^2\cdot\lambda}\\
-&\approx\frac{1}{\lambda I_D}
-\end{aligned}</script><p>In triode region</p>
+Y'_{11}&=\frac{\omega^2R_{gd}C_{gd}^2+j\omega C_{gd}}{1+\omega^2R_{gd}^2C_{gd}^2}+\frac{\omega^2R_{gs}C_{gs}^2+j\omega C_{gs}}{1+\omega^2R_{gs}^2C_{gs}^2}\\
+Y'_{12}&=-\frac{\omega^2R_{gd}C_{gd}^2+j\omega C_{gd}}{1+\omega^2R_{gd}^2C_{gd}^2}\\
+Y'_{21}&=-\frac{\omega^2R_{gd}C_{gd}^2+j\omega C_{gd}}{1+\omega^2R_{gd}^2C_{gd}^2}+\frac{g_me^{-j\omega\tau_g}(1-j\omega C_{gs})}{1+\omega^2R_{gs}^2C_{gs}^2}\\
+Y'_{22}&=\frac{\omega^2R_{gd}C_{gd}^2+j\omega C_{gd}}{1+\omega^2R_{gd}^2C_{gd}^2}+\frac{\omega^2R_{db}C_{db}^2+j\omega C_{db}}{1+\omega^2R_{db}^2C_{db}^2}+\frac{1}{R_{ds}}+j\omega C_{ds}
+\end{aligned}</script><p>Several observations can be made from the Y parameter. First, the denominator of these equations approaches unit when the frequency approaches zero. For instance, at sufficiently low frequency, we have</p>
 <script type="math/tex; mode=display">
-r_{ds}=\frac{1}{\mu_nC_{ox}\frac{W}{L}(V_{GS}-V_{TH})}</script><h3 id="MOSFET-as-Capacitor"><a href="#MOSFET-as-Capacitor" class="headerlink" title="MOSFET as Capacitor"></a>MOSFET as Capacitor</h3><p>The source, drain and the bulk are connected together as a terminal, while the gate is treated as another terminal.</p>
-<ol>
-<li>Negative potential on gate -&gt; attract holes -&gt; accumulation region -&gt; high capacitance</li>
-<li>Rise potential on gate -&gt; expel both holes and electrons -&gt; depletion region/ weak inversion region -&gt; low capacitance</li>
-<li>Gate potential exceed $V_{TH}$ -&gt; attract electrons -&gt; strong inversion region -&gt; high capacitance</li>
+Y'_{22}+Y'_{12}=\frac{1}{R_{ds}}+\omega^2R_{db}C_{db}^2+j\omega(C_{ds}+C_{db})</script><p>Second, at sufficiently high frequency, the Y parameter can be simplified as</p>
+<script type="math/tex; mode=display">
+Y'_{22}+Y'_{12}=\frac{1}{R_{ds}}+\frac{1}{R_{db}}+j\omega C_{ds}</script><p>Adopting these two conditions, we may calculate $R_{ds}, R_{db}, C_{ds}, C_{db}$.</p>
+<p>The Z parameter of the whole transistor $Z$ is</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z_{11}&=Z'_{11}+R_g+R_s+j\omega(L_s+L_g)\\
+Z_{12}&=Z'_{12}+R_s+j\omega L_s\\
+Z_{21}&=Z'_{21}+R_s+j\omega L_s\\
+Z_{22}&=Z'_{22}+R_d+R_s+j\omega(L_s+L_d)
+\end{aligned}</script><p>where $Z&#39;$ is the Z parameter of the intrinsic transistor, and can be converted from the aforementioned Y parameter.</p>
+<p>To extract the outside parasitic parameters, coldFET method is used. In the setting, the transistor is biased in <strong>strong inversion region</strong> (high Vgs and zero Vds). Hence, the drain and the source of the intrinsic transistor is assumed to be connected together. The Z parameter for this setting is</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Z_{11}=&R_s+R_g+j\omega(L_s+L_g)+\\
+&\frac{(1+j\omega C_{gd}R_{gd})(1+j\omega C_{gs}R_{gs})}{j\omega(C_{gd}+C_{gs})-j\omega C_{gd}C_{gs}(R_{gd}+R_{gs})}\\
+Z_{12}=&Z_{21}=R_s+j\omega L_s\\
+Z_{22}=&R_s+R_d+j\omega(L_s+L_d)
+\end{aligned}</script><p>We may further split the real and imaginary part of the $Z_{11}$, as</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\mathrm{real}(Z_{11})&=R_s+R_g+\frac{A_1+B_1\omega^2}{C+D\omega^2}\\
+\mathrm{imag}(Z_{11})&=\omega(L_s+L_g)+\frac{1}{\omega}\frac{A_2+B_2\omega^2}{C+D\omega^2}\\
+A_1&=C_{gs}^2R_{gs}+C_{gd}^2R_{gd}\\
+B_1&=C_{gs}^2C_{gd}^2R_{gs}R_{gd}(R_{gs}+R_{gd})\\
+A_2&=C_{gs}+C_{gd}\\
+B_2&=C_{gs}C_{gd}(C_{gs}R_{gs}^2+C_{gd}R_{gd}^2)\\
+C&=(C_{gs}+C_{gd})^2\\
+D&=C_{gs}^2C_{gd}^2(R_{gs}+R_{gd})^2
+\end{aligned}</script><p>After manipulation, $L_g, R_g$ can be obtained from</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial\ \mathrm{real}(Z_{11})\omega^2}{\partial\ \omega^2}
+&=R_s+R_g+\frac{A_1C+\omega^2B_1(2C+\omega^2D)}{(C+D\omega^2)^2}\\
+\frac{\partial\ \mathrm{imag}(Z_{11})\omega}{\partial\ \omega^2}
+&=L_s+L_g+\frac{B_2 C- A_2D}{(C+D\omega^2)^2}
+\end{aligned}</script><h3 id="Extraction"><a href="#Extraction" class="headerlink" title="Extraction"></a>Extraction</h3><p>In the first step, we have to extract the extrinsic parameters. Equations are detailed as follows. Unless otherwise stated, the extraction can be performed at any frequency. The transistor must be biased in <strong>strongly inversed region</strong> (i.e., high Vgs and zero Vds).</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R_s&=\mathrm{real}(Z_{12})\\
+L_s&=\frac{\mathrm{imag}(Z_{12})}{\omega}\\
+R_d&=\mathrm{real}(Z_{22}-Z_{12})\\
+L_d&=\frac{\mathrm{imag}(Z_{22}-Z_{12})}{\omega}\\
+R_g&\approx \frac{\partial\ \mathrm{real}(Z_{11})\omega^2}{\partial\ \omega^2}\bigg|_{\omega\to\infty}-R_s\\
+&\approx\frac{\mathrm{imag}(Z_{11}-Z_{12})}{\omega}\\
+L_g&=\frac{\partial\ \mathrm{imag}(Z_{11})\omega}{\partial\ \omega^2}\bigg|_{\omega\to\infty}-L_s
+\end{aligned}</script><p>The second step is to de-embed the extrinsic parameters. For measured data, the extrinsic parameters can be subtracted from the Z parameter; for simulation, we can simply add negative resistors and inductors at proper positions to cancel the original extrinsic parasitics.</p>
+<p>The third step is to assess the intrinsic parameters. For this measurement, the transistor has to be biased at <strong>nominal</strong> gate and drain voltage. Y parameter is measured at both very low and high frequencies. Equations are as follows.</p>
+<p>At a sufficient low frequency</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C_{gs}&=\frac{\mathrm{imag}(Y'_{11}+Y'_{12})}{\omega}\bigg|_{\omega\to0}\\
+R_{gs}&=\frac{\mathrm{real}(Y'_{11}+Y'_{12})}{\omega^2C_{gs}^2}\bigg|_{\omega\to0}\\
+C_{gd}&=\frac{\mathrm{imag}(-Y'_{12})}{\omega}\bigg|_{\omega\to0}\\
+R_{gd}&=\frac{\mathrm{real}(-Y'_{12})}{\omega^2C_{gd}^2}\bigg|_{\omega\to0}\\
+g_m&=\left|\frac{Y'_{21}-Y'_{12}}{Y'_{11}+Y'_{12}}\right|\mathrm{imag}(Y'_{11}+Y'_{12})\bigg|_{\omega\to0}\\
+&\approx\mathrm{real}(Y'_{21})\bigg|_{\omega\to0}\\
+\tau_g&=\mathrm{phase}\left|\frac{Y'_{21}-Y'_{12}}{Y'_{11}+Y'_{12}}\right|\frac{\mathrm{imag}(Y'_{11}+Y'_{12})}{\omega}\bigg|_{\omega\to0}
+\end{aligned}</script><p>Besides</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C_{ds}&=\frac{\mathrm{imag}(Y'_{22}+Y'_{12})}{\omega}|_{\omega\to\infty}\\
+C_{db}&=\frac{\mathrm{imag}(Y'_{22}+Y'_{12})}{\omega}-C_{ds}\bigg|_{\omega\to0}\\
+R_{ds}&=\frac{1}{\mathrm{real}(Y'_{22}+Y'_{12})}\bigg|_{\omega\to0}\\
+R_{db}&=\frac{1}{\mathrm{real}(Y'_{22}+Y'_{12})-1/R_{ds}}\bigg|_{\omega\to\infty}\\
+\end{aligned}</script><h2 id="Extraction-Example"><a href="#Extraction-Example" class="headerlink" title="Extraction Example"></a>Extraction Example</h2><h3 id="Extrinsic-Parameter-Extraction"><a href="#Extrinsic-Parameter-Extraction" class="headerlink" title="Extrinsic Parameter Extraction"></a>Extrinsic Parameter Extraction</h3><p><img src="modeling-of-transistors/schematic-for-extrinsic-parameter-extraction.png" alt="Schematic for extrinsic parameter extraction"></p>
+<p><img src="modeling-of-transistors/simulated-result-for-extrinsic-parameter-extraction.png" alt="Simulated result for extrinsic parameter extraction"></p>
+<p>Thus, estimated parameters are $R_s=0.39,R_d=0.36,R_g=0.51$, inductances are ignored.</p>
+<h3 id="De-Embedding"><a href="#De-Embedding" class="headerlink" title="De-Embedding"></a>De-Embedding</h3><p>The de-embedding can be implemented simply by adding negative &quot;resistors&quot; and &quot;inductors&quot; to each terminal of the transistor.</p>
+<h3 id="Intrinsic-Parameter-Extraction"><a href="#Intrinsic-Parameter-Extraction" class="headerlink" title="Intrinsic Parameter Extraction"></a>Intrinsic Parameter Extraction</h3><p><img src="modeling-of-transistors/schematic-for-intrinsic-parameter-extraction.png" alt="Schematic for intrinsic parameter extraction"></p>
+<p><img src="modeling-of-transistors/simulated-result-for-intrinsic-parameter-extraction.png" alt="Simulated result for intrinsic parameter extraction"></p>
+<h3 id="Verification"><a href="#Verification" class="headerlink" title="Verification"></a>Verification</h3><p>In the verification, the NQS effect is ignored.</p>
+<p><img src="modeling-of-transistors/extracted-parameters.png" alt="Extracted parameters"></p>
+<p><img src="modeling-of-transistors/comparison-of-the-results.png" alt="Comparison of the results"></p>
+<h3 id="Strange-Things"><a href="#Strange-Things" class="headerlink" title="Strange Things"></a>Strange Things</h3><ol>
+<li>Negative inductance at the each gate and drain</li>
+<li>Rgd is negative</li>
 </ol>
-<p><img src="mosfet/Cgs.png" alt="Cgs"></p>
-<h2 id="Short-Channel-Device"><a href="#Short-Channel-Device" class="headerlink" title="Short-Channel Device"></a>Short-Channel Device</h2><h3 id="Velocity-Saturation-Lateral"><a href="#Velocity-Saturation-Lateral" class="headerlink" title="Velocity Saturation (Lateral)"></a>Velocity Saturation (Lateral)</h3><p>Previously, it is assumed that $v=\mu E$, but that is not true for short-channel devices, as shown in the figure<br><img src="mosfet/image-20200203223737905.png" alt="Velocity Saturation"></p>
-<p>Consider a extreme case that the velocity is fixed to a maximal value, we have</p>
-<script type="math/tex; mode=display">
-I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, irrelevant to the channel length and directly proportional to the overdrive voltage.</p>
-<p> Another consequence is the early saturation of Id</p>
-<p><img src="mosfet/image-20200203224346282.png" alt="Early Saturation of Id"></p>
-<p>Furthermore, $g_m$ would be less sensitive to $I_d$ or $V_{GS}$.</p>
-<h3 id="Mobility-Degradation-Vertical"><a href="#Mobility-Degradation-Vertical" class="headerlink" title="Mobility Degradation (Vertical)"></a>Mobility Degradation (Vertical)</h3><p>The mobility of the charge carriers in the channel also declines as the gate-source voltage and the vertical field increase.</p>
-<p><img src="mosfet/image-20200203224830841.png" alt="Mobility Degradation"></p>
-<p>For this reason, we may expect $g_m=\mu C_{ox}(W/L)(V_{GS}-V_{TH})$ would not strictly follow the linear relationship.</p>
-<p><img src="mosfet/image-20200203225022517.png" alt="Transconductance Saturation"></p>
-<h3 id="Hot-Carrier-Effects"><a href="#Hot-Carrier-Effects" class="headerlink" title="Hot Carrier Effects"></a>Hot Carrier Effects</h3><p>While the average velocity of carriers saturates at <strong>high fields</strong>, the <strong>instantaneous velocity</strong> and hence the kinetic energy of the carriers continue to increase, especially as they accelerate toward the drain. These are called “hot” carriers.</p>
-<p>In the vicinity of the drain region, hot carriers may <strong>“hit” the silicon atoms</strong> at high speeds, thereby<br>creating <strong>impact ionization</strong>. As a result, new electrons and holes are generated, with the electrons absorbed by the drain and the holes by the substrate. Thus, a finite <strong>drain-substrate current</strong> appears. Also, if the carriers acquire a very high energy, they may be injected into the gate oxide and even flow out the gate terminal, introducing a <strong>gate current</strong>. The substrate and gate currents are often measured to study hot carrier effects.</p>
-<h2 id="Layout-Considerations"><a href="#Layout-Considerations" class="headerlink" title="Layout Considerations"></a>Layout Considerations</h2><h3 id="Well-Proximity-Effect-WPE"><a href="#Well-Proximity-Effect-WPE" class="headerlink" title="Well Proximity Effect (WPE)"></a>Well Proximity Effect (WPE)</h3><p>Due to the reflection of the dope implants, the border areas of the n-well receive a different doping density from those in the middle of the n-well.</p>
-<p><img src="mosfet/image-20200204171429371.png" alt="WPE Illustration"></p>
-<p>This problem can be alleviated by drawing a large n-well beyond the devices.</p>
-<h3 id="Length-of-Diffusion-LOD"><a href="#Length-of-Diffusion-LOD" class="headerlink" title="Length of Diffusion (LOD)"></a>Length of Diffusion (LOD)</h3><p>Modern MOS devices are surrounded by a shallow “trench” so as to avoid the formation of a channel between adjacent transistors, called &quot;Shallow Trench Isolation&quot; (STI). STI material has different thermal coefficient to the surrounding silicon, generating stress and altering electrical properties.</p>
-<p><img src="mosfet/20190617153235935.png" alt="STI Illustration"></p>
-<p>To alleviate the problem, dummy fingers could be inserted on the sides of the main device to minimize the propagation of the stress.</p>
-<p><img src="mosfet/image-20200204171347882.png" alt="LOD Alleviation"></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
-<li>Behzad Razavi. <em>Design of analog CMOS integrated circuits</em>.</li>
+<li>丛诗力. <em>毫米波CMOS晶体管建模技术研究</em>.</li>
+<li>李志群, 王志功. <em>射频集成电路与系统</em>.</li>
+<li>Yang Tang, Li Zhang, Yan Wang, &quot;Accurate small signal modeling and extraction of silicon MOSFET for RF IC application,&quot; <em>Solid-State Electronics</em>.</li>
 </ol>
 
     </div>
@@ -432,7 +458,7 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\d4a45699\modeling-of-transistors.html" rel="bookmark">Modeling of Transistors in Small-Signal Condition</a></div>
+      <div class="popular-posts-title"><a href="\archives\6eefa2f5\mosfet.html" rel="bookmark">Basic Theory of MOSFETs</a></div>
       
     </li>
   
@@ -476,7 +502,7 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/6eefa2f5/mosfet.html" title="Basic Theory of MOSFETs">https://triblemany.github.io/archives/6eefa2f5/mosfet.html</a>
+    <a href="https://triblemany.github.io/archives/d4a45699/modeling-of-transistors.html" title="Modeling of Transistors in Small-Signal Condition">https://triblemany.github.io/archives/d4a45699/modeling-of-transistors.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -503,8 +529,8 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/archives/bf359c5c/mathematica-tutorial.html" rel="next" title="Mathematica的常用操作和常用函数">
-                  <i class="fa fa-chevron-left"></i> Mathematica的常用操作和常用函数
+                <a href="/archives/e1b3e277/class-f-power-amplifier.html" rel="next" title="Class F Power Amplifier">
+                  <i class="fa fa-chevron-left"></i> Class F Power Amplifier
                 </a>
               
             </div>
@@ -512,10 +538,6 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/archives/2e70db9d/transistor-amplifier.html" rel="prev" title="MOS Amplifier Structures">
-                  MOS Amplifier Structures <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -574,7 +596,7 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-V-Characteristic"><span class="nav-number">1.</span> <span class="nav-text">I-V Characteristic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculation-of-Gm"><span class="nav-number">2.</span> <span class="nav-text">Calculation of Gm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Second-Order-Effects"><span class="nav-number">3.</span> <span class="nav-text">Second-Order Effects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Body-Effect"><span class="nav-number">3.1.</span> <span class="nav-text">Body Effect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Length-Modulation"><span class="nav-number">3.2.</span> <span class="nav-text">Channel Length Modulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subthreshold-Conduction"><span class="nav-number">3.3.</span> <span class="nav-text">Subthreshold Conduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parasitic"><span class="nav-number">4.</span> <span class="nav-text">Parasitic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitance"><span class="nav-number">4.1.</span> <span class="nav-text">Capacitance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resistance"><span class="nav-number">4.2.</span> <span class="nav-text">Resistance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOSFET-as-Capacitor"><span class="nav-number">4.3.</span> <span class="nav-text">MOSFET as Capacitor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Short-Channel-Device"><span class="nav-number">5.</span> <span class="nav-text">Short-Channel Device</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Velocity-Saturation-Lateral"><span class="nav-number">5.1.</span> <span class="nav-text">Velocity Saturation (Lateral)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mobility-Degradation-Vertical"><span class="nav-number">5.2.</span> <span class="nav-text">Mobility Degradation (Vertical)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hot-Carrier-Effects"><span class="nav-number">5.3.</span> <span class="nav-text">Hot Carrier Effects</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout-Considerations"><span class="nav-number">6.</span> <span class="nav-text">Layout Considerations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Well-Proximity-Effect-WPE"><span class="nav-number">6.1.</span> <span class="nav-text">Well Proximity Effect (WPE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Length-of-Diffusion-LOD"><span class="nav-number">6.2.</span> <span class="nav-text">Length of Diffusion (LOD)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-Extraction-Conditions"><span class="nav-number">1.</span> <span class="nav-text">Direct Extraction Conditions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Small-Signal-Parameter-Extraction"><span class="nav-number">2.</span> <span class="nav-text">Small-Signal Parameter Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Description"><span class="nav-number">2.1.</span> <span class="nav-text">Model Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extraction"><span class="nav-number">2.2.</span> <span class="nav-text">Extraction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extraction-Example"><span class="nav-number">3.</span> <span class="nav-text">Extraction Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Extrinsic-Parameter-Extraction"><span class="nav-number">3.1.</span> <span class="nav-text">Extrinsic Parameter Extraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#De-Embedding"><span class="nav-number">3.2.</span> <span class="nav-text">De-Embedding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intrinsic-Parameter-Extraction"><span class="nav-number">3.3.</span> <span class="nav-text">Intrinsic Parameter Extraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification"><span class="nav-number">3.4.</span> <span class="nav-text">Verification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Strange-Things"><span class="nav-number">3.5.</span> <span class="nav-text">Strange Things</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -822,9 +844,9 @@ I_D=WC_{ox}(V_{GS}-V_{TH})v_{sat}</script><p>The drain current is, therefore, ir
 
 <script>
   function disqus_config() {
-    this.page.url = "https://triblemany.github.io/archives/6eefa2f5/mosfet.html";
-    this.page.identifier = "archives/6eefa2f5/mosfet.html";
-    this.page.title = 'Basic Theory of MOSFETs';};
+    this.page.url = "https://triblemany.github.io/archives/d4a45699/modeling-of-transistors.html";
+    this.page.identifier = "archives/d4a45699/modeling-of-transistors.html";
+    this.page.title = 'Modeling of Transistors in Small-Signal Condition';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
