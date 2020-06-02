@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This article includes a brief introduction to the class J PA.">
+<meta name="keywords" content="RFIC,Power Amplifer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Class J Power Amplifier">
+<meta property="og:url" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="This article includes a brief introduction to the class J PA.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/class-b-pa-with-harmonic-short-load.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/class-b-pa-with-constant-load.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/efficiency-degradation-due-to-small-cds.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/schematic-of-class-j-pa.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/waveform-of-class-j-pa.svg">
+<meta property="og:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/waveforms-of-three-different-class-j-pas.svg">
+<meta property="og:updated_time" content="2020-06-02T13:08:01.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Class J Power Amplifier">
+<meta name="twitter:description" content="This article includes a brief introduction to the class J PA.">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier/class-b-pa-with-harmonic-short-load.svg">
+  <link rel="canonical" href="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Class J Power Amplifier | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Class J Power Amplifier
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-05-28 21:30:15" itemprop="dateCreated datePublished" datetime="2020-05-28T21:30:15+08:00">2020-05-28</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-02 21:08:01" itemprop="dateModified" datetime="2020-06-02T21:08:01+08:00">2020-06-02</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>3.5k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This article includes a brief introduction to the class J PA.</p>
+<a id="more"></a>
+<h2 id="Harmonic-Short-Termination"><a href="#Harmonic-Short-Termination" class="headerlink" title="Harmonic Short Termination"></a>Harmonic Short Termination</h2><h3 id="Equal-Harmonic-Termination"><a href="#Equal-Harmonic-Termination" class="headerlink" title="Equal Harmonic Termination"></a>Equal Harmonic Termination</h3><p>In the analysis from class A to class C PA, it is assumed the load can provide a short at higher harmonics. If this assumption cannot hold, the efficiency of the power amplifier will reduce. The waveform in the following figure is a class B PA with harmonic short. Ideally, it can achieve a drain efficiency of $\pi/4$ , or approximately 78.5%.</p>
+<p><img src="class-j-power-amplifier/class-b-pa-with-harmonic-short-load.svg" alt="Class B PA with harmonic short load"></p>
+<p>In the figure, current is normalized to $I_{max}$, while voltage is normalized to $2V_{dd}$.</p>
+<p>For a class B PA with the same impedance across all harmonics, it should assume a waveform as follows. When the load impedance is modified so as to make voltage average equal to $V_{dd}$, it has an efficiency of $\pi^2/(8-8\pi)$, or approximately 57.6%.</p>
+<p><img src="class-j-power-amplifier/class-b-pa-with-constant-load.svg" alt="Class B PA with constant load"></p>
+<p>Therefore, without harmonic short, the efficiency of traditional PA is greatly reduced.</p>
+<p>The output capacitance of the device $C_{ds}$ reduces the load impedance at high frequency, and thus can be considered as a approximation to ideal harmonic termination. Following this method, the reactance of the capacitor should be as low as possible. The metric $X_{C_{ds}}/R_L$ at the fundamental is defined to assess the approximation. If $X_{C_{ds}}/R_L\ll1$, the classic result can be expected. However, even if $X_{C_{ds}}/R_L&gt;1$, with a substantial reactive component, the efficiency can be restored or even enhanced. This technique is called class J PA.</p>
+<h3 id="Capacitive-Harmonic-Termination"><a href="#Capacitive-Harmonic-Termination" class="headerlink" title="Capacitive Harmonic Termination"></a>Capacitive Harmonic Termination</h3><p>Due to the influence of $C_{ds}$, the voltage waveform is</p>
+<script type="math/tex; mode=display">
+v(\theta)=\cos\theta+v_2\sin 2\theta</script><p>Addition of the second harmonic would increase peak-to-peak range. If the peak voltage is kept the same, the fundamental component is reduced, thereby reducing the efficiency.</p>
+<p>As shown in the figure below, a high $X_{C_{ds}}$ would lower the fundamental voltage, thereby reducing the efficiency achievable. On the other hand, however, a low $X_{C_{ds}}$ would increase the quality factor of the output node, and thus reducing the output bandwidth.</p>
+<p><img src="class-j-power-amplifier/efficiency-degradation-due-to-small-cds.svg" alt="Efficiency degradation due to small Cds"></p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">result = &#123;&#125;;</span><br><span class="line"><span class="keyword">For</span>[Iq = <span class="number">0</span>, Iq &lt;= <span class="number">0.5</span>, Iq += <span class="number">0.1</span>, Imax = <span class="number">1</span>;</span><br><span class="line"> Ipk = Imax - Iq;</span><br><span class="line"> alpha = <span class="number">2</span> <span class="keyword">ArcCos</span>[-Iq/Ipk];</span><br><span class="line"> Id[t_] := </span><br><span class="line">  <span class="keyword">Piecewise</span>[&#123;&#123;Imax (<span class="keyword">Cos</span>[t] - <span class="keyword">Cos</span>[alpha/<span class="number">2</span>])/(<span class="number">1</span> - <span class="keyword">Cos</span>[alpha/<span class="number">2</span>]), -alpha/</span><br><span class="line">       <span class="number">2</span> &lt; t &lt; alpha/<span class="number">2</span>&#125;, &#123;<span class="number">0</span>, <span class="keyword">True</span>&#125;&#125;];</span><br><span class="line"> Idc = <span class="number">1</span>/<span class="number">2</span>/<span class="keyword">Pi</span> <span class="keyword">Integrate</span>[Id[t] , &#123;t, -alpha/<span class="number">2</span>, alpha/<span class="number">2</span>&#125;];</span><br><span class="line"> I1 = <span class="number">1</span>/<span class="keyword">Pi</span> <span class="keyword">Integrate</span>[Id[t] <span class="keyword">Cos</span>[t], &#123;t, -alpha/<span class="number">2</span>, alpha/<span class="number">2</span>&#125;];</span><br><span class="line"> I2 = <span class="number">1</span>/<span class="keyword">Pi</span> <span class="keyword">Integrate</span>[Id[t] <span class="keyword">Cos</span>[<span class="number">2</span> t], &#123;t, -alpha/<span class="number">2</span>, alpha/<span class="number">2</span>&#125;];</span><br><span class="line"> eta = I1/<span class="number">2</span>/Idc;</span><br><span class="line"> x = <span class="keyword">Table</span>[k, &#123;k, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0.25</span>&#125;];</span><br><span class="line"> y = <span class="keyword">Table</span>[</span><br><span class="line">   eta/<span class="keyword">Maximize</span>[&#123;<span class="keyword">Cos</span>[t] + I2/I1 k/<span class="number">2</span> <span class="keyword">Sin</span>[<span class="number">2</span> t], <span class="number">0</span> &lt; t &lt; <span class="number">2</span> <span class="keyword">Pi</span>&#125;, t][[</span><br><span class="line">     <span class="number">1</span>]], &#123;k, x&#125;];</span><br><span class="line"> result = <span class="keyword">Append</span>[result, <span class="keyword">Table</span>[&#123;x[[k]], y[[k]]&#125;, &#123;k, <span class="keyword">Length</span>[x]&#125;]]]</span><br><span class="line"><span class="keyword">ListLinePlot</span>[result, <span class="keyword">PlotRange</span> -&gt; &#123;<span class="number">0.4</span>, <span class="number">0.8</span>&#125;, </span><br><span class="line"> <span class="keyword">PlotLegends</span> -&gt; &#123;<span class="string">"Vq=0"</span>, <span class="string">"Vq=0.1"</span>, <span class="string">"Vq=0.2"</span>, <span class="string">"Vq=0.3"</span>, <span class="string">"Vq=0.4"</span>, </span><br><span class="line">   <span class="string">"Vq=0.5"</span>&#125;, <span class="keyword">AxesLabel</span> -&gt; &#123;<span class="string">"Xcds/Rl"</span>, <span class="string">"Efficiency [%]"</span>&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="Class-J-Power-Amplifier"><a href="#Class-J-Power-Amplifier" class="headerlink" title="Class J Power Amplifier"></a>Class J Power Amplifier</h2><p>The class J power amplifier differs from classic amplifiers in that:</p>
+<ul>
+<li>The load is not purely resistive at the fundamental frequency</li>
+<li>The load presents high impedances at higher harmonics</li>
+<li>The output capacitance is used to provide a specific reactive termination at the second harmonic, generating a non-sinusoidal waveform.</li>
+</ul>
+<p><img src="class-j-power-amplifier/schematic-of-class-j-pa.png" alt="Schematic of class J PA"></p>
+<p>In the analysis, the transistor is assumed to be a current generator. In class B condition, it has a current of</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+I_T&=I_{max}\sin\theta &&0<\theta<\pi\\
+&=0 &&\pi<\theta<2\pi
+\end{aligned}</script><p>The fundamental current flowing in the matching branch has the form</p>
+<script type="math/tex; mode=display">
+I_F=I_1\sin(\theta+\phi)</script><p>And thus the current flowing through the capacitor is</p>
+<script type="math/tex; mode=display">
+I_C=I_{DC}-I_T-I_F</script><p>Thus, the voltage can be obtained through integration</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+V_o(\theta) =&\frac{1}{\omega C}\int_0^\theta \left( \frac{I_{max}}{\pi}-I_{max}\sin\varphi-I_1\sin(\varphi+\phi) \right)d\varphi+V_{off} &&0<\theta<2\pi\\
+=&\frac{1}{\omega C}\int_0^\pi \left( \frac{I_{max}}{\pi}-I_{max}\sin\varphi-I_1\sin(\varphi+\phi) \right)d\varphi\\
+&+\frac{1}{\omega C}\int_\pi^\theta \left( \frac{I_{max}}{\pi}-I_1\sin(\varphi+\phi) \right)d\varphi+V_{off} &&\pi<\theta<2\pi
+\end{aligned}</script><p>where $V_{off}$ is an arbitrary offset to make $V_o(\theta)\ge0$, and $1/\omega C$ is adjusted to make the average of $V_o(\theta)$ equal to $V_{dd}$.</p>
+<p>For instance, for $I_1=0.6,\phi=10.2^\circ$, calculated results are</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Xcds (1/wC) = 7.69585</span><br><span class="line">Xcds/Rl = 3.84793</span><br><span class="line">Zl (with Cds) = 1.63538 +1.39322 I</span><br><span class="line">Zl (without Cds) = 1.13568 +1.384 I</span><br><span class="line">Zl/Rl (with Cds) = 0.817691 +0.696608 I</span><br><span class="line">Zl/Rl (without Cds) = 0.567841 +0.692 I</span><br><span class="line">efficiency = 0.642213</span><br><span class="line">Prf = -0.874108</span><br></pre></td></tr></table></figure>
+<p><img src="class-j-power-amplifier/waveform-of-class-j-pa.svg" alt="Waveform of class J PA"></p>
+<p>In the figure, current is normalized to $I_{max}$, while voltage is normalized to $V_{dd}$.</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*define the current and the voltage waveform*)</span></span><br><span class="line">condition = &#123;Imax -&gt; <span class="number">1</span>, I1 -&gt; <span class="number">2</span>, Phi -&gt; (<span class="number">180</span> - <span class="number">68.01</span>)/<span class="number">180</span> <span class="keyword">Pi</span>, </span><br><span class="line">   Xcds -&gt; <span class="number">1</span>&#125;;</span><br><span class="line">Io[t_] := <span class="keyword">Piecewise</span>[&#123;&#123;Imax <span class="keyword">Sin</span>[t], <span class="number">0</span> &lt; t &lt; <span class="keyword">Pi</span>&#125;, &#123;<span class="number">0</span>, true&#125;&#125;];</span><br><span class="line">Vo[t_] := </span><br><span class="line">  <span class="keyword">Piecewise</span>[&#123;&#123;Xcds <span class="keyword">Integrate</span>[</span><br><span class="line">       Imax/<span class="keyword">Pi</span> - Imax <span class="keyword">Sin</span>[p] - I1 <span class="keyword">Sin</span>[p + Phi], &#123;p, <span class="number">0</span>, t&#125;], </span><br><span class="line">     t &lt;= <span class="keyword">Pi</span>&#125;, &#123;Xcds <span class="keyword">Integrate</span>[</span><br><span class="line">        Imax/<span class="keyword">Pi</span> - Imax <span class="keyword">Sin</span>[p] - I1 <span class="keyword">Sin</span>[p + Phi], &#123;p, <span class="number">0</span>, <span class="keyword">Pi</span>&#125;] + </span><br><span class="line">      Xcds <span class="keyword">Integrate</span>[Imax/<span class="keyword">Pi</span> - I1 <span class="keyword">Sin</span>[p + Phi], &#123;p, <span class="keyword">Pi</span>, t&#125;], t &gt; <span class="keyword">Pi</span>&#125;&#125;];</span><br><span class="line"><span class="comment">(*set the parameters*)</span></span><br><span class="line">a = Vo[t] /. condition;</span><br><span class="line">b = Io[t] /. condition;</span><br><span class="line"><span class="comment">(*add suitable Voff to make Vo&gt;0*)</span></span><br><span class="line">min = <span class="keyword">Minimize</span>[&#123;a, <span class="number">0</span> &lt; t &lt; <span class="number">2</span> <span class="keyword">Pi</span>&#125;, t];</span><br><span class="line">a = a - min[[<span class="number">1</span>]];</span><br><span class="line"><span class="comment">(*scale the expression to make the mean value equal to 1*)</span></span><br><span class="line">ave = <span class="keyword">Integrate</span>[a, &#123;t, <span class="number">0</span>, <span class="number">2</span> <span class="keyword">Pi</span>&#125;]/<span class="number">2</span>/<span class="keyword">Pi</span>;</span><br><span class="line">a = a/ave;</span><br><span class="line"><span class="comment">(*calculate Xcds/Rl,note that Rl equal to 2Vdd/Imax,or simply 2 after normalization*)</span></span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Xcds (1/wC) = "</span>, <span class="number">1</span>/ave]</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Xcds/Rl = "</span>, <span class="number">1</span>/ave/<span class="number">2</span>]</span><br><span class="line"><span class="comment">(*perform the fourier tranformation to obtain the in-phase and quadrature component*)</span></span><br><span class="line"><span class="comment">(*note that the current is reversed to represent the one flow through the load*)</span></span><br><span class="line">SinCoe = <span class="number">1</span>/<span class="keyword">Pi</span> <span class="keyword">Integrate</span>[a <span class="keyword">Sin</span>[t], &#123;t, <span class="number">0</span>, <span class="number">2</span> <span class="keyword">Pi</span>&#125;];</span><br><span class="line">CosCoe = <span class="number">1</span>/<span class="keyword">Pi</span> <span class="keyword">Integrate</span>[a <span class="keyword">Cos</span>[t], &#123;t, <span class="number">0</span>, <span class="number">2</span> <span class="keyword">Pi</span>&#125;];</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Zl (with Cds) = "</span>, (CosCoe - I SinCoe)/(<span class="number">1</span>/<span class="number">2</span> I)]</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Zl (without Cds) = "</span>, (CosCoe - I SinCoe)/</span><br><span class="line">    I1/(<span class="keyword">Sin</span>[Phi] - I <span class="keyword">Cos</span>[Phi]) /. condition ]</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Zl/Rl (with Cds) = "</span>, (CosCoe - I SinCoe)/(<span class="number">1</span>/<span class="number">2</span> I)/<span class="number">2</span>]</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Zl/Rl (without Cds) = "</span>, (CosCoe - I SinCoe)/</span><br><span class="line">     I1/(<span class="keyword">Sin</span>[Phi] - I <span class="keyword">Cos</span>[Phi])/<span class="number">2</span> /. condition ]</span><br><span class="line"><span class="comment">(*calculate the efficiency and power*)</span></span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"efficiency = "</span>, <span class="keyword">Abs</span>[SinCoe] <span class="keyword">Pi</span>/<span class="number">4</span>]</span><br><span class="line"><span class="keyword">Print</span>[<span class="string">"Prf = "</span>, <span class="number">10</span> <span class="keyword">Log10</span>[<span class="keyword">Abs</span>[SinCoe]]]</span><br><span class="line"><span class="comment">(*plot the waveforms*)</span></span><br><span class="line"><span class="keyword">Plot</span>[&#123;a, b&#125;, &#123;t, <span class="number">0</span>, <span class="number">2</span> <span class="keyword">Pi</span>&#125;, <span class="keyword">PlotLegends</span> -&gt; &#123;<span class="string">"Vo"</span>, <span class="string">"Io"</span>&#125;]</span><br></pre></td></tr></table></figure>
+<p>Similarly, the analysis can be performed for several other occasions.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>I1</th>
+<th>Phi</th>
+<th>Xcds/Rl</th>
+<th>Prf</th>
+<th>Eff</th>
+<th>R1</th>
+<th>X1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2.0</td>
+<td>112</td>
+<td>0.27</td>
+<td>0</td>
+<td>78.5</td>
+<td>1.0</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.7</td>
+<td>164.4</td>
+<td>2.65</td>
+<td>0</td>
+<td>78.5</td>
+<td>1.0</td>
+<td>0.92</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.6</td>
+<td>10.2</td>
+<td>3.82</td>
+<td>-0.9</td>
+<td>63.9</td>
+<td>0.82</td>
+<td>0.69</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> <img src="class-j-power-amplifier/waveforms-of-three-different-class-j-pas.svg" alt="Waveforms of three different class J PAs"></p>
+<p>The key class J design maneuver is to shift the phasing of the voltage and current waveforms, without changing their shape, such that the second harmonic voltage and current components are in phase quadrature.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\358f72b0\class-d-power-amplifier.html" rel="bookmark">Class D Power Amplifier</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\97db45b0\ads-mom-pcell.html" rel="bookmark">使用ADS创建MOM电容Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\1e678d19\ads-inductor-pcell.html" rel="bookmark">使用ADS创建电感Pcell</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\e1b3e277\class-f-power-amplifier.html" rel="bookmark">Class F Power Amplifier</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\archives\b229b9f3\class-e-power-amplifier.html" rel="bookmark">Class E Power Amplifier</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier.html" title="Class J Power Amplifier">https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/RFIC/" rel="tag"># RFIC</a>
+            
+              <a href="/tags/Power-Amplifer/" rel="tag"># Power Amplifer</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/d4a45699/modeling-of-transistors.html" rel="next" title="Modeling of Transistors in Small-Signal Condition">
+                  <i class="fa fa-chevron-left"></i> Modeling of Transistors in Small-Signal Condition
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/archives/3951eef4/programing-with-matlab.html" rel="prev" title="使用Matlab编程">
+                  使用Matlab编程 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Harmonic-Short-Termination"><span class="nav-number">1.</span> <span class="nav-text">Harmonic Short Termination</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Equal-Harmonic-Termination"><span class="nav-number">1.1.</span> <span class="nav-text">Equal Harmonic Termination</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Capacitive-Harmonic-Termination"><span class="nav-number">1.2.</span> <span class="nav-text">Capacitive Harmonic Termination</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-J-Power-Amplifier"><span class="nav-number">2.</span> <span class="nav-text">Class J Power Amplifier</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">259k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/74ab8a26/class-j-power-amplifier.html";
+    this.page.identifier = "archives/74ab8a26/class-j-power-amplifier.html";
+    this.page.title = 'Class J Power Amplifier';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>
