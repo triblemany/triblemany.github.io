@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo3-apple-touch-icon.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo-32x32.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-16x16.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo3.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    }
+  };
+</script>
+
+  <meta name="description" content="This articles covers:  The SKILL language basics Use of Ocean script for complicated parameter sweep Use of Python for parallel simulation">
+<meta name="keywords" content="Ocean Script">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automatic Simulation with Ocean Script">
+<meta property="og:url" content="https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script.html">
+<meta property="og:site_name" content="Triblemany">
+<meta property="og:description" content="This articles covers:  The SKILL language basics Use of Ocean script for complicated parameter sweep Use of Python for parallel simulation">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-06-15T13:44:13.060Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Automatic Simulation with Ocean Script">
+<meta name="twitter:description" content="This articles covers:  The SKILL language basics Use of Ocean script for complicated parameter sweep Use of Python for parallel simulation">
+  <link rel="canonical" href="https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Automatic Simulation with Ocean Script | Triblemany</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146837898-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Triblemany</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-wrapper">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Triblemany">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Triblemany">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Automatic Simulation with Ocean Script
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-06-13 10:15:45" itemprop="dateCreated datePublished" datetime="2020-06-13T10:15:45+08:00">2020-06-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 21:44:13" itemprop="dateModified" datetime="2020-06-15T21:44:13+08:00">2020-06-15</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>15k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This articles covers:</p>
+<ul>
+<li>The SKILL language basics</li>
+<li>Use of Ocean script for complicated parameter sweep</li>
+<li>Use of Python for parallel simulation</li>
+</ul>
+<a id="more"></a>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><h3 id="Running-Ocean-Script"><a href="#Running-Ocean-Script" class="headerlink" title="Running Ocean Script"></a>Running Ocean Script</h3><p>To use Ocean interactively</p>
+<ol>
+<li>In a UNIX Shell, type in <code>ocean</code></li>
+<li>In the CIW, type in Ocean commands directly</li>
+</ol>
+<p>To run a written Ocean script</p>
+<ol>
+<li>In the interactive mode, type in <code>load( &quot;oceanScript.ocn&quot; )</code></li>
+<li>In a UNIX Shell, type in <code>ocean &lt; oceanScript.ocn &gt;&gt; oceanLog.log</code></li>
+</ol>
+<h3 id="Ocean-Use-Model"><a href="#Ocean-Use-Model" class="headerlink" title="Ocean Use Model"></a>Ocean Use Model</h3><p>It would be the best to copy the auto-generated &quot;netlist&quot; folder to avoid file missing. For successful Ocean simulation, the following netlist files are indispensable:</p>
+<ol>
+<li><p>netlist</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// attenuator</span><br><span class="line">PORT0 (INPUT 0) port r=50 num=1 type=sine</span><br><span class="line">PORT1 (OUTPUT 0) port r=50 num=2 type=sine</span><br><span class="line">R0 (INPUT OUTPUT) resistor r=rt</span><br><span class="line">R1 (INPUT 0) resistor r=rb</span><br><span class="line">R2 (OUTPUT 0) resistor r=rb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>netlistHeader</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">simulator lang=spectre</span><br><span class="line">global 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>netlistFooter (empty file)</p>
+</li>
+</ol>
+<p>Besides, it is highly likely that map files are required for result browsing. Otherwise, a error &quot;In Save statement: None of the nets/terminals got successfully mapped.&quot; may occur.</p>
+<p>The Ocean script is used to control the simulation. To do this</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; set the simulation engine</span></span><br><span class="line">simulator( 'spectre )</span><br><span class="line"></span><br><span class="line"><span class="comment">; set the netlist path</span></span><br><span class="line">design(	<span class="string">"./netlist"</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">; set the model files according to the technology</span></span><br><span class="line"><span class="comment">;modelFile( </span></span><br><span class="line"><span class="comment">;    '("./model.scs" "tt")</span></span><br><span class="line"><span class="comment">;    '("./model.scs" "tt_tf")</span></span><br><span class="line"><span class="comment">;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; set the analysis</span></span><br><span class="line">analysis(</span><br><span class="line">    'sp</span><br><span class="line">	?ports list(<span class="string">"/PORT0"</span> <span class="string">"/PORT1"</span>)</span><br><span class="line">    ?start <span class="string">"0G"</span>  ?stop <span class="string">"100G"</span>  ?step <span class="string">"0.1G"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">; set the design variable</span></span><br><span class="line">desVar( <span class="string">"rb"</span> <span class="number">869.5</span> )</span><br><span class="line">desVar(	<span class="string">"rt"</span> <span class="number">5.76</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">; set the options</span></span><br><span class="line">envOption(</span><br><span class="line">	'analysisOrder  list(<span class="string">"sp"</span>) </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">; set the parameters to be saved</span></span><br><span class="line">save( 'v <span class="string">"/OUT_N"</span> <span class="string">"/OUT_P"</span> )	<span class="comment">; voltage</span></span><br><span class="line">save( 'i <span class="string">"/PORT0/MINUS"</span> <span class="string">"/PORT0/PLUS"</span> <span class="string">"/PORT1/MINUS"</span> <span class="string">"/PORT1/PLUS"</span> )	<span class="comment">; current</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; set the simulation temperature</span></span><br><span class="line">temp( <span class="number">27</span> ) </span><br><span class="line"></span><br><span class="line"><span class="comment">; set the result directory</span></span><br><span class="line">resultsDir( <span class="string">"./resultDir"</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">; run the simulation</span></span><br><span class="line">run()</span><br><span class="line"></span><br><span class="line"><span class="comment">; plot the graph</span></span><br><span class="line">S21 = db(<span class="name">spm</span>('sp <span class="number">2</span> <span class="number">1</span>))</span><br><span class="line">plot( <span class="name">S21</span> ?expr '( <span class="string">"S21"</span> ) )</span><br><span class="line"></span><br><span class="line"><span class="comment">; save the data</span></span><br><span class="line">ocnPrint( <span class="name">S21</span> ?output <span class="string">"S21.csv"</span> )</span><br></pre></td></tr></table></figure>
+<h3 id="Browse-Results"><a href="#Browse-Results" class="headerlink" title="Browse Results"></a>Browse Results</h3><p>After the simulation, the results can be browsed independently.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openResults( <span class="string">"./result"</span> )</span><br><span class="line">selectResults( 'sp )</span><br><span class="line">S21 = db(<span class="name">spm</span>('sp <span class="number">2</span> <span class="number">1</span>))</span><br><span class="line">ocnPrint( <span class="name">S21</span> ?output <span class="string">"S21.csv"</span> )</span><br></pre></td></tr></table></figure>
+<h3 id="Types-of-Simulation"><a href="#Types-of-Simulation" class="headerlink" title="Types of Simulation"></a>Types of Simulation</h3><h4 id="DC"><a href="#DC" class="headerlink" title="DC"></a>DC</h4><p>In the Ocean script</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; specify the analysis</span></span><br><span class="line">analysis('dc ?saveOppoint <span class="literal">t</span>  )</span><br><span class="line"></span><br><span class="line"><span class="comment">; browse the result</span></span><br><span class="line">IDC(<span class="string">"/V0/PLUS"</span>)</span><br><span class="line">VDC(<span class="string">"/OUT_P"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="TRAN"><a href="#TRAN" class="headerlink" title="TRAN"></a>TRAN</h4><p>In the netlist, specify the ports</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// piecewise-linear voltage source</span><br><span class="line">// for the wave parameter, write down time-value pair sequentially</span><br><span class="line">V0 (INPUT 0) vsource type=pwl wave=[ 0 0 10p 1 ]</span><br><span class="line"></span><br><span class="line">// sin voltage source</span><br><span class="line">V0 (net032 net02) vsource mag=1 type=sine</span><br></pre></td></tr></table></figure>
+<p>In the Ocean script</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; specify the analysis</span></span><br><span class="line">analysis('tran ?stop <span class="string">"1n"</span>  ?errpreset <span class="string">"moderate"</span>  ?maxstep <span class="string">"1p"</span>  )</span><br><span class="line"></span><br><span class="line"><span class="comment">; browse the result</span></span><br><span class="line">vtime('tran <span class="string">"/OUT_P"</span>)</span><br><span class="line">itime('tran <span class="string">"/PORT1/PLUS"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">; clip part of the X axis</span></span><br><span class="line">clip( <span class="name">vtime</span>('tran <span class="string">"/OUT_P"</span>) <span class="number">0.5</span>n <span class="number">1</span>n )</span><br><span class="line"></span><br><span class="line"><span class="comment">; perform Fourier transformation to get the spectrum</span></span><br><span class="line"><span class="comment">; signal, start time, end time, number of points</span></span><br><span class="line"><span class="comment">; freqMax = 1 / timeInterval / 2 (Nyquist sampling theorem)</span></span><br><span class="line"><span class="comment">; freqResolution = 1 / timeDuration</span></span><br><span class="line">dft( <span class="name">vtime</span>('tran <span class="string">"/OUT_P"</span>) <span class="number">0.5</span>n <span class="number">1</span>n <span class="number">1000</span> )</span><br></pre></td></tr></table></figure>
+<h4 id="AC"><a href="#AC" class="headerlink" title="AC"></a>AC</h4><p>In the netlist, specify the ports</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PORT0 (INPUT 0) port r=50 num=1 mag=1</span><br><span class="line">PORT1 (OUTPUT 0) port r=50 num=2 type=sine</span><br></pre></td></tr></table></figure>
+<p>In the Ocean script</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; specify the analysis</span></span><br><span class="line">analysis('ac ?start <span class="string">"0G"</span>  ?stop <span class="string">"50G"</span>  ?step <span class="string">"1G"</span>  )</span><br><span class="line"></span><br><span class="line"><span class="comment">; browse the result</span></span><br><span class="line">vfreq('ac <span class="string">"/OUT_P"</span>)</span><br><span class="line">ifreq('ac <span class="string">"/PORT1/PLUS"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="SP"><a href="#SP" class="headerlink" title="SP"></a>SP</h4><p>In the netlist, specify the ports</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PORT0 (INPUT 0) port r=50 num=1 type=sine</span><br><span class="line">PORT1 (OUTPUT 0) port r=50 num=2 type=sine</span><br></pre></td></tr></table></figure>
+<p>In the Ocean script</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; specify the analysis</span></span><br><span class="line">analysis(</span><br><span class="line">    'sp</span><br><span class="line">	?ports list(<span class="string">"/PORT0"</span> <span class="string">"/PORT1"</span>)</span><br><span class="line">    ?start <span class="string">"0G"</span>  ?stop <span class="string">"100G"</span>  ?step <span class="string">"0.1G"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">; browse the result</span></span><br><span class="line"><span class="comment">; or S21 = db(sp(2 2 ?result "sp"))</span></span><br><span class="line">S21 = db(<span class="name">spm</span>('sp <span class="number">2</span> <span class="number">1</span>))</span><br><span class="line">plot( <span class="name">S21</span> ?expr '( <span class="string">"S21"</span> ) )</span><br></pre></td></tr></table></figure>
+<h4 id="HB"><a href="#HB" class="headerlink" title="HB"></a>HB</h4><p>In the netlist, specify the ports</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PORT0 (INPUT 0) port r=50 num=1 type=sine freq=fin dbm=pin \</span><br><span class="line">        fundname=&quot;RFin&quot;</span><br><span class="line">PORT1 (OUTPUT 0) port r=50 num=2 type=sine type=dc</span><br></pre></td></tr></table></figure>
+<p>In the Ocean Script</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; specify the analysis</span></span><br><span class="line">analysis('hb ?HBTranMode <span class="string">"No"</span>  ?tstab <span class="string">"0"</span>  ?saveinit <span class="string">""</span>  </span><br><span class="line">		?autoharms <span class="string">""</span>  ?autotstab <span class="string">""</span>  ?oversample list(<span class="string">"1"</span>)  ?funds list(<span class="string">"RFin"</span>)  </span><br><span class="line">		?maxharms list(<span class="string">"3"</span>)  ?param <span class="string">"pin"</span>  ?start <span class="string">"-30"</span>  ?stop <span class="string">"4"</span>  </span><br><span class="line">		?sweepStep <span class="string">"2"</span>  )</span><br><span class="line"></span><br><span class="line"><span class="comment">; save the current</span></span><br><span class="line">save( 'i <span class="string">"/PORT1/MINUS"</span> <span class="string">"/PORT1/PLUS"</span> )</span><br><span class="line"><span class="comment">; save the voltage</span></span><br><span class="line">save( 'v <span class="string">"/OUT_N"</span> <span class="string">"/OUT_P"</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">; browse the result</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; obtain current at a specified harmonic</span></span><br><span class="line"><span class="comment">; analysis name, terminal, harmonic list</span></span><br><span class="line">ih('hb <span class="string">"/V0/PLUS"</span> '(<span class="number">0</span>))</span><br><span class="line"><span class="comment">; for rms value, use</span></span><br><span class="line"><span class="comment">; note that for 0 harmonic, only the peak value is correct</span></span><br><span class="line">rms( <span class="name">ih</span>('hb <span class="string">"/V0/PLUS"</span> '(<span class="number">0</span>)) )</span><br><span class="line"></span><br><span class="line"><span class="comment">; similarly, for voltage harmonics, use vh</span></span><br><span class="line">vh('hb <span class="string">"/OUT_P"</span> '(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">; obtain current waveform at all power levels</span></span><br><span class="line">itime('hb <span class="string">"/V0/PLUS"</span>)</span><br><span class="line"><span class="comment">; use value() to filter results at specified levels</span></span><br><span class="line"><span class="comment">; waveform, sweep variable, value</span></span><br><span class="line">value( <span class="name">itime</span>('hb <span class="string">"/V0/PLUS"</span>) <span class="string">"pin"</span> '(<span class="number">-30</span> <span class="number">-10</span>) )</span><br><span class="line"><span class="comment">; similarly, for voltage waveform, use vtime</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; obtain current spectrum</span></span><br><span class="line">ih('hb <span class="string">"/V0/PLUS"</span>)</span><br><span class="line"><span class="comment">; use value() to filter results at specified levels</span></span><br><span class="line">value(<span class="name">ih</span>('hb <span class="string">"/V0/PLUS"</span>) '<span class="string">"pin"</span> '-30)</span><br><span class="line"><span class="comment">; similarly, for voltage spectrum, use vh\</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; obtain power at specified harmonic</span></span><br><span class="line"><span class="comment">; analysis name, voltage +, voltage -, branch name 1, branch name 2, harmonic list</span></span><br><span class="line"><span class="comment">; usually, branch name 2 is set to be 0</span></span><br><span class="line">pvi('hb <span class="string">"/OUT_P"</span> <span class="string">"/OUT_N"</span> <span class="string">"/PORT1/PLUS"</span> <span class="number">0</span> '(<span class="number">1</span>))</span><br><span class="line"><span class="comment">; use dbm() to obtain power in dbm</span></span><br><span class="line">dbm( <span class="name">pvi</span>('hb <span class="string">"/OUT_P"</span> <span class="string">"/OUT_N"</span> <span class="string">"/PORT1/PLUS"</span> <span class="number">0</span> '(<span class="number">1</span>)) )</span><br><span class="line"></span><br><span class="line"><span class="comment">; to calculate power gain</span></span><br><span class="line"><span class="comment">; it is simply output power divided by input power, turned into db</span></span><br><span class="line">db10((<span class="name">pvi</span>('hb <span class="string">"/OUT_P"</span> <span class="string">"/OUT_N"</span> <span class="string">"/PORT1/PLUS"</span> <span class="number">0</span> '(<span class="number">1</span>)) / (<span class="name">-</span> pvi('hb <span class="string">"/IN_P"</span> <span class="string">"/IN_N"</span> <span class="string">"/PORT0/PLUS"</span> <span class="number">0</span> '<span class="number">1</span>))))</span><br><span class="line"></span><br><span class="line"><span class="comment">; to calculate compression point</span></span><br><span class="line">compressionVRI((<span class="name">v</span>(<span class="string">"/OUT_P"</span> ?result <span class="string">"hb_fd"</span>) - v(<span class="string">"/OUT_N"</span> ?result <span class="string">"hb_fd"</span>)) '<span class="number">1</span> ?rport resultParam(<span class="string">"PORT1:r"</span> ?result <span class="string">"hb_fd"</span>) ?gcomp <span class="number">1</span> ?measure <span class="string">"Output"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="The-SKILL®-Language"><a href="#The-SKILL®-Language" class="headerlink" title="The SKILL® Language"></a>The SKILL® Language</h2><p>Skill is a programming language integrated into the Virtuoso environment to extend its capabilities. Its grammar is similar to Lisp, with supplemented useful features.</p>
+<h3 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+	<span class="comment">;plus</span></span><br><span class="line">-	<span class="comment">;minus</span></span><br><span class="line">*	<span class="comment">;multiply</span></span><br><span class="line">/	<span class="comment">;divide</span></span><br><span class="line">**	<span class="comment">;exponentiation</span></span><br><span class="line">==	<span class="comment">;equal</span></span><br><span class="line">!=	;nequal</span><br><span class="line">=	<span class="comment">;assignment</span></span><br><span class="line">&lt;, &lt;=, &gt;, &gt;=, ==, !=	;relation operator</span><br><span class="line">!, &amp;&amp;, ||				;logic operators</span><br></pre></td></tr></table></figure>
+<h3 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\	;Escape for special characters</span><br><span class="line">( )	<span class="comment">;Grouping of list elements, function calls</span></span><br><span class="line">[ ]	;Array index, super right bracket</span><br><span class="line">'	;Specifies a symbol (quoting the expression prevents its evaluation)</span><br><span class="line"><span class="string">""</span>	<span class="comment">;String delimiter</span></span><br><span class="line">,	;Optional delimiter between list elements (different from Lisp)</span><br><span class="line"><span class="comment">;	;Line-style comment character</span></span><br><span class="line">?	;If first character, implies keyword parameter</span><br></pre></td></tr></table></figure>
+<p>Calling a function</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plus(<span class="number">2</span>,<span class="number">3</span>)		<span class="comment">;C style</span></span><br><span class="line">(<span class="name">plus</span> <span class="number">2</span> <span class="number">3</span>)		<span class="comment">;Lisp style</span></span><br><span class="line">plus(<span class="number">2</span> <span class="number">3</span>)		<span class="comment">;hybrid style</span></span><br><span class="line">(<span class="name">plus</span>,<span class="number">2</span>,<span class="number">3</span>)		<span class="comment">;hybrid style</span></span><br></pre></td></tr></table></figure>
+<p>Defining a variable</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">2</span>		<span class="comment">;C style</span></span><br><span class="line">(<span class="name">setf</span> a <span class="number">2</span>)  <span class="comment">;Lisp style</span></span><br></pre></td></tr></table></figure>
+<p>Defining a list</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = '(<span class="number">3</span> <span class="number">3.14</span> <span class="string">"abc"</span>)			<span class="comment">;use a ' to avoid evaluation</span></span><br><span class="line">a = (<span class="name">list</span> <span class="number">3</span> <span class="number">3.14</span> <span class="string">"abc"</span>)</span><br><span class="line">(<span class="name">cons</span> a a)					<span class="comment">;concatenate lists</span></span><br><span class="line">(<span class="name">car</span> a)						<span class="comment">;obtain the first element</span></span><br><span class="line">(<span class="name">cdr</span> a)						<span class="comment">;obtain the rest elements (without the first)</span></span><br><span class="line">(<span class="name">nth</span> <span class="number">2</span> a)					<span class="comment">;access data at the specified index, index starts at 1</span></span><br><span class="line">(<span class="name">length</span> a)					<span class="comment">;count the elements</span></span><br><span class="line">aCoordinate = 300:400		;equal to '( 300 400 )</span><br><span class="line">bBox = list( <span class="number">300</span>:<span class="number">400</span> <span class="number">500</span>:<span class="number">450</span> )	<span class="comment">;equal to '(( 300 400 ) ( 500 450 ))</span></span><br></pre></td></tr></table></figure>
+<p>Declaring a function</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">procedure(	<span class="name">add</span>( <span class="name">x</span> y )</span><br><span class="line">			x+y</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">; define local variable with let() function</span></span><br><span class="line">procedure(	<span class="name">square</span>( <span class="name">x</span> )</span><br><span class="line">			let(( <span class="name">n</span> )</span><br><span class="line">                n=2</span><br><span class="line">                x**2</span><br><span class="line">            )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">; use defun, note that defun accept 3 arguments</span></span><br><span class="line"><span class="comment">; there is a space between the function name and the argument list</span></span><br><span class="line">defun(	<span class="name">add</span> ( <span class="name">x</span> y )</span><br><span class="line">			x+y</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Loop and branch</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;if</span></span><br><span class="line">if(<span class="name">-1&lt;0</span> print(<span class="string">"a&lt;0"</span>))</span><br><span class="line">if(<span class="name">-1&lt;0</span> print(<span class="string">"a&lt;0"</span>) print(<span class="string">"a&gt;=0"</span>))</span><br><span class="line">if(<span class="name">-1&lt;0</span></span><br><span class="line">	then</span><br><span class="line">     	print(<span class="string">"a&lt;0"</span>)</span><br><span class="line">	else</span><br><span class="line">     	print(<span class="string">"a&gt;=0"</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">;case</span></span><br><span class="line">case( <span class="string">"c"</span></span><br><span class="line">     ( <span class="string">"a"</span>	print(<span class="string">"apple"</span>) )</span><br><span class="line">     ( <span class="string">"b"</span>	print(<span class="string">"banana"</span>) )</span><br><span class="line">     ( <span class="string">"c"</span>	print(<span class="string">"car"</span>) )</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">;for</span></span><br><span class="line">for( <span class="name">i</span> <span class="number">1</span> <span class="number">5</span> printf( <span class="string">"%d"</span> i ) )	<span class="comment">;including 1 and 5</span></span><br><span class="line"></span><br><span class="line">a = list(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">foreach( <span class="name">i</span> a printf( <span class="string">"%d"</span> i ) )</span><br><span class="line"></span><br><span class="line"><span class="comment">;while</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line">while(<span class="name">i&lt;6</span></span><br><span class="line">	printf( <span class="string">"%d"</span> i )</span><br><span class="line">    i++</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Datatype</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">nil</span>		<span class="comment">;atom, ogical false or empty list</span></span><br><span class="line"><span class="literal">t</span>		<span class="comment">;stom, logical true</span></span><br><span class="line"><span class="number">5</span>		<span class="comment">;integer</span></span><br><span class="line"><span class="number">5.3</span>		<span class="comment">;floating point number</span></span><br><span class="line"><span class="string">"abc"</span>	<span class="comment">;string</span></span><br></pre></td></tr></table></figure>
+<h3 id="Useful-Functions"><a href="#Useful-Functions" class="headerlink" title="Useful Functions"></a>Useful Functions</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; calculate stability factor mu</span></span><br><span class="line">((1 - abs((aaSP(1 1)**2))) / (abs((aaSP(1 2) * aaSP(2 1))) + abs((aaSP(2 2) - (conjugate(aaSP(1 1)) * ((aaSP(1 1) * aaSP(2 2)) - (aaSP(1 2) * aaSP(2 1))))))))</span><br><span class="line"></span><br><span class="line"><span class="comment">; calculate Vout vs. Pout</span></span><br><span class="line">waveVsWave(?y vh('hb <span class="string">"/PDET_OUT"</span> '(<span class="number">0</span>)) ?x dbm(<span class="name">pvr</span>('hb <span class="string">"/OUT_P"</span> <span class="string">"/OUT_N"</span> <span class="number">50.0</span> '(<span class="number">1</span>))) ?xName <span class="string">"Pout"</span> ?xUnits <span class="string">"dBm"</span> ?yName <span class="string">"Vout"</span> ?yUnits <span class="string">"V"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">; calculate equivalent capacitance</span></span><br><span class="line">let( ( (<span class="name">k1</span> <span class="number">1</span>) (<span class="name">k2</span> <span class="number">1</span>) ) imag(<span class="name">ypm</span>('sp k1 k2)) / <span class="number">2</span> / pi / xval(<span class="name">imag</span>(<span class="name">ypm</span>('sp k1 k2))) )</span><br><span class="line"></span><br><span class="line"><span class="comment">; calculate equivalent inductance</span></span><br><span class="line">let( ( (<span class="name">k1</span> <span class="number">1</span>) (<span class="name">k2</span> <span class="number">1</span>) ) imag(<span class="name">zpm</span>('sp k1 k2)) / <span class="number">2</span> / pi / xval(<span class="name">imag</span>(<span class="name">zpm</span>('sp k1 k2))) )</span><br><span class="line"></span><br><span class="line"><span class="comment">; calculate Gmax</span></span><br><span class="line">gmax(<span class="name">spm</span>('sp <span class="number">1</span> <span class="number">1</span>) spm('sp <span class="number">1</span> <span class="number">2</span>) spm('sp <span class="number">2</span> <span class="number">1</span>) spm('sp <span class="number">2</span> <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="Multi-Thread-Simulation"><a href="#Multi-Thread-Simulation" class="headerlink" title="Multi-Thread Simulation"></a>Multi-Thread Simulation</h2><p>Spectre® engine itself does not support multi-thread simulation. To leverage the potential of multi-core processors, we can perform several Spectre simulation at the same time manually or automatically. One method to implement automatic parallel simulation is to use Threading module in Python to open up several threads. To achieve this</p>
+<h3 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h3><p>The files should be arranged as follows</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- autoOceanSim.py		# Python multi-thread control</span><br><span class="line">- result				# A folder for the simulation results</span><br><span class="line">- ocean-script</span><br><span class="line">    - oceanScript.ocn	# modified Ocean script</span><br><span class="line">- sample-netlist</span><br><span class="line">    - netlist			# netlist folder generated by spectre</span><br><span class="line">- working-directory		# working directory</span><br></pre></td></tr></table></figure>
+<p>In the Ocean script, several places have to be modified</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; &lt;!--DIR--&gt; represents the working directory for specific project</span></span><br><span class="line">design(	<span class="string">"&lt;!--DIR--&gt;/netlist/netlist"</span> )		<span class="comment">; specify the netlist folder</span></span><br><span class="line">resultsDir( <span class="string">"&lt;!--DIR--&gt;/result"</span> )			<span class="comment">; specify the raw results</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; specify the parameters to be swept</span></span><br><span class="line">desVar(	  <span class="string">"fin"</span> &lt;!--FREQ--&gt;*1e9	)</span><br><span class="line">desVar(	  <span class="string">"pin"</span> &lt;!--PIN--&gt;	)</span><br><span class="line"></span><br><span class="line"><span class="comment">; specify the folder for selected results</span></span><br><span class="line"><span class="comment">; &lt;!--RNAME--&gt; represents the "result" folder in the top level</span></span><br><span class="line">ocnPrint( ?output <span class="string">"&lt;!--RNAME--&gt;"</span> dbm(<span class="name">pvi</span>('hb <span class="string">"/OUT_P"</span> <span class="string">"/OUT_N"</span> <span class="string">"/PORT1/PLUS"</span> <span class="number">0</span> '(<span class="number">1</span>))) )</span><br></pre></td></tr></table></figure>
+<h3 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"></span><br><span class="line">oceanDirectory = os.path.join(os.getcwd(), <span class="string">'ocean-script'</span>)</span><br><span class="line">workingDirectory = os.path.join(os.getcwd(), <span class="string">'working-directory'</span>)</span><br><span class="line">sampleNetlist = os.path.join(os.getcwd(), <span class="string">'sample-netlist'</span>)</span><br><span class="line">resultDirectory = os.path.join(os.getcwd(), <span class="string">'result'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">commandWrapper</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, command, timeOut, maxTry)</span>:</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.name = name</span><br><span class="line">        self.command = command</span><br><span class="line">        self.timeOut = timeOut</span><br><span class="line">        self.maxTry = maxTry</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        run = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> run &lt; self.maxTry:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">"Start(%d) %s"</span> % (run+<span class="number">1</span>, self.name)</span><br><span class="line">                p = subprocess.Popen(self.command, preexec_fn=os.setsid, shell=<span class="literal">True</span>)</span><br><span class="line">                p.wait(self.timeOut)</span><br><span class="line">            <span class="keyword">except</span> subprocess.TimeoutExpired:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'Timeout(%d) %s'</span> % (run+<span class="number">1</span>, self.name)</span><br><span class="line">                p.terminate()</span><br><span class="line">                p.wait()</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    os.killpg(p.pid, signal.SIGKILL)</span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> error:</span><br><span class="line">                    <span class="keyword">print</span> error</span><br><span class="line">                run += <span class="number">1</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Finish %s'</span> % self.name</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">simuController</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, oceanScriptName, maxThread=<span class="number">3</span>, timeOut=<span class="number">1800</span>, maxTry=<span class="number">3</span>)</span>:</span></span><br><span class="line">        self.oceanScriptName = oceanScriptName</span><br><span class="line">        self.__readOriginalOcean()</span><br><span class="line">        self.task = []</span><br><span class="line">        self.maxThread = maxThread</span><br><span class="line">        self.timeOut = timeOut</span><br><span class="line">        self.maxTry = maxTry</span><br><span class="line">        self.threads = []</span><br><span class="line">        self.closedThread = []</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># place cds.log file in the current directory to avoid collision</span></span><br><span class="line">        os.environ[<span class="string">'CDS_LOG_PATH'</span>] = os.getcwd()</span><br><span class="line">        <span class="comment"># name cds.log file with pid value</span></span><br><span class="line">        os.environ[<span class="string">'CDS_LOG_VERSION'</span>] = <span class="string">'pid'</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__readOriginalOcean</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(os.path.join(oceanDirectory, self.oceanScriptName), <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            self.rawData = f.read()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__preProcessOcean</span><span class="params">(self, conversionTable, currentDir, resultName)</span>:</span></span><br><span class="line">        tmpData = self.rawData</span><br><span class="line">        <span class="keyword">for</span> [x, y] <span class="keyword">in</span> conversionTable:</span><br><span class="line">            tmpData = tmpData.replace(x, y)</span><br><span class="line">        tmpData = tmpData.replace(<span class="string">'&lt;!--DIR--&gt;'</span>, currentDir)</span><br><span class="line">        tmpData = tmpData.replace(<span class="string">'&lt;!--RNAME--&gt;'</span>, os.path.join(resultDirectory, resultName+<span class="string">'.csv'</span>))</span><br><span class="line">        <span class="keyword">return</span> tmpData</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">prepareSimulation</span><span class="params">(self, conversionTable, resultName)</span>:</span></span><br><span class="line">        folderName = datetime.datetime.now().strftime(<span class="string">'%Y%m%d-%H%M%S'</span>) + <span class="string">'_'</span> + resultName</span><br><span class="line">        currentDir = os.path.join(workingDirectory, folderName)</span><br><span class="line">        os.mkdir(currentDir)</span><br><span class="line">        tmpData = self.__preProcessOcean(conversionTable, currentDir, resultName)</span><br><span class="line">        <span class="comment"># write the ocean script</span></span><br><span class="line">        <span class="keyword">with</span> open(os.path.join(currentDir, <span class="string">'oceanScript.ocn'</span>), <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(tmpData)</span><br><span class="line">        <span class="comment"># copy the netlist folder</span></span><br><span class="line">        shutil.copytree(os.path.join(sampleNetlist, <span class="string">'netlist'</span>),\</span><br><span class="line">                        os.path.join(currentDir, <span class="string">'netlist'</span>))</span><br><span class="line">        command = <span class="string">'ocean &lt; %s &gt;&gt; %s'</span> % (os.path.join(currentDir, <span class="string">'oceanScript.ocn'</span>),\</span><br><span class="line">                                        os.path.join(currentDir, <span class="string">'ocean.log'</span>))</span><br><span class="line">        self.task.append([resultName, command])</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">runSimulation</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> [name, command] <span class="keyword">in</span> self.task:</span><br><span class="line">            <span class="comment"># check if alive thread number exceeds the maximum</span></span><br><span class="line">            <span class="keyword">while</span> (threading.activeCount() - <span class="number">1</span>) &gt;= self.maxThread:</span><br><span class="line">                <span class="comment"># if everything's ok, wait for 10 seconds and check again</span></span><br><span class="line">                time.sleep(<span class="number">10</span>)</span><br><span class="line">            newSimulation = commandWrapper(name, command, self.timeOut, self.maxTry)</span><br><span class="line">            newSimulation.daemon = <span class="literal">True</span></span><br><span class="line">            newSimulation.start()</span><br><span class="line">            self.threads.append(newSimulation)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># wait for all the threads to terminate</span></span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> self.threads:</span><br><span class="line">            t.join()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"All simulations have been finished!"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    sim = simuController(oceanScriptName=<span class="string">'oceanScript.ocn'</span>, maxThread=<span class="number">5</span>, timeOut=<span class="number">2400</span>, maxTry=<span class="number">3</span>)</span><br><span class="line">    <span class="comment"># add the points to be simulated</span></span><br><span class="line">    <span class="keyword">for</span> pin <span class="keyword">in</span> [<span class="number">0</span>]:</span><br><span class="line">        <span class="keyword">for</span> freq <span class="keyword">in</span> [<span class="number">29</span>]:</span><br><span class="line">            sim.prepareSimulation([[<span class="string">'&lt;!--PIN--&gt;'</span>, str(pin)],\</span><br><span class="line">                                    [<span class="string">'&lt;!--FREQ--&gt;'</span>, str(freq)]],\</span><br><span class="line">                                    <span class="string">'Loadpull_freq_%.1fGHz_pin_%.1fdBm'</span> % (freq, pin))</span><br><span class="line">    <span class="comment"># start the simulation</span></span><br><span class="line">    sim.runSimulation()</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a href="https://acl.readthedocs.io/en/latest/zhCN/index.html" target="_blank" rel="noopener">ANSI Common Lisp 中文版</a></li>
+</ol>
+<p>SKILL® and Spectre® are the trademarks of the Cadence Design Systems, Inc.</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Triblemany</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script.html" title="Automatic Simulation with Ocean Script">https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Ocean-Script/" rel="tag"># Ocean Script</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/archives/3951eef4/programing-with-matlab.html" rel="next" title="使用Matlab编程">
+                  <i class="fa fa-chevron-left"></i> 使用Matlab编程
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc" data-target="post-toc-wrap">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc">
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Running-Ocean-Script"><span class="nav-number">1.1.</span> <span class="nav-text">Running Ocean Script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ocean-Use-Model"><span class="nav-number">1.2.</span> <span class="nav-text">Ocean Use Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Browse-Results"><span class="nav-number">1.3.</span> <span class="nav-text">Browse Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Types-of-Simulation"><span class="nav-number">1.4.</span> <span class="nav-text">Types of Simulation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DC"><span class="nav-number">1.4.1.</span> <span class="nav-text">DC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TRAN"><span class="nav-number">1.4.2.</span> <span class="nav-text">TRAN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AC"><span class="nav-number">1.4.3.</span> <span class="nav-text">AC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SP"><span class="nav-number">1.4.4.</span> <span class="nav-text">SP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HB"><span class="nav-number">1.4.5.</span> <span class="nav-text">HB</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-SKILL®-Language"><span class="nav-number">2.</span> <span class="nav-text">The SKILL® Language</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Operators"><span class="nav-number">2.1.</span> <span class="nav-text">Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Syntax"><span class="nav-number">2.2.</span> <span class="nav-text">Syntax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Useful-Functions"><span class="nav-number">2.3.</span> <span class="nav-text">Useful Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Thread-Simulation"><span class="nav-number">3.</span> <span class="nav-text">Multi-Thread Simulation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Preparation"><span class="nav-number">3.1.</span> <span class="nav-text">Preparation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Code"><span class="nav-number">3.2.</span> <span class="nav-text">Source Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          </div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Triblemany">
+  <p class="site-author-name" itemprop="name">Triblemany</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Triblemany</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">273k</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a></div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/post-details.js?v=7.3.0"></script>
+
+
+<script>
+  function disqus_config() {
+    this.page.url = "https://triblemany.github.io/archives/d99e7696/automatic-simulation-with-ocean-script.html";
+    this.page.identifier = "archives/d99e7696/automatic-simulation-with-ocean-script.html";
+    this.page.title = 'Automatic Simulation with Ocean Script';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://triblemany.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    (function() {
+      var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        window.addEventListener('load', loadComments, false);
+      } else {
+        var disqus_scroll = () => {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = document.getElementById('comments').offsetTop - window.innerHeight;
+          var scrollTop = window.scrollY;
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            window.removeEventListener('scroll', disqus_scroll);
+            loadComments();
+          }
+        };
+        window.addEventListener('scroll', disqus_scroll);
+      }
+    })();
+  
+</script>
+
+</body>
+</html>

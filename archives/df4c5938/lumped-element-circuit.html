@@ -67,6 +67,8 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/pi-representation.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/t-representation.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/coupled-transmission-line.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/schematic-of-a-lumped-element-coupler.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/simulated-result-of-the-lumped-element-coupler.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/lumped-element-coupler.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/img.gif">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/lumped-wilkinson-power-divider.png">
@@ -84,7 +86,7 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/rotated-compact-layout-of-the-direct-quadrature-generation.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/transformer-based-hybrid.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/df4c5938/lumped-element-circuit/hybrid.png">
-<meta property="og:updated_time" content="2020-03-09T13:13:45.030Z">
+<meta property="og:updated_time" content="2020-06-03T03:22:48.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lumped-Element Circuit">
 <meta name="twitter:description" content="This paper explains how to implemented distributed components (e.g., transmission line, balun, coupler) with lumped elements.">
@@ -313,7 +315,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-09 21:13:45" itemprop="dateModified" datetime="2020-03-09T21:13:45+08:00">2020-03-09</time>
+                <time title="Modified: 2020-06-03 11:22:48" itemprop="dateModified" datetime="2020-06-03T11:22:48+08:00">2020-06-03</time>
               </span>
             
           
@@ -327,7 +329,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>9.5k</span>
+              <span>10k</span>
             </span>
           
 
@@ -387,9 +389,19 @@ k_C=\frac{C_c}{C_c+C_g}=\frac{C_c}{C}</script><p>Then, the even and odd mode cha
 Z_{0e}=\sqrt{\frac{L(1+k_L)}{C(1-k_C)}}\\
 v_e=\frac{1}{\sqrt{L(1+k_L)C(1-k_C)}}\\
 Z_{0o}=\sqrt{\frac{L(1-k_L)}{C(1+k_C)}}\\
-v_o=\frac{1}{\sqrt{L(1-k_L)C(1+k_C)}}</script><p>For the desired transverse electromagnetic mode (TEM) propagation, the even-mode and odd-mode propagation velocities should equal to avoid dispersions. Therefore, we have $k_L=k_C$.</p>
-<p>If we want 3-dB power division, then $|k|=|-j\sqrt{1-k^2}|$, and thus $k\approx0.707$.</p>
-<p>A example of the lumped-element coupler is as follows:</p>
+v_o=\frac{1}{\sqrt{L(1-k_L)C(1+k_C)}}\\
+Z_0=\sqrt{Z_{0o}Z_{0e}}</script><p>For the desired transverse electromagnetic mode (TEM) propagation, the even-mode and odd-mode propagation velocities should equal to avoid dispersions. Therefore, we have $k_L=k_C$.</p>
+<p>For a specified power division, the calculation process is as follows:</p>
+<ol>
+<li>From $k=\sqrt{10^{C/10}}$ and $k_L=k_C$, the coupling coefficients are determined. Note that $C$ denotes the coupled power to input power ratio in decibel.</li>
+<li>From $Z_0=\sqrt{Z_{0o}Z_{0e}}$ and $k_L=(Z_{0e}-Z_{0o})/(Z_{0e}+Z_{0o})$, the even and odd mode characteristic impedances are determined.</li>
+<li>Setting $\theta=\pi/2$ and from the equations, the component values are determined.</li>
+</ol>
+<p>For instance, if we want 3-dB power division, then $k\approx0.707$. At 28 GHz, the schematic is</p>
+<p><img src="lumped-element-circuit/schematic-of-a-lumped-element-coupler.png" alt="Schematic of a lumped element coupler"></p>
+<p>And the simulated results is</p>
+<p><img src="lumped-element-circuit/simulated-result-of-the-lumped-element-coupler.png" alt="Simulated result of the lumped element coupler"></p>
+<p>A example of the layout of the lumped-element coupler is as follows:</p>
 <p><img src="lumped-element-circuit/lumped-element-coupler.png" alt="Lumped-element coupler"></p>
 <h2 id="Balun"><a href="#Balun" class="headerlink" title="Balun"></a>Balun</h2><h3 id="Lattice-type-LC-balun"><a href="#Lattice-type-LC-balun" class="headerlink" title="Lattice-type LC balun"></a>Lattice-type LC balun</h3><p>Schematic of the lattice-type LC balun is</p>
 <p><img src="lumped-element-circuit/img.gif" alt="Lattice-type LC balun"></p>
@@ -667,7 +679,7 @@ R_3^2+Z_{in}Z_{out}=R_3^2\frac{(A+1)^2}{(A-1)^2}</script><p>Substitute the equat
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -736,7 +748,9 @@ R_3^2+Z_{in}Z_{out}=R_3^2\frac{(A+1)^2}{(A-1)^2}</script><p>Substitute the equat
         
           
         
-        <span class="site-state-item-count">27</span>
+          
+        
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -767,7 +781,7 @@ R_3^2+Z_{in}Z_{out}=R_3^2\frac{(A+1)^2}{(A-1)^2}</script><p>Substitute the equat
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">259k</span>
+    <span title="Symbols count total">273k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
