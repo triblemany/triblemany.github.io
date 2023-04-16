@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="Triblemany">
 <meta property="og:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2023-04-16T05:07:55.519Z">
+<meta property="og:updated_time" content="2023-04-16T17:56:43.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IC Calculator">
 <meta name="twitter:description" content="This article features calculators of:  Simple calculator Resonating frequency. Impedance conversion. Transmission line RLGC parameters from S parameters.">
@@ -291,7 +291,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-04-16 13:07:55" itemprop="dateModified" datetime="2023-04-16T13:07:55+08:00">2023-04-16</time>
+                <time title="Modified: 2023-04-17 01:56:43" itemprop="dateModified" datetime="2023-04-17T01:56:43+08:00">2023-04-17</time>
               </span>
             
           
@@ -393,8 +393,7 @@ function calcImp(){
     Z = complex(parseFloat($("#Ireal").val()), parseFloat($("#Iimag").val()));
     Y = divide(1, Z);
     Z0 = complex(parseFloat($("#Nr").val()), parseFloat($("#Ni").val()));
-    R = divide(subtract(Z, Z0), add(Z, Z0))
-
+    R = divide(subtract(Z, Z0), add(Z, Z0));
 
     //$("#Ireal").val(format(Z.re, precision));
     //$("#Iimag").val(format(Z.im, precision));
@@ -436,8 +435,7 @@ function calcAdm(){
     Y = complex(parseFloat($("#Areal").val()), parseFloat($("#Aimag").val()));
     Z = divide(1, Y);
     Z0 = complex(parseFloat($("#Nr").val()), parseFloat($("#Ni").val()));
-    R = divide(subtract(Z, Z0), add(Z, Z0))
-
+    R = divide(subtract(Z, Z0), add(Z, Z0));
 
     $("#Ireal").val(format(Z.re, precision));
     $("#Iimag").val(format(Z.im, precision));
@@ -486,10 +484,8 @@ function calcS(){
     Z = complex(parseFloat($("#SR").val()), Zi);
     Y = divide(1, Z);
     Z0 = complex(parseFloat($("#Nr").val()), parseFloat($("#Ni").val()));
-    R = divide(subtract(Z, Z0), add(Z, Z0))
+    R = divide(subtract(Z, Z0), add(Z, Z0));
 
-
-​    
 ​    $("#Ireal").val(format(Z.re, precision));
 ​    $("#Iimag").val(format(Z.im, precision));
 ​    
@@ -537,9 +533,7 @@ function calcP(){
     Y = complex(1/parseFloat($("#PR").val()), Yi);
     Z = divide(1, Y);
     Z0 = complex(parseFloat($("#Nr").val()), parseFloat($("#Ni").val()));
-    R = divide(subtract(Z, Z0), add(Z, Z0))
-
-
+    R = divide(subtract(Z, Z0), add(Z, Z0));
 ​    
 ​    $("#Ireal").val(format(Z.re, precision));
 ​    $("#Iimag").val(format(Z.im, precision));
