@@ -63,12 +63,13 @@
 <meta property="og:site_name" content="Triblemany">
 <meta property="og:description" content="本文介绍了二阶系统的基本概念。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/zeta-and-resonance.png">
-<meta property="og:updated_time" content="2019-11-12T05:08:02.593Z">
+<meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/step-response.png">
+<meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/frequency-response.png">
+<meta property="og:updated_time" content="2024-05-19T08:58:29.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二阶系统">
 <meta name="twitter:description" content="本文介绍了二阶系统的基本概念。">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/zeta-and-resonance.png">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/step-response.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/5777cf8/frequency-response">
 
 
@@ -293,7 +294,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-12 13:08:02" itemprop="dateModified" datetime="2019-11-12T13:08:02+08:00">2019-11-12</time>
+                <time title="Modified: 2024-05-19 16:58:29" itemprop="dateModified" datetime="2024-05-19T16:58:29+08:00">2024-05-19</time>
               </span>
             
           
@@ -307,7 +308,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.2k</span>
+              <span>2.3k</span>
             </span>
           
 
@@ -354,7 +355,9 @@ Y(s) &=G(s) \cdot U(s) \\
 \begin{aligned}
 y(t) &=1-e^{-\sigma t} \cos \omega_{d} t-\frac{\sigma}{\omega_{d}} e^{-\sigma t} \sin \omega_{d} t \\
 &=1-e^{-\sigma t}\left(\cos \omega_{d} t+\frac{\sigma}{\omega_{d}} \sin \omega_{d} t\right), t \geq 0
-\end{aligned}</script><h3 id="稳态分析"><a href="#稳态分析" class="headerlink" title="稳态分析"></a>稳态分析</h3><p>幅频响应为</p>
+\end{aligned}</script><p>对于$\omega_n=2\pi$，不同$\zeta$时阶跃响应如下图</p>
+<p><img src="frequency-response/step-response.png" alt="step-response"></p>
+<h3 id="稳态分析"><a href="#稳态分析" class="headerlink" title="稳态分析"></a>稳态分析</h3><p>幅频响应为</p>
 <script type="math/tex; mode=display">
 A(\omega)=|G(j \omega)|=\frac{1}{\sqrt{\left[1-\left(\frac{\omega}{\omega_{n}}\right)^{2}\right]^{2}+\left(2 \zeta \frac{\omega}{\omega_{n}}\right)^{2}}}</script><p>相频响应为</p>
 <script type="math/tex; mode=display">
@@ -376,8 +379,8 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
 <li>当$0&lt;\zeta&lt;1/\sqrt{2}$时，存在谐振频率</li>
 <li>当$\zeta=0$时，$\omega_r=\omega_n, A(\omega_r)\rightarrow\infty, \varphi(\omega_r)=-90^{\circ}$</li>
 </ul>
-<p>画出幅频响应和相频响应曲线则有</p>
-<p><img src="frequency-response\zeta-and-resonance.png" alt="zeta-and-resonance"></p>
+<p>同样的，对于$\omega_n=2\pi$，不同$\zeta$时频率响应如下图</p>
+<p><img src="frequency-response/frequency-response.png" alt="frequency-response"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/48169298" target="_blank" rel="noopener">控制理论学习笔记（4）——一阶系统和二阶系统</a>.</li>
 <li>孙晓波, 李双全, 王海英. 自动控制原理. 科学出版社, 2006.</li>
@@ -408,14 +411,14 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\7ca3cc72\ic-calculator.html" rel="bookmark">IC Calculator</a></div>
+      <div class="popular-posts-title"><a href="\archives\df4c5938\lumped-element-circuit.html" rel="bookmark">Lumped-Element Circuit</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\archives\df4c5938\lumped-element-circuit.html" rel="bookmark">Lumped-Element Circuit</a></div>
+      <div class="popular-posts-title"><a href="\archives\7ca3cc72\ic-calculator.html" rel="bookmark">IC Calculator</a></div>
       
     </li>
   
@@ -647,7 +650,7 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2023</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2024</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
