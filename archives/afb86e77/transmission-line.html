@@ -55,13 +55,13 @@
   };
 </script>
 
-  <meta name="description" content="This article covers:  Transmission line (TL) equation and its solution Input impedance of a terminated TL Conversion between RLGC and γZ parameters S, Z, Y and ABCD Parameters of TL Examples of obtain">
+  <meta name="description" content="Transmission lines are the backbone of high-frequency circuits, guiding electromagnetic waves from one point to another. While at low frequencies we can treat wires as ideal short circuits, at higher">
 <meta name="keywords" content="RF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Model RLGC Transmission Line">
+<meta property="og:title" content="A Deep Dive into Transmission Line Modeling with RLGC Parameters">
 <meta property="og:url" content="https://triblemany.github.io/archives/afb86e77/transmission-line.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="This article covers:  Transmission line (TL) equation and its solution Input impedance of a terminated TL Conversion between RLGC and γZ parameters S, Z, Y and ABCD Parameters of TL Examples of obtain">
+<meta property="og:description" content="Transmission lines are the backbone of high-frequency circuits, guiding electromagnetic waves from one point to another. While at low frequencies we can treat wires as ideal short circuits, at higher">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/Lumped-Model-of-Transmission-Lines.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/Transmission-Line-with-Load.png">
@@ -70,10 +70,10 @@
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/lumped_mimic_distributed.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/detailed_schematic.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/simulation_result.png">
-<meta property="og:updated_time" content="2024-05-19T09:20:31.335Z">
+<meta property="og:updated_time" content="2025-08-23T18:53:40.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="How to Model RLGC Transmission Line">
-<meta name="twitter:description" content="This article covers:  Transmission line (TL) equation and its solution Input impedance of a terminated TL Conversion between RLGC and γZ parameters S, Z, Y and ABCD Parameters of TL Examples of obtain">
+<meta name="twitter:title" content="A Deep Dive into Transmission Line Modeling with RLGC Parameters">
+<meta name="twitter:description" content="Transmission lines are the backbone of high-frequency circuits, guiding electromagnetic waves from one point to another. While at low frequencies we can treat wires as ideal short circuits, at higher">
 <meta name="twitter:image" content="https://triblemany.github.io/archives/afb86e77/transmission-line/Lumped-Model-of-Transmission-Lines.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/afb86e77/transmission-line">
 
@@ -89,7 +89,7 @@
   };
 </script>
 
-  <title>How to Model RLGC Transmission Line | Triblemany</title>
+  <title>A Deep Dive into Transmission Line Modeling with RLGC Parameters | Triblemany</title>
   <meta name="generator" content="Hexo 3.9.0">
   
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146837898-1"></script>
@@ -272,7 +272,7 @@
       <meta itemprop="name" content="Triblemany">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">How to Model RLGC Transmission Line
+        <h1 class="post-title" itemprop="name headline">A Deep Dive into Transmission Line Modeling with RLGC Parameters
 
           
         </h1>
@@ -299,7 +299,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-19 17:20:31" itemprop="dateModified" datetime="2024-05-19T17:20:31+08:00">2024-05-19</time>
+                <time title="Modified: 2025-08-24 02:53:40" itemprop="dateModified" datetime="2025-08-24T02:53:40+08:00">2025-08-24</time>
               </span>
             
           
@@ -313,7 +313,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>8k</span>
+              <span>14k</span>
             </span>
           
 
@@ -326,69 +326,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>This article covers:</p>
+        <p>Transmission lines are the backbone of high-frequency circuits, guiding electromagnetic waves from one point to another. While at low frequencies we can treat wires as ideal short circuits, at higher frequencies, their physical length becomes a significant fraction of the signal&#39;s wavelength. This means we can no longer ignore the time it takes for a signal to travel down the wire. To accurately predict signal behavior, we must model the transmission line using its distributed parameters: resistance (R), inductance (L), conductance (G), and capacitance (C).<br>This article provides a comprehensive guide to understanding and modeling RLGC transmission lines. We will cover:</p>
 <ul>
-<li>Transmission line (TL) equation and its solution</li>
-<li>Input impedance of a terminated TL</li>
-<li>Conversion between RLGC and γZ parameters</li>
-<li>S, Z, Y and ABCD Parameters of TL</li>
-<li>Examples of obtaining parameters from simulation</li>
+<li>The derivation of the fundamental Transmission Line (Telegrapher&#39;s) Equations.</li>
+<li>The concepts of characteristic impedance, propagation constant, and input impedance.</li>
+<li>Converting between the physical RLGC model and the wave-based propagation constant (γ) and characteristic impedance (Z₀) model.</li>
+<li>Representing the transmission line as a two-port network using S, Z, Y, and ABCD parameters.</li>
+<li>Practical examples of how to extract these crucial parameters from simulations.</li>
 </ul>
 <a id="more"></a>
-<h2 id="Transmission-Line"><a href="#Transmission-Line" class="headerlink" title="Transmission Line"></a>Transmission Line</h2><h3 id="Transmission-Line-Equation"><a href="#Transmission-Line-Equation" class="headerlink" title="Transmission Line Equation"></a>Transmission Line Equation</h3><p><img src="transmission-line/Lumped-Model-of-Transmission-Lines.png" alt="Lumped Model of Transmission Lines"></p>
-<p>We have</p>
+<h2 id="1-The-Fundamental-Transmission-Line-Equations"><a href="#1-The-Fundamental-Transmission-Line-Equations" class="headerlink" title="1. The Fundamental Transmission Line Equations"></a>1. The Fundamental Transmission Line Equations</h2><p>To understand how voltages and currents propagate, we start by modeling the transmission line as an infinite series of infinitesimally small, lumped-element segments. Each segment, of length $\Delta z$, contains the distributed parameters:</p>
+<ul>
+<li><strong>R:</strong> The series resistance per unit length (in Ω/m).</li>
+<li><strong>L:</strong> The series inductance per unit length (in H/m).</li>
+<li><strong>G:</strong> The shunt conductance per unit length (in S/m), representing dielectric loss.</li>
+<li><strong>C:</strong> The shunt capacitance per unit length (in F/m).</li>
+</ul>
+<p><img src="transmission-line/Lumped-Model-of-Transmission-Lines.png" alt="Lumped Model of Transmission Lines"></p>
+<h3 id="Deriving-the-Telegrapher-39-s-Equations"><a href="#Deriving-the-Telegrapher-39-s-Equations" class="headerlink" title="Deriving the Telegrapher&#39;s Equations"></a>Deriving the Telegrapher&#39;s Equations</h3><p>By applying Kirchhoff&#39;s Voltage Law (KVL) and Kirchhoff&#39;s Current Law (KCL) to this infinitesimal segment, we can derive the governing equations.</p>
+<p>Applying KVL around the loop:</p>
 <script type="math/tex; mode=display">
 v(z,t)-R\Delta z i(z,t)-L\Delta z\frac{\partial i(z,t)}{\partial t}-v(z+\Delta z)=0\\
-i(z,t)-G\Delta zv(z+\Delta z,t)-C\Delta z\frac{\partial v(z+\Delta z,t)}{\partial t}-i(z+\Delta z,t)=0</script><p>Divide them by $\Delta z$ and set $\Delta z\to0$</p>
+i(z,t)-G\Delta zv(z+\Delta z,t)-C\Delta z\frac{\partial v(z+\Delta z,t)}{\partial t}-i(z+\Delta z,t)=0</script><p>Rearranging and dividing by $\Delta z$, then set $\Delta z\to0$ becomes the <strong>Telegrapher&#39;s Equations</strong>:</p>
 <script type="math/tex; mode=display">
 \frac{\partial v(z,t)}{\partial t}=-Ri(z,t)-L\frac{\partial i(z,t)}{\partial t}\\
-\frac{\partial i(z,t)}{\partial t}=-Gv(z,t)-C\frac{\partial v(z,t)}{\partial t}</script><p>For the sinusoidal steady-state condition</p>
+\frac{\partial i(z,t)}{\partial t}=-Gv(z,t)-C\frac{\partial v(z,t)}{\partial t}</script><h3 id="The-Frequency-Domain-Solution"><a href="#The-Frequency-Domain-Solution" class="headerlink" title="The Frequency-Domain Solution"></a>The Frequency-Domain Solution</h3><p>For steady-state sinusoidal signals (the basis of most RF and microwave analysis), we can simplify these partial differential equations by moving to the frequency domain using phasors, where $v(z,t) = \Re\{V(z)e^{jωt}\}$. The time derivatives $\partial/\partial t$ are replaced by $j\omega$. The Telegrapher&#39;s Equations become:</p>
 <script type="math/tex; mode=display">
 \frac{d V(z)}{d t}=-(R+j\omega L)I(z)\\
 \frac{d I(z)}{d t}=-(G+j\omega C)V(z)\\</script><p>With manipulation, it turns into</p>
 <script type="math/tex; mode=display">
 \frac{d^2 V(z)}{d t^2}-\gamma^2V(z)=0\\
-\frac{d^2 I(z)}{d t^2}-\gamma^2I(z)=0\\</script><p>where</p>
+\frac{d^2 I(z)}{d t^2}-\gamma^2I(z)=0\\</script><p>where $\gamma$ is the <strong>complex propagation constant</strong>:</p>
 <script type="math/tex; mode=display">
-\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><p>The solution is</p>
+\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}=\alpha+j\beta</script><ul>
+<li>$\alpha$ <strong>(Alpha)</strong> is the <strong>attenuation constant</strong> in Nepers/m, representing the signal loss per unit length.</li>
+<li>$\beta$ <strong>(Beta)</strong> is the <strong>phase constant</strong> in radians/m, representing the phase shift per unit length.</li>
+</ul>
+<p>The general solution to these second-order differential equations is:</p>
 <script type="math/tex; mode=display">
 V(z)=V^+e^{-\gamma z}+V^-e^{\gamma z}\\
 I(z)=I^+e^{-\gamma z}-I^-e^{\gamma z}</script><p>$V(z)$ can be used to derive $I(z)$ as</p>
 <script type="math/tex; mode=display">
-I(z)=\frac{\gamma}{R+j\omega L}(V^+e^{-\gamma z}-V^-e^{\gamma z})</script><p>we have</p>
+I(z)=\frac{\gamma}{R+j\omega L}(V^+e^{-\gamma z}-V^-e^{\gamma z})</script><p>Here, $V^+e^{-\gamma z}$ represents a forward-propagating wave (traveling in the +z direction) that decays, while $V^-e^{\gamma z}$ represents a reverse-propagating (reflected) wave.</p>
+<p>The relationship between voltage and current for each wave is defined by the <strong>characteristic impedance</strong> $Z_0$:</p>
 <script type="math/tex; mode=display">
-\frac{V^+}{I^+}=\frac{V^-}{I^-}=Z_0=\frac{R+j\omega L}{\gamma}=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>The solution of $V(z)$ can be written in the time domain as $\mathrm{Re}[V(z)e^{j\omega t}]$</p>
+\frac{V^+}{I^+}=\frac{V^-}{I^-}=Z_0=\frac{R+j\omega L}{\gamma}=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><p>This impedance is the ratio of voltage to current for a single wave traveling along the line. It is a fundamental property of the line&#39;s geometry and material properties.</p>
+<p>The solution of $V(z)$ can be written in the time domain as $\mathrm{Re}[V(z)e^{j\omega t}]$</p>
 <script type="math/tex; mode=display">
-v(z,t)=|V^+|\cos(\omega t-\beta z+\phi^+)e^{-\alpha z}\\
-|V^-|\cos(\omega t-\beta z+\phi^-)e^{\alpha z}</script><p>where we have</p>
+\begin{aligned}
+v(z,t)=&|V^+|\cos(\omega t-\beta z+\phi^+)e^{-\alpha z}+\\
+&|V^-|\cos(\omega t-\beta z+\phi^-)e^{\alpha z}
+\end{aligned}</script><p>where we have</p>
 <script type="math/tex; mode=display">
 \lambda=\frac{2\pi}{\beta}\\
 v_p=\frac{\omega}{\beta}=\lambda f</script><p><strong>For lossless lines</strong> $\beta=\omega\sqrt{LC}$</p>
 <script type="math/tex; mode=display">
 \lambda=\frac{2\pi}{\omega \sqrt{LC}}\\
-v_p=\frac{1}{\sqrt{LC}}</script><h3 id="Terminated-Transmission-Line"><a href="#Terminated-Transmission-Line" class="headerlink" title="Terminated Transmission Line"></a>Terminated Transmission Line</h3><p><img src="transmission-line/Transmission-Line-with-Load.png" alt="Transmission Line with Load"></p>
-<p>Since</p>
+v_p=\frac{1}{\sqrt{LC}}</script><h2 id="2-Terminated-Transmission-Line"><a href="#2-Terminated-Transmission-Line" class="headerlink" title="2. Terminated Transmission Line"></a>2. Terminated Transmission Line</h2><p>In practice, a transmission line is always connected to a load. Let&#39;s consider a line of length l terminated with a load impedance $Z_L$ at $z=l$. For convenience, we often place the load at $z=0$ and the input at $z=-l$.</p>
+<p><img src="transmission-line/Transmission-Line-with-Load.png" alt="Transmission Line with Load"></p>
+<p>At the load ($z=0$), the relationship between the total voltage and total current is fixed:</p>
 <script type="math/tex; mode=display">
-Z_L=\frac{V(0)}{I(0)}=\frac{V^++V^-}{V^+-V^-}Z_0</script><p>The ratio of the reflected voltage wave amplitude to the incident voltage wave amplitude is defined as the voltage <strong>reflection coefficient</strong>:</p>
+Z_L=\frac{V(0)}{I(0)}=\frac{V^++V^-}{I^+-I^-}=\frac{V^++V^-}{V^+-V^-}Z_0</script><h3 id="Reflection-Coefficient"><a href="#Reflection-Coefficient" class="headerlink" title="Reflection Coefficient"></a>Reflection Coefficient</h3><p>Any mismatch between the load impedance $Z_L$ and the characteristic impedance $Z_0$ will cause a portion of the incident wave to be reflected. The ratio of the reflected voltage wave to the incident voltage wave at the load is the <strong>reflection coefficient</strong>:</p>
 <script type="math/tex; mode=display">
-\Gamma=\frac{V^-}{V^+}=\frac{Z_L-Z_0}{Z_L+Z_0}</script><p>Using reflection coefficient, we may rewrite the transmission line solution as</p>
+\Gamma=\frac{V^-}{V^+}=\frac{Z_L-Z_0}{Z_L+Z_0}</script><p>The voltage and current at any point $z$ can now be expressed in terms of the incident wave $V^+$ and the reflection coefficient $\Gamma$:</p>
 <script type="math/tex; mode=display">
 V(z)=V^+(e^{-\gamma z}+\Gamma e^{\gamma z})\\
 I(z)=\frac{V^+}{Z_0}(e^{-\gamma z}-\Gamma e^{\gamma z})</script><p>The maximal voltage amplitude to the minimal voltage amplitude is defined as <strong>standing wave ratio (SWR)</strong>:</p>
 <script type="math/tex; mode=display">
 \operatorname{SWR}=\frac{1+|\Gamma|}{1-|\Gamma|}</script><p>At arbitrary point, the reflection coefficient is</p>
 <script type="math/tex; mode=display">
-\Gamma(-l)=\frac{V^-e^{-\gamma l}}{V^+e^{\gamma l}}=\Gamma(0)e^{-2\gamma l}</script><p>and input impedance is</p>
+\Gamma(-l)=\frac{V^-e^{-\gamma l}}{V^+e^{\gamma l}}=\Gamma(0)e^{-2\gamma l}</script><h3 id="Input-Impedance"><a href="#Input-Impedance" class="headerlink" title="Input Impedance"></a>Input Impedance</h3><p>The impedance seen looking into the transmission line from a distance l away from the load is the <strong>input impedance</strong>. This is a critical parameter for matching circuits.</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 Z_{in}=Z(-l)&=Z_0\frac{1+\Gamma e^{-2\gamma l}}{1-\Gamma e^{-2\gamma l}}\\
 &=Z_0\frac{Z_L+Z_0\tanh{\gamma l}}{Z_0+Z_L\tanh{\gamma l}}
-\end{aligned}</script><p><strong>For lossless lines</strong></p>
+\end{aligned}</script><p>As a special cases for lossless lines:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 Z_{in}=Z(-l)&=Z_0\frac{1+\Gamma e^{-2j\beta l}}{1-\Gamma e^{-2j\beta l}}\\
 &=Z_0\frac{Z_L+jZ_0\tan{\beta l}}{Z_0+jZ_L\tan{\beta l}}
-\end{aligned}</script><p>Thus</p>
+\end{aligned}</script><p>This leads to several important applications:</p>
 <ul>
 <li><p>For a <strong>quarter-wavelength</strong> transmission line where $\beta l=\pi/2$, we have</p>
 <script type="math/tex; mode=display">
@@ -400,76 +417,84 @@ Z_{in}=-jZ_0\cot{\beta l}</script></li>
 <script type="math/tex; mode=display">
 Z_{in}=jZ_0\tan{\beta l}</script></li>
 </ul>
-<h3 id="Parameter-Conversion"><a href="#Parameter-Conversion" class="headerlink" title="Parameter Conversion"></a>Parameter Conversion</h3><p>γZ to RLCG</p>
+<h2 id="3-Parameter-Conversion"><a href="#3-Parameter-Conversion" class="headerlink" title="3. Parameter Conversion"></a>3. Parameter Conversion</h2><p>We have two equivalent ways to describe a transmission line: the physical RLGC parameters and the wave-behavior parameters $\gamma$ and $Z_0$. It&#39;s essential to know how to convert between them.</p>
+<h3 id="From-RLGC-to-γ-and-Z₀"><a href="#From-RLGC-to-γ-and-Z₀" class="headerlink" title="From RLGC to γ and Z₀"></a>From RLGC to γ and Z₀</h3><p>These are the definitions we&#39;ve already used:</p>
 <script type="math/tex; mode=display">
-R={\rm Re}\{\gamma Z\}</script><script type="math/tex; mode=display">
-L={\rm Im}\{\gamma Z\}/\omega</script><script type="math/tex; mode=display">
-G={\rm Re}\{\gamma/Z\}</script><script type="math/tex; mode=display">
-C={\rm Im}\{\gamma/Z\}/\omega</script><h3 id="S-Z-Y-and-ABCD-Parameters"><a href="#S-Z-Y-and-ABCD-Parameters" class="headerlink" title="S, Z, Y and ABCD Parameters"></a>S, Z, Y and ABCD Parameters</h3><script type="math/tex; mode=display">
-S=\frac{1}{D_s}
-\left[
-    \begin{matrix}
-        (Z^2-Z_0^2)\sinh\gamma l & 2ZZ_0\\
-        2ZZ_0 & (Z^2-Z_0^2)\sinh\gamma
-    \end{matrix}
-\right]\\
-D_s=2ZZ_0\cosh\gamma l+(Z^2+Z_0^2)\sinh\gamma l\\
+\gamma=\sqrt{(R+j\omega L)(G+j\omega C)}\\
+Z_0=\sqrt{\frac{R+j\omega L}{G+j\omega C}}</script><h3 id="From-γ-and-Z₀-to-RLGC"><a href="#From-γ-and-Z₀-to-RLGC" class="headerlink" title="From γ and Z₀ to RLGC"></a>From γ and Z₀ to RLGC</h3><p>By manipulating the equations above, we can solve for the RLGC parameters. From the product γZ₀ and the ratio γ/Z₀:</p>
+<script type="math/tex; mode=display">
+\gamma Z_0=R+j\omega L\\
+\gamma/Z_0=G+j\omega C</script><p>By taking the real and imaginary parts, we can isolate each component:</p>
+<script type="math/tex; mode=display">
+R={\rm Re}\{\gamma Z\}\\
+L={\rm Im}\{\gamma Z\}/\omega\\
+G={\rm Re}\{\gamma/Z\}\\
+C={\rm Im}\{\gamma/Z\}/\omega</script><p>This conversion is extremely useful for extracting a physical circuit model from measured or simulated wave-based parameters.</p>
+<h2 id="4-Two-Port-Network-Parameters"><a href="#4-Two-Port-Network-Parameters" class="headerlink" title="4. Two-Port Network Parameters"></a>4. Two-Port Network Parameters</h2><p>A segment of transmission line of length $l$ can be fully characterized as a two-port network. This allows it to be easily integrated into larger circuit simulations. Below are the standard parameter matrices.</p>
+<p><em>Note on Notation:</em> For clarity, we will use $Z_c$ to represent the <strong>characteristic impedance of the transmission line</strong> itself and $Z_0$ to represent the <strong>port impedance of the measurement system</strong> (typically 50 Ω).</p>
+<h3 id="ABCD-Parameters"><a href="#ABCD-Parameters" class="headerlink" title="ABCD Parameters"></a>ABCD Parameters</h3><p>ABCD parameters are useful for cascading networks. For a TL of length $l$:</p>
+<script type="math/tex; mode=display">
 ABCD=
 \left[
     \begin{matrix}
-        \cosh\gamma l & Z\sinh\gamma l\\
-        \frac{\sinh\gamma l}{Z} & \cosh\gamma l
+        \cosh\gamma l & Z_c\sinh\gamma l\\
+        \frac{\sinh\gamma l}{Z_c} & \cosh\gamma l
     \end{matrix}
-\right]\\
+\right]\\</script><h3 id="Z-and-Y-Parameters"><a href="#Z-and-Y-Parameters" class="headerlink" title="Z and Y Parameters"></a>Z and Y Parameters</h3><p>Z (impedance) and Y (admittance) parameters relate the port voltages and currents.</p>
+<script type="math/tex; mode=display">
 Z=
 \left[
     \begin{matrix}
-        \frac{Z}{\tanh\gamma l} & \frac{Z}{\sinh\gamma l}\\
-        \frac{Z}{\sinh\gamma l} & \frac{Z}{\tanh\gamma l}
+        \frac{Z_c}{\tanh\gamma l} & \frac{Z_c}{\sinh\gamma l}\\
+        \frac{Z_c}{\sinh\gamma l} & \frac{Z_c}{\tanh\gamma l}
     \end{matrix}
 \right]\\
 Y=
 \left[
     \begin{matrix}
-        \frac{1}{Z\tanh\gamma l} & -\frac{1}{Z\sinh\gamma l}\\
-        -\frac{1}{Z\sinh\gamma l} & \frac{1}{Z\tanh\gamma l}
+        \frac{1}{Z_c\tanh\gamma l} & -\frac{1}{Z_c\sinh\gamma l}\\
+        -\frac{1}{Z_c\sinh\gamma l} & \frac{1}{Z_c\tanh\gamma l}
     \end{matrix}
-\right]</script><p>Note that $Z$ is the characteristic impedance of the <strong>transmission line</strong>, and $Z_0$ is the characteristic impedance of the <strong>measurement system</strong>.</p>
-<h3 id="Distortionless-Line"><a href="#Distortionless-Line" class="headerlink" title="Distortionless Line"></a>Distortionless Line</h3><p>In a lossy line, the phase term $\beta$ is generally a complicated function of frequency $\omega$. If $\beta$ is not a linear function of frequency, the phase velocity can vary with frequency, causing signal dispersion. However, for the lossy lines, when</p>
+\right]</script><h3 id="S-Parameters"><a href="#S-Parameters" class="headerlink" title="S Parameters"></a>S Parameters</h3><p>S-parameters (scattering parameters) are the most common in high-frequency measurements, as they relate incident and reflected waves, which are easier to measure than total voltages and currents. For a TL referenced to a port impedance $Z_0$:</p>
 <script type="math/tex; mode=display">
-\frac{R}{L}=\frac{G}{C}</script><p>it is still distortionless. In this case</p>
+S=\frac{1}{D_s}
+\left[
+    \begin{matrix}
+        (Z_c^2-Z_0^2)\sinh\gamma l & 2Z_cZ_0\\
+        2Z_cZ_0 & (Z_c^2-Z_0^2)\sinh\gamma
+    \end{matrix}
+\right]</script><p>where the common denominator is:</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-\gamma&=\sqrt{(R+j\omega L)(G+j\omega C)}\\
-&=\sqrt{(j\omega L)(j\omega C)\left(1+\frac{R}{j\omega L}\right)\left(1+\frac{G}{j\omega C}\right)}\\
-&=j\omega\sqrt{LC}\left(1+\frac{R}{j\omega L}\right)\\
-&=R\sqrt{\frac{C}{L}}+j\omega\sqrt{LC}
-\end{aligned}</script><h2 id="Parameters-Extraction"><a href="#Parameters-Extraction" class="headerlink" title="Parameters Extraction"></a>Parameters Extraction</h2><h3 id="Direct-Simulation"><a href="#Direct-Simulation" class="headerlink" title="Direct Simulation"></a>Direct Simulation</h3><p>The characteristic impedance can be obtained from direct simulation. First, two ports of identical impedance are connected to the sides of the TL. Then, a parameter sweep of the port impedance is conducted at the intended frequency. The impedance that have the lowest reflection can be used as characteristic impedance.</p>
+D_s=2Z_cZ_0\cosh\gamma l+(Z_c^2+Z_0^2)\sinh\gamma l</script><h2 id="5-Practical-Parameter-Extraction"><a href="#5-Practical-Parameter-Extraction" class="headerlink" title="5. Practical Parameter Extraction"></a>5. Practical Parameter Extraction</h2><p>Now let&#39;s apply this theory to extract the RLGC parameters from a simulated transmission line.</p>
+<h3 id="Direct-Simulation"><a href="#Direct-Simulation" class="headerlink" title="Direct Simulation"></a>Direct Simulation</h3><p>Connect the transmission line between two ports. Sweep the impedance of both ports at the target frequency and monitor the reflection coefficient ($S_{11}$). The port impedance that results in the minimum reflection ($S_{11}\approx0$) is the characteristic impedance of the line.</p>
 <p><img src="transmission-line/simulation_schematic.png" alt="simulation_schematic"></p>
 <p>Real part of characteristic impedance is given by</p>
 <p><img src="transmission-line/real_of_Z.png" alt="real_of_Z"></p>
-<p>Also, we note that when the characteristic impedance matches, the gain of the TL can be written as</p>
+<p>Once the ports are matched to $Z_c$, the $S_{21}$ parameter directly gives you $e^{-\gamma l}$</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 S_{21}\biggl|_{Z=Z_0}&=\frac{1}{\sinh\gamma l+\cosh\gamma l}\\
 &=e^{-\gamma l}\\
 &=e^{-\alpha l}e^{-j\beta l}
-\end{aligned}</script><p>Hence, we have</p>
+\end{aligned}</script><p>From this, we can solve for α and β.</p>
 <script type="math/tex; mode=display">
 S_{21}[dB]=20\log_{10}e^{-\alpha l}=-20\alpha l\log_{10}{e}\\
-S_{21}[rad]=-\beta l</script><p>The above equations can be used to solve for γ. In this case, we have a TL length of $400\times10^{-6} \mathrm{m}$ and $S_{21}|_{Z=Z_0}=-0.22 dB/-28.95^\circ$. We can write</p>
+S_{21}[rad]=-\beta l</script><p>The above equations can be used to solve for γ. In this case, we have a transmission line with a length of $400\times10^{-6} \mathrm{m}$ and $S_{21}|_{Z=Z_0}=-0.22 dB/-28.95^\circ$. We can write</p>
 <script type="math/tex; mode=display">
 \alpha=\frac{S_{21}[dB]}{-8.686[dB/m]\cdot l[m]}=63.3\\
-\beta=\frac{S_{21}[rad]}{-l[m]}=1263[rad/m]</script><h3 id="Calculation"><a href="#Calculation" class="headerlink" title="Calculation"></a>Calculation</h3><p>Alternatively, the parameters of a TL can be calculation directly from S parameters. This function is supported in Matlab. Calculation process is as follows:</p>
+\beta=\frac{S_{21}[rad]}{-l[m]}=1263[rad/m]</script><p>With $γ = α + jβ$ and $Z_c$ known, use the conversion formulas from Section 3 to find R, L, G, and C.</p>
+<h3 id="Calculation-from-S-Parameters"><a href="#Calculation-from-S-Parameters" class="headerlink" title="Calculation from S-Parameters"></a>Calculation from S-Parameters</h3><p>A more direct and robust method, which doesn&#39;t require finding the exact $Z_c$ first, is to calculate the RLGC parameters directly from the standard 50 Ω S-parameter matrix. This is based on converting the S-parameters to ABCD parameters and then solving for $γ$ and $Z_c$.</p>
+<p>This functionality is built into many software tools. In MATLAB, the <code>s2rlgc</code> function from the RF Toolbox can do this automatically.</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PolartoComplex = @(len, the) len*<span class="built_in">cos</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>) + <span class="number">1</span><span class="built_in">i</span>*len*<span class="built_in">sin</span>(the*<span class="built_in">pi</span>/<span class="number">180</span>);</span><br><span class="line"></span><br><span class="line">S11 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line">S12 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S21 = PolartoComplex(<span class="number">0.975</span>, <span class="number">-28.942</span>);</span><br><span class="line">S22 = PolartoComplex(<span class="number">0.019</span>, <span class="number">9.658</span>);</span><br><span class="line"><span class="built_in">length</span> = <span class="number">400e-6</span>;	<span class="comment">% length of transmission line</span></span><br><span class="line">freq = <span class="number">28e9</span>;		<span class="comment">% frequency of simulation</span></span><br><span class="line">Z0 = <span class="number">50</span>;</span><br><span class="line">rlgc_params = s2rlgc([S11, S12; S21, S22], <span class="built_in">length</span>, freq, Z0)</span><br></pre></td></tr></table></figure>
 <p>Corresponding output is</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    R: 5.1717e+03</span><br><span class="line">    L: 3.6799e-07</span><br><span class="line">    G: 0.4737</span><br><span class="line">    C: 1.4002e-10</span><br><span class="line">alpha: 62.5539</span><br><span class="line"> beta: 1.2634e+03</span><br><span class="line">   Zc: 51.3183 - 1.5526i</span><br></pre></td></tr></table></figure>
-<h3 id="Verification-of-the-Model"><a href="#Verification-of-the-Model" class="headerlink" title="Verification of the Model"></a>Verification of the Model</h3><p>8 RLGC segments are used for verification</p>
+<h3 id="Verification-of-the-Model"><a href="#Verification-of-the-Model" class="headerlink" title="Verification of the Model"></a>Verification of the Model</h3><p>To confirm that the extracted RLGC parameters are accurate, you can build a lumped-element model using these values and compare its performance to the original distributed model. The line is broken into several smaller RLGC segments. If the model is accurate, the simulation results of the lumped model should closely match the original.</p>
 <p><img src="transmission-line/lumped_mimic_distributed.png" alt="lumped_mimic_distributed"></p>
 <p>Detailed schematic of each one</p>
 <p><img src="transmission-line/detailed_schematic.png" alt="detailed_schematic"></p>
 <p>Results</p>
 <p><img src="transmission-line/simulation_result.png" alt="simulation_result"></p>
+<p>As seen in the results, the lumped-element approximation closely mimics the behavior of the original distributed transmission line, validating our extracted parameters.</p>
 <h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="Field-Solution"><a href="#Field-Solution" class="headerlink" title="Field Solution"></a>Field Solution</h3><script type="math/tex; mode=display">
 \nabla\times E=-j\omega\mu H\\
 \nabla\times H=j\omega\epsilon E+\sigma E</script><p>which can be transformed into</p>
@@ -497,9 +522,24 @@ Z_0\approx\sqrt{\frac{L}{C}}</script><p>How to convert $\gamma,Z$ parameters to 
 \beta=\omega\sqrt{\mu\epsilon}=\omega\sqrt{\mu_0\epsilon_0\epsilon_{eff}}</script><p>where $\epsilon&#39;=\epsilon_0\epsilon_{eff}$ and $Z_0=\sqrt{\mu_0/\epsilon_0}=377 \Omega$. These translates to</p>
 <script type="math/tex; mode=display">
 A=20\alpha\log_{10}{e}\\
-\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+\epsilon_{eff}=\left(\frac{c\beta}{\omega}\right)^2</script><h3 id="Distortion-less-Line"><a href="#Distortion-less-Line" class="headerlink" title="Distortion-less Line"></a>Distortion-less Line</h3><p>In a lossy line, the phase term $\beta$ is generally a complicated function of frequency $\omega$. If $\beta$ is not a linear function of frequency, the phase velocity can vary with frequency, causing signal dispersion. A fascinating special case occurs even on a lossy line when the parameters satisfy the <strong>Heaviside condition</strong>:</p>
+<script type="math/tex; mode=display">
+\frac{R}{L}=\frac{G}{C}</script><p>Under this condition, the propagation constant simplifies to:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\gamma&=\sqrt{(R+j\omega L)(G+j\omega C)}\\
+&=\sqrt{(j\omega L)(j\omega C)\left(1+\frac{R}{j\omega L}\right)\left(1+\frac{G}{j\omega C}\right)}\\
+&=j\omega\sqrt{LC}\left(1+\frac{R}{j\omega L}\right)\\
+&=R\sqrt{\frac{C}{L}}+j\omega\sqrt{LC}
+\end{aligned}</script><p>This means:</p>
+<ul>
+<li><strong>Attenuation α = R√(C/L)</strong> is constant with frequency.</li>
+<li><strong>Phase constant β = ω√(LC)</strong> is perfectly linear with frequency.</li>
+</ul>
+<p>Since the phase velocity $v_p = ω/β$ is constant, a signal traveling down this line will be attenuated, but its shape will not be distorted by dispersion. This principle was historically important for long-distance telegraph cables.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
 <li>W. R. Eisenstadt and Y. Eo, &quot;S-parameter-based IC interconnect transmission line characterization,&quot; in <em>IEEE Transactions on Components, Hybrids, and Manufacturing Technology</em>, vol. 15, no. 4, pp. 483-490, Aug. 1992. DOI:  <a href="https://doi.org/10.1109/33.159877" target="_blank" rel="noopener">10.1109/33.159877</a></li>
-<li>David M. Pozar. <em>Microwave engineering</em>.</li>
+<li>David M. Pozar. <em>Microwave engineering</em>, 4th Edition.</li>
 </ol>
 
     </div>
@@ -557,7 +597,7 @@ A=20\alpha\log_{10}{e}\\
     <strong>Post author:  </strong>Triblemany</li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://triblemany.github.io/archives/afb86e77/transmission-line.html" title="How to Model RLGC Transmission Line">https://triblemany.github.io/archives/afb86e77/transmission-line.html</a>
+    <a href="https://triblemany.github.io/archives/afb86e77/transmission-line.html" title="A Deep Dive into Transmission Line Modeling with RLGC Parameters">https://triblemany.github.io/archives/afb86e77/transmission-line.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.</li>
@@ -649,7 +689,7 @@ A=20\alpha\log_{10}{e}\\
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transmission-Line"><span class="nav-number">1.</span> <span class="nav-text">Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transmission-Line-Equation"><span class="nav-number">1.1.</span> <span class="nav-text">Transmission Line Equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terminated-Transmission-Line"><span class="nav-number">1.2.</span> <span class="nav-text">Terminated Transmission Line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter-Conversion"><span class="nav-number">1.3.</span> <span class="nav-text">Parameter Conversion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-Z-Y-and-ABCD-Parameters"><span class="nav-number">1.4.</span> <span class="nav-text">S, Z, Y and ABCD Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distortionless-Line"><span class="nav-number">1.5.</span> <span class="nav-text">Distortionless Line</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parameters-Extraction"><span class="nav-number">2.</span> <span class="nav-text">Parameters Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-Simulation"><span class="nav-number">2.1.</span> <span class="nav-text">Direct Simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation"><span class="nav-number">2.2.</span> <span class="nav-text">Calculation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification-of-the-Model"><span class="nav-number">2.3.</span> <span class="nav-text">Verification of the Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">3.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Field-Solution"><span class="nav-number">3.1.</span> <span class="nav-text">Field Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Low-Loss-Approximation"><span class="nav-number">3.2.</span> <span class="nav-text">Low-Loss Approximation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-The-Fundamental-Transmission-Line-Equations"><span class="nav-number">1.</span> <span class="nav-text">1. The Fundamental Transmission Line Equations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deriving-the-Telegrapher-39-s-Equations"><span class="nav-number">1.1.</span> <span class="nav-text">Deriving the Telegrapher&#39;s Equations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Frequency-Domain-Solution"><span class="nav-number">1.2.</span> <span class="nav-text">The Frequency-Domain Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Terminated-Transmission-Line"><span class="nav-number">2.</span> <span class="nav-text">2. Terminated Transmission Line</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflection-Coefficient"><span class="nav-number">2.1.</span> <span class="nav-text">Reflection Coefficient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input-Impedance"><span class="nav-number">2.2.</span> <span class="nav-text">Input Impedance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Parameter-Conversion"><span class="nav-number">3.</span> <span class="nav-text">3. Parameter Conversion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#From-RLGC-to-γ-and-Z₀"><span class="nav-number">3.1.</span> <span class="nav-text">From RLGC to γ and Z₀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#From-γ-and-Z₀-to-RLGC"><span class="nav-number">3.2.</span> <span class="nav-text">From γ and Z₀ to RLGC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Two-Port-Network-Parameters"><span class="nav-number">4.</span> <span class="nav-text">4. Two-Port Network Parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ABCD-Parameters"><span class="nav-number">4.1.</span> <span class="nav-text">ABCD Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Z-and-Y-Parameters"><span class="nav-number">4.2.</span> <span class="nav-text">Z and Y Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-Parameters"><span class="nav-number">4.3.</span> <span class="nav-text">S Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Practical-Parameter-Extraction"><span class="nav-number">5.</span> <span class="nav-text">5. Practical Parameter Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-Simulation"><span class="nav-number">5.1.</span> <span class="nav-text">Direct Simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculation-from-S-Parameters"><span class="nav-number">5.2.</span> <span class="nav-text">Calculation from S-Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verification-of-the-Model"><span class="nav-number">5.3.</span> <span class="nav-text">Verification of the Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">6.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Field-Solution"><span class="nav-number">6.1.</span> <span class="nav-text">Field Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Low-Loss-Approximation"><span class="nav-number">6.2.</span> <span class="nav-text">Low-Loss Approximation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distortion-less-Line"><span class="nav-number">6.3.</span> <span class="nav-text">Distortion-less Line</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
           </div>
         
       </div>
@@ -720,7 +760,7 @@ A=20\alpha\log_{10}{e}\\
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2024</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2025</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -729,7 +769,7 @@ A=20\alpha\log_{10}{e}\\
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">391k</span>
+    <span title="Symbols count total">398k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
@@ -863,7 +903,7 @@ A=20\alpha\log_{10}{e}\\
   function disqus_config() {
     this.page.url = "https://triblemany.github.io/archives/afb86e77/transmission-line.html";
     this.page.identifier = "archives/afb86e77/transmission-line.html";
-    this.page.title = 'How to Model RLGC Transmission Line';};
+    this.page.title = 'A Deep Dive into Transmission Line Modeling with RLGC Parameters';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({
