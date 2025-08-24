@@ -55,21 +55,22 @@
   };
 </script>
 
-  <meta name="description" content="本文介绍了二阶系统的基本概念。">
-<meta name="keywords" content="Analog">
+  <meta name="description" content="从汽车的悬挂系统到电路中的滤波器，二阶系统无处不在。它们是理解现实世界动态行为的基石。本文将深入探讨二阶系统的核心概念，分析其瞬态和稳态响应，帮助你建立一个清晰而完整的知识框架。">
+<meta name="keywords" content="Analog,Signal Processing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二阶系统">
 <meta property="og:url" content="https://triblemany.github.io/archives/5777cf8/frequency-response.html">
 <meta property="og:site_name" content="Triblemany">
-<meta property="og:description" content="本文介绍了二阶系统的基本概念。">
+<meta property="og:description" content="从汽车的悬挂系统到电路中的滤波器，二阶系统无处不在。它们是理解现实世界动态行为的基石。本文将深入探讨二阶系统的核心概念，分析其瞬态和稳态响应，帮助你建立一个清晰而完整的知识框架。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/image-20250824133001050.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/step-response.png">
 <meta property="og:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/frequency-response.png">
-<meta property="og:updated_time" content="2024-05-24T15:48:31.110Z">
+<meta property="og:updated_time" content="2025-08-24T05:30:05.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二阶系统">
-<meta name="twitter:description" content="本文介绍了二阶系统的基本概念。">
-<meta name="twitter:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/step-response.png">
+<meta name="twitter:description" content="从汽车的悬挂系统到电路中的滤波器，二阶系统无处不在。它们是理解现实世界动态行为的基石。本文将深入探讨二阶系统的核心概念，分析其瞬态和稳态响应，帮助你建立一个清晰而完整的知识框架。">
+<meta name="twitter:image" content="https://triblemany.github.io/archives/5777cf8/frequency-response/image-20250824133001050.png">
   <link rel="canonical" href="https://triblemany.github.io/archives/5777cf8/frequency-response">
 
 
@@ -294,7 +295,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-05-24 23:48:31" itemprop="dateModified" datetime="2024-05-24T23:48:31+08:00">2024-05-24</time>
+                <time title="Modified: 2025-08-24 13:30:05" itemprop="dateModified" datetime="2025-08-24T13:30:05+08:00">2025-08-24</time>
               </span>
             
           
@@ -308,7 +309,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.3k</span>
+              <span>3.5k</span>
             </span>
           
 
@@ -321,20 +322,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文介绍了二阶系统的基本概念。</p>
+        <p>从汽车的悬挂系统到电路中的滤波器，二阶系统无处不在。它们是理解现实世界动态行为的基石。本文将深入探讨二阶系统的核心概念，分析其瞬态和稳态响应，帮助你建立一个清晰而完整的知识框架。</p>
 <a id="more"></a>
-<h2 id="二阶系统"><a href="#二阶系统" class="headerlink" title="二阶系统"></a>二阶系统</h2><p>二阶系统的传递函数为</p>
+<h2 id="什么是二阶系统？"><a href="#什么是二阶系统？" class="headerlink" title="什么是二阶系统？"></a>什么是二阶系统？</h2><p>在控制理论和信号处理中，如果一个系统的行为可以用一个二阶常微分方程来描述，那么它就是一个二阶系统。其标准形式的传递函数为：</p>
 <script type="math/tex; mode=display">
-G(s)=\frac{\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}</script><p>其中$\omega_n$为自然频率，也可写成</p>
+G(s)=\frac{\omega_n^2}{s^2+2\zeta\omega_ns+\omega_n^2}</script><p>这个简单的公式由两个核心参数主导系统的全部特性：</p>
+<ul>
+<li><p><strong>自然频率 $\omega_n$ (Natural Frequency)</strong>: 想象一个没有摩擦或空气阻力的秋千，它会以一个固定的频率来回摆动，这就是它的自然频率。在二阶系统中，$\omega_n$ 代表了系统在无阻尼情况下的固有振荡频率。</p>
+</li>
+<li><p><strong>阻尼比 $\zeta$ (Damping Ratio)</strong>: 这个无量纲参数描述了系统振荡衰减的快慢。$\zeta=0$ 意味着没有阻尼（像那个理想秋千），而$\zeta$越大，振荡消失得越快。</p>
+</li>
+</ul>
+<p>将$s=j\omega$代入，我们可以得到系统的频率响应表达式：</p>
 <script type="math/tex; mode=display">
-G(j\omega)=\frac{1}{1-(\frac{\omega}{\omega_n})^2+j2\zeta\frac{\omega}{\omega_n}}</script><p>可以近似得到$Q=1/2\zeta$</p>
-<h3 id="瞬态分析"><a href="#瞬态分析" class="headerlink" title="瞬态分析"></a>瞬态分析</h3><p>极点为</p>
+G(j\omega)=\frac{1}{1-(\frac{\omega}{\omega_n})^2+j2\zeta\frac{\omega}{\omega_n}}</script><p>在电子学中，我们常用<strong>品质因数Q (Quality Factor)</strong>来描述谐振电路的特性，它与阻尼比的关系为 $Q=1/(2\zeta)$。高Q值意味着低阻尼和更强的谐振。</p>
+<h2 id="瞬态分析：系统如何响应突变？"><a href="#瞬态分析：系统如何响应突变？" class="headerlink" title="瞬态分析：系统如何响应突变？"></a>瞬态分析：系统如何响应突变？</h2><p>瞬态分析关注的是系统在受到一个突发输入（如阶跃信号）后的即时反应。系统的行为完全由其<strong>极点</strong>决定。通过求解特征方程 $s^2+2\zeta\omega_ns+\omega_n^2=0$，我们得到极点：</p>
 <script type="math/tex; mode=display">
--\zeta\omega_n\pm\omega_n\sqrt{\zeta^2-1}</script><p>其实部定义为阻尼（damping）</p>
+p_{1,2} = -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2-1}</script><p>极点的位置随着阻尼比$\zeta$的变化而变化，从而根本上改变了系统的行为。其实部定义为<strong>阻尼（damping）</strong>:</p>
 <script type="math/tex; mode=display">
-\sigma=-\zeta\omega_n</script><p>虚部定义为衰减后振荡频率（damped natural frequency）</p>
+\sigma=-\zeta\omega_n</script><p>虚部定义为<strong>衰减后振荡频率（damped natural frequency）</strong>:</p>
 <script type="math/tex; mode=display">
-\omega_d=\omega_n\sqrt{1-\zeta^2}</script><p>因此</p>
+\omega_d=\omega_n\sqrt{1-\zeta^2}</script><p>根据$\zeta$的取值，系统的响应可以分为以下几种情况：</p>
 <ul>
 <li>$\zeta&lt;-1$，极点为右半平面一对不相等实数（无震荡发散）</li>
 <li>$\zeta=-1$，极点为右半平面一对相等实数（发散，无震荡临界情况）</li>
@@ -344,7 +352,8 @@ G(j\omega)=\frac{1}{1-(\frac{\omega}{\omega_n})^2+j2\zeta\frac{\omega}{\omega_n}
 <li>$\zeta=1$，极点为左半平面一对相等实数（衰减，临界阻尼）</li>
 <li>$\zeta&gt;1$，极点为左半平面一对不相等实数（过阻尼衰减）</li>
 </ul>
-<p>当有输入信号为阶跃函数时，有</p>
+<p><img src="frequency-response/image-20250824133001050.png" alt="image-20250824133001050"></p>
+<h3 id="阶跃响应分析"><a href="#阶跃响应分析" class="headerlink" title="阶跃响应分析"></a>阶跃响应分析</h3><p>当有输入信号为阶跃函数时，有</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 Y(s) &=G(s) \cdot U(s) \\
@@ -358,7 +367,17 @@ y(t) &=1-e^{-\sigma t} \cos \omega_{d} t-\frac{\sigma}{\omega_{d}} e^{-\sigma t}
 &=1-e^{-\sigma t}\left(\cos \omega_{d} t+\frac{\sigma}{\omega_{d}} \sin \omega_{d} t\right), t \geq 0
 \end{aligned}</script><p>对于$\omega_n=2\pi$，不同$\zeta$时阶跃响应如下图</p>
 <p><img src="frequency-response/step-response.png" alt="step-response"></p>
-<h3 id="稳态分析"><a href="#稳态分析" class="headerlink" title="稳态分析"></a>稳态分析</h3><p>幅频响应为</p>
+<p>对于工程应用，我们常用以下指标来量化欠阻尼系统的性能：</p>
+<ul>
+<li><strong>峰值时间 ($t_p$)</strong>: 响应达到第一个峰值所需的时间：$t_p = \frac{\pi}{\omega_d} = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}}$</li>
+<li><strong>超调量 (%OS)</strong>: 响应超过最终值的最大百分比，它只与阻尼比有关：$\%OS = e^{\frac{-\zeta\pi}{\sqrt{1-\zeta^2}}} \times 100\%$</li>
+<li><strong>调节时间 ($t_s$)</strong>: 响应进入并保持在终值$\pm\delta$误差带内所需的时间：$t_s = \frac{\ln(1/\delta)}{\zeta\omega_n}$<ul>
+<li>对于一阶系统，$t_s = \tau\cdot\ln(1/\delta)$</li>
+</ul>
+</li>
+</ul>
+<h2 id="稳态分析：系统如何响应不同频率？"><a href="#稳态分析：系统如何响应不同频率？" class="headerlink" title="稳态分析：系统如何响应不同频率？"></a>稳态分析：系统如何响应不同频率？</h2><p>稳态分析（或称频率响应分析）研究的是系统对不同频率正弦输入的响应。</p>
+<p>幅频响应为</p>
 <script type="math/tex; mode=display">
 A(\omega)=|G(j \omega)|=\frac{1}{\sqrt{\left[1-\left(\frac{\omega}{\omega_{n}}\right)^{2}\right]^{2}+\left(2 \zeta \frac{\omega}{\omega_{n}}\right)^{2}}}</script><p>相频响应为</p>
 <script type="math/tex; mode=display">
@@ -368,7 +387,7 @@ A(\omega)=|G(j \omega)|=\frac{1}{\sqrt{\left[1-\left(\frac{\omega}{\omega_{n}}\r
 \omega=0 &\quad  A(0)=1, \varphi(0)=0^{\circ} \\
 \omega=\omega_{n} &\quad A(\omega)=\frac{1}{2 \zeta},\varphi\left(\omega_{n}\right)=-90^{\circ} \\
 \omega \rightarrow \infty &\quad A(\infty)=0, \varphi(\infty)=-180^{\circ}
-\end{aligned}</script><p>对幅频响应的分母求极值，得到谐振频率</p>
+\end{aligned}</script><p>对幅频响应的分母求极值，得到<strong>谐振频率</strong>:</p>
 <script type="math/tex; mode=display">
 \omega_r=\omega_n\sqrt{1-2\zeta^2}</script><p>以及谐振时的幅值和相位</p>
 <script type="math/tex; mode=display">
@@ -382,6 +401,12 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
 </ul>
 <p>同样的，对于$\omega_n=2\pi$，不同$\zeta$时频率响应如下图</p>
 <p><img src="frequency-response/frequency-response.png" alt="frequency-response"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>二阶系统的行为完全由其<strong>自然频率 $\omega_n$</strong> 和<strong>阻尼比 $\zeta$</strong> 共同决定。这两个参数定义了极点在S平面中的位置，从而决定了系统：</p>
+<ol>
+<li><strong>瞬态响应</strong>的形态（过阻尼、临界阻尼或欠阻尼），包括其响应速度、超调和振荡特性。</li>
+<li><strong>频率响应</strong>的形态，包括其带宽、是否存在谐振峰以及谐振的剧烈程度。 </li>
+</ol>
+<p>掌握了二阶系统的分析方法，就掌握了理解从简单电路到复杂机电系统动态特性的钥匙。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/48169298" target="_blank" rel="noopener">控制理论学习笔记（4）——一阶系统和二阶系统</a>.</li>
 <li>孙晓波, 李双全, 王海英. 自动控制原理. 科学出版社, 2006.</li>
@@ -458,6 +483,8 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
           <div class="post-tags">
             
               <a href="/tags/Analog/" rel="tag"># Analog</a>
+            
+              <a href="/tags/Signal-Processing/" rel="tag"># Signal Processing</a>
             
           </div>
         
@@ -538,7 +565,7 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
           <div class="post-toc">
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二阶系统"><span class="nav-number">1.</span> <span class="nav-text">二阶系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#瞬态分析"><span class="nav-number">1.1.</span> <span class="nav-text">瞬态分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稳态分析"><span class="nav-number">1.2.</span> <span class="nav-text">稳态分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是二阶系统？"><span class="nav-number">1.</span> <span class="nav-text">什么是二阶系统？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#瞬态分析：系统如何响应突变？"><span class="nav-number">2.</span> <span class="nav-text">瞬态分析：系统如何响应突变？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阶跃响应分析"><span class="nav-number">2.1.</span> <span class="nav-text">阶跃响应分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#稳态分析：系统如何响应不同频率？"><span class="nav-number">3.</span> <span class="nav-text">稳态分析：系统如何响应不同频率？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
           </div>
         
       </div>
@@ -587,7 +614,9 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -618,7 +647,7 @@ A(\omega_r)=\frac{1}{2\zeta\sqrt{1-\zeta^2}}</script><script type="math/tex; mod
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">398k</span>
+    <span title="Symbols count total">399k</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
   <span class="post-meta-divider">|</span>
